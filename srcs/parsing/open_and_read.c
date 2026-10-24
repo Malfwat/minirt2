@@ -6,7 +6,7 @@
 /*   By: admoufle <admoufle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 16:55:10 by admoufle          #+#    #+#             */
-/*   Updated: 2026/10/24 17:15:28 by admoufle         ###   ########.fr       */
+/*   Updated: 2026/10/24 17:54:15 by admoufle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,5 @@ t_fd    open_scene(const char *filename, t_err *err)
     fd = open(filename, O_RDONLY);
     if (fd < 0)
         return (ERRNO);
+    return (fd);
 }
