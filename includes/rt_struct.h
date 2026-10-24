@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   rt_struct.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: admoufle <admoufle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 18:53:51 by me                #+#    #+#             */
-/*   Updated: 2026/10/23 19:36:03 by me               ###   ########.fr       */
+/*   Updated: 2026/10/24 16:57:27 by admoufle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_STRUCT_H
 # define RT_STRUCT_H
+
+# include <stddef.h>
+
+typedef ssize_t t_fd;
 
 enum e_obj
 {

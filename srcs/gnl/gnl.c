@@ -6,7 +6,7 @@
 /*   By: admoufle <admoufle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 20:09:54 by me                #+#    #+#             */
-/*   Updated: 2026/10/24 16:47:50 by admoufle         ###   ########.fr       */
+/*   Updated: 2026/10/24 16:53:00 by admoufle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ char	*concate_and_stash(t_buf **head)
 char	*gnl(int const fd)
 {
 	static t_buf	*head;
-	char			*line;
 
 	if (fd < 0)
 		return (free_gnl(&head), NULL);

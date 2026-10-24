@@ -6,7 +6,7 @@
 #    By: admoufle <admoufle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/10/24 16:16:04 by admoufle         ###   ########.fr        #
+#    Updated: 2026/10/24 16:53:45 by admoufle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,9 +25,10 @@ SRCS	=	main.c
 SRCS	+=	string/ft_strcmp.c \
 			string/ft_strlen.c \
 			string/ft_memcpy.c \
+			string/ft_strdup.c \
 			string/ft_strchr.c
 
-SRCS	+=	gnl/gnl.c
+SRCS	+=	gnl/gnl.c gnl/gnl_utils.c
 
 BUILD	=	.build/
 
