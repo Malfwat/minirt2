@@ -6,7 +6,7 @@
 /*   By: admoufle <admoufle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 20:09:54 by me                #+#    #+#             */
-/*   Updated: 2026/10/24 16:53:00 by admoufle         ###   ########.fr       */
+/*   Updated: 2026/10/25 14:55:23 by admoufle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,28 @@
 #include "rt_gnl.h"
 #include "str.h"
 
-t_buf	*read_and_put_next(t_buf **head, int const fd)
+void	pop_node(t_buf **head, t_buf *node)
+{
+	t_buf	*ptr;
+
+	if (*head == node)
+		return (free_gnl(head));
+	ptr = *head;
+	while (ptr->next != node)
+		ptr = ptr->next;
+	free(node->ptr);
+	free(node);
+	ptr->next = NULL;
+}
+
+int	read_and_put_next(t_buf **head, int const fd)
 {
 	t_buf	*node;
 	ssize_t	bytes_read;
 
 	node = malloc(sizeof(*node));
 	if (!node)
-		return (NULL);
+		return (-1);
 	node->next = NULL;
 	if (!*head)
 		*head = node;
@@ -29,26 +43,28 @@ t_buf	*read_and_put_next(t_buf **head, int const fd)
 		get_last_node(*head)->next = node;
 	node->ptr = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!node->ptr)
-		return (NULL);
+		return (-1);
 	bytes_read = read(fd, node->ptr, BUFFER_SIZE);
-	if (bytes_read <= 0)
-		return (NULL);
+	if (bytes_read < 0)
+		return (-1);
+	if (!bytes_read)
+		return (pop_node(head, node), 0);
 	node->ptr[bytes_read] = 0;
-	return (node);
+	return (1);
 }
 
-void	concate(char *buffer, t_buf *head)
+bool	update_stash(char *ptr, t_buf **head)
 {
-	size_t	len;
+	void	*stash;
 
-	while (head)
-	{
-		len = ft_strlen(head->ptr);
-		ft_memcpy(buffer, head->ptr, len);
-		head = head->next;
-		buffer += len;
-	}
-	*buffer = 0;
+	stash = ft_strdup(ptr + 1);
+	if (!stash)
+		return (false);
+	ptr[1] = 0;
+	free((*head)->ptr);
+	(*head)->ptr = stash;
+	free_gnl(&(*head)->next);
+	return (true);
 }
 
 char	*concate_and_stash(t_buf **head)
@@ -56,12 +72,13 @@ char	*concate_and_stash(t_buf **head)
 	char	*line;
 	size_t	nb_node;
 	void	*tmp;
-	void	*stash;
 
 	nb_node = 0;
 	tmp = *head;
 	while (tmp && ++nb_node)
 		tmp = ((t_buf *)tmp)->next;
+	if (!nb_node)
+		return (NULL);
 	line = malloc(sizeof(char) * (nb_node * BUFFER_SIZE + 1));
 	if (!line)
 		return (NULL);
@@ -69,13 +86,9 @@ char	*concate_and_stash(t_buf **head)
 	tmp = ft_strchr(line, '\n');
 	if (tmp && ((char *)tmp)[1])
 	{
-		stash = ft_strdup(tmp + 1);
-		if (!stash)
+		if (!update_stash(tmp, head))
 			return (free(line), NULL);
-		((char *)tmp)[1] = 0;
-		free((*head)->ptr);
-		(*head)->ptr = stash;
-		return (free_gnl(&(*head)->next), line);
+		return (line);
 	}
 	return (free_gnl(head), line);
 }
@@ -83,11 +96,17 @@ char	*concate_and_stash(t_buf **head)
 char	*gnl(int const fd)
 {
 	static t_buf	*head;
+	int				ret;
 
 	if (fd < 0)
 		return (free_gnl(&head), NULL);
 	while (!head || !ft_strchr(get_last_node(head)->ptr, '\n'))
-		if (!read_and_put_next(&head, fd))
+	{
+		ret = read_and_put_next(&head, fd);
+		if (ret < 0)
 			return (free_gnl(&head), NULL);
+		else if (ret == 0)
+			break ;
+	}
 	return (concate_and_stash(&head));
 }

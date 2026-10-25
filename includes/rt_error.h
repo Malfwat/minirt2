@@ -6,7 +6,7 @@
 /*   By: admoufle <admoufle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 16:58:41 by admoufle          #+#    #+#             */
-/*   Updated: 2026/10/24 17:15:01 by admoufle         ###   ########.fr       */
+/*   Updated: 2026/10/25 14:55:48 by admoufle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 
 typedef enum e_err
 {
-    ext
-}   t_err;
+	ext = -1,
+	ok
+}	t_err;
 
 #endif /* RT_ERROR_H */
