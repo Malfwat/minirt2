@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 20:27:06 by me                #+#    #+#             */
-/*   Updated: 2026/10/30 18:08:03 by me               ###   ########.fr       */
+/*   Updated: 2026/11/02 20:41:45 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stddef.h>
 # include <stdbool.h>
+# include <math.h>
 
 /* ft_strchr.c */
 char	*ft_strchr(const char *s, char c);
@@ -34,5 +35,8 @@ void	*ft_memcpy(void *dest, const void *src, size_t n);
 
 /* ft_atoi.c */
 bool	ft_atoi(const char *n, int *res);
+
+/* ft_atof.c */
+bool	ft_atof(const char *n, __uint8_t precision, double *res);
 
 #endif /*STR_H*/

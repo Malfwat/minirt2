@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 15:59:58 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/02 12:39:47 by me               ###   ########.fr       */
+/*   Updated: 2026/11/02 19:08:28 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,12 @@ bool	get_decimal(const char *n, double *res, __uint8_t precision)
 	return (true);
 }
 
-bool	get_fixedvalue(const char *n, double *res)
+bool	get_fixedvalue(const char *n, double *res, __int8_t *sign)
 {
 	double	prev = 0;
-	__int8_t	sign;
 
 	*res = 0;
-	sign = (__int8_t []){1, -1}[*n == '-'];
+	*sign = (__int8_t []){1, -1}[*n == '-'];
 	if (*n == '-' || *n == '+')
 		n++;
 	while (*n && *n != '.')
@@ -54,15 +53,15 @@ bool	get_fixedvalue(const char *n, double *res)
 		*res = (*res) * 10 + *n - '0';
 		n++;
 	}
-	*res *= sign;
 	return (true);
 }
 
 bool	ft_atof(const char *n, __uint8_t precision, double *res)
 {
-	double	value;
-	double	tmp;
-	char	*ptr_dot;
+	__int8_t	sign;
+	double		value;
+	double		tmp;
+	char		*ptr_dot;
 
 	if (!res)
 		return (false);
@@ -70,10 +69,10 @@ bool	ft_atof(const char *n, __uint8_t precision, double *res)
 	tmp = 0;
 	if ((ptr_dot && (ptr_dot - n) / sizeof(*n) > 40)
 		|| (!ptr_dot && ft_strlen(n) > 40)
-		|| !get_fixedvalue(n, &value)
+		|| !get_fixedvalue(n, &value, &sign)
 		|| (ptr_dot && !get_decimal(ptr_dot + 1, &tmp, precision)))
 		return (false);
 	value += tmp;
-	*res = value;
+	*res = value * sign;
 	return (true);
 }

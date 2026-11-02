@@ -12,3 +12,5 @@ int	main(int ac, char **av)
 	printf("%s -> %f\n", av[1], d);
 	return (0);
 }
+
+//cc tests/main_atof.c srcs/string/{ft_strlen.c,ft_atof.c,ft_strchr.c} -I includes
