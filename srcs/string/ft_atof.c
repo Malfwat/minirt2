@@ -35,8 +35,6 @@ bool	get_decimal(const char *n, double *res, __uint8_t precision)
 	return (true);
 }
 
-#include <stdio.h>
-
 bool	get_fixedvalue(const char *n, double *res)
 {
 	double	prev = 0;
@@ -44,7 +42,7 @@ bool	get_fixedvalue(const char *n, double *res)
 
 	*res = 0;
 	sign = (__int8_t []){1, -1}[*n == '-'];
-	if (*n == '-' || '+')
+	if (*n == '-' || *n == '+')
 		n++;
 	while (*n && *n != '.')
 	{
@@ -78,14 +76,4 @@ bool	ft_atof(const char *n, __uint8_t precision, double *res)
 	value += tmp;
 	*res = value;
 	return (true);
-}
-
-int main(int ac, char **av)
-{
-	double d;
-	if (ac != 2)
-		return (0);
-	if (!ft_atof(av[1], 2, &d))
-		return (printf("ERR\n"), 0);
-	printf("%f\n", d);
 }
