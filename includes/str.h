@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admoufle <admoufle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 20:27:06 by me                #+#    #+#             */
-/*   Updated: 2026/10/25 15:42:22 by admoufle         ###   ########.fr       */
+/*   Updated: 2026/10/30 18:08:03 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define STR_H
 
 # include <stddef.h>
+# include <stdbool.h>
 
 /* ft_strchr.c */
 char	*ft_strchr(const char *s, char c);

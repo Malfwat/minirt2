@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_struct.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admoufle <admoufle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 18:53:51 by me                #+#    #+#             */
-/*   Updated: 2026/10/25 14:40:07 by admoufle         ###   ########.fr       */
+/*   Updated: 2026/11/02 11:41:02 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ enum e_obj
 
 typedef struct s_vec3
 {
-	float	x;
-	float	y;
-	float	z;
+	double	x;
+	double	y;
+	double	z;
 }	t_vec3;
 
 typedef t_vec3	t_coordinate;
@@ -46,8 +46,8 @@ typedef struct s_obj
 	t_coordinate	coordinate;
 	t_color			color;
 	t_vec3			vec;
-	float			diameter;
-	float			height;
+	double			diameter;
+	double			height;
 
 	struct s_obj	*next;
 }	t_obj;
@@ -55,13 +55,13 @@ typedef struct s_obj
 typedef struct s_ambient
 {
 	t_coordinate	coordinate;
-	float			ratio;
+	double			ratio;
 }	t_amb;
 
 typedef struct s_light
 {
 	t_coordinate	coordinate;
-	float			ratio;
+	double			ratio;
 	t_color			color;
 
 	struct s_light	*next;
