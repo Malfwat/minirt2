@@ -13,4 +13,4 @@ int	main(int ac, char **av)
 	return (0);
 }
 
-//cc tests/main_atof.c srcs/string/{ft_strlen.c,ft_atof.c,ft_strchr.c} -I includes
+//cc tests/main_atof.c srcs/string/{ft_strlen.c,ft_atof.c,ft_strchr.c} -I includes -o test_atof

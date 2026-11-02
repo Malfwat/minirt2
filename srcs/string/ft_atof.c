@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 15:59:58 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/02 19:08:28 by me               ###   ########.fr       */
+/*   Updated: 2026/11/02 20:53:32 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ bool	ft_atof(const char *n, __uint8_t precision, double *res)
 	double		tmp;
 	char		*ptr_dot;
 
-	if (!res)
+	if (!res || !n || !*n)
 		return (false);
 	ptr_dot = ft_strchr(n, '.');
 	tmp = 0;
