@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 15:59:58 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/02 20:53:32 by me               ###   ########.fr       */
+/*   Updated: 2026/11/02 20:57:06 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@
 
 bool	get_decimal(const char *n, double *res, __uint8_t precision)
 {
-	int	i;
 	int	length;
 
-	i = 0;
 	*res = 0;
 	length = ft_strlen(n);
 	if (length < precision)
