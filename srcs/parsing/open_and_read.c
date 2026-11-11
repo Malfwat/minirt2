@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 16:55:10 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/11 17:31:50 by me               ###   ########.fr       */
+/*   Updated: 2026/11/11 17:47:46 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,16 @@ int	parse_file(t_fd fd, t_scene *sc, t_err *err, int *line_no)
 	i = 0;
 	while (line)
 	{
+		*line_no = i;
 		if (*line != '#')
 		{
 			*err = parse_line(line, sc);
 			if (*err != ok)
-				return (gnl(FREE_GNL), RT_ERR);
+				return (free(line), gnl(FREE_GNL), RT_ERR);
 		}
 		free(line);
 		line = gnl(fd);
 		i++;
-		*line_no = i;
 	}
 	if (errno)
 		return (ERRNO);
