@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_and_read.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admoufle <admoufle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 16:55:10 by admoufle          #+#    #+#             */
-/*   Updated: 2026/10/25 15:47:02 by admoufle         ###   ########.fr       */
+/*   Updated: 2026/11/11 16:29:24 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,22 @@ t_err	parse_line(char *str, t_scene *sc)
 {
 	(void)str;
 	(void)sc;
+	return (ok);
+}
+
+t_err	parse_file(t_fd fd, t_scene *sc)
+{
+	char	*line;
+
+	line = gnl(fd);
+	while (line)
+	{
+		if (*line != '#')
+			parse_line(line, sc);
+		else
+			free(line);
+		line = gnl(fd);
+	}
+	// check errno 
 	return (ok);
 }
