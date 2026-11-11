@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 16:58:41 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/11 18:18:05 by me               ###   ########.fr       */
+/*   Updated: 2026/11/11 18:52:09 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 
 typedef enum e_err
 {
-	ext = -2,
+	ext = -4,
+	invalid_double_value,
+	bad_vec_format,
 	bad_elem,
 	ok
 }	t_err;
