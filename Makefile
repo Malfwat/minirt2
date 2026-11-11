@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: admoufle <admoufle@student.42.fr>          +#+  +:+       +#+         #
+#    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/10/25 15:40:33 by admoufle         ###   ########.fr        #
+#    Updated: 2026/11/11 17:05:33 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,10 @@ SRCS	+=	string/ft_strcmp.c \
 			string/ft_strchr.c	\
 			string/ft_atoi.c
 
-SRCS	+=	parsing/open_and_read.c
+SRCS	+=	parsing/open_and_read.c \
+			parsing/parse.c
+
+SRCS	+=	error/rt_error.c
 
 SRCS	+=	gnl/gnl.c gnl/gnl_utils.c
 

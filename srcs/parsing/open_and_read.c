@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 16:55:10 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/11 16:46:48 by me               ###   ########.fr       */
+/*   Updated: 2026/11/11 17:13:24 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,13 @@ t_err	parse_line(char *str, t_scene *sc)
 	return (ok);
 }
 
-int	parse_file(t_fd fd, t_scene *sc, t_err *err)
+int	parse_file(t_fd fd, t_scene *sc, t_err *err, int *line_no)
 {
 	char	*line;
+	int		i;
 
 	line = gnl(fd);
+	i = 0;
 	while (line)
 	{
 		if (*line != '#')
@@ -72,8 +74,10 @@ int	parse_file(t_fd fd, t_scene *sc, t_err *err)
 		}
 		free(line);
 		line = gnl(fd);
+		i++;
 	}
 	if (errno)
 		return (ERRNO);
+	*line_no = i;
 	return (ok);
 }

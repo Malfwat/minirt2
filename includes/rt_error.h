@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_error.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admoufle <admoufle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 16:58:41 by admoufle          #+#    #+#             */
-/*   Updated: 2026/10/25 14:55:48 by admoufle         ###   ########.fr       */
+/*   Updated: 2026/11/11 17:16:05 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,17 @@
 
 # define ERRNO -4
 # define RT_ERR -2
+# define NOT_A_LINE -6
+
+# include "rt_struct.h"
 
 typedef enum e_err
 {
 	ext = -1,
 	ok
 }	t_err;
+
+void	manage_error_and_exit(int err_type, t_err errnum,
+			t_scene *sc, int line);
 
 #endif /* RT_ERROR_H */
