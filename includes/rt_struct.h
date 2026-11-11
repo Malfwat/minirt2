@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 18:53:51 by me                #+#    #+#             */
-/*   Updated: 2026/11/11 16:16:33 by me               ###   ########.fr       */
+/*   Updated: 2026/11/11 18:40:23 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,20 @@
 
 # include <stddef.h>
 
-typedef int		t_fd;
+typedef int			t_fd;
 
 enum e_obj
 {
 	sphere,
 	cylinder,
-	plan
+	plan,
+	amb,
+	light,
+	cam,
+	none
 };
+
+typedef enum e_obj	t_elem;
 
 typedef struct s_vec3
 {
@@ -31,7 +37,7 @@ typedef struct s_vec3
 	double	z;
 }	t_vec3;
 
-typedef t_vec3	t_coordinate;
+typedef t_vec3		t_coordinate;
 
 typedef struct s_color
 {

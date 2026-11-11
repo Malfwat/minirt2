@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_and_read.c                                    :+:      :+:    :+:   */
+/*   open_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 16:55:10 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/11 17:47:46 by me               ###   ########.fr       */
+/*   Updated: 2026/11/11 18:07:40 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "str.h"
-#include "rt_gnl.h"
 #include "rt_struct.h"
 #include "rt_error.h"
 
 #include <fcntl.h>
-#include <errno.h>
 
 bool	is_rt(const char *filename)
 {
@@ -48,36 +46,4 @@ t_fd	open_scene(const char *filename, t_err *err)
 	if (fd < 0)
 		return (ERRNO);
 	return (fd);
-}
-
-t_err	parse_line(char *str, t_scene *sc)
-{
-	(void)str;
-	(void)sc;
-	return (ok);
-}
-
-int	parse_file(t_fd fd, t_scene *sc, t_err *err, int *line_no)
-{
-	char	*line;
-	int		i;
-
-	line = gnl(fd);
-	i = 0;
-	while (line)
-	{
-		*line_no = i;
-		if (*line != '#')
-		{
-			*err = parse_line(line, sc);
-			if (*err != ok)
-				return (free(line), gnl(FREE_GNL), RT_ERR);
-		}
-		free(line);
-		line = gnl(fd);
-		i++;
-	}
-	if (errno)
-		return (ERRNO);
-	return (ok);
 }

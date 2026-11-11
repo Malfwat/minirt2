@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/11 17:41:57 by me               ###   ########.fr        #
+#    Updated: 2026/11/11 18:42:01 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,10 +26,12 @@ SRCS	+=	string/ft_strcmp.c \
 			string/ft_strlen.c \
 			string/ft_memcpy.c \
 			string/ft_strdup.c \
-			string/ft_strchr.c	\
-			string/ft_atoi.c
+			string/ft_strchr.c \
+			string/ft_bzero.c  \
+			string/ft_atoi.c   \
+			string/is_wspace.c
 
-SRCS	+=	parsing/open_and_read.c \
+SRCS	+=	parsing/open_scene.c \
 			parsing/parse.c
 
 SRCS	+=	error/rt_error.c
