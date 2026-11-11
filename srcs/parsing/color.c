@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 20:14:07 by me                #+#    #+#             */
-/*   Updated: 2026/11/11 20:59:38 by me               ###   ########.fr       */
+/*   Updated: 2026/11/11 21:04:00 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	*pass_color_value(char *str, int i)
 		if (ptr)
 			return ((void *)0);
 		ptr = ft_strchr_set(str, " \t\v\n\r\f");
+		if (ptr)
+			return (ptr);
 		if (is_numeric(str))
 			return (ft_strchr(str, 0));
 		else
@@ -56,6 +58,7 @@ t_err	get_color(char *str, t_color *color)
 		ptr = pass_color_value(str, i);
 		if (!ptr)
 			return (bad_color_format);
+		*ptr = 0;
 		if (!ft_atoi(str, &value) || !(value >= 0 && value <= 255))
 			return (invalid_color_value);
 		*get_right_color_addr(&color, i) = value;
