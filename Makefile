@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/11 17:05:33 by me               ###   ########.fr        #
+#    Updated: 2026/11/11 17:41:57 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,10 @@ SRCS	+=	parsing/open_and_read.c \
 SRCS	+=	error/rt_error.c
 
 SRCS	+=	gnl/gnl.c gnl/gnl_utils.c
+
+SRCS	+=	light/light.c
+
+SRCS	+=	obj/obj_utils.c
 
 BUILD	=	.build/
 

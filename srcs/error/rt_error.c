@@ -6,12 +6,13 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 16:26:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/11 17:15:26 by me               ###   ########.fr       */
+/*   Updated: 2026/11/11 17:45:02 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_error.h"
 #include "rt_struct.h"
+#include "rt_element.h"
 
 #include <errno.h>
 #include <stdlib.h>
@@ -27,7 +28,8 @@ char	*err_message(t_err errnum)
 
 void	free_scene(t_scene *sc)
 {
-	(void)sc;
+	free_light(sc->light_lst);
+	free_obj(sc->obj_lst);
 }
 
 void	manage_error_and_exit(int err_type, t_err errnum, t_scene *sc, int line)
@@ -39,9 +41,9 @@ void	manage_error_and_exit(int err_type, t_err errnum, t_scene *sc, int line)
 	else
 		str = err_message(errnum);
 	if (line < 0)
-		printf("MiniRT: %s\n", str);
+		printf("Error\n\tMiniRT: %s\n", str);
 	else
-		printf("MiniRT: line %i: %s\n", line, str);
+		printf("Error\n\tMiniRT: line %i: %s\n", line, str);
 	free_scene(sc);
 	exit(1);
 }
