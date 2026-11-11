@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 20:14:07 by me                #+#    #+#             */
-/*   Updated: 2026/11/11 21:04:00 by me               ###   ########.fr       */
+/*   Updated: 2026/11/11 21:06:59 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,5 @@ t_err	get_color(char *str, t_color *color)
 		}
 		i++;
 	}
-	if (str && !is_line_empty(str))
-		return (bad_color_format);
 	return (ok);
 }
