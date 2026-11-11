@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 16:55:10 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/11 16:29:24 by me               ###   ########.fr       */
+/*   Updated: 2026/11/11 16:46:48 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "rt_error.h"
 
 #include <fcntl.h>
+#include <errno.h>
 
 bool	is_rt(const char *filename)
 {
@@ -56,7 +57,7 @@ t_err	parse_line(char *str, t_scene *sc)
 	return (ok);
 }
 
-t_err	parse_file(t_fd fd, t_scene *sc)
+int	parse_file(t_fd fd, t_scene *sc, t_err *err)
 {
 	char	*line;
 
@@ -64,11 +65,15 @@ t_err	parse_file(t_fd fd, t_scene *sc)
 	while (line)
 	{
 		if (*line != '#')
-			parse_line(line, sc);
-		else
-			free(line);
+		{
+			*err = parse_line(line, sc);
+			if (*err != ok)
+				return (gnl(FREE_GNL), RT_ERR);
+		}
+		free(line);
 		line = gnl(fd);
 	}
-	// check errno 
+	if (errno)
+		return (ERRNO);
 	return (ok);
 }

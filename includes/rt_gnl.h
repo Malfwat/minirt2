@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_gnl.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admoufle <admoufle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 20:14:46 by me                #+#    #+#             */
-/*   Updated: 2026/10/25 14:36:16 by admoufle         ###   ########.fr       */
+/*   Updated: 2026/11/11 16:36:25 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ char	*gnl(int fd);
 void	free_gnl(t_buf **head);
 t_buf	*get_last_node(t_buf *lst);
 void	concate(char *buffer, t_buf *head);
+
+# define FREE_GNL -1
 
 #endif /*RT_GNL_H*/
