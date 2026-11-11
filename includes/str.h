@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 20:27:06 by me                #+#    #+#             */
-/*   Updated: 2026/11/11 18:41:44 by me               ###   ########.fr       */
+/*   Updated: 2026/11/11 19:25:10 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n);
 
 /* ft_atoi.c */
 bool	ft_atoi(const char *n, int *res);
+bool	is_numeric(const char *n);
 
 /* ft_atof.c */
 bool	ft_atof(const char *n, __uint8_t precision, double *res);

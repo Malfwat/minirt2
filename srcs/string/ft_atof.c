@@ -6,13 +6,15 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 15:59:58 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/11 16:05:50 by me               ###   ########.fr       */
+/*   Updated: 2026/11/11 19:25:04 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <str.h>
 #include <math.h>
 #include <stdbool.h>
+
+#include "str.h"
 
 bool	get_decimal(const char *n, double *res, __uint8_t precision)
 {
@@ -64,6 +66,8 @@ bool	ft_atof(const char *n, __uint8_t precision, double *res)
 	if (!res || !n || !*n)
 		return (false);
 	ptr_dot = ft_strchr(n, '.');
+	if (ptr_dot && !is_numeric(ptr_dot + 1))
+		return (false);
 	tmp = 0;
 	if ((ptr_dot && (ptr_dot - n) / sizeof(*n) > 40)
 		|| (!ptr_dot && ft_strlen(n) > 40)
