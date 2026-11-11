@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 18:53:51 by me                #+#    #+#             */
-/*   Updated: 2026/11/02 11:41:02 by me               ###   ########.fr       */
+/*   Updated: 2026/11/11 16:07:29 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_obj
 
 typedef struct s_ambient
 {
+	t_color			color;
 	t_coordinate	coordinate;
 	double			ratio;
 }	t_amb;

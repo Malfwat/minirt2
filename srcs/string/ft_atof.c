@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 15:59:58 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/02 20:57:06 by me               ###   ########.fr       */
+/*   Updated: 2026/11/11 16:05:50 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ bool	get_decimal(const char *n, double *res, __uint8_t precision)
 		precision = length;
 	while (precision--)
 	{
-
 		if (!(n[precision] >= '0' && n[precision] <= '9'))
 			return (false);
 		*res += n[precision] - '0';
@@ -35,8 +34,9 @@ bool	get_decimal(const char *n, double *res, __uint8_t precision)
 
 bool	get_fixedvalue(const char *n, double *res, __int8_t *sign)
 {
-	double	prev = 0;
+	double	prev;
 
+	prev = 0;
 	*res = 0;
 	*sign = (__int8_t []){1, -1}[*n == '-'];
 	if (*n == '-' || *n == '+')
