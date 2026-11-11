@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/11 18:59:33 by me               ###   ########.fr       */
+/*   Updated: 2026/11/11 20:59:22 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@
 # include "rt_struct.h"
 # include "rt_error.h"
 
+# include <stdbool.h>
+
 void	parse(const char *filename, t_scene *sc);
 t_fd	open_scene(const char *filename, t_err *err);
+bool	is_line_empty(char *str);
 
 t_err	get_vec3(char *str, t_vec3 *vec);
 
