@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 20:27:06 by me                #+#    #+#             */
-/*   Updated: 2026/11/11 19:25:10 by me               ###   ########.fr       */
+/*   Updated: 2026/11/11 19:30:37 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 /* ft_strchr.c */
 char	*ft_strchr(const char *s, char c);
+char	*ft_strchr_set(const char *s, char *set);
 
 /* ft_strcmp.c */
 int		ft_strcmp(const char *s1, const char *s2);
