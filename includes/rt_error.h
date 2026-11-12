@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 16:58:41 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/12 14:39:04 by me               ###   ########.fr       */
+/*   Updated: 2026/11/12 14:43:02 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@
 
 typedef enum e_err
 {
-	ext = -9,
-	invalid_length_value,
-	invalid_color_value,
-	invalid_double_value,
-	bad_color_format,
-	bad_ratio_format,
-	bad_fov_format,
-	bad_vec_format,
-	bad_elem,
-	ok
+	ok = 0,
+	bad_color_format = -1,
+	bad_elem = -2,
+	bad_fov_format = -3,
+	bad_ratio_format = -4,
+	bad_vec_format = -5,
+	ext = -6,
+	invalid_color_value = -7,
+	invalid_double_value = -8,
+	invalid_length_value = -9
 }	t_err;
 
 void	manage_error_and_exit(int err_type, t_err errnum,
