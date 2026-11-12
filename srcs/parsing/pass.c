@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 14:49:11 by me                #+#    #+#             */
-/*   Updated: 2026/11/12 17:35:39 by me               ###   ########.fr       */
+/*   Updated: 2026/11/12 19:53:35 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,18 @@ void	pass_color(char **str_ptr)
 {
 	__UINT8_TYPE__	i;
 	char			*tmp;
+	void			*ptr;
 
+	ptr = *str_ptr;
 	i = 0;
 	while (i < 2)
 	{
 		*str_ptr = ft_strchr(*str_ptr, ',');
+		if (!*str_ptr)
+		{
+			*str_ptr = ptr;
+			return ;
+		}
 		(*str_ptr)++;
 		i++;
 	}
