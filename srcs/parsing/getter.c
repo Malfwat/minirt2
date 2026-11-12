@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 20:16:46 by me                #+#    #+#             */
-/*   Updated: 2026/11/12 21:51:38 by me               ###   ########.fr       */
+/*   Updated: 2026/11/12 22:09:51 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,12 @@ t_err	get_light_comp(char *str, void **ptrs, getter *fptr)
 	{
 		ptr	= str;
 		pass_component(&str);
-		err = fptr[i](ptr, &ptrs[i]);
+		err = fptr[i](ptr, ptrs[i]);
 		if (err != ok)
 			return (err);
-		if (!*str)
-			return (bad_amb_config);
+		if (!*str && i < 2)
+			return (bad_light_config);
+		i++;
 	}
 	return (ok);
 }
