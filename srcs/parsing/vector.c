@@ -6,11 +6,12 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 18:45:31 by me                #+#    #+#             */
-/*   Updated: 2026/11/12 15:26:00 by me               ###   ########.fr       */
+/*   Updated: 2026/11/12 15:42:04 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_struct.h"
+#include "rt_parsing.h"
 #include "rt_error.h"
 #include "str.h"
 
@@ -34,10 +35,7 @@ t_err	get_vec3(char *str, t_vec3 *vec)
 	str = ptr + 1;
 	if (!*str || is_wspace(*str))
 		return (bad_vec_format);
-	ptr = ft_strchr_set(str, "\t\v\n\r\f ");
-	if (!ptr)
-		ptr = ft_strchr(str, 0);
-	*ptr = 0;
+	null_terminate_component(str);
 	if (!ft_atof(str, 5, &(vec->z)))
 		return (invalid_double_value);
 	return (ok);

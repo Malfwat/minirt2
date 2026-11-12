@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 16:49:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/11 19:00:46 by me               ###   ########.fr       */
+/*   Updated: 2026/11/12 15:08:44 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,47 @@
 
 t_elem	get_elem(char *line)
 {
-	if (!ft_strncmp((line), AMB, 2))
+
+	if (!ft_strcmp((line), AMB))
 		return (amb);
-	if (!ft_strncmp((line), CAM, 2))
+	if (!ft_strcmp((line), CAM))
 		return (cam);
-	if (!ft_strncmp((line), LIGHT, 2))
+	if (!ft_strcmp((line), LIGHT))
 		return (light);
-	if (!ft_strncmp((line), PL, 3))
+	if (!ft_strcmp((line), PL))
 		return (plan);
-	if (!ft_strncmp((line), CY, 3))
+	if (!ft_strcmp((line), CY))
 		return (cylinder);
-	if (!ft_strncmp((line), SP, 3))
+	if (!ft_strcmp((line), SP))
 		return (sphere);
 	return (none);
 }
 
+void	null_terminate_component(char *str)
+{
+	char	*ptr;
+
+	ptr = ft_strchr_set(str, "\t\v\n\r\f ");
+	if (!ptr)
+		ptr = ft_strchr(str, 0);
+	*ptr = 0;
+}
+
+#include <stdio.h>
+
 t_err	parse_line(char *str, t_scene *sc)
 {
 	t_elem	elem;
+	char	*next;
 
+	next = str;
+	jump_id(&next);
+	null_terminate_component(str);
 	elem = get_elem(str);
 	if (elem == none)
 		return (bad_elem);
+	printf("%s", next);
+	//jump_id(&str);
 	(void)sc;
 	return (ok);
 }

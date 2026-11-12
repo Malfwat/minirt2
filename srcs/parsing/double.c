@@ -6,21 +6,17 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 14:13:30 by me                #+#    #+#             */
-/*   Updated: 2026/11/12 14:38:58 by me               ###   ########.fr       */
+/*   Updated: 2026/11/12 15:43:30 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_error.h"
+#include "rt_parsing.h"
 #include "str.h"
 
 t_err	get_strict_positive_double(char *str, double *res)
 {
-	char	*ptr;
-
-	ptr = ft_strchr_set(str, "\t\v\n\r\f ");
-	if (!ptr)
-		ptr = ft_strchr(str, 0);
-	*ptr = 0;
+	null_terminate_component(str);
 	if (!ft_atof(str, 5, res))
 		return (invalid_double_value);
 	if (*res <= 0)
