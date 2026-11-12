@@ -6,14 +6,14 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 14:13:30 by me                #+#    #+#             */
-/*   Updated: 2026/11/12 14:35:48 by me               ###   ########.fr       */
+/*   Updated: 2026/11/12 14:38:58 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_error.h"
 #include "str.h"
 
-t_err	get_strict_positiv_double(char *str, double *res)
+t_err	get_strict_positive_double(char *str, double *res)
 {
 	char	*ptr;
 
@@ -30,11 +30,10 @@ t_err	get_strict_positiv_double(char *str, double *res)
 
 t_err	get_height(char *str, double *res)
 {
-	return (get_strict_positiv_double(str, res));
+	return (get_strict_positive_double(str, res));
 }
-
 
 t_err	get_diameter(char *str, double *res)
 {
-	return (get_strict_positiv_double(str, res));
+	return (get_strict_positive_double(str, res));
 }
