@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 20:16:46 by me                #+#    #+#             */
-/*   Updated: 2026/11/12 22:19:35 by me               ###   ########.fr       */
+/*   Updated: 2026/11/12 22:22:31 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_err	get_light_comp(char *str, void **ptrs, getter *fptr)
 	i = 0;
 	while (i < 3)
 	{
-		if (!*str && i < 2)
+		if (!*str)
 			return (bad_light_config);
 		ptr	= str;
 		pass_component(&str);
