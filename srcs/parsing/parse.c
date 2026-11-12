@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 16:49:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/12 15:08:44 by me               ###   ########.fr       */
+/*   Updated: 2026/11/12 17:38:49 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 
 t_elem	get_elem(char *line)
 {
-
 	if (!ft_strcmp((line), AMB))
 		return (amb);
 	if (!ft_strcmp((line), CAM))
@@ -37,14 +36,18 @@ t_elem	get_elem(char *line)
 	return (none);
 }
 
-void	null_terminate_component(char *str)
+t_err	get_and_pass_elem(char **str, t_elem *elem)
 {
-	char	*ptr;
+	char	*next;
 
-	ptr = ft_strchr_set(str, "\t\v\n\r\f ");
-	if (!ptr)
-		ptr = ft_strchr(str, 0);
-	*ptr = 0;
+	next = *str;
+	pass_id(&next);
+	null_terminate_component(*str);
+	*elem = get_elem(*str);
+	if (*elem == none)
+		return (bad_elem);
+	*str = next;
+	return (ok);
 }
 
 #include <stdio.h>
@@ -52,29 +55,14 @@ void	null_terminate_component(char *str)
 t_err	parse_line(char *str, t_scene *sc)
 {
 	t_elem	elem;
-	char	*next;
+	t_err	err;
 
-	next = str;
-	jump_id(&next);
-	null_terminate_component(str);
-	elem = get_elem(str);
-	if (elem == none)
-		return (bad_elem);
-	printf("%s", next);
-	//jump_id(&str);
+	err = get_and_pass_elem(&str, &elem);
+	if (err != ok)
+		return (err);
+	printf("%s", str);
 	(void)sc;
 	return (ok);
-}
-
-bool	is_line_empty(char *str)
-{
-	while (*str)
-	{
-		if (!is_wspace(*str))
-			return (false);
-		str++;
-	}
-	return (true);
 }
 
 int	parse_file(t_fd fd, t_scene *sc, t_err *err, int *line_no)

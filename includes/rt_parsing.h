@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/12 15:41:37 by me               ###   ########.fr       */
+/*   Updated: 2026/11/12 16:47:42 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@
 void	parse(const char *filename, t_scene *sc);
 t_fd	open_scene(const char *filename, t_err *err);
 bool	is_line_empty(char *str);
-void	jump_id(char **str_ptr);
+void	pass_id(char **str_ptr);
 void	null_terminate_component(char *str);
+char	*pass_color_value(char *str, int i);
 
 t_err	get_vec3(char *str, t_vec3 *vec);
 
