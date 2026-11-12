@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 20:21:21 by me                #+#    #+#             */
-/*   Updated: 2026/11/11 19:29:17 by me               ###   ########.fr       */
+/*   Updated: 2026/11/12 15:25:11 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strchr_set(const char *s, char *set)
 		return ((void *)0);
 	while (*s && !ft_strchr(set, *s))
 		s++;
-	if (ft_strchr(set, *s))
+	if (*s && ft_strchr(set, *s))
 		return ((char *)s);
 	return ((void *)0);
 }
