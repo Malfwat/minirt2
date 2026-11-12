@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 18:45:31 by me                #+#    #+#             */
-/*   Updated: 2026/11/12 15:16:08 by me               ###   ########.fr       */
+/*   Updated: 2026/11/12 15:19:42 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ t_err	get_vec3(char *str, t_vec3 *vec)
 	if (!ft_atof(str, 5, &(vec->y)))
 		return (invalid_double_value);
 	str = ptr + 1;
-	ptr = ft_strchr_set(str, "\t\v\n\r\f ");
-	if (!ptr)
+	if (!*str || is_wspace(*str))
 		return (bad_vec_format);
 	*ptr = 0;
 	if (!ft_atof(str, 5, &(vec->z)))
