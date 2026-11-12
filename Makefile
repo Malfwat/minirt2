@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/12 13:39:33 by me               ###   ########.fr        #
+#    Updated: 2026/11/12 14:18:16 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS	+=	string/ft_strcmp.c \
 SRCS	+=	parsing/open_scene.c \
 			parsing/parse.c		 \
 			parsing/light.c		 \
+			parsing/double.c		 \
 			parsing/cam.c		 \
 			parsing/vector.c	 \
 			parsing/color.c
