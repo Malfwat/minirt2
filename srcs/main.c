@@ -6,13 +6,15 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 19:23:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/11 18:37:14 by me               ###   ########.fr       */
+/*   Updated: 2026/11/12 20:30:48 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_parsing.h"
 #include "rt_struct.h"
 #include "str.h"
+
+#include <stdio.h>
 
 int	main(int ac, char **av)
 {
@@ -22,5 +24,6 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (0);
 	parse(av[1], &sc);
+	printf("%i, %f\n", sc.amb.color.b, sc.amb.ratio);
 	return (0);
 }

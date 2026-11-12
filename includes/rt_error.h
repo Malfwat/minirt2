@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 16:58:41 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/12 14:43:02 by me               ###   ########.fr       */
+/*   Updated: 2026/11/12 20:25:28 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ typedef enum e_err
 	ext = -6,
 	invalid_color_value = -7,
 	invalid_double_value = -8,
-	invalid_length_value = -9
+	invalid_length_value = -9,
+	bad_amb_config = -10
 }	t_err;
 
 void	manage_error_and_exit(int err_type, t_err errnum,

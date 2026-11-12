@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 16:49:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/12 17:38:49 by me               ###   ########.fr       */
+/*   Updated: 2026/11/12 20:16:20 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,16 @@ t_err	get_and_pass_elem(char **str, t_elem *elem)
 	return (ok);
 }
 
-#include <stdio.h>
+parse_functions	get_parsefunc(t_elem elem)
+{
+	if (elem == amb)
+		return (get_amb);
+	if (elem == light)
+		return (get_light);
+	if (elem == cam)
+		return (get_cam);
+	return (get_obj);
+}
 
 t_err	parse_line(char *str, t_scene *sc)
 {
@@ -60,9 +69,7 @@ t_err	parse_line(char *str, t_scene *sc)
 	err = get_and_pass_elem(&str, &elem);
 	if (err != ok)
 		return (err);
-	printf("%s", str);
-	(void)sc;
-	return (ok);
+	return (get_parsefunc(elem)(str, sc));
 }
 
 int	parse_file(t_fd fd, t_scene *sc, t_err *err, int *line_no)
