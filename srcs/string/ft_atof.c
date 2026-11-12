@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 15:59:58 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/12 13:11:03 by me               ###   ########.fr       */
+/*   Updated: 2026/11/12 13:19:01 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool	get_fixedvalue(const char *n, double *res, __int8_t *sign)
 	if (*n == '-' || *n == '+')
 		n++;
 	if (!(*n <= '9' && *n >= '0'))
-			return (false);
+		return (false);
 	while (*n && *n != '.')
 	{
 		if (prev > *res)
@@ -72,6 +72,7 @@ bool	ft_atof(const char *n, __uint8_t precision, double *res)
 		return (false);
 	tmp = 0;
 	if ((ptr_dot && (ptr_dot - n) / sizeof(*n) > 40)
+		|| (ptr_dot && !ptr_dot[1])
 		|| (!ptr_dot && ft_strlen(n) > 40)
 		|| !get_fixedvalue(n, &value, &sign)
 		|| (ptr_dot && !get_decimal(ptr_dot + 1, &tmp, precision)))
