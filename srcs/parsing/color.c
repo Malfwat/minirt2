@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 20:14:07 by me                #+#    #+#             */
-/*   Updated: 2026/11/12 20:28:11 by me               ###   ########.fr       */
+/*   Updated: 2026/11/12 21:57:10 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,15 @@ char	*pass_color_value(char *str, int i)
 	return (ptr);
 }
 
-t_err	get_color(char *str, t_color *color)
+t_err	get_color(char *str, void *color)
 {
 	int		value;
 	int		i;
 	char	*ptr;
+	t_color	*c;
 
 	i = 0;
+	c = color;
 	while (i < 3)
 	{
 		ptr = pass_color_value(str, i);
@@ -61,7 +63,7 @@ t_err	get_color(char *str, t_color *color)
 		*ptr = 0;
 		if (!ft_atoi(str, &value) || !(value >= 0 && value <= 255))
 			return (invalid_color_value);
-		*get_right_color_addr(&color, i) = value;
+		*get_right_color_addr(&c, i) = value;
 		if (i < 2)
 		{
 			str = ptr + 1;

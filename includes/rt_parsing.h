@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/12 20:29:07 by me               ###   ########.fr       */
+/*   Updated: 2026/11/12 21:54:38 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,13 @@ char	*pass_color_value(char *str, int i);
 void	pass_color(char **str_ptr);
 void	pass_component(char **str_ptr);
 
-t_err	get_vec3(char *str, t_vec3 *vec);
-t_err	get_ratio(char *str, double *ratio);
-t_err	get_color(char *str, t_color *color);
+t_err	get_vec3(char *str, void *vec);
+t_err	get_ratio(char *str, void *ratio);
+t_err	get_color(char *str, void *color);
+
+typedef	t_err (*getter)(char *, void *);
+
+getter	*get_light_getter(void);
 
 t_err	get_amb(char *str, t_scene *sc);
 t_err	get_cam(char *str, t_scene *sc);
