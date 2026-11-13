@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/13 14:55:21 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 17:46:03 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 20:41:24 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_err	get_and_pass_elem(char **str, t_elem *elem)
 	return (ok);
 }
 
-parse_functions	get_parsefunc(t_elem elem)
+t_parse_functions	get_parsefunc(t_elem elem)
 {
 	if (elem == amb)
 		return (get_amb);

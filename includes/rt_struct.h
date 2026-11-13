@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 18:53:51 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 16:45:32 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 20:50:53 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ typedef struct s_scene
 	t_light	*light_lst;
 	t_obj	*obj_lst;
 	t_elem	actual;
+
+	void	*parser;
 }	t_scene;
 
 #endif /*RT_STRUCT_H*/

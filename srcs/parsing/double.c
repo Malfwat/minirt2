@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 14:13:30 by me                #+#    #+#             */
-/*   Updated: 2026/11/12 15:43:30 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 20:37:11 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ t_err	get_strict_positive_double(char *str, double *res)
 	return (ok);
 }
 
-t_err	get_height(char *str, double *res)
+t_err	get_height(char *str, void *res)
 {
 	return (get_strict_positive_double(str, res));
 }
 
-t_err	get_diameter(char *str, double *res)
+t_err	get_diameter(char *str, void *res)
 {
 	return (get_strict_positive_double(str, res));
 }

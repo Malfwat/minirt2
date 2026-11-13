@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/13 17:46:19 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 20:50:26 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,38 +26,61 @@
 
 # include <stdbool.h>
 
-void	parse(const char *filename, t_scene *sc);
-t_fd	open_scene(const char *filename, t_err *err);
-bool	is_line_empty(char *str);
-void	null_terminate_component(char *str);
-void	pass_id(char **str_ptr);
-char	*pass_color_value(char *str, int i);
-void	pass_color(char **str_ptr);
-void	pass_component(char **str_ptr);
+void				parse(const char *filename, t_scene *sc);
+t_fd				open_scene(const char *filename, t_err *err);
+bool				is_line_empty(char *str);
+void				null_terminate_component(char *str);
+void				pass_id(char **str_ptr);
+char				*pass_color_value(char *str, int i);
 
-t_err	get_vec3(char *str, void *vec);
-t_err	get_ratio(char *str, void *ratio);
-t_err	get_color(char *str, void *color);
-t_err	get_fov(char *str, __UINT8_TYPE__ *fov);
-t_err	get_height(char *str, double *res);
-t_err	get_diameter(char *str, double *res);
-typedef	t_err (*getter)(char *, void *);
+void				pass_color(char **str_ptr);
+void				pass_component(char **str_ptr);
+typedef void	(*t_pass)(char **);
 
-getter	*get_light_getter(void);
-bool	add_light(t_light **head, t_light data);
+t_err				get_vec3(char *str, void *vec);
+t_err				get_ratio(char *str, void *ratio);
+t_err				get_color(char *str, void *color);
+t_err				get_fov(char *str, void *fov);
+t_err				get_height(char *str, void *res);
+t_err				get_diameter(char *str, void *res);
+typedef t_err	(*t_getter)(char *, void *);
 
-t_err	get_amb(char *str, t_scene *sc);
-t_err	get_cam(char *str, t_scene *sc);
-t_err	get_light(char *str, t_scene *sc);
-t_err	get_sp(char *str, t_scene *sc);
+t_getter			*get_light_getter(void);
+bool				add_light(t_light **head, t_light data);
+
+t_err				get_amb(char *str, t_scene *sc);
+t_err				get_cam(char *str, t_scene *sc);
+t_err				get_light(char *str, t_scene *sc);
+t_err				get_sp(char *str, t_scene *sc);
 //t_err	get_obj(char *str, t_scene *sc);
 //t_err	get_obj(char *str, t_scene *sc);
 
-t_err	add_obj(t_scene *sc, t_obj o);
+t_err				add_obj(t_scene *sc, t_obj o);
 
-typedef	t_err (*parse_functions)(char *, t_scene *);
+typedef t_err	(*t_parse_functions)(char *, t_scene *);
 
-t_err	get_and_pass_elem(char **str, t_elem *elem);
-parse_functions	get_parsefunc(t_elem elem);
+t_err				get_and_pass_elem(char **str, t_elem *elem);
+t_parse_functions	get_parsefunc(t_elem elem);
+
+enum	e_get_index
+{
+	color,
+	diameter,
+	fov,
+	height,
+	ratio,
+	vec
+};
+
+typedef struct s_parser
+{
+	t_getter	*getting_f;
+	t_pass		*passing_f;
+	int			*passing_index;
+	int			*getting_index;
+	
+	t_err		err;
+	void		*addr[NB_COMP + 1];
+}	t_parser;
 
 #endif /* RT_PARSING_H */

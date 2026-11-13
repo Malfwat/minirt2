@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 20:16:46 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 17:59:58 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 20:41:07 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_err	get_cam(char *str, t_scene *sc)
 	return ((t_err []){ok, bad_cam_config}[*str != 0]);
 }
 
-t_err	get_light_comp(char *str, void **ptrs, getter *fptr)
+t_err	get_light_comp(char *str, void **ptrs, t_getter *fptr)
 {
 	t_err			err;
 	char			*ptr;

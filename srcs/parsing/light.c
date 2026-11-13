@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 12:36:00 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 14:53:25 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 20:40:50 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ t_err	get_ratio(char *str, void *ratio)
 	return (ok);
 }
 
-getter	*get_light_getter(void)
+t_getter	*get_light_getter(void)
 {
-	static getter	tab[3] = {get_vec3, get_ratio, get_color};
+	static t_getter	tab[3] = {get_vec3, get_ratio, get_color};
 
 	return (tab);
 }

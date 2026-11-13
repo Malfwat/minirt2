@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 16:49:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 16:44:02 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 20:40:06 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,32 @@
 
 #include <unistd.h>
 #include <errno.h>
+
+t_getter	*get_comp_getter(void)
+{
+	static t_getter	tab[7] = {
+		get_color,
+		get_diameter,
+		get_fov,
+		get_height,
+		get_ratio,
+		get_vec3,
+		(void *)0
+	};
+
+	return (tab);
+}
+
+t_pass	*get_pass_func_ptr(void)
+{
+	static t_pass	tab[3] = {
+		pass_color,
+		pass_component,
+		(void *)0
+	};
+
+	return (tab);
+}
 
 t_err	parse_line(char *str, t_scene *sc)
 {
