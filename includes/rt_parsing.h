@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/13 21:45:09 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 22:38:57 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,23 +68,16 @@ typedef t_err	(*t_parse_functions)(char *, t_scene *);
 t_err				get_and_pass_elem(char **str, t_elem *elem);
 t_parse_functions	get_parsefunc(t_elem elem);
 
-enum	e_get_index
-{
-	color,
-	diameter,
-	fov,
-	height,
-	ratio,
-	vec
-};
-
 typedef struct s_parser
 {
-	t_getter	*getting_f;
-	t_pass		*passing_f;
+	t_getter		*getting_f;
+	t_pass			*passing_f;
 	
-	t_err		err;
-	void		*addr[NB_COMP + 1];
+	t_err			err;
+	__UINT8_TYPE__	required;
+	void			*addr[NB_COMP + 1];
 }	t_parser;
+
+t_err				get_comp(char *str, t_parser *p);
 
 #endif /* RT_PARSING_H */

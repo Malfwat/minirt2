@@ -6,11 +6,13 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/13 17:59:07 by me               ###   ########.fr        #
+#    Updated: 2026/11/13 22:46:54 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	miniRT
+
+NAME_BONUS	=	miniRT_bonus
 
 CC		=	cc
 
@@ -45,6 +47,10 @@ SRCS	+=	parsing/open_scene.c\
 			parsing/vector.c	\
 			parsing/color.c
 
+MANDATORY	=	parsing/loop.c
+
+BONUS		=	parsing/loop_bonus.c
+
 SRCS	+=	error/rt_error.c
 
 SRCS	+=	gnl/gnl.c gnl/gnl_utils.c
@@ -61,8 +67,13 @@ DEPS	=	$(OBJ:.o=.d)
 
 all: $(NAME)
 
-$(NAME):	$(OBJ)
-	$(CC) $(OBJ) -o $@ 
+bonus: $(NAME_BONUS)
+
+$(NAME):	$(OBJ) $(addprefix $(BUILD), $(MANDATORY:.c=.o))
+	$(CC) $^ -o $@ 
+
+$(NAME_BONUS):	$(OBJ) $(addprefix $(BUILD), $(BONUS:.c=.o))
+	$(CC) $^ -o $@ 
 
 $(BUILD)%.o:	$(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
@@ -72,10 +83,10 @@ clean:
 	rm -rf $(BUILD)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(NAME_BONUS)
 
 re: fclean all 
 
-.PHONY: all re clean fclean
+.PHONY: all re clean fclean bonus
 
 -include $(DEPS)
