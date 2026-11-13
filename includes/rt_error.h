@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 16:58:41 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/12 22:10:18 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 14:40:15 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 typedef enum e_err
 {
+	syscall_err = 2,
 	ok = 0,
 	bad_color_format = -1,
 	bad_elem = -2,
@@ -35,7 +36,7 @@ typedef enum e_err
 	bad_light_config = -11,
 }	t_err;
 
-void	manage_error_and_exit(int err_type, t_err errnum,
+void	manage_error_and_exit(t_err errnum,
 			t_scene *sc, int line);
 
 #endif /* RT_ERROR_H */

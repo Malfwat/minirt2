@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 16:26:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/11 18:37:42 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 14:47:15 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,20 @@ void	free_scene(t_scene *sc)
 	free_obj(sc->obj_lst);
 }
 
-void	manage_error_and_exit(int err_type, t_err errnum, t_scene *sc, int line)
+void	manage_error_and_exit(t_err errnum, t_scene *sc, int line)
 {
 	char	*str;
 
-	if (err_type == ERRNO)
+	if (errnum == syscall_err)
+	{
 		str = strerror(errno);
-	else
-		str = err_message(errnum);
-	if (line < 0)
 		printf("Error\n\tMiniRT: %s\n", str);
+	}
 	else
+	{
+		str = err_message(errnum);
 		printf("Error\n\tMiniRT: line %i: %s\n", line, str);
+	}
 	free_scene(sc);
 	exit(1);
 }

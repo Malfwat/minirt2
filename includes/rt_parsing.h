@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/12 21:54:38 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 14:57:30 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_err	get_color(char *str, void *color);
 typedef	t_err (*getter)(char *, void *);
 
 getter	*get_light_getter(void);
+bool	add_light(t_light **head, t_light data);
 
 t_err	get_amb(char *str, t_scene *sc);
 t_err	get_cam(char *str, t_scene *sc);
@@ -50,5 +51,8 @@ t_err	get_obj(char *str, t_scene *sc);
 
 
 typedef	t_err (*parse_functions)(char *, t_scene *);
+
+t_err	get_and_pass_elem(char **str, t_elem *elem);
+parse_functions	get_parsefunc(t_elem elem);
 
 #endif /* RT_PARSING_H */

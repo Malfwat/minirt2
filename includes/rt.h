@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admoufle <admoufle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:03:21 by admoufle          #+#    #+#             */
-/*   Updated: 2026/10/25 14:53:51 by admoufle         ###   ########.fr       */
+/*   Updated: 2026/11/13 14:52:38 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@
 
 t_fd	open_scene(const char *filename, t_err *err);
 t_err	parse_line(char *str, t_scene *sc);
+void	free_scene(t_scene *sc);
 
 #endif /* RT_H */

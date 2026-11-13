@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 16:49:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/12 20:16:20 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 14:57:11 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,52 +14,9 @@
 #include "rt_error.h"
 #include "rt_parsing.h"
 #include "rt_gnl.h"
-#include "str.h"
 
 #include <unistd.h>
 #include <errno.h>
-
-t_elem	get_elem(char *line)
-{
-	if (!ft_strcmp((line), AMB))
-		return (amb);
-	if (!ft_strcmp((line), CAM))
-		return (cam);
-	if (!ft_strcmp((line), LIGHT))
-		return (light);
-	if (!ft_strcmp((line), PL))
-		return (plan);
-	if (!ft_strcmp((line), CY))
-		return (cylinder);
-	if (!ft_strcmp((line), SP))
-		return (sphere);
-	return (none);
-}
-
-t_err	get_and_pass_elem(char **str, t_elem *elem)
-{
-	char	*next;
-
-	next = *str;
-	pass_id(&next);
-	null_terminate_component(*str);
-	*elem = get_elem(*str);
-	if (*elem == none)
-		return (bad_elem);
-	*str = next;
-	return (ok);
-}
-
-parse_functions	get_parsefunc(t_elem elem)
-{
-	if (elem == amb)
-		return (get_amb);
-	if (elem == light)
-		return (get_light);
-	if (elem == cam)
-		return (get_cam);
-	return (get_obj);
-}
 
 t_err	parse_line(char *str, t_scene *sc)
 {
@@ -72,10 +29,11 @@ t_err	parse_line(char *str, t_scene *sc)
 	return (get_parsefunc(elem)(str, sc));
 }
 
-int	parse_file(t_fd fd, t_scene *sc, t_err *err, int *line_no)
+t_err	parse_file(t_fd fd, t_scene *sc, int *line_no)
 {
 	char	*line;
 	int		i;
+	t_err	err;
 
 	line = gnl(fd);
 	i = 0;
@@ -84,23 +42,22 @@ int	parse_file(t_fd fd, t_scene *sc, t_err *err, int *line_no)
 		*line_no = i;
 		if (*line != '#' && !is_line_empty(line))
 		{
-			*err = parse_line(line, sc);
-			if (*err != ok)
-				return (free(line), gnl(FREE_GNL), RT_ERR);
+			err = parse_line(line, sc);
+			if (err != ok)
+				return (free(line), gnl(FREE_GNL), err);
 		}
 		free(line);
 		line = gnl(fd);
 		i++;
 	}
 	if (errno)
-		return (ERRNO);
+		return (syscall_err);
 	return (ok);
 }
 
 void	parse(const char *filename, t_scene *sc)
 {
 	int		line_no;
-	int		err_type;
 	t_err	err;
 	t_fd	fd;
 
@@ -108,9 +65,9 @@ void	parse(const char *filename, t_scene *sc)
 	line_no = 0;
 	fd = open_scene(filename, &err);
 	if (fd < 0)
-		return (manage_error_and_exit(fd, err, sc, NOT_A_LINE));
-	err_type = parse_file(fd, sc, &err, &line_no);
-	if (err_type != ok)
-		return (manage_error_and_exit(fd, err, sc, line_no));
+		return (manage_error_and_exit(syscall_err, sc, NOT_A_LINE));
+	err = parse_file(fd, sc, &line_no);
+	if (err != ok)
+		return (manage_error_and_exit(err, sc, line_no));
 	close(fd);
 }

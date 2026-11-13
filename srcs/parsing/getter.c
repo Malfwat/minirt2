@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 20:16:46 by me                #+#    #+#             */
-/*   Updated: 2026/11/12 22:22:31 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 14:54:37 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_err	get_amb(char *str, t_scene *sc)
 	t_err	err;
 	char	*ptr;
 
-	ptr	= str;
+	ptr = str;
 	pass_component(&str);
 	err = get_ratio(ptr, &sc->amb.ratio);
 	if (err != ok)
@@ -45,8 +45,8 @@ t_err	get_cam(char *str, t_scene *sc)
 
 t_err	get_light_comp(char *str, void **ptrs, getter *fptr)
 {
-	t_err		err;
-	char		*ptr;
+	t_err			err;
+	char			*ptr;
 	__UINT8_TYPE__	i;
 
 	i = 0;
@@ -54,7 +54,7 @@ t_err	get_light_comp(char *str, void **ptrs, getter *fptr)
 	{
 		if (!*str)
 			return (bad_light_config);
-		ptr	= str;
+		ptr = str;
 		pass_component(&str);
 		err = fptr[i](ptr, ptrs[i]);
 		if (err != ok)
@@ -76,7 +76,8 @@ t_err	get_light(char *str, t_scene *sc)
 	err = get_light_comp(str, l_comp_addr, get_light_getter());
 	if (err != ok)
 		return (err);
-	(void)sc;
+	if (!add_light(&sc->light_lst, l))
+		return (syscall_err);
 	return (ok);
 }
 
