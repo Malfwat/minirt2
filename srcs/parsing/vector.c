@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 18:45:31 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 14:53:39 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 15:32:47 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_err	get_vec3(char *str, void *vec)
 	t_vec3	*v;
 
 	v = vec;
+	null_terminate_component(str);
 	ptr = ft_strchr(str, ',');
 	if (!ptr)
 		return (bad_vec_format);

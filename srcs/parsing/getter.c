@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 20:16:46 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 15:27:27 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 15:34:08 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ t_err	get_cam(char *str, t_scene *sc)
 	tab[2] = &sc->cam.fov;
 	while (i < 3)
 	{
+		if (!*str)
+			return (bad_cam_config);
 		ptr = str;
 		pass_component(&str);
 		if (i < 2)
