@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/13 22:38:57 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 23:15:28 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef void	(*t_pass)(char **);
 t_pass				*get_light_passer(void);
 t_pass				*get_amb_passer(void);
 t_pass				*get_cam_passer(void);
+t_pass				*get_sp_passer(void);
 
 t_err				get_vec3(char *str, void *vec);
 t_err				get_ratio(char *str, void *ratio);
@@ -49,6 +50,7 @@ t_err				get_height(char *str, void *res);
 t_err				get_diameter(char *str, void *res);
 typedef t_err	(*t_getter)(char *, void *);
 
+t_getter			*get_sp_getter(void);
 t_getter			*get_light_getter(void);
 t_getter			*get_amb_getter(void);
 t_getter			*get_cam_getter(void);

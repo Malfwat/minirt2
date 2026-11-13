@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/13 17:58:20 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 18:04:52 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 23:14:31 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,20 @@ t_err	get_sp_comp(char *str, t_obj *o)
 
 t_err	get_sp(char *str, t_scene *sc)
 {
-	t_err			err;
-	t_obj			o;
+	t_err		err;
+	t_parser	p;
+	t_obj		o;
 
 	ft_bzero(&o, sizeof(t_obj));
+	p.required = 3;
+	p.err = bad_sp_config;
+	p.addr[0] = &o.coordinate;
+	p.addr[1] = &o.diameter;
+	p.addr[2] = &o.color;
+	p.getting_f = get_sp_getter();
+	p.passing_f = get_sp_passer();
 	o.id = sphere;
-	err = get_sp_comp(str, &o);
+	err = get_comp(str, &p);
 	if (err != ok)
 		return (err);
 	return (add_obj(sc, o));
