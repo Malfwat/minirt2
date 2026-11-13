@@ -67,7 +67,7 @@ int	main(void)
 	{"-50,0,20 0,0,1 -1", bad_fov_format, 0, 0},
 	{"-50,0,20 0,0,1 70 extra", bad_cam_config, 0, 0},
 	{"-50,0,20 0,0,1", bad_cam_config, 0, 0},
-	{"-50, 0, 20 0,0,1 70", invalid_double_value, 0, 0},
+	{"-50, 0, 20 0,0,1 70", bad_vec_format, 0, 0},
 	{"-50,0 0,0,1 70", bad_vec_format, 0, 0},
 	{"", bad_cam_config, 0, 0},
 	{NULL, ok, 0, 0}
