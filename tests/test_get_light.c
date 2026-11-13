@@ -117,6 +117,9 @@ int	main(void)
 	{"-40,0,30 0.6 256,0,0", invalid_color_value, 0, 0, 0, 0},
 	{"-40,0,30 0.6 255,0", bad_color_format, 0, 0, 0, 0},
 	{"-40,0,30 0.6", bad_light_config, 0, 0, 0, 0},
+	{"-40,0,30 0.6 255,0,0 extra", bad_light_config, 0, 0, 0, 0},
+	{"-40, 0, 30 0.6 255,255,255", invalid_double_value, 0, 0, 0, 0},
+	{"-40,0,30 0.6 255 ,0,255", invalid_color_value, 0, 0, 0, 0},
 	{"", bad_light_config, 0, 0, 0, 0},
 	{NULL, ok, 0, 0, 0, 0}
 	};
