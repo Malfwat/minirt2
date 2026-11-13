@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/13 23:15:28 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 23:37:14 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef void	(*t_pass)(char **);
 t_pass				*get_light_passer(void);
 t_pass				*get_amb_passer(void);
 t_pass				*get_cam_passer(void);
+t_pass				*get_cy_passer(void);
+t_pass				*get_pl_passer(void);
 t_pass				*get_sp_passer(void);
 
 t_err				get_vec3(char *str, void *vec);
@@ -50,6 +52,8 @@ t_err				get_height(char *str, void *res);
 t_err				get_diameter(char *str, void *res);
 typedef t_err	(*t_getter)(char *, void *);
 
+t_getter			*get_cy_getter(void);
+t_getter			*get_pl_getter(void);
 t_getter			*get_sp_getter(void);
 t_getter			*get_light_getter(void);
 t_getter			*get_amb_getter(void);
@@ -59,6 +63,8 @@ bool				add_light(t_light **head, t_light data);
 t_err				get_amb(char *str, t_scene *sc);
 t_err				get_cam(char *str, t_scene *sc);
 t_err				get_light(char *str, t_scene *sc);
+t_err				get_cy(char *str, t_scene *sc);
+t_err				get_pl(char *str, t_scene *sc);
 t_err				get_sp(char *str, t_scene *sc);
 //t_err	get_obj(char *str, t_scene *sc);
 //t_err	get_obj(char *str, t_scene *sc);

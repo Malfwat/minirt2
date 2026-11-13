@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/13 14:55:21 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 20:41:24 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 23:36:14 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,9 @@ t_parse_functions	get_parsefunc(t_elem elem)
 		return (get_light);
 	if (elem == cam)
 		return (get_cam);
-	return (get_sp);
+	if (elem == sphere)
+		return (get_sp);
+	if (elem == cylinder)
+		return (get_cy);
+	return (get_pl);
 }
