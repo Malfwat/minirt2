@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/13 14:55:21 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 14:58:19 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 17:46:03 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ parse_functions	get_parsefunc(t_elem elem)
 		return (get_light);
 	if (elem == cam)
 		return (get_cam);
-	return (get_obj);
+	return (get_sp);
 }

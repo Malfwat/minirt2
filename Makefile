@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/13 14:57:49 by me               ###   ########.fr        #
+#    Updated: 2026/11/13 17:59:07 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS	+=	parsing/open_scene.c\
 			parsing/light.c		\
 			parsing/double.c	\
 			parsing/cam.c		\
+			parsing/obj.c		\
 			parsing/getter.c	\
 			parsing/getter_utils.c	\
 			parsing/utils.c		\

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 16:26:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 14:47:15 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 17:53:20 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char	*err_message(t_err errnum)
 {
 	if (errnum == ext)
 		return ("Invalid file extension");
+	if (errnum == bad_color_format)
+		return ("Bad color format");
 	return ("");
 }
 

@@ -2,12 +2,11 @@
 
 #include "rt_struct.h"
 #include "rt_error.h"
+#include "rt_parsing.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-t_err	get_fov(char *str, __UINT8_TYPE__ *fov);
 
 typedef struct s_case
 {

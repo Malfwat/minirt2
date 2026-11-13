@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/13 15:24:51 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 17:46:19 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_err	get_vec3(char *str, void *vec);
 t_err	get_ratio(char *str, void *ratio);
 t_err	get_color(char *str, void *color);
 t_err	get_fov(char *str, __UINT8_TYPE__ *fov);
+t_err	get_height(char *str, double *res);
+t_err	get_diameter(char *str, double *res);
 typedef	t_err (*getter)(char *, void *);
 
 getter	*get_light_getter(void);
@@ -47,8 +49,11 @@ bool	add_light(t_light **head, t_light data);
 t_err	get_amb(char *str, t_scene *sc);
 t_err	get_cam(char *str, t_scene *sc);
 t_err	get_light(char *str, t_scene *sc);
-t_err	get_obj(char *str, t_scene *sc);
+t_err	get_sp(char *str, t_scene *sc);
+//t_err	get_obj(char *str, t_scene *sc);
+//t_err	get_obj(char *str, t_scene *sc);
 
+t_err	add_obj(t_scene *sc, t_obj o);
 
 typedef	t_err (*parse_functions)(char *, t_scene *);
 

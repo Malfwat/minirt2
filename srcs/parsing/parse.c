@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 16:49:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 14:57:11 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 16:44:02 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_err	parse_line(char *str, t_scene *sc)
 	err = get_and_pass_elem(&str, &elem);
 	if (err != ok)
 		return (err);
+	sc->actual = elem;
 	return (get_parsefunc(elem)(str, sc));
 }
 

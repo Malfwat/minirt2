@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 18:53:51 by me                #+#    #+#             */
-/*   Updated: 2026/11/11 18:40:23 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 16:45:32 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef struct s_obj
 	struct s_obj	*next;
 }	t_obj;
 
+# define NB_COMP 5
+
 typedef struct s_ambient
 {
 	t_color			color;
@@ -87,6 +89,7 @@ typedef struct s_scene
 	t_amb	amb;
 	t_light	*light_lst;
 	t_obj	*obj_lst;
+	t_elem	actual;
 }	t_scene;
 
 #endif /*RT_STRUCT_H*/
