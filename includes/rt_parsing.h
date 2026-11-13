@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/13 14:57:30 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 15:24:51 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	pass_component(char **str_ptr);
 t_err	get_vec3(char *str, void *vec);
 t_err	get_ratio(char *str, void *ratio);
 t_err	get_color(char *str, void *color);
-
+t_err	get_fov(char *str, __UINT8_TYPE__ *fov);
 typedef	t_err (*getter)(char *, void *);
 
 getter	*get_light_getter(void);

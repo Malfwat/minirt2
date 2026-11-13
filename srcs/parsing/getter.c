@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 20:16:46 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 15:17:04 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 15:27:27 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,29 @@ t_err	get_amb(char *str, t_scene *sc)
 
 t_err	get_cam(char *str, t_scene *sc)
 {
-	(void)str;
-	(void)sc;
+	void			*tab[3];
+	char			*ptr;
+	t_err			err;
+	__UINT8_TYPE__	i;
+
+	i = 0;
+	tab[0] = &sc->cam.coordinate;
+	tab[1] = &sc->cam.vec;
+	tab[2] = &sc->cam.fov;
+	while (i < 3)
+	{
+		ptr = str;
+		pass_component(&str);
+		if (i < 2)
+			err = get_vec3(ptr, tab[i]);
+		else
+			err = get_fov(ptr, tab[i]);
+		if (err != ok)
+			return (err);
+		i++;
+	}
+	if (*str)
+		return (bad_cam_config);
 	return (ok);
 }
 

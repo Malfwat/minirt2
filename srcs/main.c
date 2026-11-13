@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 19:23:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 14:52:51 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 15:28:27 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int ac, char **av)
 	parse(av[1], &sc);
 	printf("%i, %f\n", sc.amb.color.b, sc.amb.ratio);
 	printf("%i, %f\n", sc.light_lst->color.b, sc.light_lst->coordinate.x);
+	printf("%i, %f\n", sc.cam.fov, sc.cam.coordinate.x);
 	free_scene(&sc);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 16:58:41 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/13 14:40:15 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 15:27:01 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef enum e_err
 	invalid_length_value = -9,
 	bad_amb_config = -10,
 	bad_light_config = -11,
+	bad_cam_config = -12,
 }	t_err;
 
 void	manage_error_and_exit(t_err errnum,
