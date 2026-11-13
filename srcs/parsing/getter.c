@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 20:16:46 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 23:21:15 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 23:24:04 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_err	get_amb(char *str, t_scene *sc)
 	t_parser	p;
 	t_err		err;
 
-	p.err = bad_light_config;
+	p.err = bad_amb_config;
 	p.required = 2;
 	p.addr[0] = &sc->amb.ratio;
 	p.addr[1] = &sc->amb.color;
@@ -57,7 +57,7 @@ t_err	get_cam(char *str, t_scene *sc)
 	t_parser	p;
 	t_err		err;
 
-	p.err = bad_light_config;
+	p.err = bad_cam_config;
 	p.required = 3;
 	p.addr[0] = &sc->cam.coordinate;
 	p.addr[1] = &sc->cam.vec;
