@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 16:58:41 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/13 23:30:40 by me               ###   ########.fr       */
+/*   Updated: 2026/11/14 00:02:38 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,13 @@ typedef enum e_err
 	bad_cam_config = -12,
 	bad_sp_config = -13,
 	bad_pl_config = -14,
-	bad_cy_config = -15
+	bad_cy_config = -15,
+	dup_amb = -16,
+	dup_cam = -17,
+	dup_light = -18,
+	missing_amb = -19,
+	missing_light = -20,
+	missing_cam = -21
 }	t_err;
 
 void	manage_error_and_exit(t_err errnum,

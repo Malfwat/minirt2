@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/13 23:37:14 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 23:54:01 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # include "rt_error.h"
 
 # include <stdbool.h>
+
+void				set_bool(bool *l, bool *c, bool *a, t_elem elem);
+t_err				parse_line(char *str, t_scene *sc);
 
 void				parse(const char *filename, t_scene *sc);
 t_fd				open_scene(const char *filename, t_err *err);
@@ -80,7 +83,7 @@ typedef struct s_parser
 {
 	t_getter		*getting_f;
 	t_pass			*passing_f;
-	
+
 	t_err			err;
 	__UINT8_TYPE__	required;
 	void			*addr[NB_COMP + 1];

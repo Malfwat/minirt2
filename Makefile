@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/13 23:33:56 by me               ###   ########.fr        #
+#    Updated: 2026/11/13 23:53:07 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,9 +50,11 @@ SRCS	+=	parsing/open_scene.c\
 			parsing/vector.c	\
 			parsing/color.c
 
-MANDATORY	=	parsing/loop.c
+MANDATORY	=	parsing/loop.c	\
+				parsing/parse_line.c
 
-BONUS		=	parsing/loop_bonus.c
+BONUS		=	parsing/loop_bonus.c	\
+				parsing/parse_line_bonus.c
 
 SRCS	+=	error/rt_error.c
 

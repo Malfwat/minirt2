@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 16:49:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 21:41:13 by me               ###   ########.fr       */
+/*   Updated: 2026/11/14 00:01:44 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,14 @@
 #include <unistd.h>
 #include <errno.h>
 
-t_err	parse_line(char *str, t_scene *sc)
+void	set_bool(bool *l, bool *c, bool *a, t_elem elem)
 {
-	t_elem	elem;
-	t_err	err;
-
-	err = get_and_pass_elem(&str, &elem);
-	if (err != ok)
-		return (err);
-	sc->actual = elem;
-	return (get_parsefunc(elem)(str, sc));
+	if (elem == amb)
+		*a = true;
+	if (elem == cam)
+		*c = true;
+	if (elem == light)
+		*l = true;
 }
 
 t_err	parse_file(t_fd fd, t_scene *sc, int *line_no)
@@ -56,6 +54,17 @@ t_err	parse_file(t_fd fd, t_scene *sc, int *line_no)
 	return (ok);
 }
 
+t_err	check_acl(t_scene *sc)
+{
+	if (!sc->ambient)
+		return (missing_amb);
+	if (!sc->l)
+		return (missing_light);
+	if (!sc->camera)
+		return (missing_cam);
+	return (ok);
+}
+
 void	parse(const char *filename, t_scene *sc)
 {
 	int		line_no;
@@ -68,6 +77,9 @@ void	parse(const char *filename, t_scene *sc)
 	if (fd < 0)
 		return (manage_error_and_exit(syscall_err, sc, NOT_A_LINE));
 	err = parse_file(fd, sc, &line_no);
+	if (err != ok)
+		return (manage_error_and_exit(err, sc, line_no));
+	err = check_acl(sc);
 	if (err != ok)
 		return (manage_error_and_exit(err, sc, line_no));
 	close(fd);

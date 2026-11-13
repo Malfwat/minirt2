@@ -6,14 +6,14 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 18:53:51 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 21:44:53 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 23:55:39 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_STRUCT_H
 # define RT_STRUCT_H
 
-# include <stddef.h>
+# include <stdbool.h>
 
 typedef int			t_fd;
 
@@ -85,6 +85,10 @@ typedef struct s_camera
 
 typedef struct s_scene
 {
+	bool	camera;
+	bool	l;
+	bool	ambient;
+
 	t_cam	cam;
 	t_amb	amb;
 	t_light	*light_lst;
