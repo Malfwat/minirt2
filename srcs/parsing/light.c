@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 12:36:00 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 20:40:50 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 21:37:47 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,46 @@ t_err	get_ratio(char *str, void *ratio)
 
 t_getter	*get_light_getter(void)
 {
-	static t_getter	tab[3] = {get_vec3, get_ratio, get_color};
+	static t_getter	tab[4] = {
+		get_vec3,
+		get_ratio,
+		get_color,
+		NULL
+	};
+
+	return (tab);
+}
+
+t_pass	*get_light_passer(void)
+{
+	static t_pass	tab[4] = {
+		pass_component,
+		pass_component,
+		pass_color,
+		NULL
+	};
+
+	return (tab);
+}
+
+t_getter	*get_amb_getter(void)
+{
+	static t_getter	tab[3] = {
+		get_ratio,
+		get_color,
+		NULL
+	};
+
+	return (tab);
+}
+
+t_pass	*get_amb_passer(void)
+{
+	static t_pass	tab[3] = {
+		pass_component,
+		pass_color,
+		NULL
+	};
 
 	return (tab);
 }

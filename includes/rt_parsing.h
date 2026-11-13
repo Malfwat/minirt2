@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/13 20:50:26 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 21:45:09 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ void				pass_color(char **str_ptr);
 void				pass_component(char **str_ptr);
 typedef void	(*t_pass)(char **);
 
+t_pass				*get_light_passer(void);
+t_pass				*get_amb_passer(void);
+t_pass				*get_cam_passer(void);
+
 t_err				get_vec3(char *str, void *vec);
 t_err				get_ratio(char *str, void *ratio);
 t_err				get_color(char *str, void *color);
@@ -46,6 +50,8 @@ t_err				get_diameter(char *str, void *res);
 typedef t_err	(*t_getter)(char *, void *);
 
 t_getter			*get_light_getter(void);
+t_getter			*get_amb_getter(void);
+t_getter			*get_cam_getter(void);
 bool				add_light(t_light **head, t_light data);
 
 t_err				get_amb(char *str, t_scene *sc);
@@ -76,8 +82,6 @@ typedef struct s_parser
 {
 	t_getter	*getting_f;
 	t_pass		*passing_f;
-	int			*passing_index;
-	int			*getting_index;
 	
 	t_err		err;
 	void		*addr[NB_COMP + 1];

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 20:16:46 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 20:41:07 by me               ###   ########.fr       */
+/*   Updated: 2026/11/13 21:48:57 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,42 +64,42 @@ t_err	get_cam(char *str, t_scene *sc)
 	return ((t_err []){ok, bad_cam_config}[*str != 0]);
 }
 
-t_err	get_light_comp(char *str, void **ptrs, t_getter *fptr)
+t_err	get_light_comp(char *str, t_parser *p)
 {
 	t_err			err;
 	char			*ptr;
 	__UINT8_TYPE__	i;
 
 	i = 0;
-	while (i < 3)
+	while (p->getting_f[i])
 	{
 		if (!*str)
-			return (bad_light_config);
+			return (p->err);
 		ptr = str;
-		if (i < 2)
-			pass_component(&str);
-		else
-			pass_color(&str);
-		err = fptr[i](ptr, ptrs[i]);
+		p->passing_f[i](&str);
+		err = p->getting_f[i](ptr, p->addr[i]);
 		if (err != ok)
 			return (err);
 		i++;
 	}
 	if (*str)
-		return (bad_light_config);
+		return (p->err);
 	return (ok);
 }
 
 t_err	get_light(char *str, t_scene *sc)
 {
 	t_light	l;
+	t_parser	p;
 	t_err	err;
-	void	*l_comp_addr[3];
 
-	l_comp_addr[0] = &l.coordinate;
-	l_comp_addr[1] = &l.ratio;
-	l_comp_addr[2] = &l.color;
-	err = get_light_comp(str, l_comp_addr, get_light_getter());
+	p.err = bad_light_config;
+	p.addr[0] = &l.coordinate;
+	p.addr[1] = &l.ratio;
+	p.addr[2] = &l.color;
+	p.getting_f = get_light_getter();
+	p.passing_f = get_light_passer();
+	err = get_light_comp(str, &p);
 	if (err != ok)
 		return (err);
 	if (!add_light(&sc->light_lst, l))
