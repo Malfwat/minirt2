@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 16:26:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 17:53:20 by me               ###   ########.fr       */
+/*   Updated: 2026/11/14 11:54:19 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ void	manage_error_and_exit(t_err errnum, t_scene *sc, int line)
 	else
 	{
 		str = err_message(errnum);
-		printf("Error\n\tMiniRT: line %i: %s\n", line, str);
+		if (line != NOT_A_LINE)
+			printf("Error\n\tMiniRT: line %i: %s\n", line, str);
+		else
+			printf("Error\n\tMiniRT: %s\n", str);
 	}
 	free_scene(sc);
 	exit(1);
