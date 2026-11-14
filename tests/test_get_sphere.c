@@ -15,6 +15,7 @@
 #include "rt_parsing.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 t_err	get_sp(char *str, t_scene *sc);
