@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 20:27:06 by me                #+#    #+#             */
-/*   Updated: 2026/11/11 19:30:37 by me               ###   ########.fr       */
+/*   Updated: 2026/11/14 15:23:27 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ void	ft_bzero(void *s, size_t n);
 
 /* is_wspace.c */
 bool	is_wspace(char c);
+# define RT_WSPACE "\t\v\n\r\f "
 
 #endif /*STR_H*/

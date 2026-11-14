@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 17:36:50 by me                #+#    #+#             */
-/*   Updated: 2026/11/12 17:37:33 by me               ###   ########.fr       */
+/*   Updated: 2026/11/14 15:26:49 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	null_terminate_component(char *str)
 {
 	char	*ptr;
 
-	ptr = ft_strchr_set(str, "\t\v\n\r\f ");
+	ptr = ft_strchr_set(str, RT_WSPACE);
 	if (!ptr)
 		ptr = ft_strchr(str, 0);
 	*ptr = 0;

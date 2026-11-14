@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 14:49:11 by me                #+#    #+#             */
-/*   Updated: 2026/11/12 20:30:37 by me               ###   ########.fr       */
+/*   Updated: 2026/11/14 15:26:57 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	pass_elem(char **str_ptr)
 	char	*ptr;
 
 	ptr = *str_ptr;
-	ptr = ft_strchr_set(ptr, " \t\v\r\f");
+	ptr = ft_strchr_set(ptr, RT_WSPACE);
 	if (!ptr)
 		ptr = ft_strchr(*str_ptr, 0);
-	while (*ptr && ft_strchr("\t\v\r\f ", *ptr))
+	while (*ptr && ft_strchr(RT_WSPACE, *ptr))
 		ptr++;
 	*str_ptr = ptr;
 }
@@ -56,7 +56,7 @@ void	pass_color(char **str_ptr)
 	}
 	if (**str_ptr == ' ')
 		(*str_ptr)++;
-	tmp = ft_strchr_set(*str_ptr, "\t\v\n\r\f ");
+	tmp = ft_strchr_set(*str_ptr, RT_WSPACE);
 	if (!tmp)
 		tmp = ft_strchr(*str_ptr, 0);
 	while (*tmp && is_wspace(*tmp))
