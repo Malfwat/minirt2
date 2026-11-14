@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/13 23:54:01 by me               ###   ########.fr       */
+/*   Updated: 2026/11/14 12:09:42 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void				set_bool(bool *l, bool *c, bool *a, t_elem elem);
 t_err				parse_line(char *str, t_scene *sc);
 
 void				parse(const char *filename, t_scene *sc);
-t_fd				open_scene(const char *filename, t_err *err);
+t_err				open_scene(const char *filename, t_fd *fd);
 bool				is_line_empty(char *str);
 void				null_terminate_component(char *str);
 void				pass_id(char **str_ptr);

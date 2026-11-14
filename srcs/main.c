@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 19:23:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/14 11:27:27 by me               ###   ########.fr       */
+/*   Updated: 2026/11/14 12:04:57 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,36 +16,45 @@
 #include "str.h"
 
 #include "mlx.h"
-#include "mlx_int.h"
 
-void	free_mlx(t_xvar *xvar)
+#include <stdlib.h>
+#include <unistd.h> // sleep
+
+typedef struct s_graphics
 {
-	mlx_destroy_display(xvar);
-	free(xvar);
+	void	*mlx;
+	void	*win;
+}	t_graphics;
+
+void	free_mlx(t_graphics *data)
+{
+	mlx_destroy_display(data->mlx);
+	free(data->mlx);
 }
 
-void	destroy_graphics(t_xvar *xvar)
+void	destroy_graphics(t_graphics data)
 {
-	mlx_destroy_window(xvar, xvar->win_list);
+	mlx_destroy_window(data.mlx, data.win);
 }
 
 int	main(int ac, char **av)
 {
-	t_xvar	*xvar;
+	t_graphics data;
 	t_scene	sc;
 
 	ft_bzero(&sc, sizeof(t_scene));
 	if (ac != 2)
 		return (0);
 	parse(av[1], &sc);
-	xvar = mlx_init();
-	if (!xvar)
+	data.mlx = mlx_init();
+	if (!data.mlx)
 		return (free_scene(&sc), 1);
-	if (!mlx_new_window(xvar, 500, 500, "Hello World!"))
-		return (free_scene(&sc), 1);
-	sleep(5);
-	destroy_graphics(xvar);
-	free_mlx(xvar);
+	data.win = mlx_new_window(data.mlx, 500, 500, "Hello World!");
+	if (!data.win)
+		return (free_mlx(data.mlx), free_scene(&sc), 1);
+	sleep(1);
+	destroy_graphics(data);
+	free_mlx(&data);
 	free_scene(&sc);
 	return (0);
 }

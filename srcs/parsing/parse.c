@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 16:49:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/14 11:28:24 by me               ###   ########.fr       */
+/*   Updated: 2026/11/14 12:06:45 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ void	parse(const char *filename, t_scene *sc)
 
 	err = ok;
 	line_no = 0;
-	fd = open_scene(filename, &err);
-	if (fd < 0)
-		return (manage_error_and_exit(syscall_err, sc, NOT_A_LINE));
+	err = open_scene(filename, &fd);
+	if (err != ok)
+		return (manage_error_and_exit(err, sc, NOT_A_LINE));
 	err = parse_file(fd, sc, &line_no);
 	if (err != ok)
 		return (manage_error_and_exit(err, sc, line_no));
