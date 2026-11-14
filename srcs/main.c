@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 19:23:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/14 12:16:15 by me               ###   ########.fr       */
+/*   Updated: 2026/11/14 12:21:26 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int ac, char **av)
 		return (free_scene(&sc), 1);
 	data.win = mlx_new_window(data.mlx, 500, 500, "Hello World!");
 	if (!data.win)
-		return (free_mlx(data.mlx), free_scene(&sc), 1);
+		return (free_mlx(&data), free_scene(&sc), 1);
 	sleep(1);
 	destroy_graphics(&data);
 	free_mlx(&data);
