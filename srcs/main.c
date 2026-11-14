@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 19:23:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/14 21:23:26 by me               ###   ########.fr       */
+/*   Updated: 2026/11/14 21:30:33 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	main(int ac, char **av)
 	parse(av[1], &sc);
 	if (!init_graphics(&data))
 		return (free_scene(&sc), destroy_graphics(&data), 1);
-	render(&data);
+	render(&data, &sc);
 	mlx_put_image_to_window(data.mlx, data.win, data.image.img, 0, 0);
 	mlx_loop(data.mlx);
 	destroy_graphics(&data);

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:47:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/14 21:17:32 by me               ###   ########.fr       */
+/*   Updated: 2026/11/14 21:31:00 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void	put_pxl(int x, int y, t_graphics *data, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	render_lines(int y_start, int y_end, t_graphics *data)
+void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc)
 {
 	int	i;
 
-	i = 0;
+	(void)sc;
 	while (y_start < y_end)
 	{
 		i = 0;
