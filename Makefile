@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/14 20:13:00 by me               ###   ########.fr        #
+#    Updated: 2026/11/14 20:58:06 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,7 @@ CC		=	cc
 
 CFLAGS	=	-Wall -Wextra -Werror -MMD -MP -g
 
-
-
 MLX		=	lmlx_Linux
-
-
 
 HEADER	=	includes minilibx-linux
 
@@ -55,6 +51,8 @@ SRCS	+=	parsing/open_scene.c\
 			parsing/pass.c		\
 			parsing/vector.c	\
 			parsing/color.c
+
+SRCS	+=	rendering/put_pxl.c
 
 MANDATORY	=	parsing/loop.c	\
 				parsing/parse_line.c

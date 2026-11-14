@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/14 12:09:42 by me               ###   ########.fr       */
+/*   Updated: 2026/11/14 20:35:34 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ t_err				get_light(char *str, t_scene *sc);
 t_err				get_cy(char *str, t_scene *sc);
 t_err				get_pl(char *str, t_scene *sc);
 t_err				get_sp(char *str, t_scene *sc);
-//t_err	get_obj(char *str, t_scene *sc);
-//t_err	get_obj(char *str, t_scene *sc);
 
 t_err				add_obj(t_scene *sc, t_obj o);
 
