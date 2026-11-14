@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/14 10:52:34 by me               ###   ########.fr        #
+#    Updated: 2026/11/14 20:13:00 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME_BONUS	=	miniRT_bonus
 
 CC		=	cc
 
-CFLAGS	=	-Wall -Wextra -Werror -MMD -MP
+CFLAGS	=	-Wall -Wextra -Werror -MMD -MP -g
 
 
 
