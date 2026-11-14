@@ -35,7 +35,7 @@ char	*pass_color_value(char *str, int i)
 	{
 		if (ptr)
 			return ((void *)0);
-		ptr = ft_strchr_set(str, " \t\v\n\r\f");
+		ptr = ft_strchr_set(str, RT_WSPACE);
 		if (ptr)
 			return (ptr);
 		if (is_numeric(str))
