@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 19:23:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/14 19:05:35 by me               ###   ########.fr       */
+/*   Updated: 2026/11/14 19:29:35 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "mlx.h"
 
 #include <stdlib.h>
+#include <X11/X.h>
 
 void	free_mlx(t_graphics *data)
 {
@@ -28,8 +29,10 @@ void	free_mlx(t_graphics *data)
 
 void	destroy_graphics(t_graphics *data)
 {
-	mlx_destroy_image(data->mlx, data->image.img);
-	mlx_destroy_window(data->mlx, data->win);
+	if (data->image.img)
+		mlx_destroy_image(data->mlx, data->image.img);
+	if (data->win)
+		mlx_destroy_window(data->mlx, data->win);
 }
 
 int	keyhook(int keycode, void *param)
@@ -39,6 +42,12 @@ int	keyhook(int keycode, void *param)
 	data = param;
 	if (keycode == ESC)
 		mlx_loop_end(data->mlx);
+	return (0);
+}
+
+int	stop_loop(void *param)
+{
+	mlx_loop_end(((t_graphics *)param)->mlx);
 	return (0);
 }
 
@@ -64,6 +73,7 @@ int	main(int ac, char **av)
 		return (destroy_graphics(&data), free_mlx(&data), free_scene(&sc), 1);
 	data.image.addr = mlx_get_data_addr(data.image.img, &data.image.bpp,
 			&data.image.line_length, &data.image.endian);
+	mlx_hook(data.win, DestroyNotify, 0, stop_loop, &data);
 	mlx_loop(data.mlx);
 	destroy_graphics(&data);
 	free_mlx(&data);
