@@ -19,13 +19,40 @@
 #include <string.h>
 #include <stdio.h>
 
+static char	**messages(void)
+{
+	static char	*tab[21] = {
+		"Bad color format",
+		"Bad element identifier",
+		"Bad field of view format",
+		"Bad ratio format",
+		"Bad vector format",
+		"Bad file extension",
+		"Color value out of range",
+		"Invalid double value",
+		"Length must be strictly positive",
+		"Bad ambient light configuration",
+		"Bad light configuration",
+		"Bad camera configuration",
+		"Bad sphere configuration",
+		"Bad plane configuration",
+		"Bad cylinder configuration",
+		"Ambient light declared twice",
+		"Camera declared twice",
+		"Light declared twice",
+		"Missing ambient light",
+		"Missing light",
+		"Missing camera"
+	};
+
+	return (tab);
+}
+
 char	*err_message(t_err errnum)
 {
-	if (errnum == ext)
-		return ("Invalid file extension");
-	if (errnum == bad_color_format)
-		return ("Bad color format");
-	return ("");
+	if (errnum >= 0 || errnum < -21)
+		return ("Unknown error");
+	return (messages()[-errnum - 1]);
 }
 
 void	free_scene(t_scene *sc)
