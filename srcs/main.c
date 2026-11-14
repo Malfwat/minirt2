@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 19:23:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/14 10:59:38 by me               ###   ########.fr       */
+/*   Updated: 2026/11/14 11:27:27 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,10 @@ int	main(int ac, char **av)
 	xvar = mlx_init();
 	if (!xvar)
 		return (free_scene(&sc), 1);
-	xvar->win_list = mlx_new_window(xvar, 500, 500, "Hello World!");
-	if (!xvar->win_list)
+	if (!mlx_new_window(xvar, 500, 500, "Hello World!"))
 		return (free_scene(&sc), 1);
 	sleep(5);
-
+	destroy_graphics(xvar);
 	free_mlx(xvar);
 	free_scene(&sc);
 	return (0);
