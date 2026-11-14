@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/14 21:06:53 by me               ###   ########.fr       */
+/*   Updated: 2026/11/14 21:21:39 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ typedef struct s_graphics
 	t_image	image;
 }	t_graphics;
 
-void	put_pxl(int	x, int y, t_graphics *data, int color);
-void	render_line(int y_start, int y_end, t_graphics *data);
+void	put_pxl(int x, int y, t_graphics *data, int color);
+void	render_lines(int y_start, int y_end, t_graphics *data);
+void	render(t_graphics *data);
 
 # define WIDTH 500
 # define HEIGHT 500

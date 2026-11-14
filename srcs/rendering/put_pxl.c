@@ -6,23 +6,23 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:47:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/14 21:06:41 by me               ###   ########.fr       */
+/*   Updated: 2026/11/14 21:17:32 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_graphics.h"
 
-void	put_pxl(int	x, int y, t_graphics *data, int color)
+void	put_pxl(int x, int y, t_graphics *data, int color)
 {
-	void	*dst;
+	char	*dst;
 
 	dst = data->image.addr
 		+ (y * data->image.line_length
-		+ x * (data->image.bpp / 8));
+			+ x * (data->image.bpp / 8));
 	*(unsigned int *)dst = color;
 }
 
-void	render_line(int y_start, int y_end, t_graphics *data)
+void	render_lines(int y_start, int y_end, t_graphics *data)
 {
 	int	i;
 
