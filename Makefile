@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/13 23:53:07 by me               ###   ########.fr        #
+#    Updated: 2026/11/14 10:52:34 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,13 @@ CC		=	cc
 
 CFLAGS	=	-Wall -Wextra -Werror -MMD -MP
 
-HEADER	=	includes
+
+
+MLX		=	lmlx_Linux
+
+
+
+HEADER	=	includes minilibx-linux
 
 SRC_DIR	=	srcs/
 
@@ -70,22 +76,26 @@ OBJ		=	$(addprefix $(BUILD), $(SRCS:.c=.o))
 
 DEPS	=	$(OBJ:.o=.d)
 
-all: $(NAME)
+all: minilibx-linux/$(MLX) $(NAME)
+
+minilibx-linux/$(MLX):
+	make -C minilibx-linux
 
 bonus: $(NAME_BONUS)
 
 $(NAME):	$(OBJ) $(addprefix $(BUILD), $(MANDATORY:.c=.o))
-	$(CC) $^ -o $@ 
+	$(CC) $^ -o $@ -$(MLX) -lXext -lX11 -lm -lz -O3 -L minilibx-linux/
 
 $(NAME_BONUS):	$(OBJ) $(addprefix $(BUILD), $(BONUS:.c=.o))
-	$(CC) $^ -o $@ 
+	$(CC) $^ -o $@ -$(MLX) -L minilibx-linux/
 
 $(BUILD)%.o:	$(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER)
+	$(CC) $(CFLAGS) -c $< -o $@ $(addprefix -I, $(HEADER))
 
 clean:
 	rm -rf $(BUILD)
+	make clean -C minilibx-linux
 
 fclean: clean
 	rm -f $(NAME) $(NAME_BONUS)
