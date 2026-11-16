@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/14 22:12:04 by me               ###   ########.fr        #
+#    Updated: 2026/11/16 13:05:13 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,11 +85,11 @@ minilibx-linux/$(MLX):
 
 bonus: $(NAME_BONUS)
 
-$(NAME):	$(OBJ) $(addprefix $(BUILD), $(MANDATORY:.c=.o))
+$(NAME):	$(OBJ) $(addprefix $(BUILD), $(MANDATORY:.c=.o)) | minilibx-linux/$(MLX)
 	$(CC) $^ -o $@ -$(MLX) -lXext -lX11 -lm -lz -O3 -L minilibx-linux/
 
-$(NAME_BONUS):	$(OBJ) $(addprefix $(BUILD), $(BONUS:.c=.o))
-	$(CC) $^ -o $@ -$(MLX) -L minilibx-linux/
+$(NAME_BONUS):	$(OBJ) $(addprefix $(BUILD), $(BONUS:.c=.o)) | minilibx-linux/$(MLX)
+	$(CC) $^ -o $@ -$(MLX) -lXext -lX11 -lm -lz -O3 -L minilibx-linux/
 
 $(BUILD)%.o:	$(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
