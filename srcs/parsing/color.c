@@ -6,12 +6,11 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 20:14:07 by me                #+#    #+#             */
-/*   Updated: 2026/11/12 21:57:10 by me               ###   ########.fr       */
+/*   Updated: 2026/11/16 22:21:34 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_struct.h"
-#include "rt_parsing.h"
 #include "rt_error.h"
 #include "str.h"
 

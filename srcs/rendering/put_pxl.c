@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:47:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/14 21:43:05 by me               ###   ########.fr       */
+/*   Updated: 2026/11/16 22:36:22 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,34 @@ void	put_pxl(int x, int y, t_graphics *data, int color)
 	*(unsigned int *)dst = color;
 }
 
+t_color	get_pxl_color(t_scene *sc, int x, int y)
+{
+	double	tmp;
+	t_color	c;
+
+	(void)sc;
+	tmp = (double)x / WIDTH;
+	c.r = tmp * 256;
+	tmp = (double)y / HEIGHT;
+	c.g = tmp * 256;
+	c.b = 0;
+	return (c);
+}
+
 void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc)
 {
-	int	i;
+	int		x;
+	t_color	c;
 
 	(void)sc;
 	while (y_start < y_end)
 	{
-		i = 0;
-		while (i < WIDTH)
+		x = 0;
+		while (x < WIDTH)
 		{
-			put_pxl(i, y_start, data, 0x00ff0000);
-			i++;
+			c = get_pxl_color(sc, x, y_start);
+			put_pxl(x, y_start, data, t_color_to_int(c));
+			x++;
 		}
 		y_start++;
 	}

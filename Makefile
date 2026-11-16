@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/16 14:18:20 by me               ###   ########.fr        #
+#    Updated: 2026/11/16 22:22:32 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,8 @@ SRCS	+=	parsing/open_scene.c\
 
 SRCS	+= vector/norme.c
 
-SRCS	+=	rendering/put_pxl.c
+SRCS	+=	rendering/put_pxl.c	\
+			rendering/color.c
 
 MANDATORY	=	parsing/loop.c	\
 				parsing/parse_line.c\
