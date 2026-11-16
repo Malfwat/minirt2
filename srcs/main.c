@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 19:23:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/16 20:53:17 by me               ###   ########.fr       */
+/*   Updated: 2026/11/17 00:08:19 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 #include "mlx.h"
 
 #include <stdlib.h>
-#include <X11/X.h>
 
 void	destroy_graphics(t_graphics *data)
 {
@@ -64,7 +63,7 @@ bool	init_graphics(t_graphics *data)
 		return (false);
 	data->image.addr = mlx_get_data_addr(data->image.img, &data->image.bpp,
 			&data->image.line_length, &data->image.endian);
-	mlx_hook(data->win, DestroyNotify, 0, stop_loop, data);
+	mlx_hook(data->win, W_CROSS, 0, stop_loop, data);
 	return (true);
 }
 

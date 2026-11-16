@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/17 00:00:00 by me                #+#    #+#             */
-/*   Updated: 2026/11/17 00:00:00 by me               ###   ########.fr       */
+/*   Updated: 2026/11/17 00:04:26 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,6 @@
 
 #include <math.h>
 #include <stdio.h>
-
-/* prototypes locaux : rt_math.h ne les declare pas encore */
-t_vec3	add(t_vec3 a, t_vec3 b);
-t_vec3	sub(t_vec3 a, t_vec3 b);
-t_vec3	mult(t_vec3 a, double scal);
-double	scal(t_vec3 a, t_vec3 b);
-t_vec3	cross(t_vec3 a, t_vec3 b);
 
 static int	g_fail;
 static int	g_total;

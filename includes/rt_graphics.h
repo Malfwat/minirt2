@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/16 22:21:02 by me               ###   ########.fr       */
+/*   Updated: 2026/11/17 00:10:03 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define RT_GRAPHICS_H
 
 # define ESC 65307
+# define W_CROSS 17
 
 # include "rt_struct.h"
 # include "rt_error.h"
@@ -28,10 +29,18 @@ typedef struct s_image
 	int		endian;
 }	t_image;
 
+typedef struct s_axes
+{
+	t_vec3	x;
+	t_vec3	y;
+	t_vec3	z;
+}	t_axes;
+
 typedef struct s_graphics
 {
 	void	*mlx;
 	void	*win;
+	t_axes	axes;
 	t_image	image;
 }	t_graphics;
 
