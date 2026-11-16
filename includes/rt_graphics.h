@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/14 21:31:36 by me               ###   ########.fr       */
+/*   Updated: 2026/11/16 14:11:38 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,9 @@ void	render(t_graphics *data, t_scene *sc);
 
 # define WIDTH 500
 # define HEIGHT 500
+
+# ifndef NB_TH
+#  define NB_TH 8
+# endif /*NB_TH*/
 
 #endif /*RT_GRAPHICS_H*/

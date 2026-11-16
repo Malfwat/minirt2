@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 19:23:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/14 21:30:33 by me               ###   ########.fr       */
+/*   Updated: 2026/11/16 14:14:47 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	main(int ac, char **av)
 	t_scene		sc;
 
 	ft_bzero(&sc, sizeof(t_scene));
-	if (ac != 2)
+	if (ac != 2 || NB_TH < 0)
 		return (0);
 	parse(av[1], &sc);
 	if (!init_graphics(&data))

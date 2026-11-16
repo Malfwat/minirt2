@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/16 13:05:13 by me               ###   ########.fr        #
+#    Updated: 2026/11/16 14:12:17 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,6 +78,8 @@ OBJ		=	$(addprefix $(BUILD), $(SRCS:.c=.o))
 
 DEPS	=	$(OBJ:.o=.d)
 
+NB_PC	=	$(echo nproc)
+
 all: minilibx-linux/$(MLX) $(NAME)
 
 minilibx-linux/$(MLX):
@@ -93,7 +95,7 @@ $(NAME_BONUS):	$(OBJ) $(addprefix $(BUILD), $(BONUS:.c=.o)) | minilibx-linux/$(M
 
 $(BUILD)%.o:	$(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@ $(addprefix -I, $(HEADER))
+	$(CC) $(CFLAGS) -c $< -o $@ $(addprefix -I, $(HEADER)) -D NB_TH=$(NB_PC)
 
 clean:
 	rm -rf $(BUILD)
