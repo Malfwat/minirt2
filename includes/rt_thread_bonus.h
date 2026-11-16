@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 20:05:34 by me                #+#    #+#             */
-/*   Updated: 2026/11/16 20:43:19 by me               ###   ########.fr       */
+/*   Updated: 2026/11/16 21:15:04 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,16 @@ typedef struct s_thread_data
 	t_graphics	*data;
 	t_scene		*sc;
 	sem_t		*sem;
-	bool		*go_on;
+	bool		*stop;
 	int			y_start;
 	int			y_end;
 }	t_thread_data;
 
 struct	s_multi_threading
 {
-	int		band_limit;
-	bool	go_on;
+	int		err;
+	int		lim;
+	bool	stop;
 	sem_t	sem;
 };
 
