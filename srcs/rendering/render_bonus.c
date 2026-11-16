@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:19:48 by me                #+#    #+#             */
-/*   Updated: 2026/11/16 21:15:18 by me               ###   ########.fr       */
+/*   Updated: 2026/11/16 21:19:46 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_err	render(t_graphics *data, t_scene *sc)
 	{
 		th_data[i] = attrib_data(data, sc, &th.sem, &th.stop);
 		th_data[i].y_start = th.lim;
-		th.lim += (int []){HEIGHT / NB_TH, HEIGHT / NB_TH}[i < HEIGHT % NB_TH];
+		th.lim += HEIGHT / NB_TH + (int []){0, 1}[i < HEIGHT % NB_TH];
 		th_data[i].y_end = th.lim;
 		th.err = pthread_create(tab + i, NULL, thread_rendering, th_data + i);
 		if (th.err)
