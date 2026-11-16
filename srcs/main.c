@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 19:23:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/16 14:14:47 by me               ###   ########.fr       */
+/*   Updated: 2026/11/16 20:53:17 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	main(int ac, char **av)
 {
 	t_graphics	data;
 	t_scene		sc;
+	t_err		err;
 
 	ft_bzero(&sc, sizeof(t_scene));
 	if (ac != 2 || NB_TH < 0)
@@ -79,7 +80,12 @@ int	main(int ac, char **av)
 	parse(av[1], &sc);
 	if (!init_graphics(&data))
 		return (free_scene(&sc), destroy_graphics(&data), 1);
-	render(&data, &sc);
+	err = render(&data, &sc);
+	if (err != ok)
+	{
+		destroy_graphics(&data);
+		manage_error_and_exit(err, &sc, NOT_A_LINE);
+	}
 	mlx_put_image_to_window(data.mlx, data.win, data.image.img, 0, 0);
 	mlx_loop(data.mlx);
 	destroy_graphics(&data);
