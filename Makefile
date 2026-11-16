@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/16 14:12:17 by me               ###   ########.fr        #
+#    Updated: 2026/11/16 14:18:20 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,7 @@ OBJ		=	$(addprefix $(BUILD), $(SRCS:.c=.o))
 
 DEPS	=	$(OBJ:.o=.d)
 
-NB_PC	=	$(echo nproc)
+NB_PC	=	$(shell nproc)
 
 all: minilibx-linux/$(MLX) $(NAME)
 

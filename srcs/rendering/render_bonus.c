@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:19:48 by me                #+#    #+#             */
-/*   Updated: 2026/11/16 14:05:15 by me               ###   ########.fr       */
+/*   Updated: 2026/11/16 14:33:50 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include <unistd.h>
 #include <pthread.h>
+#include <stdio.h>
 
 typedef struct s_thread_data
 {
@@ -38,22 +39,39 @@ void	render(t_graphics *data, t_scene *sc)
 {
 	__UINT8_TYPE__	i;
 	__UINT8_TYPE__	nb_succeed;
-	pthread_t		tab[HEIGHT / NB_TH];
-	t_thread_data	thread_data[HEIGHT / NB_TH];
+	pthread_t		tab[NB_TH];
+	t_thread_data	thread_data[NB_TH];
 
 
 	i = 0;
-	while (i < HEIGHT / NB_TH)
+	while (i < NB_TH)
 	{
 		thread_data[i].data = data;
 		thread_data[i].sc = sc;
-		thread_data[i].y_start = i * NB_TH;
-		thread_data[i].y_end = (i + 1) * NB_TH;
+		thread_data[i].y_start = i * HEIGHT/NB_TH;
+		thread_data[i].y_end = (i + 1) * HEIGHT/NB_TH;
+		if (HEIGHT % NB_TH)
+		{
+			if (i < HEIGHT % NB_TH)
+			{
+				if (i != 0)
+					thread_data[i].y_start += i;
+				thread_data[i].y_end += i + 1;
+			}
+			else
+			{
+				thread_data[i].y_start += HEIGHT % NB_TH;
+				thread_data[i].y_end += HEIGHT % NB_TH;
+				if (thread_data[i].y_end > HEIGHT)
+					thread_data[i].y_end = HEIGHT;
+			}
+		}
 		if (pthread_create(tab + i, NULL, thread_rendering, thread_data + i))
 		{
 			//err management
 			break ;
 		}
+		printf("start:%i\tend:%i\n", thread_data[i].y_start, thread_data[i].y_end);
 		i++;
 	}
 	nb_succeed = i;
