@@ -6,13 +6,13 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:19:50 by me                #+#    #+#             */
-/*   Updated: 2026/11/14 21:33:56 by me               ###   ########.fr       */
+/*   Updated: 2026/11/16 20:38:03 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_graphics.h"
 
-void	render(t_graphics *data, t_scene *sc)
+t_err	render(t_graphics *data, t_scene *sc)
 {
 	render_lines(0, HEIGHT, data, sc);
 }

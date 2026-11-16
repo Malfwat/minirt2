@@ -6,25 +6,17 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:19:48 by me                #+#    #+#             */
-/*   Updated: 2026/11/16 15:27:06 by me               ###   ########.fr       */
+/*   Updated: 2026/11/16 20:44:06 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "rt_error.h"
 #include "rt_graphics.h"
+#include "rt_thread_bonus.h"
 
 #include <unistd.h>
 #include <pthread.h>
 #include <semaphore.h>
-
-typedef struct s_thread_data
-{
-	t_graphics	*data;
-	t_scene		*sc;
-	bool		*go_on;
-	int			y_start;
-	int			y_end;
-	sem_t		*sem;
-}	t_thread_data;
 
 void	*thread_rendering(void *tdata)
 {
@@ -46,44 +38,57 @@ void	*thread_rendering(void *tdata)
 	return (NULL);
 }
 
-void	render(t_graphics *data, t_scene *sc)
+void	join_thread(pthread_t tab[], int tab_size)
 {
-	__UINT8_TYPE__	i;
-	int				y;
-	bool			go_on;
-	sem_t			sem;
-	pthread_t		tab[NB_TH];
-	t_thread_data	thread_data[NB_TH];
+	int	i;
 
 	i = 0;
-	y = 0;
-	go_on = true;
-	if (sem_init(&sem, 0, 1))
-		return ;
+	while (i < tab_size)
+		pthread_join(tab[i++], NULL);
+}
+
+void	stop_and_join_thread(sem_t *sem, bool *go_on, pthread_t tab[], int n)
+{
+	sem_wait(sem);
+	*go_on = false;
+	sem_post(sem);
+	join_thread(tab, n);
+}
+
+t_thread_data	attrib_data(t_graphics *data, t_scene *sc, sem_t *sem, bool *go)
+{
+	t_thread_data	tmp;
+
+	tmp.data = data;
+	tmp.sc = sc;
+	tmp.sem = sem;
+	tmp.go_on = go;
+	return (tmp);
+}
+
+t_err	render(t_graphics *data, t_scene *sc)
+{
+	struct s_multi_threading	th;
+	pthread_t					tab[NB_TH];
+	t_thread_data				thread_data[NB_TH];
+	__UINT8_TYPE__				i;
+
+	if (sem_init(&th.sem, 0, 1))
+		return (syscall_err);
+	i = 0;
+	th.band_limit = 0;
+	th.go_on = true;
 	while (i < NB_TH)
 	{
-		thread_data[i].data = data;
-		thread_data[i].sc = sc;
-		thread_data[i].sem = &sem;
-		thread_data[i].go_on = &go_on;
-		thread_data[i].y_start = y;
-		y += HEIGHT / NB_TH;
-		y += (int []){0, 1}[i < HEIGHT % NB_TH];
-		thread_data[i].y_end = y;
+		thread_data[i] = attrib_data(data, sc, &th.sem, &th.go_on);
+		thread_data[i].y_start = th.band_limit;
+		th.band_limit += HEIGHT / NB_TH;
+		th.band_limit += (int []){0, 1}[i < HEIGHT % NB_TH];
+		thread_data[i].y_end = th.band_limit;
 		if (pthread_create(tab + i, NULL, thread_rendering, thread_data + i))
-			break ;
+			return (stop_and_join_thread(&th.sem, &th.go_on, tab, i - 1),
+				syscall_err);
 		i++;
 	}
-	if (i < NB_TH)
-	{
-		sem_wait(&sem);
-		go_on = false;
-		sem_post(&sem);
-		while (i > 0)
-			pthread_join(tab[--i], NULL);
-		return ;
-	}
-	i = 0;
-	while (i < NB_TH)
-		pthread_join(tab[i++], NULL);
+	return (join_thread(tab, NB_TH), ok);
 }
