@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:47:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/16 22:36:22 by me               ###   ########.fr       */
+/*   Updated: 2026/11/16 22:45:20 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc)
 	int		x;
 	t_color	c;
 
-	(void)sc;
 	while (y_start < y_end)
 	{
 		x = 0;
