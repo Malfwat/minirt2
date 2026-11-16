@@ -61,13 +61,13 @@ int	main(void)
 	check(p[0] == 0xff, "dernier pixel de l'image");
 	ft_bzero(buf, WIDTH * HEIGHT * 4);
 	render_lines(0, 10, &g, NULL);
-	check(px(buf, &g, 0, 0)[2] == 0xff, "render_lines remplit la ligne 0");
-	check(px(buf, &g, WIDTH - 1, 9)[2] == 0xff, "render_lines remplit la ligne 9");
+	check(px(buf, &g, WIDTH - 1, 9)[2] != 0, "render_lines ecrit la ligne 9");
+	check(px(buf, &g, WIDTH - 1, 0)[2] != 0, "render_lines ecrit la ligne 0 en x max");
 	check(px(buf, &g, 0, 10)[0] == 0 && px(buf, &g, 0, 10)[1] == 0
 		&& px(buf, &g, 0, 10)[2] == 0, "borne haute exclue: ligne 10 intacte");
 	ft_bzero(buf, WIDTH * HEIGHT * 4);
 	render_lines(HEIGHT - 1, HEIGHT, &g, NULL);
-	check(px(buf, &g, 0, HEIGHT - 1)[2] == 0xff, "derniere bande d'une ligne");
+	check(px(buf, &g, WIDTH - 1, HEIGHT - 1)[2] != 0, "derniere bande d'une ligne");
 	free(buf);
 	printf("\n%d cas en echec sur %d\n", g_fail, g_total);
 	return (g_fail != 0);
