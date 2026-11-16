@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "rt_error.h"
+#include "rt_math.h"
 #include "rt_parsing.h"
 #include "rt_struct.h"
 
@@ -67,5 +68,8 @@ t_err	get_cam(char *str, t_scene *sc)
 	err = get_comp(str, &p);
 	if (err != ok)
 		return (err);
+	if (get_norme(sc->cam.vec) < 1e-04)
+		return (vector_null);
+	sc->cam.vec = normalize(sc->cam.vec);
 	return (ok);
 }

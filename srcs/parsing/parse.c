@@ -83,8 +83,5 @@ void	parse(const char *filename, t_scene *sc)
 	err = check_acl(sc);
 	if (err != ok)
 		return (manage_error_and_exit(err, sc, NOT_A_LINE));
-	if (get_norme(sc->cam.vec) < 1e-04)
-		return (manage_error_and_exit(vector_null, sc, NOT_A_LINE));
-	sc->cam.vec = normalize(sc->cam.vec);
 	close(fd);
 }

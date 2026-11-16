@@ -41,7 +41,7 @@ static char	**messages(void)
 		"Camera declared twice",
 		"Light declared twice",
 		"Missing ambient light", "Missing light", "Missing camera",
-		"Camera vector null"
+		"Null vector"
 	};
 
 	return (tab);
