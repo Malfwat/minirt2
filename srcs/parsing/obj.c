@@ -6,12 +6,13 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/13 17:58:20 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 23:41:08 by me               ###   ########.fr       */
+/*   Updated: 2026/11/16 12:01:22 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "str.h"
 #include "rt_error.h"
+#include "rt_math.h"
 #include "rt_parsing.h"
 #include "rt_struct.h"
 
@@ -54,6 +55,9 @@ t_err	get_pl(char *str, t_scene *sc)
 	err = get_comp(str, &p);
 	if (err != ok)
 		return (err);
+	if (get_norme(o.vec) < 1e-04)
+		return (vector_null);
+	o.vec = normalize(o.vec);
 	return (add_obj(sc, o));
 }
 
@@ -77,5 +81,8 @@ t_err	get_cy(char *str, t_scene *sc)
 	err = get_comp(str, &p);
 	if (err != ok)
 		return (err);
+	if (get_norme(o.vec) < 1e-04)
+		return (vector_null);
+	o.vec = normalize(o.vec);
 	return (add_obj(sc, o));
 }

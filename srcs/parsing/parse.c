@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 16:49:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/14 22:23:16 by me               ###   ########.fr       */
+/*   Updated: 2026/11/16 11:57:19 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	parse(const char *filename, t_scene *sc)
 	err = check_acl(sc);
 	if (err != ok)
 		return (manage_error_and_exit(err, sc, NOT_A_LINE));
-	if (!get_norme(sc->cam.vec))
+	if (get_norme(sc->cam.vec) < 1e-04)
 		return (manage_error_and_exit(vector_null, sc, NOT_A_LINE));
 	sc->cam.vec = normalize(sc->cam.vec);
 	close(fd);
