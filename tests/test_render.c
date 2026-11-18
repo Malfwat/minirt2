@@ -51,6 +51,9 @@ int	main(void)
 	g.image.addr = buf;
 	g.image.bpp = 32;
 	g.image.line_length = WIDTH * 4;
+	/* frame fov 70 : tan(35) et tan(35) * 600 / 900 */
+	g.ox = 0.7002075382;
+	g.oy = 0.4668050255;
 	put_pxl(0, 0, &g, 0x00112233);
 	p = px(buf, &g, 0, 0);
 	check(p[0] == 0x33 && p[1] == 0x22 && p[2] == 0x11, "ordre BGR little-endian");
