@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 22:17:34 by me                #+#    #+#             */
-/*   Updated: 2026/11/17 00:05:08 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 21:00:46 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define RT_MATH_H
 
 # include "rt_struct.h"
+
+typedef struct s_quad
+{
+	double	a;
+	double	b;
+	double	c;
+}	t_quad;
 
 t_vec3	add(t_vec3 a, t_vec3 b);
 t_vec3	cross(t_vec3 a, t_vec3 b);

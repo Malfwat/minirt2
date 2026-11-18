@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/18 20:25:24 by me               ###   ########.fr        #
+#    Updated: 2026/11/18 21:47:28 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ SRCS	+=	vector/norme.c\
 SRCS	+=	rendering/put_pxl.c	\
 			rendering/utils.c	\
 			rendering/color.c	\
+			rendering/quad.c	\
 			rendering/system.c
 
 SRCS	+=	error/rt_error.c
