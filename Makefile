@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/18 20:15:31 by me               ###   ########.fr        #
+#    Updated: 2026/11/18 20:25:24 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,17 +86,17 @@ DEPS	+=	$(addprefix $(BUILD), $(MANDATORY:.c=.d))
 
 NB_PC	=	$(shell nproc)
 
-all: minilibx-linux/$(MLX) $(NAME)
+all: minilibx-linux/libmlx-Linux.a $(NAME)
 
-minilibx-linux/$(MLX):
+minilibx-linux/libmlx-Linux.a:
 	make -C minilibx-linux
 
 bonus: $(NAME_BONUS)
 
-$(NAME):	$(OBJ) $(addprefix $(BUILD), $(MANDATORY:.c=.o)) | minilibx-linux/$(MLX)
-	$(CC) $^ -o $@ -$(MLX) -lXext -lX11 -lm -lz -O3 -L minilibx-linux/
+$(NAME):	$(OBJ) $(addprefix $(BUILD), $(MANDATORY:.c=.o)) | minilibx-linux/libmlx-Linux.a
+	$(CC) $^ -o $@ -$(MLX) -lXext -lX11 -lm -lz -O3 -L minilibx-linux/ 
 
-$(NAME_BONUS):	$(OBJ) $(addprefix $(BUILD), $(BONUS:.c=.o)) | minilibx-linux/$(MLX)
+$(NAME_BONUS):	$(OBJ) $(addprefix $(BUILD), $(BONUS:.c=.o)) | minilibx-linux/libmlx-Linux.a
 	$(CC) $^ -o $@ -$(MLX) -lXext -lX11 -lm -lz -O3 -pthread -L minilibx-linux/
 
 $(BUILD)%.o:	$(SRC_DIR)%.c

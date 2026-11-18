@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 20:15:58 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 20:27:05 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	build_frame(t_graphics *data, t_scene *sc);
 
 double	deg_to_rad(double angle);
 
-# define WIDTH 500
-# define HEIGHT 500
+# define WIDTH 50
+# define HEIGHT 50
 
 # ifndef NB_TH
 #  define NB_TH 8
