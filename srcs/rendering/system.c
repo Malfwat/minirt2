@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/17 16:52:40 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 15:01:23 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 18:26:15 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_axes	get_system(t_vec3 z)
 {
 	t_axes	axe;
 	t_vec3	tmp;
-	
+
 	z = normalize(z);
 	axe.z = z;
 	ft_bzero(&tmp, sizeof(tmp));

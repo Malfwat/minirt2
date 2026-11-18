@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:47:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 18:06:26 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 18:29:22 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,20 @@ void	put_pxl(int x, int y, t_graphics *data, int color)
 	*(unsigned int *)dst = color;
 }
 
-#include <stdio.h>
-t_color	get_pxl_color(t_scene *sc, int x, int y, double ox, double oy)
+t_color	get_pxl_color(t_scene *sc, double xy[], double ox, double oy)
 {
 	t_vec3	vec;
 	t_color	c;
 
 	(void)sc;
-	vec.x = (((double)x + 0.5) * 2 / WIDTH - 1) * ox;
-	vec.y = (((double)y + 0.5) * 2 / HEIGHT - 1) * oy;
+	vec.x = ((xy[0] + 0.5) * 2 / WIDTH - 1) * ox;
+	vec.y = (1 - (xy[1] + 0.5) * 2 / HEIGHT) * oy;
 	vec.z = 1;
 	vec = normalize(vec);
 	c.r = (vec.x + 1) / 2 * 255;
 	c.g = (vec.y + 1) / 2 * 255;
 	c.b = vec.z * 255;
-
 	return (c);
-}
-
-double deg_to_rad(double angle)
-{
-	return (angle * M_PI / 180);
 }
 
 void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc)
@@ -57,14 +50,14 @@ void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc)
 	t_color	c;
 
 	r = (double)HEIGHT / (double)WIDTH;
-	ox = tan(deg_to_rad(sc->cam.fov / 2));
+	ox = tan(deg_to_rad(sc->cam.fov) / 2);
 	oy = tan(deg_to_rad(sc->cam.fov) / 2) * r;
 	while (y_start < y_end)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			c = get_pxl_color(sc, x, y_start, ox, oy);
+			c = get_pxl_color(sc, (double []){x, y_start}, ox, oy);
 			put_pxl(x, y_start, data, t_color_to_int(c));
 			x++;
 		}

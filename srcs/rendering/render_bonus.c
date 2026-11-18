@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:19:48 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 17:29:27 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 18:26:46 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ t_err	render(t_graphics *data, t_scene *sc)
 	if (sem_init(&th.sem, 0, 1))
 		return (syscall_err);
 	data->axes = get_system(sc->cam.vec);
-	i = 0;
-	while (i < NB_TH)
+	i = -1;
+	while (++i < NB_TH)
 	{
 		th_data[i] = attrib_data(data, sc, &th.sem, &th.stop);
 		th_data[i].y_start = th.lim;
@@ -93,7 +93,6 @@ t_err	render(t_graphics *data, t_scene *sc)
 			stop_and_join_thread(&th.sem, &th.stop, tab, i);
 			return (syscall_err);
 		}
-		i++;
 	}
 	return (join_thread(tab, NB_TH), ok);
 }

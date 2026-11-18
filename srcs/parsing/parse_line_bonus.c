@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/13 23:51:11 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 16:59:40 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 18:26:03 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_err	parse_line(char *str, t_scene *sc)
 	err = get_and_pass_elem(&str, &elem);
 	if (err != ok)
 		return (err);
-	//sc->actual = elem;
 	if (sc->camera && elem == cam)
 		return (dup_cam);
 	if (sc->ambient && elem == amb)
