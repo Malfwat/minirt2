@@ -41,10 +41,12 @@ int	main(void)
 {
 	char		*buf;
 	t_graphics	g;
+	t_scene		sc;
 	unsigned char	*p;
 
 	buf = calloc(WIDTH * HEIGHT, 4);
 	check(buf != NULL, "allocation du faux buffer");
+	sc.cam.fov = 70;
 	ft_bzero(&g, sizeof(g));
 	g.image.addr = buf;
 	g.image.bpp = 32;
@@ -60,14 +62,19 @@ int	main(void)
 	p = px(buf, &g, WIDTH - 1, HEIGHT - 1);
 	check(p[0] == 0xff, "dernier pixel de l'image");
 	ft_bzero(buf, WIDTH * HEIGHT * 4);
-	render_lines(0, 10, &g, NULL);
+	render_lines(0, 10, &g, &sc);
 	check(px(buf, &g, WIDTH - 1, 9)[2] != 0, "render_lines ecrit la ligne 9");
 	check(px(buf, &g, WIDTH - 1, 0)[2] != 0, "render_lines ecrit la ligne 0 en x max");
 	check(px(buf, &g, 0, 10)[0] == 0 && px(buf, &g, 0, 10)[1] == 0
 		&& px(buf, &g, 0, 10)[2] == 0, "borne haute exclue: ligne 10 intacte");
 	ft_bzero(buf, WIDTH * HEIGHT * 4);
-	render_lines(HEIGHT - 1, HEIGHT, &g, NULL);
+	render_lines(HEIGHT - 1, HEIGHT, &g, &sc);
 	check(px(buf, &g, WIDTH - 1, HEIGHT - 1)[2] != 0, "derniere bande d'une ligne");
+	ft_bzero(buf, WIDTH * HEIGHT * 4);
+	render_lines(HEIGHT / 2, HEIGHT / 2 + 1, &g, &sc);
+	check(px(buf, &g, 0, HEIGHT / 2)[2] < px(buf, &g, WIDTH / 2, HEIGHT / 2)[2]
+		&& px(buf, &g, WIDTH / 2, HEIGHT / 2)[2] < px(buf, &g, WIDTH - 1, HEIGHT / 2)[2],
+		"degrade rouge croissant de gauche a droite");
 	free(buf);
 	printf("\n%d cas en echec sur %d\n", g_fail, g_total);
 	return (g_fail != 0);
