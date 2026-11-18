@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 19:23:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 18:41:41 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 18:48:35 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	stop_loop(void *param)
 	return (0);
 }
 
-bool	init_graphics(t_graphics *data, double fov)
+bool	init_graphics(t_graphics *data)
 {
 	ft_bzero(data, sizeof(t_graphics));
 	data->mlx = mlx_init();
@@ -64,8 +64,6 @@ bool	init_graphics(t_graphics *data, double fov)
 	data->image.addr = mlx_get_data_addr(data->image.img, &data->image.bpp,
 			&data->image.line_length, &data->image.endian);
 	mlx_hook(data->win, W_CROSS, 0, stop_loop, data);
-	data->ox = tan(deg_to_rad(fov) / 2);
-	data->oy = data->ox * (double)HEIGHT / (double)WIDTH;
 	return (true);
 }
 
@@ -79,7 +77,7 @@ int	main(int ac, char **av)
 	if (ac != 2 || NB_TH < 0)
 		return (0);
 	parse(av[1], &sc);
-	if (!init_graphics(&data, sc.cam.fov))
+	if (!init_graphics(&data))
 		return (free_scene(&sc), destroy_graphics(&data), 1);
 	err = render(&data, &sc);
 	if (err != ok)

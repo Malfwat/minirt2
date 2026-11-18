@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:19:48 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 18:26:46 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 18:49:17 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ t_err	render(t_graphics *data, t_scene *sc)
 	if (sem_init(&th.sem, 0, 1))
 		return (syscall_err);
 	data->axes = get_system(sc->cam.vec);
+	data->ox = tan(deg_to_rad(sc->cam.fov) / 2);
+	data->oy = data->ox * (double)HEIGHT / (double)WIDTH;
 	i = -1;
 	while (++i < NB_TH)
 	{
