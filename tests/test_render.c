@@ -54,6 +54,8 @@ int	main(void)
 	/* frame fov 70 : tan(35) et tan(35) * 600 / 900 */
 	g.ox = 0.7002075382;
 	g.oy = 0.4668050255;
+	/* frame d'une camera qui regarde vers +z : x=-X, y=+Y, z=+Z */
+	g.axes.x.x = -1; g.axes.y.y = 1; g.axes.z.z = 1;
 	put_pxl(0, 0, &g, 0x00112233);
 	p = px(buf, &g, 0, 0);
 	check(p[0] == 0x33 && p[1] == 0x22 && p[2] == 0x11, "ordre BGR little-endian");
@@ -66,18 +68,32 @@ int	main(void)
 	check(p[0] == 0xff, "dernier pixel de l'image");
 	ft_bzero(buf, WIDTH * HEIGHT * 4);
 	render_lines(0, 10, &g, &sc);
-	check(px(buf, &g, WIDTH - 1, 9)[2] != 0, "render_lines ecrit la ligne 9");
-	check(px(buf, &g, WIDTH - 1, 0)[2] != 0, "render_lines ecrit la ligne 0 en x max");
+	check(px(buf, &g, WIDTH - 1, 9)[0] != 0, "render_lines ecrit la ligne 9");
+	check(px(buf, &g, WIDTH - 1, 0)[0] != 0, "render_lines ecrit la ligne 0 en x max");
 	check(px(buf, &g, 0, 10)[0] == 0 && px(buf, &g, 0, 10)[1] == 0
 		&& px(buf, &g, 0, 10)[2] == 0, "borne haute exclue: ligne 10 intacte");
 	ft_bzero(buf, WIDTH * HEIGHT * 4);
 	render_lines(HEIGHT - 1, HEIGHT, &g, &sc);
-	check(px(buf, &g, WIDTH - 1, HEIGHT - 1)[2] != 0, "derniere bande d'une ligne");
+	check(px(buf, &g, WIDTH - 1, HEIGHT - 1)[0] != 0, "derniere bande d'une ligne");
 	ft_bzero(buf, WIDTH * HEIGHT * 4);
 	render_lines(HEIGHT / 2, HEIGHT / 2 + 1, &g, &sc);
-	check(px(buf, &g, 0, HEIGHT / 2)[2] < px(buf, &g, WIDTH / 2, HEIGHT / 2)[2]
-		&& px(buf, &g, WIDTH / 2, HEIGHT / 2)[2] < px(buf, &g, WIDTH - 1, HEIGHT / 2)[2],
-		"degrade rouge croissant de gauche a droite");
+	ft_bzero(buf, WIDTH * HEIGHT * 4);
+	render_lines(0, HEIGHT, &g, &sc);
+	p = px(buf, &g, WIDTH / 2, HEIGHT / 2);
+	check(p[2] == 127 && p[1] == 127 && p[0] >= 250,
+		"pixel central = axes.z encode (0,0,1) -> 127,127,254");
+	check(px(buf, &g, 0, HEIGHT / 2)[2] > px(buf, &g, WIDTH - 1, HEIGHT / 2)[2],
+		"l'axe x de l'ecran vaut -X du monde : rouge decroissant");
+	check(px(buf, &g, WIDTH / 2, 0)[1] > px(buf, &g, WIDTH / 2, HEIGHT - 1)[1],
+		"le vert croit vers le haut");
+	g.axes.x.x = 0.8; g.axes.x.y = -0.6; g.axes.x.z = 0;
+	g.axes.y.x = 0; g.axes.y.y = 0; g.axes.y.z = -1;
+	g.axes.z.x = 0.6; g.axes.z.y = 0.8; g.axes.z.z = 0;
+	ft_bzero(buf, WIDTH * HEIGHT * 4);
+	render_lines(HEIGHT / 2, HEIGHT / 2 + 1, &g, &sc);
+	p = px(buf, &g, WIDTH / 2, HEIGHT / 2);
+	check(p[2] == 204 && p[1] == 229 && p[0] == 0,
+		"camera inclinee : le centre encode le nouveau axes.z (204,229,0)");
 	free(buf);
 	printf("\n%d cas en echec sur %d\n", g_fail, g_total);
 	return (g_fail != 0);
