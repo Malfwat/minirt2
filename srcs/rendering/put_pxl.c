@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:47:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 19:32:12 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 20:37:00 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_color	get_pxl_color(t_scene *sc, t_graphics *d, double x, double y)
 	vec = sysvec_to_real_vec(d->axes, pxl_to_sysvec(d->ox, d->oy, x, y));
 	c.r = (vec.x + 1) / 2 * 255;
 	c.g = (vec.y + 1) / 2 * 255;
-	c.b = vec.z * 255;
+	c.b = (vec.z + 1) / 2 * 255;
 	return (c);
 }
 
