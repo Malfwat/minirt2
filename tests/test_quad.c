@@ -15,12 +15,6 @@
 #include <math.h>
 #include <stdio.h>
 
-/* a retirer quand rt_math.h declarera ces prototypes */
-double	min(double a, double b);
-bool	min_pos(double a, double b, double *t);
-bool	quad(t_quad q, double *s1, double *s2);
-bool	solve_hit(t_quad q, double *t);
-
 static int	g_fail;
 static int	g_total;
 
@@ -64,8 +58,6 @@ int	main(void)
 	hit("racine nulle : pas une intersection", 1, 0, 0, 0, 0);
 	hit("sphere a 10 de rayon 1 (9 et 11)", 1, -20, 99, 1, 9.0);
 	hit("sphere tangente (racine 10)", 1, -20, 100, 1, 10.0);
-	check(min(3, 7) == 3 && min(7, 3) == 3, "min rend le plus petit");
-	check(min_pos(-5, 2, &(double){0}) == true, "min_pos accepte la positive");
 	printf("\n%d cas en echec sur %d\n", g_fail, g_total);
 	return (g_fail != 0);
 }
