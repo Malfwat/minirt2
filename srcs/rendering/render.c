@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:19:50 by me                #+#    #+#             */
-/*   Updated: 2026/11/16 20:47:58 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 16:59:54 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 t_err	render(t_graphics *data, t_scene *sc)
 {
+	data->axes = get_system(sc->cam.vec);
 	render_lines(0, HEIGHT, data, sc);
 	return (ok);
 }

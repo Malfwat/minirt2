@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:19:48 by me                #+#    #+#             */
-/*   Updated: 2026/11/16 21:19:46 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 17:04:02 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ t_err	render(t_graphics *data, t_scene *sc)
 	ft_bzero(&th, sizeof(th));
 	if (sem_init(&th.sem, 0, 1))
 		return (syscall_err);
+	data->axes = get_system(sc->cam.vec);
 	i = 0;
 	while (i < NB_TH)
 	{
