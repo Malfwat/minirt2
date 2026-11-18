@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 19:23:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/17 00:08:19 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 17:48:57 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ bool	init_graphics(t_graphics *data)
 	if (!data->win)
 		return (false);
 	mlx_key_hook(data->win, keyhook, data);
-	data->image.img = mlx_new_image(data->mlx, 500, 500);
+	data->image.img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (!data->image.img)
 		return (false);
 	data->image.addr = mlx_get_data_addr(data->image.img, &data->image.bpp,
