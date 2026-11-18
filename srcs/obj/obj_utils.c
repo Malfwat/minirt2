@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 17:38:20 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 23:01:26 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 23:21:00 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,13 @@ t_err	add_obj(t_scene *sc, t_obj o)
 	return (ok);
 }
 
-t_get_quad	fill_quad(t_obj *o)
+t_get_quad	fill_quad(enum e_obj id)
 {
-	if (o->id == sphere)
+	if (id == sphere)
 		return (sp_quad);
+	if (id == plan)
+		return (pl_quad);
+	if (id == cylinder)
+		return (cy_quad);
 	return (NULL);
 }

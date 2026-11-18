@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/18 20:57:25 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 22:28:16 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 23:36:22 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static bool	quad(t_quad q, double *s1, double *s2)
 	double	delt;
 
 	delt = q.b * q.b - 4 * q.a * q.c;
-	if (delt < 0)
+	if (delt < 0 || !q.a)
 		return (false);
 	if (delt == 0)
 	{
