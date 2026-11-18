@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/18 18:28:10 by me               ###   ########.fr        #
+#    Updated: 2026/11/18 19:55:23 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,14 +60,6 @@ SRCS	+=	rendering/put_pxl.c	\
 			rendering/color.c	\
 			rendering/system.c
 
-MANDATORY	=	parsing/loop.c	\
-				parsing/parse_line.c\
-				rendering/render.c
-
-BONUS		=	parsing/loop_bonus.c	\
-				parsing/parse_line_bonus.c\
-				rendering/render_bonus.c
-
 SRCS	+=	error/rt_error.c
 
 SRCS	+=	gnl/gnl.c gnl/gnl_utils.c
@@ -76,11 +68,21 @@ SRCS	+=	light/light.c
 
 SRCS	+=	obj/obj_utils.c
 
+MANDATORY	=	parsing/loop.c	\
+				parsing/parse_line.c\
+				rendering/render.c
+
+BONUS		=	parsing/loop_bonus.c	\
+				parsing/parse_line_bonus.c\
+				rendering/render_bonus.c
+
 BUILD	=	.build/
 
 OBJ		=	$(addprefix $(BUILD), $(SRCS:.c=.o))
 
 DEPS	=	$(OBJ:.o=.d)
+DEPS	+=	$(addprefix, $(BUILD), $(BONUS:.o=.d))
+DEPS	+=	$(addprefix, $(BUILD), $(MANDATORY:.o=.d))
 
 NB_PC	=	$(shell nproc)
 
@@ -95,7 +97,7 @@ $(NAME):	$(OBJ) $(addprefix $(BUILD), $(MANDATORY:.c=.o)) | minilibx-linux/$(MLX
 	$(CC) $^ -o $@ -$(MLX) -lXext -lX11 -lm -lz -O3 -L minilibx-linux/
 
 $(NAME_BONUS):	$(OBJ) $(addprefix $(BUILD), $(BONUS:.c=.o)) | minilibx-linux/$(MLX)
-	$(CC) $^ -o $@ -$(MLX) -lXext -lX11 -lm -lz -O3 -L minilibx-linux/
+	$(CC) $^ -o $@ -$(MLX) -lXext -lX11 -lm -lz -O3 -pthread -L minilibx-linux/
 
 $(BUILD)%.o:	$(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
