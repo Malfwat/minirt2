@@ -37,6 +37,38 @@ static unsigned char	*px(char *buf, t_graphics *g, int x, int y)
 			+ x * (g->image.bpp / 8)));
 }
 
+static int	max_jump(char *buf, t_graphics *g)
+{
+	int	x;
+	int	y;
+	int	c;
+	int	d;
+	int	max;
+
+	max = 0;
+	y = 1;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			c = 0;
+			while (c < 3)
+			{
+				d = px(buf, g, x, y)[c] - px(buf, g, x, y - 1)[c];
+				if (d < 0)
+					d = -d;
+				if (d > max)
+					max = d;
+				c++;
+			}
+			x++;
+		}
+		y++;
+	}
+	return (max);
+}
+
 int	main(void)
 {
 	char		*buf;
@@ -92,8 +124,19 @@ int	main(void)
 	ft_bzero(buf, WIDTH * HEIGHT * 4);
 	render_lines(HEIGHT / 2, HEIGHT / 2 + 1, &g, &sc);
 	p = px(buf, &g, WIDTH / 2, HEIGHT / 2);
-	check(p[2] == 204 && p[1] == 229 && p[0] == 0,
-		"camera inclinee : le centre encode le nouveau axes.z (204,229,0)");
+	check(p[2] == 204 && p[1] == 229 && p[0] == 127,
+		"camera inclinee : le centre encode le nouveau axes.z (204,229,127)");
+
+	/* camera tres inclinee + grand fov : vec.z change de signe dans l'image.
+	   Aucun canal ne doit reboucler (ancien bug : b = vec.z * 255). */
+	g.axes.x.x = -0.9180; g.axes.x.y = 0.0; g.axes.x.z = 0.3967;
+	g.axes.y.x = -0.1834; g.axes.y.y = 0.8868; g.axes.y.z = -0.4244;
+	g.axes.z.x = 0.3517; g.axes.z.y = 0.4623; g.axes.z.z = 0.8140;
+	g.ox = 5.6713;
+	g.oy = 5.6713 * (double)HEIGHT / (double)WIDTH;
+	ft_bzero(buf, (size_t)WIDTH * HEIGHT * 4);
+	render_lines(0, HEIGHT, &g, &sc);
+	check(max_jump(buf, &g) <= 2, "aucun canal ne reboucle quand vec.z change de signe");
 	free(buf);
 	printf("\n%d cas en echec sur %d\n", g_fail, g_total);
 	return (g_fail != 0);
