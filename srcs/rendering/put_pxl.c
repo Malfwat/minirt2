@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:47:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 17:13:13 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 17:26:11 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ t_color	get_pxl_color(t_scene *sc, int x, int y, double ox, double oy)
 	t_color	c;
 
 	(void)sc;
-	tmp = (double)x * ox;
-	c.r = tmp * 256;
-	tmp = (double)y * oy;;
-	c.g = tmp * 256;
-	c.b = 1;
+	tmp = (((double)x + 0.5)* 2 / WIDTH) * ox - 1;
+	c.r = tmp * 255.99;
+	tmp = (((double)y + 0.5)* 2 / HEIGHT) * oy - 1;
+	c.g = tmp * 255.99;
+	c.b = 255;
 	return (c);
 }
 
@@ -46,7 +46,7 @@ void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc)
 	int		x;
 	t_color	c;
 
-	r = HEIGHT / WIDTH;
+	r = (double)HEIGHT / (double)WIDTH;
 	ox = tan(sc->cam.fov / 2);
 	oy = tan(sc->cam.fov / 2 * r);
 	while (y_start < y_end)
