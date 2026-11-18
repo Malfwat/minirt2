@@ -6,22 +6,20 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/18 23:17:07 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 23:21:56 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 00:13:23 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_math.h"
 #include "rt_struct.h"
 
-#include "str.h"
-
-t_quad	pl_quad(t_obj *sp, t_vec3 d, t_vec3 o)
+bool	pl_hit(t_obj *pl, t_vec3 d, t_vec3 o, double *t)
 {
-	t_quad	q;
+	double	denom;
 
-	ft_bzero(&q, sizeof(q));
-	(void)sp;
-	(void)d;
-	(void)o;
-	return (q);
+	denom = scal(d, pl->vec);
+	if (denom < 1e-4)
+		return (false);
+	*t = -scal(sub(o, pl->coordinate), pl->vec) / denom;
+	return (true);
 }

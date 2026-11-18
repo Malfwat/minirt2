@@ -6,22 +6,18 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/18 23:17:07 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 23:22:07 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 00:01:24 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_math.h"
 #include "rt_struct.h"
 
-#include "str.h"
-
-t_quad	cy_quad(t_obj *sp, t_vec3 d, t_vec3 o)
+bool	cy_hit(t_obj *cy, t_vec3 d, t_vec3 o, double *t)
 {
-	t_quad	q;
-
-	ft_bzero(&q, sizeof(q));
-	(void)sp;
+	(void)cy;
 	(void)d;
 	(void)o;
-	return (q);
+	(void)t;
+	return (false);
 }

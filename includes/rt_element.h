@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 17:43:09 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 23:21:13 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 00:13:51 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 void		free_obj(t_obj *lst);
 void		free_light(t_light *lst);
 
-t_quad		cy_quad(t_obj *sp, t_vec3 d, t_vec3 o);
-t_quad		pl_quad(t_obj *sp, t_vec3 d, t_vec3 o);
-t_quad		sp_quad(t_obj *sp, t_vec3 d, t_vec3 o);
+bool		cy_hit(t_obj *sp, t_vec3 d, t_vec3 o, double *t);
+bool		pl_hit(t_obj *sp, t_vec3 d, t_vec3 o, double *t);
+bool		sp_hit(t_obj *sp, t_vec3 d, t_vec3 o, double *t);
 
-typedef t_quad	(*t_get_quad)(t_obj *, t_vec3, t_vec3);
+typedef bool	(*t_intersect)(t_obj *, t_vec3, t_vec3, double *);
 
-t_get_quad	fill_quad(enum e_obj id);
+t_intersect	get_intersect_f(enum e_obj id);
 
 #endif /*RT_ELEMENT_H*/

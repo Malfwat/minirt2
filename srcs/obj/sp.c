@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/18 22:31:59 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 22:40:25 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 00:13:32 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,12 @@ t_quad	sp_quad(t_obj *sp, t_vec3 d, t_vec3 o)
 	r = sp->diameter / 2;
 	q.c = scal(oc, oc) - r * r;
 	return (q);
+}
+
+bool	sp_hit(t_obj *sp, t_vec3 d, t_vec3 o, double *t)
+{
+	t_quad	q;
+
+	q = sp_quad(sp, d, o);
+	return (solve_hit(q, t));
 }
