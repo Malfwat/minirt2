@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/17 16:52:40 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 18:26:15 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 19:14:17 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,11 @@ t_axes	get_system(t_vec3 z)
 		axe.y = cross(axe.x, axe.z);
 	}
 	return (axe);
+}
+
+void	build_frame(t_graphics *data, t_scene *sc)
+{
+	data->axes = get_system(sc->cam.vec);
+	data->ox = tan(deg_to_rad(sc->cam.fov) / 2);
+	data->oy = data->ox * (double)HEIGHT / (double)WIDTH;
 }

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 18:38:47 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 19:15:04 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int		t_color_to_int(t_color c);
 ** @return t_axes	Structure of 3 t_vec3 
 */
 t_axes	get_system(t_vec3 z);
+void	build_frame(t_graphics *data, t_scene *sc);
 
 double	deg_to_rad(double angle);
 

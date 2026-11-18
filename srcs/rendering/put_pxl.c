@@ -6,14 +6,12 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:47:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 19:05:26 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 19:26:49 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_graphics.h"
 #include "rt_math.h"
-
-#include <math.h>
 
 void	put_pxl(int x, int y, t_graphics *data, int color)
 {
@@ -25,21 +23,33 @@ void	put_pxl(int x, int y, t_graphics *data, int color)
 	*(unsigned int *)dst = color;
 }
 
-t_color	get_pxl_color(t_scene *sc, t_graphics *data, double x, double y)
+t_vec3	pxl_to_sysvec(double ox, double oy, double posx, double posy)
 {
 	t_vec3	vec;
-	t_vec3	tmp;
+
+	vec.x = ((posx + 0.5) * 2 / WIDTH - 1) * ox;
+	vec.y = (1 - (posy + 0.5) * 2 / HEIGHT) * oy;
+	vec.z = 1;
+	return (normalize(vec));
+}
+
+t_vec3	sysvec_to_real_vec(t_axes axes, t_vec3 svec)
+{
+	t_vec3	vec;
+
+	vec.x = svec.x * axes.x.x + svec.y * axes.y.x + svec.z * axes.z.x;
+	vec.y = svec.x * axes.x.y + svec.y * axes.y.y + svec.z * axes.z.y;
+	vec.z = svec.x * axes.x.z + svec.y * axes.y.z + svec.z * axes.z.z;
+	return (normalize(vec));
+}
+
+t_color	get_pxl_color(t_scene *sc, t_graphics *d, double x, double y)
+{
+	t_vec3	vec;
 	t_color	c;
 
 	(void)sc;
-	tmp.x = ((x + 0.5) * 2 / WIDTH - 1) * data->ox;
-	tmp.y = (1 - (y + 0.5) * 2 / HEIGHT) * data->oy;
-	tmp.z = 1;
-	tmp = normalize(tmp);
-	vec.x = tmp.x * data->axes.x.x + tmp.y * data->axes.y.x + tmp.z * data->axes.z.x;
-	vec.y = tmp.x * data->axes.x.y + tmp.y * data->axes.y.y + tmp.z * data->axes.z.y;
-	vec.x = tmp.x * data->axes.x.z + tmp.y * data->axes.y.z + tmp.z * data->axes.z.z;
-	vec = normalize(vec);
+	vec = sysvec_to_real_vec(d->axes, pxl_to_sysvec(d->ox, d->oy, x, y));
 	c.r = (vec.x + 1) / 2 * 255;
 	c.g = (vec.y + 1) / 2 * 255;
 	c.b = vec.z * 255;
