@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:47:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 00:04:02 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 00:20:18 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_color	get_pxl_color(t_scene *sc, t_graphics *d, double x, double y)
 	{
 		if (get_intersect_f(lst->id)(lst, vec, sc->cam.coordinate, &t))
 		{
-			if (t < t_best)
+			if (t < t_best && t > 0)
 			{
 				t_best = t;
 				best = lst;
