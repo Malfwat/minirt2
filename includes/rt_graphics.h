@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 22:42:55 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 00:53:18 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	put_pxl(int x, int y, t_graphics *data, int color);
 void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc);
 t_err	render(t_graphics *data, t_scene *sc);
 int		t_color_to_int(t_color c);
+t_color	mult_color_light(t_color a, t_light light);
 
 /** 
 ** @brief Give a 3D sytem from one t_vec3

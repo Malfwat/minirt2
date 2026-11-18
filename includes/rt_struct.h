@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 18:53:51 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 16:59:26 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 00:55:52 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,6 @@ typedef struct s_obj
 
 # define NB_COMP 5
 
-typedef struct s_ambient
-{
-	t_color			color;
-	t_coordinate	coordinate;
-	double			ratio;
-}	t_amb;
-
 typedef struct s_light
 {
 	t_coordinate	coordinate;
@@ -90,10 +83,9 @@ typedef struct s_scene
 	bool	ambient;
 
 	t_cam	cam;
-	t_amb	amb;
+	t_light	amb;
 	t_light	*light_lst;
 	t_obj	*obj_lst;
-	//t_elem	actual;
 }	t_scene;
 
 #endif /*RT_STRUCT_H*/

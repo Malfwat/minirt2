@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 22:21:54 by me                #+#    #+#             */
-/*   Updated: 2026/11/16 22:28:46 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 00:56:03 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,4 +15,14 @@
 int	t_color_to_int(t_color c)
 {
 	return (c.r << 16 | c.g << 8 | c.b);
+}
+
+t_color	mult_color_light(t_color a, t_light light)
+{
+	t_color	c;
+
+	c.r = a.r * light.color.r * light.ratio;
+	c.g = a.g * light.color.g * light.ratio;
+	c.b = a.b * light.color.b * light.ratio;
+	return (c);
 }
