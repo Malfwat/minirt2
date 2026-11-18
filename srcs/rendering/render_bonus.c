@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:19:48 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 17:04:02 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 17:29:27 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_err	render(t_graphics *data, t_scene *sc)
 	struct s_multi_threading	th;
 	pthread_t					tab[NB_TH];
 	t_thread_data				th_data[NB_TH];
-	__UINT8_TYPE__				i;
+	int							i;
 
 	ft_bzero(&th, sizeof(th));
 	if (sem_init(&th.sem, 0, 1))

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:47:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 17:26:11 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 17:28:19 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ t_color	get_pxl_color(t_scene *sc, int x, int y, double ox, double oy)
 	return (c);
 }
 
+double deg_to_rad(double angle)
+{
+	return (angle * 180 / M_PI);
+}
+
 void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc)
 {
 	double	r;
@@ -47,8 +52,8 @@ void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc)
 	t_color	c;
 
 	r = (double)HEIGHT / (double)WIDTH;
-	ox = tan(sc->cam.fov / 2);
-	oy = tan(sc->cam.fov / 2 * r);
+	ox = tan(deg_to_rad(sc->cam.fov) / 2);
+	oy = tan(deg_to_rad(sc->cam.fov) / 2 * r);
 	while (y_start < y_end)
 	{
 		x = 0;
