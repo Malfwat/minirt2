@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/18 21:47:28 by me               ###   ########.fr        #
+#    Updated: 2026/11/18 22:40:43 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ SRCS	+=	gnl/gnl.c gnl/gnl_utils.c
 
 SRCS	+=	light/light.c
 
-SRCS	+=	obj/obj_utils.c
+SRCS	+=	obj/obj_utils.c obj/sp.c
 
 MANDATORY	=	parsing/loop.c	\
 				parsing/parse_line.c\

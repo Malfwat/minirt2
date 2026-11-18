@@ -6,12 +6,14 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:47:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 20:37:00 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 23:01:14 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_graphics.h"
 #include "rt_math.h"
+#include "rt_element.h"
+#include "str.h"
 
 void	put_pxl(int x, int y, t_graphics *data, int color)
 {
@@ -47,12 +49,18 @@ t_color	get_pxl_color(t_scene *sc, t_graphics *d, double x, double y)
 {
 	t_vec3	vec;
 	t_color	c;
+	t_quad	q;
+	double	t;
 
-	(void)sc;
+	ft_bzero(&c, sizeof(c));
 	vec = sysvec_to_real_vec(d->axes, pxl_to_sysvec(d->ox, d->oy, x, y));
-	c.r = (vec.x + 1) / 2 * 255;
-	c.g = (vec.y + 1) / 2 * 255;
-	c.b = (vec.z + 1) / 2 * 255;
+	q = fill_quad(sc->obj_lst)(sc->obj_lst, vec, sc->cam.coordinate);
+	if (solve_hit(q, &t))
+	{
+		c.r = sc->obj_lst->color.r;
+		c.g = sc->obj_lst->color.g;
+		c.b = sc->obj_lst->color.b;
+	}
 	return (c);
 }
 
