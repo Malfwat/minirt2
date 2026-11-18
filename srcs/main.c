@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 19:23:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 18:48:35 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 19:34:16 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ bool	init_graphics(t_graphics *data)
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		return (false);
-	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Hello World!");
+	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "MiniRT");
 	if (!data->win)
 		return (false);
 	mlx_key_hook(data->win, keyhook, data);

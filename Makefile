@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/18 19:55:23 by me               ###   ########.fr        #
+#    Updated: 2026/11/18 20:15:31 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,8 +81,8 @@ BUILD	=	.build/
 OBJ		=	$(addprefix $(BUILD), $(SRCS:.c=.o))
 
 DEPS	=	$(OBJ:.o=.d)
-DEPS	+=	$(addprefix, $(BUILD), $(BONUS:.o=.d))
-DEPS	+=	$(addprefix, $(BUILD), $(MANDATORY:.o=.d))
+DEPS	+=	$(addprefix $(BUILD), $(BONUS:.c=.d))
+DEPS	+=	$(addprefix $(BUILD), $(MANDATORY:.c=.d))
 
 NB_PC	=	$(shell nproc)
 

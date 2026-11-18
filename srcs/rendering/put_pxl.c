@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:47:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 19:26:49 by me               ###   ########.fr       */
+/*   Updated: 2026/11/18 19:32:12 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_vec3	pxl_to_sysvec(double ox, double oy, double posx, double posy)
 	vec.x = ((posx + 0.5) * 2 / WIDTH - 1) * ox;
 	vec.y = (1 - (posy + 0.5) * 2 / HEIGHT) * oy;
 	vec.z = 1;
-	return (normalize(vec));
+	return (vec);
 }
 
 t_vec3	sysvec_to_real_vec(t_axes axes, t_vec3 svec)
