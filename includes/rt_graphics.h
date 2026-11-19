@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 19:44:17 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 21:25:53 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int		t_color_to_int(t_color c);
 t_color	mult_color_light(t_color a, t_light light, double factor);
 t_color	add_color(t_color a, t_color b);
 t_color	get_final_color(t_hit hit, t_scene *sc);
-bool	is_illuminated(t_hit hit, t_light light, t_obj *obj);
 t_color	get_pixel_illumination(t_hit hit, t_light *l, t_scene *sc);
 bool	cast_ray(t_scene *sc, t_cast data, t_hit *ptr);
 bool	quad(t_quad q, double *s1, double *s2);

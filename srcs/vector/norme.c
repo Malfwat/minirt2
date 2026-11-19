@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:50:59 by me                #+#    #+#             */
-/*   Updated: 2026/11/14 22:26:42 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 21:31:03 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ t_vec3	normalize(t_vec3 vec)
 	double	norme;
 
 	norme = get_norme(vec);
+	if (norme < 1e-4)
+		return (vec);
 	vec.x /= norme;
 	vec.y /= norme;
 	vec.z /= norme;
