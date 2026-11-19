@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/18 22:31:59 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 01:49:11 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 01:55:12 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ bool	sp_hit(t_obj *sp, t_vec3 d, t_vec3 o, t_hit *hit)
 	ret = solve_hit(q, &hit->t);
 	if (!ret)
 		return (false);
-	hit->p = mult(d, hit->t);
+	hit->p = add(o, mult(d, hit->t));
 	hit->normal = normalize(sub(hit->p, sp->coordinate));
 	hit->obj = sp;
 	return (true);
