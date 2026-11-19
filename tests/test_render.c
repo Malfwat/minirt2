@@ -53,6 +53,8 @@ int	main(void)
 	t_graphics	g;
 	t_scene		sc;
 	t_obj		o;
+	t_obj		far;
+	t_light		l;
 	unsigned char	*p;
 
 	buf = calloc((size_t)WIDTH * HEIGHT, 4);
@@ -64,6 +66,13 @@ int	main(void)
 	sc.amb.color.r = 255;
 	sc.amb.color.g = 255;
 	sc.amb.color.b = 255;
+	ft_bzero(&l, sizeof(l));
+	l.coordinate.z = -50;
+	l.color.r = 255;
+	l.color.g = 255;
+	l.color.b = 255;
+	l.ratio = 0;
+	sc.light_lst = &l;
 	sc.cam.vec.z = 1;
 	g.image.addr = buf;
 	g.image.bpp = 32;
@@ -103,6 +112,43 @@ int	main(void)
 		"le disque couvre plusieurs lignes au centre");
 	check(px(buf, &g, WIDTH / 4, HEIGHT / 2)[2] == 0,
 		"pas de disque a un quart de la largeur");
+
+	/* occlusion : la sphere proche doit gagner, dans les deux ordres de liste */
+	ft_bzero(&sc, sizeof(sc));
+	ft_bzero(&g, sizeof(g));
+	sc.cam.fov = 70;
+	sc.cam.vec.z = 1;
+	sc.amb.ratio = 1.0;
+	sc.amb.color.r = 255;
+	sc.amb.color.g = 255;
+	sc.amb.color.b = 255;
+	sc.light_lst = &l;
+	sc.cam.coordinate.z = -10;
+	g.image.addr = buf;
+	g.image.bpp = 32;
+	g.image.line_length = WIDTH * 4;
+	build_frame(&g, &sc);
+	set_sphere(&o, 0, 2);
+	o.color.r = 0;
+	o.color.g = 255;
+	o.color.b = 0;
+	set_sphere(&far, 6, 2);
+	far.color.r = 255;
+	far.color.g = 0;
+	far.color.b = 0;
+	o.next = &far;
+	sc.obj_lst = &o;
+	ft_bzero(buf, (size_t)WIDTH * HEIGHT * 4);
+	render_lines(HEIGHT / 2, HEIGHT / 2 + 1, &g, &sc);
+	p = px(buf, &g, WIDTH / 2, HEIGHT / 2);
+	check(p[2] == 0 && p[1] == 255, "proche devant : la verte gagne");
+	far.next = &o;
+	o.next = NULL;
+	sc.obj_lst = &far;
+	ft_bzero(buf, (size_t)WIDTH * HEIGHT * 4);
+	render_lines(HEIGHT / 2, HEIGHT / 2 + 1, &g, &sc);
+	p = px(buf, &g, WIDTH / 2, HEIGHT / 2);
+	check(p[2] == 0 && p[1] == 255, "liste inversee : la verte gagne quand meme");
 	free(buf);
 	printf("\n%d cas en echec sur %d\n", g_fail, g_total);
 	return (g_fail != 0);
