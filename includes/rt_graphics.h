@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 02:08:32 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 02:34:45 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int		t_color_to_int(t_color c);
 t_color	mult_color_light(t_color a, t_light light, double factor);
 t_color	add_color(t_color a, t_color b);
 t_color	get_final_color(t_hit hit, t_light *lights, t_light amb);
+bool	is_illuminated(t_hit hit, t_light light, t_hit *data);
 
 /** 
 ** @brief Give a 3D sytem from one t_vec3
