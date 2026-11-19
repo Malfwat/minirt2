@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/18 23:17:07 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 17:48:35 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 18:03:12 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ bool	ray_cast_disk(t_cy_eq *data, t_hit *hit, t_vec3	disk_o, double denom)
 	hit->t = tmp;
 	hit->p = p;
 	hit->normal = data->cy->vec;
-	hit->obj = data-> cy;
+	if (scal(sub(disk_o, data->cy->coordinate), data->cy->vec) < 0)
+		hit->normal = mult(hit->normal, -1);
+	hit->obj = data->cy;
 	return (true);
 }
 
