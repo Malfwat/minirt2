@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 21:25:53 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 22:49:13 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,15 @@ typedef struct s_raycast
 	t_vec3	origin;
 	double	lim;
 }	t_cast;
+
+typedef struct s_pxl_color_data
+{
+	double	dif;
+	double	spec;
+
+	t_color	c_dif;
+	t_color	c_spec;
+}	t_pxl_data;
 
 void	put_pxl(int x, int y, t_graphics *data, int color);
 void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc);
