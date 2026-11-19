@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 03:59:09 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 15:30:09 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 # define ESC 65307
 # define W_CROSS 17
 
-# include "rt_struct.h"
 # include "rt_error.h"
+# include "rt_math.h"
+# include "rt_struct.h"
 
 typedef struct s_image
 {
@@ -71,6 +72,7 @@ t_color	get_final_color(t_hit hit, t_scene *sc);
 bool	is_illuminated(t_hit hit, t_light light, t_obj *obj);
 t_color	get_pixel_illumination(t_hit hit, t_light *l, t_scene *sc);
 bool	cast_ray(t_scene *sc, t_cast data, t_hit *ptr);
+bool	quad(t_quad q, double *s1, double *s2);
 
 /**
 ** @brief Give a 3D sytem from one t_vec3

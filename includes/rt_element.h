@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 17:43:09 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 01:41:36 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 15:55:15 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,13 @@ bool		sp_hit(t_obj *sp, t_vec3 d, t_vec3 o, t_hit *hit);
 typedef bool	(*t_intersect)(t_obj *, t_vec3, t_vec3, t_hit *);
 
 t_intersect	get_intersect_f(enum e_obj id);
+
+typedef struct s_cy_eq
+{
+	double	m;
+	double	k;
+	t_quad	q;
+	t_obj	*cy;
+}	t_cy_eq;
 
 #endif /*RT_ELEMENT_H*/

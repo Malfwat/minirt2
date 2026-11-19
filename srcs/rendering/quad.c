@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/18 20:57:25 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 23:36:22 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 15:31:28 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 #include "rt_math.h"
 
 #include <math.h>
-#include <limits.h>
 
-static double	min(double a, double b)
+double	min(double a, double b)
 {
 	if (a < b)
 		return (a);
@@ -36,7 +35,7 @@ static bool	min_pos(double a, double b, double *t)
 	return (true);
 }
 
-static bool	quad(t_quad q, double *s1, double *s2)
+bool	quad(t_quad q, double *s1, double *s2)
 {
 	double	delt;
 
