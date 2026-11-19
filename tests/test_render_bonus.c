@@ -90,6 +90,7 @@ int	main(void)
 	char		*buf;
 	t_graphics	g;
 	t_scene		sc;
+	t_obj		o;
 	t_err		err;
 
 	buf = calloc(WIDTH * HEIGHT, 4);
@@ -97,13 +98,27 @@ int	main(void)
 	ft_bzero(&g, sizeof(g));
 	ft_bzero(&sc, sizeof(sc));
 	sc.cam.fov = 70;
+	sc.amb.ratio = 1.0;
+	sc.amb.color.r = 255;
+	sc.amb.color.g = 255;
+	sc.amb.color.b = 255;
 	sc.cam.vec.z = 1;
 	g.image.addr = buf;
 	g.image.bpp = 32;
 	g.image.line_length = WIDTH * 4;
+	ft_bzero(&o, sizeof(o));
+	o.id = sphere;
+	o.diameter = 1000000;
+	o.color.r = 200;
+	o.color.g = 120;
+	o.color.b = 40;
+	sc.obj_lst = &o;
 	err = render(&g, &sc);
 	check(err == ok, "render bonus renvoie ok");
-	check(black_pixels(buf, &g) == 0, "tous les pixels sont ecrits (aucun noir)");
+	check(black_pixels(buf, &g) == 0, "les 8 bandes couvrent toute l'image");
+	check(px(buf, &g, WIDTH / 2, HEIGHT / 2)[2] == 200
+		&& px(buf, &g, WIDTH / 2, HEIGHT / 2)[1] == 120,
+		"couleur de l'objet respectee (ambiance blanche a 1.0)");
 	check(max_row_jump(buf, &g) <= 3, "aucune couture entre les bandes");
 	free(buf);
 	printf("\n%d cas en echec sur %d\n", g_fail, g_total);

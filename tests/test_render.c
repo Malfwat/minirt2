@@ -60,6 +60,10 @@ int	main(void)
 	ft_bzero(&g, sizeof(g));
 	ft_bzero(&sc, sizeof(sc));
 	sc.cam.fov = 160;
+	sc.amb.ratio = 1.0;
+	sc.amb.color.r = 255;
+	sc.amb.color.g = 255;
+	sc.amb.color.b = 255;
 	sc.cam.vec.z = 1;
 	g.image.addr = buf;
 	g.image.bpp = 32;
