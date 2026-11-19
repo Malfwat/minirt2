@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:47:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 00:53:01 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 01:07:29 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_color	get_pxl_color(t_scene *sc, t_graphics *d, double x, double y)
 	}
 	if (!best)
 		return ((t_color){0, 0, 0});
-	return (mult_color_light(best->color, sc->amb));
+	return (mult_color_amb(best->color, sc->amb));
 }
 
 void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc)
