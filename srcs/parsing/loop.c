@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/13 22:32:39 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 20:34:41 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 23:09:59 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_err	get_comp(char *str, t_parser *p)
 	__UINT8_TYPE__	i;
 
 	i = 0;
-	while (p->getting_f[i])
+	while (p->getting_f[i] && i < p->required)
 	{
 		if (!*str)
 			break ;
