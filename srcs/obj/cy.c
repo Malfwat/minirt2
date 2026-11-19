@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/18 23:17:07 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 18:03:12 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 18:10:41 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,7 @@ bool	cy_hit(t_obj *cy, t_vec3 d, t_vec3 o, t_hit *hit)
 	t_hit	tmp;
 
 	data.q = cy_quad(cy, d, o, &data);
-	if (!quad(data.q, &data.s1, &data.s2))
-		return (false);
+	quad(data.q, &data.s1, &data.s2);
 	data.ray_dir = d;
 	data.cam_o = o;
 	data.cy = cy;
