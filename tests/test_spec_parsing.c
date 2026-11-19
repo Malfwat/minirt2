@@ -18,7 +18,8 @@
 **   - 5 champs  -> valide, valeurs stockees
 **   - 4 champs  -> REJET (les deux ou aucun)
 **   - 6 champs  -> rejet (contenu residuel)
-**   - intensite hors [0,1] et exposant hors [1,1000] -> rejet
+**   - intensite hors [0,1] -> rejet ; exposant 0 accepte (sentinelle "mat"),
+**     exposant negatif ou > 1000 -> rejet
 **
 ** Compilation : le comportement differe entre les deux binaires.
 **   mandatory : gcc ... tests/test_spec_parsing.c $MANDATORY_SRCS
@@ -128,7 +129,7 @@ int	main(void)
 	{"0,0,20", bad_sp_config, 0, 0, 0, 0},
 	{"", bad_sp_config, 0, 0, 0, 0},
 	{"0,0,20 12.6 255,0,0 1.5 40", ANY_ERR, 1, 0, 0, 0},
-	{"0,0,20 12.6 255,0,0 0.5 0", ANY_ERR, 1, 0, 0, 0},
+	{"0,0,20 12.6 255,0,0 0.5 0", ok, 1, 0.5, 0, 1},
 	{"0,0,20 12.6 255,0,0 0.5 1001", ANY_ERR, 1, 0, 0, 0},
 	{"0,0,20 12.6 255,0,0 0.5 -40", ANY_ERR, 1, 0, 0, 0},
 	{"0,0,20 12.6 255,0,0 abc 40", ANY_ERR, 1, 0, 0, 0},
