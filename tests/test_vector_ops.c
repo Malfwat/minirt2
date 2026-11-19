@@ -70,8 +70,9 @@ int	main(void)
 	check(same(cross(v(1, 0, 0), v(1, 0, 0)), v(0, 0, 1)) == 0,
 		"cross de deux colineaires ne donne pas un axe valide");
 	r = cross(v(0, 1, 0), v(0, 1, 0));
-	check(!isfinite(r.x) || !isfinite(r.y) || !isfinite(r.z),
-		"cross de deux colineaires -> NaN (contrat a garder en tete)");
+	check(isfinite(r.x) && isfinite(r.y) && isfinite(r.z)
+		&& get_norme(r) < 1e-12,
+		"cross de deux colineaires -> vecteur nul, jamais NaN");
 	printf("\n%d cas en echec sur %d\n", g_fail, g_total);
 	return (g_fail != 0);
 }
