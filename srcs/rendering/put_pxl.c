@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:47:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 02:54:57 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 03:31:23 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,30 +45,47 @@ t_vec3	sysvec_to_real_vec(t_axes axes, t_vec3 svec)
 	return (normalize(vec));
 }
 
+bool	cast_ray(t_scene *sc, t_cast data, t_hit *ptr)
+{
+	t_obj	*olst;
+	t_hit	best;
+	t_hit	hit;
+
+	ft_bzero(&best, sizeof(best));
+	best.t = INFINITY;
+	olst = sc->obj_lst;
+	while (olst)
+	{
+		if (get_intersect_f(olst->id)(olst, data.dir, sc->cam.coordinate, &hit))
+		{
+			if (hit.t < best.t && hit.t > 0)
+				best = hit;
+		}
+		olst = olst->next;
+	}
+	if (best.obj && best.t > 1e-4)
+	{
+		*ptr = best;
+		return (true);
+	}
+	return (false);
+}
+
 t_color	get_pxl_color(t_scene *sc, t_graphics *d, double x, double y)
 {
-	t_obj	*lst;
+	t_cast	data;
 	t_vec3	vec;
 	t_hit	best;
 	t_hit	hit;
 
 	ft_bzero(&hit, sizeof(hit));
-	ft_bzero(&best, sizeof(best));
-	best.t = INFINITY;
 	vec = sysvec_to_real_vec(d->axes, pxl_to_sysvec(d->ox, d->oy, x, y));
-	lst = sc->obj_lst;
-	while (lst)
-	{
-		if (get_intersect_f(lst->id)(lst, vec, sc->cam.coordinate, &hit))
-		{
-			if (hit.t < best.t && hit.t > 0)
-				best = hit;
-		}
-		lst = lst->next;
-	}
-	if (!best.obj)
+	data.dir = vec;
+	data.lim = INFINITY;
+	data.origin = sc->cam.coordinate;
+	if (!cast_ray(sc, data, &best))
 		return ((t_color){0, 0, 0});
-	return (get_final_color(best, sc->light_lst, sc->amb, sc->obj_lst));
+	return (get_final_color(best, *sc));
 }
 
 void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc)

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 02:56:06 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 03:31:41 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,21 @@ typedef struct s_hit_data
 	t_vec3	normal;
 }	t_hit;
 
+
+typedef struct s_raycast
+{
+	t_vec3	dir;
+	t_vec3	origin;
+	double	lim;
+}	t_cast;
+
 void	put_pxl(int x, int y, t_graphics *data, int color);
 void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc);
 t_err	render(t_graphics *data, t_scene *sc);
 int		t_color_to_int(t_color c);
 t_color	mult_color_light(t_color a, t_light light, double factor);
 t_color	add_color(t_color a, t_color b);
-t_color	get_final_color(t_hit hit, t_light *lights, t_light amb, t_obj *objl);
+t_color	get_final_color(t_hit hit, t_scene sc);
 bool	is_illuminated(t_hit hit, t_light light, t_obj *obj);
 
 /** 

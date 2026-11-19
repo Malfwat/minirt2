@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 17:38:20 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 02:52:25 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 03:09:34 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ bool	is_illuminated(t_hit hit, t_light light, t_obj *obj)
 	t_l = get_norme(vec);
 	vec = normalize(vec);
 	p_offset = add(hit.p, mult(vec, 1e-3));
-	if (!get_intersect_f(hit.obj->id)(obj, vec, p_offset, &data))
+	if (!get_intersect_f(obj->id)(obj, vec, p_offset, &data))
 		return (true);
 	if (data.t < t_l)
 		return (false);

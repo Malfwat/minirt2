@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 22:21:54 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 03:01:22 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 03:38:44 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,36 +57,30 @@ static double	max(double a, double b)
 	return (b);
 }
 
-t_color	get_final_color(t_hit hit, t_light *lights, t_light amb, t_obj *objl)
+bool	cast_ray(t_scene *sc, t_cast data, t_hit *ptr);
+
+t_color	get_final_color(t_hit hit, t_scene sc)
 {
-	t_vec3	l;
+	t_cast	data;
+	t_hit	h;
 	t_color	a;
 	t_color	b;
 	t_color	tmp;
-	void	*ptr;
 	double	factor;
 
-	a = mult_color_light(hit.obj->color, amb, 1);
+	a = mult_color_light(hit.obj->color, sc.amb, 1);
 	ft_bzero(&b, sizeof(b));
-	while (lights)
+	while (sc.light_lst)
 	{
-		l = sub(lights->coordinate, hit.p);
-		l = normalize(l);
-		factor = max(0, scal(l, hit.normal));
-		ptr = objl;
-		while (objl)
-		{
-			if (!is_illuminated(hit, *lights, objl))
-			{
-				factor = 0;
-				break ;
-			}
-			objl = objl->next;
-		}
-		tmp = mult_color_light(hit.obj->color, *lights, factor);
+		data.dir = sub(sc.light_lst->coordinate, hit.p);
+		data.dir = normalize(data.dir);
+		factor = 0;
+		ft_bzero(&h, sizeof(h));
+		if (!cast_ray(&sc, data, &h))
+			factor = max(0, scal(data.dir, hit.normal));
+		tmp = mult_color_light(hit.obj->color, *sc.light_lst, factor);
 		b = add_color(b, tmp);
-		objl = ptr;
-		lights = lights->next;
+		sc.light_lst = sc.light_lst->next;
 	}
 	return (add_color(a, b));
 }
