@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 16:26:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/14 22:26:09 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 11:01:05 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static char	**messages(void)
 		"Bad sphere configuration",
 		"Bad plane configuration",
 		"Bad cylinder configuration",
-		"Ambient light declared twice",
-		"Camera declared twice",
-		"Light declared twice",
+		"Ambient light declared more than once",
+		"Camera declared more than once",
+		"Light declared more than once",
 		"Missing ambient light", "Missing light", "Missing camera",
 		"Null vector"
 	};
