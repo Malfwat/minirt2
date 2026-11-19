@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:47:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 01:16:40 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 01:47:59 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,31 +47,27 @@ t_vec3	sysvec_to_real_vec(t_axes axes, t_vec3 svec)
 
 t_color	get_pxl_color(t_scene *sc, t_graphics *d, double x, double y)
 {
-	t_obj	*best;
 	t_obj	*lst;
 	t_vec3	vec;
-	double	t_best;
-	double	t;
+	t_hit	best;
+	t_hit	hit;
 
-	t_best = INFINITY;
-	best = NULL;
+	best.t = INFINITY;
+	ft_bzero(&hit, sizeof(hit));
 	vec = sysvec_to_real_vec(d->axes, pxl_to_sysvec(d->ox, d->oy, x, y));
 	lst = sc->obj_lst;
 	while (lst)
 	{
-		if (get_intersect_f(lst->id)(lst, vec, sc->cam.coordinate, &t))
+		if (get_intersect_f(lst->id)(lst, vec, sc->cam.coordinate, &hit))
 		{
-			if (t < t_best && t > 0)
-			{
-				t_best = t;
-				best = lst;
-			}
+			if (hit.t < best.t && hit.t > 0)
+				best = hit;
 		}
 		lst = lst->next;
 	}
-	if (!best)
+	if (!hit.obj)
 		return ((t_color){0, 0, 0});
-	return (mult_color_light(best->color, sc->amb, 1));
+	return (get_final_color(sc, hit, *sc->light_lst, sc->amb));
 }
 
 void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc)

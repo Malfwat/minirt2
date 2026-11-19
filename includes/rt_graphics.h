@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 01:16:19 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 01:47:37 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,21 @@ typedef struct s_graphics
 	t_image	image;
 }	t_graphics;
 
+typedef struct s_hit_data
+{
+	t_obj	*obj;
+	double	t;
+	t_vec3	p;
+	t_vec3	normal;
+}	t_hit;
+
 void	put_pxl(int x, int y, t_graphics *data, int color);
 void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc);
 t_err	render(t_graphics *data, t_scene *sc);
 int		t_color_to_int(t_color c);
-t_color	mult_color_light(t_color a, t_light light, double x);
+t_color	mult_color_light(t_color a, t_light light, double factor);
+t_color	add_color(t_color a, t_color b);
+t_color	get_final_color(t_scene *sc, t_hit hit, t_light light, t_light amb);
 
 /** 
 ** @brief Give a 3D sytem from one t_vec3

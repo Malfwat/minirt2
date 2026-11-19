@@ -6,12 +6,13 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/18 22:31:59 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 00:13:32 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 01:49:11 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_math.h"
 #include "rt_struct.h"
+#include "rt_graphics.h"
 
 t_quad	sp_quad(t_obj *sp, t_vec3 d, t_vec3 o)
 {
@@ -27,10 +28,17 @@ t_quad	sp_quad(t_obj *sp, t_vec3 d, t_vec3 o)
 	return (q);
 }
 
-bool	sp_hit(t_obj *sp, t_vec3 d, t_vec3 o, double *t)
+bool	sp_hit(t_obj *sp, t_vec3 d, t_vec3 o, t_hit *hit)
 {
 	t_quad	q;
+	bool	ret;
 
 	q = sp_quad(sp, d, o);
-	return (solve_hit(q, t));
+	ret = solve_hit(q, &hit->t);
+	if (!ret)
+		return (false);
+	hit->p = mult(d, hit->t);
+	hit->normal = normalize(sub(hit->p, sp->coordinate));
+	hit->obj = sp;
+	return (true);
 }
