@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 17:38:20 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 03:09:34 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 03:59:46 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,28 @@ bool	is_illuminated(t_hit hit, t_light light, t_obj *obj)
 	if (data.t < t_l)
 		return (false);
 	return (true);
+}
+
+static double	max(double a, double b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+t_color	get_pixel_illumination(t_hit hit, t_light *l, t_scene *sc)
+{
+	t_cast	data;
+	double	factor;
+	t_hit	h;
+
+	data.dir = sub(l->coordinate, hit.p);
+	data.lim = get_norme(data.dir);
+	data.dir = normalize(data.dir);
+	data.origin = add(hit.p, mult(data.dir, 1e-4));
+	factor = 0;
+	ft_bzero(&h, sizeof(h));
+	if (!cast_ray(sc, data, &h))
+		factor = max(0, scal(data.dir, hit.normal));
+	return (mult_color_light(hit.obj->color, *l, factor));
 }

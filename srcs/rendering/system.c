@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/17 16:52:40 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 00:41:44 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 03:57:48 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,24 @@ void	build_frame(t_graphics *data, t_scene *sc)
 	data->axes = get_system(sc->cam.vec);
 	data->ox = tan(deg_to_rad(sc->cam.fov) / 2);
 	data->oy = data->ox * (double)HEIGHT / (double)WIDTH;
+}
+
+t_vec3	pxl_to_sysvec(double ox, double oy, double posx, double posy)
+{
+	t_vec3	vec;
+
+	vec.x = ((posx + 0.5) * 2 / WIDTH - 1) * ox;
+	vec.y = (1 - (posy + 0.5) * 2 / HEIGHT) * oy;
+	vec.z = 1;
+	return (vec);
+}
+
+t_vec3	sysvec_to_real_vec(t_axes axes, t_vec3 svec)
+{
+	t_vec3	vec;
+
+	vec.x = svec.x * axes.x.x + svec.y * axes.y.x + svec.z * axes.z.x;
+	vec.y = svec.x * axes.x.y + svec.y * axes.y.y + svec.z * axes.z.y;
+	vec.z = svec.x * axes.x.z + svec.y * axes.y.z + svec.z * axes.z.z;
+	return (normalize(vec));
 }

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:47:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 03:31:23 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 03:57:52 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,6 @@ void	put_pxl(int x, int y, t_graphics *data, int color)
 	*(unsigned int *)dst = color;
 }
 
-t_vec3	pxl_to_sysvec(double ox, double oy, double posx, double posy)
-{
-	t_vec3	vec;
-
-	vec.x = ((posx + 0.5) * 2 / WIDTH - 1) * ox;
-	vec.y = (1 - (posy + 0.5) * 2 / HEIGHT) * oy;
-	vec.z = 1;
-	return (vec);
-}
-
-t_vec3	sysvec_to_real_vec(t_axes axes, t_vec3 svec)
-{
-	t_vec3	vec;
-
-	vec.x = svec.x * axes.x.x + svec.y * axes.y.x + svec.z * axes.z.x;
-	vec.y = svec.x * axes.x.y + svec.y * axes.y.y + svec.z * axes.z.y;
-	vec.z = svec.x * axes.x.z + svec.y * axes.y.z + svec.z * axes.z.z;
-	return (normalize(vec));
-}
-
 bool	cast_ray(t_scene *sc, t_cast data, t_hit *ptr)
 {
 	t_obj	*olst;
@@ -56,14 +36,14 @@ bool	cast_ray(t_scene *sc, t_cast data, t_hit *ptr)
 	olst = sc->obj_lst;
 	while (olst)
 	{
-		if (get_intersect_f(olst->id)(olst, data.dir, sc->cam.coordinate, &hit))
+		if (get_intersect_f(olst->id)(olst, data.dir, data.origin, &hit))
 		{
 			if (hit.t < best.t && hit.t > 0)
 				best = hit;
 		}
 		olst = olst->next;
 	}
-	if (best.obj && best.t > 1e-4)
+	if (best.obj && best.t > 1e-4 && best.t < data.lim)
 	{
 		*ptr = best;
 		return (true);
@@ -85,7 +65,7 @@ t_color	get_pxl_color(t_scene *sc, t_graphics *d, double x, double y)
 	data.origin = sc->cam.coordinate;
 	if (!cast_ray(sc, data, &best))
 		return ((t_color){0, 0, 0});
-	return (get_final_color(best, *sc));
+	return (get_final_color(best, sc));
 }
 
 void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc)

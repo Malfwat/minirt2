@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 22:21:54 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 03:38:44 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 03:59:57 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,37 +50,19 @@ t_color	add_color(t_color a, t_color b)
 	return (c);
 }
 
-static double	max(double a, double b)
+t_color	get_final_color(t_hit hit, t_scene *sc)
 {
-	if (a > b)
-		return (a);
-	return (b);
-}
-
-bool	cast_ray(t_scene *sc, t_cast data, t_hit *ptr);
-
-t_color	get_final_color(t_hit hit, t_scene sc)
-{
-	t_cast	data;
-	t_hit	h;
+	t_light	*l;
 	t_color	a;
 	t_color	b;
-	t_color	tmp;
-	double	factor;
 
-	a = mult_color_light(hit.obj->color, sc.amb, 1);
+	a = mult_color_light(hit.obj->color, sc->amb, 1);
 	ft_bzero(&b, sizeof(b));
-	while (sc.light_lst)
+	l = sc->light_lst;
+	while (l)
 	{
-		data.dir = sub(sc.light_lst->coordinate, hit.p);
-		data.dir = normalize(data.dir);
-		factor = 0;
-		ft_bzero(&h, sizeof(h));
-		if (!cast_ray(&sc, data, &h))
-			factor = max(0, scal(data.dir, hit.normal));
-		tmp = mult_color_light(hit.obj->color, *sc.light_lst, factor);
-		b = add_color(b, tmp);
-		sc.light_lst = sc.light_lst->next;
+		b = add_color(b, get_pixel_illumination(hit, l, sc));
+		l = l->next;
 	}
 	return (add_color(a, b));
 }

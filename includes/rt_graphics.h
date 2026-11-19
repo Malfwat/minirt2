@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 03:31:41 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 03:59:09 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_hit_data
 	t_vec3	normal;
 }	t_hit;
 
-
 typedef struct s_raycast
 {
 	t_vec3	dir;
@@ -68,17 +67,22 @@ t_err	render(t_graphics *data, t_scene *sc);
 int		t_color_to_int(t_color c);
 t_color	mult_color_light(t_color a, t_light light, double factor);
 t_color	add_color(t_color a, t_color b);
-t_color	get_final_color(t_hit hit, t_scene sc);
+t_color	get_final_color(t_hit hit, t_scene *sc);
 bool	is_illuminated(t_hit hit, t_light light, t_obj *obj);
+t_color	get_pixel_illumination(t_hit hit, t_light *l, t_scene *sc);
+bool	cast_ray(t_scene *sc, t_cast data, t_hit *ptr);
 
-/** 
+/**
 ** @brief Give a 3D sytem from one t_vec3
+		
 **
 ** @param[in] z 3D non null vector used as z axis of the new system
 ** @return t_axes	Structure of 3 t_vec3 
 */
 t_axes	get_system(t_vec3 z);
 void	build_frame(t_graphics *data, t_scene *sc);
+t_vec3	sysvec_to_real_vec(t_axes axes, t_vec3 svec);
+t_vec3	pxl_to_sysvec(double ox, double oy, double posx, double posy);
 
 double	deg_to_rad(double angle);
 
