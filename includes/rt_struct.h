@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 18:53:51 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 20:44:28 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 23:40:38 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ typedef struct s_color
 	__UINT8_TYPE__	g;
 	__UINT8_TYPE__	b;
 }	t_color;
+
+typedef struct s_color_double
+{
+	double	r;
+	double	g;
+	double	b;
+}	t_color_double;
 
 typedef struct s_obj
 {

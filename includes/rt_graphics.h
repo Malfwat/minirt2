@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 22:49:13 by me               ###   ########.fr       */
+/*   Updated: 2026/11/20 00:03:08 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ typedef struct s_pxl_color_data
 	t_color	c_dif;
 	t_color	c_spec;
 }	t_pxl_data;
+
+typedef struct s_quadrant
+{
+	t_color	colors[4];
+}	t_quadrant;
 
 void	put_pxl(int x, int y, t_graphics *data, int color);
 void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc);

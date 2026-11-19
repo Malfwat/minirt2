@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/17 16:52:40 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 03:57:48 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 23:32:33 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ t_vec3	pxl_to_sysvec(double ox, double oy, double posx, double posy)
 {
 	t_vec3	vec;
 
-	vec.x = ((posx + 0.5) * 2 / WIDTH - 1) * ox;
-	vec.y = (1 - (posy + 0.5) * 2 / HEIGHT) * oy;
+	vec.x = (posx * 2 / WIDTH - 1) * ox;
+	vec.y = (1 - posy * 2 / HEIGHT) * oy;
 	vec.z = 1;
 	return (vec);
 }

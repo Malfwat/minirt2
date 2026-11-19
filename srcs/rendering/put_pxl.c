@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:47:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 03:57:52 by me               ###   ########.fr       */
+/*   Updated: 2026/11/20 00:08:53 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,55 @@ t_color	get_pxl_color(t_scene *sc, t_graphics *d, double x, double y)
 	return (get_final_color(best, sc));
 }
 
+t_color_double	add_color_double(t_color_double c, t_color x)
+{
+	c.r += (double)x.r;
+	c.g += (double)x.g;
+	c.b += (double)x.b;
+	return (c);
+}
+
+t_color	cdouble_to_c(t_color_double c, double div)
+{
+	return ((t_color){c.r / div, c.g / div, c.b / div});
+}
+
+t_quadrant	get_quadrant(t_graphics *data, t_scene *sc, double x, double y)
+{
+	t_quadrant	q;
+
+	q.colors[0] = get_pxl_color(sc, data, x + 0.25, y + 0.25);
+	q.colors[1] = get_pxl_color(sc, data, x + 0.25, y + 0.75);
+	q.colors[2] = get_pxl_color(sc, data, x + 0.75, y + 0.25);
+	q.colors[3] = get_pxl_color(sc, data, x + 0.75, y + 0.75);
+	return (q);
+}
+
+t_color	quadrant_mean(t_quadrant q)
+{
+	t_color_double	tmp;
+	int				i;
+
+	ft_bzero(&tmp, sizeof(tmp));
+	i = 0;
+	while (i < 4)
+		tmp = add_color_double(tmp, q.colors[i++]);
+	return (cdouble_to_c(tmp, 4));
+}
+
 void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc)
 {
-	int		x;
-	t_color	c;
+	int			x;
+	t_color		c;
+	t_quadrant	q;
 
 	while (y_start < y_end)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			c = get_pxl_color(sc, data, x, y_start);
+			q = get_quadrant(data, sc, x, y_start);
+			c = quadrant_mean(q);
 			put_pxl(x, y_start, data, t_color_to_int(c));
 			x++;
 		}
