@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/13 23:12:52 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 23:58:12 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 20:26:58 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 t_getter	*get_sp_getter(void)
 {
-	static t_getter	tab[4] = {
+	static t_getter	tab[6] = {
 		get_vec3,
 		get_diameter,
 		get_color,
+		get_intensity,
+		get_exposant,
 		(void *)0
 	};
 
@@ -26,10 +28,12 @@ t_getter	*get_sp_getter(void)
 
 t_pass	*get_sp_passer(void)
 {
-	static t_pass	tab[4] = {
+	static t_pass	tab[6] = {
 		pass_component,
 		pass_component,
 		pass_color,
+		pass_component,
+		pass_component,
 		(void *)0
 	};
 

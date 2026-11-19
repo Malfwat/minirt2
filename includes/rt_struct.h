@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 18:53:51 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 00:55:52 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 20:14:18 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ typedef struct s_obj
 	t_vec3			vec;
 	double			diameter;
 	double			height;
+
+	double			intensity;
+	double			exposant;
 
 	struct s_obj	*next;
 }	t_obj;

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/14 20:35:34 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 20:35:18 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define PL "pl"
 # define SP "sp"
 # define CY "cy"
+
+# define SPECULAR 2
 
 # include "rt_struct.h"
 # include "rt_error.h"
@@ -53,6 +55,8 @@ t_err				get_color(char *str, void *color);
 t_err				get_fov(char *str, void *fov);
 t_err				get_height(char *str, void *res);
 t_err				get_diameter(char *str, void *res);
+t_err				get_exposant(char *str, void *res);
+t_err				get_intensity(char *str, void *res);
 typedef t_err	(*t_getter)(char *, void *);
 
 t_getter			*get_cy_getter(void);

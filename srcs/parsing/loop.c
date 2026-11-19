@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/13 22:32:39 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 22:44:35 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 20:34:41 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_err	get_comp(char *str, t_parser *p)
 	while (p->getting_f[i])
 	{
 		if (!*str)
-			return (p->err);
+			break ;
 		ptr = str;
 		p->passing_f[i](&str);
 		err = p->getting_f[i](ptr, p->addr[i]);
@@ -31,7 +31,7 @@ t_err	get_comp(char *str, t_parser *p)
 			return (err);
 		i++;
 	}
-	if (*str)
+	if (*str || i != p->required)
 		return (p->err);
 	return (ok);
 }

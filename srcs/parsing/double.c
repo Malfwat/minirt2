@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 14:13:30 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 20:37:11 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 20:16:02 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,16 @@ t_err	get_height(char *str, void *res)
 }
 
 t_err	get_diameter(char *str, void *res)
+{
+	return (get_strict_positive_double(str, res));
+}
+
+t_err	get_intensity(char *str, void *res)
+{
+	return (get_strict_positive_double(str, res));
+}
+
+t_err	get_exposant(char *str, void *res)
 {
 	return (get_strict_positive_double(str, res));
 }
