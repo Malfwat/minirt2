@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 17:43:09 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 16:56:02 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 17:49:01 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_intersect	get_intersect_f(enum e_obj id);
 
 typedef struct s_cy_eq
 {
+	double	s1;
+	double	s2;
 	double	m;
 	double	k;
 	t_quad	q;
@@ -37,5 +39,7 @@ typedef struct s_cy_eq
 	t_vec3	cam_o;
 	t_vec3	ray_dir;
 }	t_cy_eq;
+
+void		update_hit_pipe(t_cy_eq *data, t_hit *hit, double s);
 
 #endif /*RT_ELEMENT_H*/
