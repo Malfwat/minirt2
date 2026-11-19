@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/18 23:17:07 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 01:36:52 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 02:12:10 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ bool	cy_hit(t_obj *cy, t_vec3 d, t_vec3 o, t_hit *hit)
 	(void)cy;
 	(void)d;
 	(void)o;
-	hit->obj = cy;
+	(void)hit;
 	return (false);
 }

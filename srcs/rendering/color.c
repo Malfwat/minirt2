@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 22:21:54 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 02:04:18 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 02:08:12 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,19 @@ static double	max(double a, double b)
 	return (b);
 }
 
-t_color	get_final_color(t_scene *sc, t_hit hit, t_light *lights, t_light amb)
+t_color	get_final_color(t_hit hit, t_light *lights, t_light amb)
 {
 	t_vec3	l;
 	t_color	a;
 	t_color	b;
 	t_color	tmp;
-	bool	factor;
+	double	factor;
 
 	a = mult_color_light(hit.obj->color, amb, 1);
 	ft_bzero(&b, sizeof(b));
 	while (lights)
 	{
-		l = sub(sc->light_lst->coordinate, hit.p);
+		l = sub(lights->coordinate, hit.p);
 		l = normalize(l);
 		factor = max(0, scal(l, hit.normal));
 		tmp = mult_color_light(hit.obj->color, *lights, factor);

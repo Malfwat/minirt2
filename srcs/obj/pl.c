@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/18 23:17:07 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 01:55:24 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 02:15:32 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ bool	pl_hit(t_obj *pl, t_vec3 d, t_vec3 o, t_hit *hit)
 	denom = scal(d, pl->vec);
 	if (fabs(denom) < 1e-4)
 		return (false);
-	hit->t = -scal(normalize(sub(o, pl->coordinate)), pl->vec) / denom;
+	hit->t = -scal(sub(o, pl->coordinate), pl->vec) / denom;
 	hit->p = add(o, mult(d, hit->t));
-	hit->normal = pl->vec;
+	hit->normal = normalize(pl->vec);
 	hit->obj = pl;
 	return (true);
 }
