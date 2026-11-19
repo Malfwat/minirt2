@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 17:43:09 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 15:55:15 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 16:56:02 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_cy_eq
 	double	k;
 	t_quad	q;
 	t_obj	*cy;
+	t_vec3	cam_o;
+	t_vec3	ray_dir;
 }	t_cy_eq;
 
 #endif /*RT_ELEMENT_H*/
