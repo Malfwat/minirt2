@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 16:26:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 11:01:05 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 20:58:50 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 static char	**messages(void)
 {
-	static char	*tab[22] = {
+	static char	*tab[23] = {
 		"Bad color format",
 		"Bad element identifier",
 		"Bad field of view format",
@@ -41,7 +41,7 @@ static char	**messages(void)
 		"Camera declared more than once",
 		"Light declared more than once",
 		"Missing ambient light", "Missing light", "Missing camera",
-		"Null vector"
+		"Null vector", "Invalid double value",
 	};
 
 	return (tab);
