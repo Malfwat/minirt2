@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 15:30:09 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 19:24:00 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ t_vec3	pxl_to_sysvec(double ox, double oy, double posx, double posy);
 
 double	deg_to_rad(double angle);
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 192
+# define HEIGHT 108
 
 # ifndef NB_TH
 #  define NB_TH 8

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 16:49:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/16 11:57:19 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 19:30:20 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "rt_error.h"
 #include "rt_parsing.h"
 #include "rt_gnl.h"
+#include "str.h"
 #include "rt_math.h"
 
 #include <unistd.h>
@@ -29,6 +30,17 @@ void	set_bool(bool *l, bool *c, bool *a, t_elem elem)
 		*l = true;
 }
 
+static void	take_off_clrf(char *line)
+{
+	size_t	len;
+
+	len = ft_strlen(line);
+	if (line[--len] == '\n')
+		line[len] = 0;
+	if (line[--len] == '\r')
+		line[len] = 0;
+}
+
 t_err	parse_file(t_fd fd, t_scene *sc, int *line_no)
 {
 	char	*line;
@@ -42,6 +54,7 @@ t_err	parse_file(t_fd fd, t_scene *sc, int *line_no)
 		*line_no = i;
 		if (*line != '#' && !is_line_empty(line))
 		{
+			take_off_clrf(line);
 			err = parse_line(line, sc);
 			if (err != ok)
 				return (free(line), gnl(FREE_GNL), err);
