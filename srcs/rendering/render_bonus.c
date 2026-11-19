@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:19:48 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 19:15:36 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 19:37:09 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ t_err	render(t_graphics *data, t_scene *sc)
 		{
 			errno = th.err;
 			stop_and_join_thread(&th.sem, &th.stop, tab, i);
-			return (syscall_err);
+			return (sem_destroy(&th.sem), syscall_err);
 		}
 	}
-	return (join_thread(tab, NB_TH), ok);
+	return (join_thread(tab, NB_TH), sem_destroy(&th.sem), ok);
 }
