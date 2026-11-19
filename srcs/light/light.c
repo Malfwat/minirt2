@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 17:38:20 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 03:59:46 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 21:10:51 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,23 @@ bool	add_light(t_light **head, t_light data)
 	return (true);
 }
 
-bool	is_illuminated(t_hit hit, t_light light, t_obj *obj)
-{
-	t_hit	data;
-	t_vec3	vec;
-	t_vec3	p_offset;
-	double	t_l;
+//bool	is_illuminated(t_hit hit, t_light light, t_obj *obj)
+//{
+//	t_hit	data;
+//	t_vec3	vec;
+//	t_vec3	p_offset;
+//	double	t_l;
 
-	vec = sub(light.coordinate, hit.p);
-	t_l = get_norme(vec);
-	vec = normalize(vec);
-	p_offset = add(hit.p, mult(vec, 1e-3));
-	if (!get_intersect_f(obj->id)(obj, vec, p_offset, &data))
-		return (true);
-	if (data.t < t_l)
-		return (false);
-	return (true);
-}
+//	vec = sub(light.coordinate, hit.p);
+//	t_l = get_norme(vec);
+//	vec = normalize(vec);
+//	p_offset = add(hit.p, mult(vec, 1e-3));
+//	if (!get_intersect_f(obj->id)(obj, vec, p_offset, &data))
+//		return (true);
+//	if (data.t < t_l)
+//		return (false);
+//	return (true);
+//}
 
 static double	max(double a, double b)
 {
@@ -83,5 +83,6 @@ t_color	get_pixel_illumination(t_hit hit, t_light *l, t_scene *sc)
 	ft_bzero(&h, sizeof(h));
 	if (!cast_ray(sc, data, &h))
 		factor = max(0, scal(data.dir, hit.normal));
+	// multiplier ici 
 	return (mult_color_light(hit.obj->color, *l, factor));
 }
