@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 18:53:51 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 20:14:18 by me               ###   ########.fr       */
+/*   Updated: 2026/11/19 20:44:28 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_obj
 	struct s_obj	*next;
 }	t_obj;
 
-# define NB_COMP 5
+# define NB_COMP 7
 
 typedef struct s_light
 {
