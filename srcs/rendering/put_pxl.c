@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:47:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/20 00:08:53 by me               ###   ########.fr       */
+/*   Updated: 2026/11/20 01:00:11 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,40 +68,30 @@ t_color	get_pxl_color(t_scene *sc, t_graphics *d, double x, double y)
 	return (get_final_color(best, sc));
 }
 
-t_color_double	add_color_double(t_color_double c, t_color x)
+t_color	anti_aliasing(t_graphics *data, t_scene *sc, double x, double y)
 {
-	c.r += (double)x.r;
-	c.g += (double)x.g;
-	c.b += (double)x.b;
-	return (c);
-}
-
-t_color	cdouble_to_c(t_color_double c, double div)
-{
-	return ((t_color){c.r / div, c.g / div, c.b / div});
-}
-
-t_quadrant	get_quadrant(t_graphics *data, t_scene *sc, double x, double y)
-{
-	t_quadrant	q;
-
-	q.colors[0] = get_pxl_color(sc, data, x + 0.25, y + 0.25);
-	q.colors[1] = get_pxl_color(sc, data, x + 0.25, y + 0.75);
-	q.colors[2] = get_pxl_color(sc, data, x + 0.75, y + 0.25);
-	q.colors[3] = get_pxl_color(sc, data, x + 0.75, y + 0.75);
-	return (q);
-}
-
-t_color	quadrant_mean(t_quadrant q)
-{
-	t_color_double	tmp;
 	int				i;
+	int				j;
+	int				tmp;
+	double			step;
+	t_color_double	c;
 
-	ft_bzero(&tmp, sizeof(tmp));
+	tmp = AA / 4;
+	step = 0.5 / (double)tmp;
+	ft_bzero(&c, sizeof(c));
 	i = 0;
-	while (i < 4)
-		tmp = add_color_double(tmp, q.colors[i++]);
-	return (cdouble_to_c(tmp, 4));
+	while (i < tmp)
+	{
+		j = 0;
+		while (j < tmp)
+		{
+			c = add_color_double(c, get_pxl_color(sc, data,
+						x + step * (double)j, y + step * (double)i));
+			j++;
+		}
+		i++;
+	}
+	return (cdouble_to_c(c, AA));
 }
 
 void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc)
@@ -116,7 +106,10 @@ void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc)
 		while (x < WIDTH)
 		{
 			q = get_quadrant(data, sc, x, y_start);
-			c = quadrant_mean(q);
+			if (quadrant_diff(q) > 20)
+				c = anti_aliasing(data, sc, x, y_start);
+			else
+				c = quadrant_mean(q);
 			put_pxl(x, y_start, data, t_color_to_int(c));
 			x++;
 		}

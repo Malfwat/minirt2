@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/20 00:03:08 by me               ###   ########.fr       */
+/*   Updated: 2026/11/20 01:01:21 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,24 @@ typedef struct s_quadrant
 	t_color	colors[4];
 }	t_quadrant;
 
-void	put_pxl(int x, int y, t_graphics *data, int color);
-void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc);
-t_err	render(t_graphics *data, t_scene *sc);
-int		t_color_to_int(t_color c);
-t_color	mult_color_light(t_color a, t_light light, double factor);
-t_color	add_color(t_color a, t_color b);
-t_color	get_final_color(t_hit hit, t_scene *sc);
-t_color	get_pixel_illumination(t_hit hit, t_light *l, t_scene *sc);
-bool	cast_ray(t_scene *sc, t_cast data, t_hit *ptr);
-bool	quad(t_quad q, double *s1, double *s2);
+t_color			quadrant_mean(t_quadrant q);
+t_quadrant		get_quadrant(t_graphics *data, t_scene *sc, double x, double y);
+t_color_double	add_color_double(t_color_double c, t_color x);
+t_color			cdouble_to_c(t_color_double c, double div);
+double			quadrant_diff(t_quadrant q);
+
+void			put_pxl(int x, int y, t_graphics *data, int color);
+void			render_lines(int y_start, int y_end, t_graphics *data,
+					t_scene *sc);
+t_err			render(t_graphics *data, t_scene *sc);
+t_color			get_pxl_color(t_scene *sc, t_graphics *d, double x, double y);
+int				t_color_to_int(t_color c);
+t_color			mult_color_light(t_color a, t_light light, double factor);
+t_color			add_color(t_color a, t_color b);
+t_color			get_final_color(t_hit hit, t_scene *sc);
+t_color			get_pixel_illumination(t_hit hit, t_light *l, t_scene *sc);
+bool			cast_ray(t_scene *sc, t_cast data, t_hit *ptr);
+bool			quad(t_quad q, double *s1, double *s2);
 
 /**
 ** @brief Give a 3D sytem from one t_vec3
@@ -94,15 +102,16 @@ bool	quad(t_quad q, double *s1, double *s2);
 ** @param[in] z 3D non null vector used as z axis of the new system
 ** @return t_axes	Structure of 3 t_vec3 
 */
-t_axes	get_system(t_vec3 z);
-void	build_frame(t_graphics *data, t_scene *sc);
-t_vec3	sysvec_to_real_vec(t_axes axes, t_vec3 svec);
-t_vec3	pxl_to_sysvec(double ox, double oy, double posx, double posy);
+t_axes			get_system(t_vec3 z);
+void			build_frame(t_graphics *data, t_scene *sc);
+t_vec3			sysvec_to_real_vec(t_axes axes, t_vec3 svec);
+t_vec3			pxl_to_sysvec(double ox, double oy, double posx, double posy);
 
-double	deg_to_rad(double angle);
+double			deg_to_rad(double angle);
 
 # define WIDTH 1920
 # define HEIGHT 1080
+# define AA 8
 
 # ifndef NB_TH
 #  define NB_TH 8

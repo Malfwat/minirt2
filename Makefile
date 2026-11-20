@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/19 19:21:06 by me               ###   ########.fr        #
+#    Updated: 2026/11/20 00:32:06 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,8 @@ SRCS	+=	rendering/put_pxl.c	\
 			rendering/utils.c	\
 			rendering/color.c	\
 			rendering/quad.c	\
+			rendering/anti_aliasing_quad.c	\
+			rendering/quad_diff.c	\
 			rendering/system.c
 
 SRCS	+=	error/rt_error.c

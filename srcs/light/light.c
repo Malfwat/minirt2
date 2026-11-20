@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 17:38:20 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 22:51:02 by me               ###   ########.fr       */
+/*   Updated: 2026/11/20 00:25:32 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ bool	add_light(t_light **head, t_light data)
 	return (true);
 }
 
-static double	max(double a, double b)
+double	max(double a, double b)
 {
 	if (a > b)
 		return (a);
