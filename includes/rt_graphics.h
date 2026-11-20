@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/20 01:10:47 by me               ###   ########.fr       */
+/*   Updated: 2026/11/20 01:15:25 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ double			deg_to_rad(double angle);
 
 # define WIDTH 1100
 # define HEIGHT 400
-# define AA 16
+# define AA 4
 
 # ifndef NB_TH
 #  define NB_TH 8

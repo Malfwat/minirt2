@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:47:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/20 01:12:08 by me               ###   ########.fr       */
+/*   Updated: 2026/11/20 01:14:30 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_color	anti_aliasing(t_graphics *data, t_scene *sc, double x, double y)
 	t_color_double	c;
 
 	total = AA * AA;
-	step = 1 / AA;
+	step = 1.0 / AA;
 	ft_bzero(&c, sizeof(c));
 	i = 0;
 	while (i < AA)
