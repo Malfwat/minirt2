@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:47:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/20 01:00:11 by me               ###   ########.fr       */
+/*   Updated: 2026/11/20 01:12:08 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,28 +70,29 @@ t_color	get_pxl_color(t_scene *sc, t_graphics *d, double x, double y)
 
 t_color	anti_aliasing(t_graphics *data, t_scene *sc, double x, double y)
 {
+	int				total;
 	int				i;
 	int				j;
-	int				tmp;
 	double			step;
 	t_color_double	c;
 
-	tmp = AA / 4;
-	step = 0.5 / (double)tmp;
+	total = AA * AA;
+	step = 1 / AA;
 	ft_bzero(&c, sizeof(c));
 	i = 0;
-	while (i < tmp)
+	while (i < AA)
 	{
 		j = 0;
-		while (j < tmp)
+		while (j < AA)
 		{
 			c = add_color_double(c, get_pxl_color(sc, data,
-						x + step * (double)j, y + step * (double)i));
+						x + step * (double)(j + 0.5),
+						y + step * (double)(i + 0.5)));
 			j++;
 		}
 		i++;
 	}
-	return (cdouble_to_c(c, AA));
+	return (cdouble_to_c(c, total));
 }
 
 void	render_lines(int y_start, int y_end, t_graphics *data, t_scene *sc)
