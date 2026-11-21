@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:19:48 by me                #+#    #+#             */
-/*   Updated: 2026/11/21 04:01:11 by me               ###   ########.fr       */
+/*   Updated: 2026/11/21 17:54:35 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,40 @@
 void	*thread_rendering(void *tdata)
 {
 	t_thread_data	*data;
+	int				cursor;
+	int				i;
 
 	data = tdata;
-	while (data->y_start < data->y_end)
+	sem_wait(data->sem_band);
+	cursor = *data->cursor;
+	*data->cursor += HEIGHT / NB_BAND + (int []){0, 1}[*data->it < HEIGHT % NB_BAND];
+	while (cursor < HEIGHT)
 	{
-		sem_wait(data->sem_printing);
-		render_lines(data->y_start, data->y_start + 1, data->data, data->sc);
-		data->y_start++;
-		sem_wait(data->sem_stop);
-		if (*data->stop)
+		*data->it += 1;
+		sem_post(data->sem_band);
+		i = 0;
+		data->y_start = cursor;
+		while (i <= data->band_height)
 		{
+			sem_wait(data->sem_printing);
+			render_lines(data->y_start + i, data->y_start + i + 1, data->data, data->sc);
+			sem_wait(data->sem_stop);
+			if (*data->stop)
+			{
+				sem_post(data->sem_printing);
+				sem_post(data->sem_stop);
+				break ;
+			}
 			sem_post(data->sem_printing);
 			sem_post(data->sem_stop);
-			break ;
+			usleep(1);
+			i++;
 		}
-		sem_post(data->sem_printing);
-		sem_post(data->sem_stop);
-		usleep(1);
+		sem_wait(data->sem_band);
+		cursor = *data->cursor;
+		*data->cursor += HEIGHT / NB_BAND + (int []){0, 1}[i < HEIGHT % NB_BAND];
 	}
+	sem_post(data->sem_band);
 	return (NULL);
 }
 
@@ -78,24 +94,22 @@ t_thread_data	attrib_data(t_render *params, int i)
 	tmp.sem_stop = &params->sem_stop[i];
 	tmp.sem_printing = &params->sem_printing[i];
 	tmp.stop = &params->stop[i];
+	tmp.it = &params->band_it;
+	tmp.cursor = &params->band_cursor;
+	tmp.sem_band = &params->sem_cursor;
 	return (tmp);
 }
 
 t_err	render_th(t_render *param)
 {
 	int				i;
-	int				lim;
 	t_err			err;
 
 	i = -1;
-	lim = 0;
 	while (++i < NB_TH)
 	{
 		param->th_data[i] = attrib_data(param, i);
-		param->th_data[i].id = i;
-		param->th_data[i].y_start = lim;
-		lim += HEIGHT / NB_TH + (int []){0, 1}[i < HEIGHT % NB_TH];
-		param->th_data[i].y_end = lim;
+		param->th_data[i].band_height = HEIGHT / NB_BAND;
 		err = pthread_create(param->tab + i, NULL,
 				thread_rendering, param->th_data + i);
 		if (err)

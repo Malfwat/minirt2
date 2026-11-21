@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:21:19 by me                #+#    #+#             */
-/*   Updated: 2026/11/21 03:57:28 by me               ###   ########.fr       */
+/*   Updated: 2026/11/21 17:48:52 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 #  define NB_TH 8
 # endif /*NB_TH*/
 
+# define NB_BAND 48
+
 typedef struct s_band
 {
 	int				y_start;
@@ -34,14 +36,17 @@ typedef struct s_band
 
 typedef struct s_thread_data
 {
-	int			id;
+	//int			id;
 	t_graphics	*data;
 	t_scene		*sc;
 	sem_t		*sem_stop;
 	sem_t		*sem_printing;
 	bool		*stop;
+	sem_t		*sem_band;
+	int			*cursor;
+	int			*it;
 	int			y_start;
-	int			y_end;
+	int			band_height;
 }	t_thread_data;
 
 typedef struct timeval	t_time;
@@ -52,6 +57,9 @@ typedef struct s_render
 	t_err			err;
 	t_scene			sc;
 	t_graphics		data;
+	int				band_it;
+	int				band_cursor;
+	sem_t			sem_cursor;
 	sem_t			sem_stop[NB_TH];
 	sem_t			sem_printing[NB_TH];
 	bool			stop[NB_TH];
