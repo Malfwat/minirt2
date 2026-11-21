@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:19:48 by me                #+#    #+#             */
-/*   Updated: 2026/11/21 04:01:11 by me               ###   ########.fr       */
+/*   Updated: 2026/11/21 20:48:54 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	*thread_rendering(void *tdata)
 		sem_post(data->sem_stop);
 		usleep(1);
 	}
+	sem_post(data->sem_done);
 	return (NULL);
 }
 
@@ -75,6 +76,7 @@ t_thread_data	attrib_data(t_render *params, int i)
 
 	tmp.data = &params->data;
 	tmp.sc = &params->sc;
+	tmp.sem_done = &params->done;
 	tmp.sem_stop = &params->sem_stop[i];
 	tmp.sem_printing = &params->sem_printing[i];
 	tmp.stop = &params->stop[i];

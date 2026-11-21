@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:21:19 by me                #+#    #+#             */
-/*   Updated: 2026/11/21 03:57:28 by me               ###   ########.fr       */
+/*   Updated: 2026/11/21 20:55:45 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_thread_data
 	t_scene		*sc;
 	sem_t		*sem_stop;
 	sem_t		*sem_printing;
+	sem_t		*sem_done;
 	bool		*stop;
 	int			y_start;
 	int			y_end;
@@ -52,6 +53,9 @@ typedef struct s_render
 	t_err			err;
 	t_scene			sc;
 	t_graphics		data;
+	bool			finished;
+	sem_t			done;
+	pthread_t		monitor;
 	sem_t			sem_stop[NB_TH];
 	sem_t			sem_printing[NB_TH];
 	bool			stop[NB_TH];
@@ -67,5 +71,7 @@ void	sem_n_post(sem_t *s, int n);
 void	sem_n_wait(sem_t *s, int n);
 bool	init_sem_tab(sem_t	tab[]);
 void	close_sem_tab(sem_t tab[], int n);
+
+# define FREQ 50000
 
 #endif /*RT_GRAPHICS_BONUS_H*/

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:11:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/21 03:59:42 by me               ###   ########.fr       */
+/*   Updated: 2026/11/21 20:33:23 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,21 @@ int	main(int ac, char **av)
 	parse(av[1], &param.sc);
 	if (!init_graphics(&param.data, &param))
 		return (free_scene(&param.sc), destroy_graphics(&param.data), 1);
+	if (sem_init(&param.done, 0, 0))
+	{
+		destroy_graphics(&param.data);
+		manage_error_and_exit(syscall_err, &param.sc, NOT_A_LINE);
+	}
 	if (!init_sem_tab(param.sem_stop))
 	{
+		sem_destroy(&param.done);
 		destroy_graphics(&param.data);
 		manage_error_and_exit(syscall_err, &param.sc, NOT_A_LINE);
 	}
 	if (!init_sem_tab(param.sem_printing)
 		|| gettimeofday(&param.last, NULL))
 	{
+		sem_destroy(&param.done);
 		close_sem_tab(param.sem_stop, NB_TH);
 		destroy_graphics(&param.data);
 		manage_error_and_exit(syscall_err, &param.sc, NOT_A_LINE);
@@ -75,5 +82,6 @@ int	main(int ac, char **av)
 	build_frame(&param.data, &param.sc);
 	mlx_loop_hook(param.data.mlx, rendering_loop, &param);
 	mlx_loop(param.data.mlx);
+	sem_destroy(&param.done);
 	return (exit_prog(&param), 0);
 }

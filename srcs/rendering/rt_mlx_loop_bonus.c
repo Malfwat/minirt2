@@ -6,13 +6,17 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:14:30 by me                #+#    #+#             */
-/*   Updated: 2026/11/21 04:00:14 by me               ###   ########.fr       */
+/*   Updated: 2026/11/21 20:50:44 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_graphics.h"
 #include "rt_graphics_bonus.h"
 #include "mlx.h"
+
+#include <sys/time.h>
+#include <errno.h>
+#include <stdio.h>
 
 int	keyhook(int keycode, void *param)
 {
@@ -48,6 +52,36 @@ void	refresh(t_render *param, t_time now)
 	sem_n_post(param->sem_printing, NB_TH);
 }
 
+void	*monitor(void *data)
+{
+	t_render	*param;
+	t_time		before;
+	t_time		after;
+	long		delta;
+
+	param = data;
+	printf("Went\n");
+	gettimeofday(&before, NULL);
+	for (int i = 0; i < 8; i++)
+		sem_wait(&param->done);
+	gettimeofday(&after, NULL);
+	delta = (after.tv_sec - before.tv_sec) * 1000000 + after.tv_usec - before.tv_usec;
+	printf("%i\t%lu\n", FREQ, delta);
+	return (0);
+}
+
+void	launch_monitor(t_render *param)
+{
+	t_err	err;
+
+	err = pthread_create(&param->monitor, NULL, monitor, param);
+	if (err)
+	{
+		errno = err;
+		return ;
+	}
+}
+
 int	rendering_loop(void *data)
 {
 	static bool	stop;
@@ -62,10 +96,11 @@ int	rendering_loop(void *data)
 		param->err = syscall_err;
 		return (mlx_loop_end(param->data.mlx), 0);
 	}
-	if (delayed(now, param->last, 150)) // needs to be a define
+	if (delayed(now, param->last, FREQ)) // needs to be a define
 		refresh(param, now);
 	if (!stop)
 	{
+		launch_monitor(param);
 		param->err = render_th(param);
 		if (param->err != ok)
 			return (mlx_loop_end(param->data.mlx), 0);
