@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:14:30 by me                #+#    #+#             */
-/*   Updated: 2026/11/21 02:14:05 by me               ###   ########.fr       */
+/*   Updated: 2026/11/21 03:00:59 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,20 @@ int	keyhook(int keycode, void *param)
 int	rendering_loop(void *data)
 {
 	static bool	stop;
-	static int	loop;
 	t_render	*param;
+	t_time		now;
 
 	param = data;
-	loop++;
-	loop %= 4;
-	if (!loop)
+	param->err = gettimeofday(&now, NULL);
+	if (param->err)
+		return (mlx_loop_end(param->data.mlx), 0);
+	if (now.tv_usec - param->last.tv_usec > 10)
 	{
-		sem_n_wait(&param->sem_printing, NB_TH);
+		param->last = now;
+		sem_n_wait(param->sem_printing, NB_TH);
 		mlx_put_image_to_window(param->data.mlx, param->data.win,
 			param->data.image.img, 0, 0);
-		sem_n_post(&param->sem_printing, NB_TH);
+		sem_n_post(param->sem_printing, NB_TH);
 	}
 	if (!stop)
 	{
@@ -56,8 +58,12 @@ int	rendering_loop(void *data)
 	return (0);
 }
 
-int	stop_loop(void *param)
+int	stop_loop(void *data)
 {
-	mlx_loop_end(((t_graphics *)param)->mlx);
+	t_render	*param;
+
+	param = data;
+	stop_and_join_thread(&param->sem_stop, &param->stop, param->tab, NB_TH);
+	mlx_loop_end(param->data.mlx);
 	return (0);
 }

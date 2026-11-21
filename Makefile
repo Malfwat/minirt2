@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/21 01:56:55 by me               ###   ########.fr        #
+#    Updated: 2026/11/21 02:24:06 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,11 +103,11 @@ $(NAME):	$(OBJ) $(addprefix $(BUILD), $(MANDATORY:.c=.o)) | minilibx-linux/libml
 	$(CC) $^ -o $@ -$(MLX) -lXext -lX11 -lm -lz -O3 -L minilibx-linux/ 
 
 $(NAME_BONUS):	$(OBJ) $(addprefix $(BUILD), $(BONUS:.c=.o)) | minilibx-linux/libmlx_Linux.a
-	$(CC) $^ -o $@ -$(MLX) -lXext -lX11 -lm -lz -O3 -pthread -L minilibx-linux/ -fsanitize=address
+	$(CC) $^ -o $@ -$(MLX) -lXext -lX11 -lm -lz -O3 -pthread -L minilibx-linux/
 
 $(BUILD)%.o:	$(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@ $(addprefix -I, $(HEADER)) -D NB_TH=$(NB_PC) -fsanitize=address
+	$(CC) $(CFLAGS) -c $< -o $@ $(addprefix -I, $(HEADER)) -D NB_TH=$(NB_PC)
 
 clean:
 	rm -rf $(BUILD)

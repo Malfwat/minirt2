@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 01:52:52 by me                #+#    #+#             */
-/*   Updated: 2026/11/21 01:55:59 by me               ###   ########.fr       */
+/*   Updated: 2026/11/21 02:56:30 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ void	sem_n_post(sem_t *s, int n)
 	int	i;
 
 	i = 0;
-	while (i++ < n)
-		sem_post(s);
+	while (i < n)
+	{
+		sem_post(s + i);
+		i++;
+	}
 }
 
 void	sem_n_wait(sem_t *s, int n)
@@ -26,6 +29,9 @@ void	sem_n_wait(sem_t *s, int n)
 	int	i;
 
 	i = 0;
-	while (i++ < n)
-		sem_wait(s);
+	while (i < n)
+	{
+		sem_wait(s + i);
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:19:48 by me                #+#    #+#             */
-/*   Updated: 2026/11/21 02:13:14 by me               ###   ########.fr       */
+/*   Updated: 2026/11/21 02:59:53 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "rt_error.h"
 #include "rt_graphics.h"
 #include "rt_graphics_bonus.h"
-#include "rt_thread_bonus.h"
 
 #include <errno.h>
 #include <unistd.h>
@@ -40,7 +39,7 @@ void	*thread_rendering(void *tdata)
 		}
 		sem_post(data->sem_printing);
 		sem_post(data->sem_stop);
-		usleep(10);
+		usleep(1);
 	}
 	return (NULL);
 }
@@ -62,14 +61,14 @@ void	stop_and_join_thread(sem_t *sem, bool *stop, pthread_t tab[], int n)
 	join_thread(tab, n);
 }
 
-t_thread_data	attrib_data(t_render *params)
+t_thread_data	attrib_data(t_render *params, int i)
 {
 	t_thread_data	tmp;
 
 	tmp.data = &params->data;
 	tmp.sc = &params->sc;
 	tmp.sem_stop = &params->sem_stop;
-	tmp.sem_printing = &params->sem_printing;
+	tmp.sem_printing = &params->sem_printing[i];
 	tmp.stop = &params->stop;
 	return (tmp);
 }
@@ -84,7 +83,8 @@ t_err	render_th(t_render *param)
 	lim = 0;
 	while (++i < NB_TH)
 	{
-		param->th_data[i] = attrib_data(param);
+		param->th_data[i].id = i;
+		param->th_data[i] = attrib_data(param, i);
 		param->th_data[i].y_start = lim;
 		lim += HEIGHT / NB_TH + (int []){0, 1}[i < HEIGHT % NB_TH];
 		param->th_data[i].y_end = lim;
