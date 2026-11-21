@@ -6,11 +6,12 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 01:52:52 by me                #+#    #+#             */
-/*   Updated: 2026/11/21 02:56:30 by me               ###   ########.fr       */
+/*   Updated: 2026/11/21 03:58:34 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <semaphore.h>
+#include <stdbool.h>
 
 void	sem_n_post(sem_t *s, int n)
 {
@@ -34,4 +35,27 @@ void	sem_n_wait(sem_t *s, int n)
 		sem_wait(s + i);
 		i++;
 	}
+}
+
+void	close_sem_tab(sem_t tab[], int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+		sem_destroy(tab + i++);
+}
+
+bool	init_sem_tab(sem_t	tab[])
+{
+	int	i;
+
+	i = 0;
+	while (i < NB_TH)
+	{
+		if (sem_init(tab + i, 0, 1))
+			return (close_sem_tab(tab, i), false);
+		i++;
+	}
+	return (true);
 }

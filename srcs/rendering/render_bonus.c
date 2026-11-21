@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:19:48 by me                #+#    #+#             */
-/*   Updated: 2026/11/21 03:16:24 by me               ###   ########.fr       */
+/*   Updated: 2026/11/21 04:01:11 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,20 @@ void	join_thread(pthread_t tab[], int tab_size)
 		pthread_join(tab[i++], NULL);
 }
 
-void	stop_and_join_thread(sem_t *sem, bool *stop, pthread_t tab[], int n)
+void	stop_and_join_thread(sem_t tab[], bool stop[],
+	pthread_t th_tab[], int n)
 {
-	sem_wait(sem);
-	*stop = true;
-	sem_post(sem);
-	join_thread(tab, n);
+	int	i;
+
+	i = 0;
+	while (i < NB_TH)
+	{
+		sem_wait(tab + i);
+		stop[i] = true;
+		sem_post(tab + i);
+		i++;
+	}
+	join_thread(th_tab, n);
 }
 
 t_thread_data	attrib_data(t_render *params, int i)
@@ -67,9 +75,9 @@ t_thread_data	attrib_data(t_render *params, int i)
 
 	tmp.data = &params->data;
 	tmp.sc = &params->sc;
-	tmp.sem_stop = &params->sem_stop;
+	tmp.sem_stop = &params->sem_stop[i];
 	tmp.sem_printing = &params->sem_printing[i];
-	tmp.stop = &params->stop;
+	tmp.stop = &params->stop[i];
 	return (tmp);
 }
 
@@ -93,8 +101,8 @@ t_err	render_th(t_render *param)
 		if (err)
 		{
 			errno = err;
-			stop_and_join_thread(&param->sem_stop, &param->stop, param->tab, i);
-			return (sem_destroy(&param->sem_stop), syscall_err);
+			stop_and_join_thread(param->sem_stop, param->stop, param->tab, i);
+			return (close_sem_tab(param->sem_stop, NB_TH), syscall_err);
 		}
 	}
 	return (ok);

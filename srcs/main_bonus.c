@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:11:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/21 03:33:27 by me               ###   ########.fr       */
+/*   Updated: 2026/11/21 03:59:42 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,51 +40,27 @@ static bool	init_graphics(t_graphics *data, t_render *param)
 	return (true);
 }
 
-void	close_sem_tab(sem_t tab[], int n)
+void	exit_prog(t_render *param)
 {
-	int	i;
-
-	i = 0;
-	while (i < n)
-		sem_destroy(tab + i++);
-}
-
-bool	init_sem_tab(sem_t	tab[])
-{
-	int	i;
-
-	i = 0;
-	while (i < NB_TH)
-	{
-		if (sem_init(tab + i, 0, 1))
-			return (close_sem_tab(tab, i), false);
-		i++;
-	}
-	return (true);
-}
-
-void	exit_prog(t_render param)
-{
-	close_sem_tab(param.sem_printing, NB_TH);
-	sem_destroy(&param.sem_stop);
-	destroy_graphics(&param.data);
-	if (param.err != ok)
-		manage_error_and_exit(syscall_err, &param.sc, NOT_A_LINE);
-	free_scene(&param.sc);
+	close_sem_tab(param->sem_printing, NB_TH);
+	close_sem_tab(param->sem_stop, NB_TH);
+	destroy_graphics(&param->data);
+	if (param->err != ok)
+		manage_error_and_exit(syscall_err, &param->sc, NOT_A_LINE);
+	free_scene(&param->sc);
 }
 
 int	main(int ac, char **av)
 {
 	t_render	param;
 
-	param.stop = false;
 	ft_bzero(&param, sizeof(param));
 	if (ac != 2 || NB_TH < 0)
 		return (1); // ajouter un usage
 	parse(av[1], &param.sc);
 	if (!init_graphics(&param.data, &param))
 		return (free_scene(&param.sc), destroy_graphics(&param.data), 1);
-	if (sem_init(&param.sem_stop, 0, 1))
+	if (!init_sem_tab(param.sem_stop))
 	{
 		destroy_graphics(&param.data);
 		manage_error_and_exit(syscall_err, &param.sc, NOT_A_LINE);
@@ -92,12 +68,12 @@ int	main(int ac, char **av)
 	if (!init_sem_tab(param.sem_printing)
 		|| gettimeofday(&param.last, NULL))
 	{
-		sem_destroy(&param.sem_stop);
+		close_sem_tab(param.sem_stop, NB_TH);
 		destroy_graphics(&param.data);
 		manage_error_and_exit(syscall_err, &param.sc, NOT_A_LINE);
 	}
 	build_frame(&param.data, &param.sc);
 	mlx_loop_hook(param.data.mlx, rendering_loop, &param);
 	mlx_loop(param.data.mlx);
-	return (exit_prog(param), 0);
+	return (exit_prog(&param), 0);
 }

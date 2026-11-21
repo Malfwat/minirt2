@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:14:30 by me                #+#    #+#             */
-/*   Updated: 2026/11/21 03:36:36 by me               ###   ########.fr       */
+/*   Updated: 2026/11/21 04:00:14 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	keyhook(int keycode, void *param)
 	render_param = param;
 	if (keycode == ESC)
 	{
-		stop_and_join_thread(&render_param->sem_stop,
-			&render_param->stop,
+		stop_and_join_thread(render_param->sem_stop,
+			render_param->stop,
 			render_param->tab,
 			NB_TH);
 		mlx_loop_end(render_param->data.mlx);
@@ -30,9 +30,9 @@ int	keyhook(int keycode, void *param)
 	return (0);
 }
 
-bool	delayed(t_time n, t_time l, int t)
+bool	delayed(t_time n, t_time l, long t)
 {
-	int	delay;
+	long	delay;
 
 	delay = n.tv_sec * 1000000 + n.tv_usec;
 	delay = delay - l.tv_sec * 1000000 - l.tv_usec;
@@ -62,7 +62,7 @@ int	rendering_loop(void *data)
 		param->err = syscall_err;
 		return (mlx_loop_end(param->data.mlx), 0);
 	}
-	if (delayed(now, param->last, 15)) // 10 needs to be a define
+	if (delayed(now, param->last, 150)) // needs to be a define
 		refresh(param, now);
 	if (!stop)
 	{
@@ -79,7 +79,7 @@ int	stop_loop(void *data)
 	t_render	*param;
 
 	param = data;
-	stop_and_join_thread(&param->sem_stop, &param->stop, param->tab, NB_TH);
+	stop_and_join_thread(param->sem_stop, param->stop, param->tab, NB_TH);
 	mlx_loop_end(param->data.mlx);
 	return (0);
 }
