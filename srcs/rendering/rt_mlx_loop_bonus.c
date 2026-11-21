@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:14:30 by me                #+#    #+#             */
-/*   Updated: 2026/11/21 03:00:59 by me               ###   ########.fr       */
+/*   Updated: 2026/11/21 03:36:36 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,40 @@ int	keyhook(int keycode, void *param)
 	return (0);
 }
 
+bool	delayed(t_time n, t_time l, int t)
+{
+	int	delay;
+
+	delay = n.tv_sec * 1000000 + n.tv_usec;
+	delay = delay - l.tv_sec * 1000000 - l.tv_usec;
+	return (delay > t);
+}
+
+void	refresh(t_render *param, t_time now)
+{
+	param->last = now;
+	sem_n_wait(param->sem_printing, NB_TH);
+	mlx_put_image_to_window(param->data.mlx, param->data.win,
+		param->data.image.img, 0, 0);
+	sem_n_post(param->sem_printing, NB_TH);
+}
+
 int	rendering_loop(void *data)
 {
 	static bool	stop;
 	t_render	*param;
 	t_time		now;
+	int			err;
 
 	param = data;
-	param->err = gettimeofday(&now, NULL);
-	if (param->err)
-		return (mlx_loop_end(param->data.mlx), 0);
-	if (now.tv_usec - param->last.tv_usec > 10)
+	err = gettimeofday(&now, NULL);
+	if (err)
 	{
-		param->last = now;
-		sem_n_wait(param->sem_printing, NB_TH);
-		mlx_put_image_to_window(param->data.mlx, param->data.win,
-			param->data.image.img, 0, 0);
-		sem_n_post(param->sem_printing, NB_TH);
+		param->err = syscall_err;
+		return (mlx_loop_end(param->data.mlx), 0);
 	}
+	if (delayed(now, param->last, 15)) // 10 needs to be a define
+		refresh(param, now);
 	if (!stop)
 	{
 		param->err = render_th(param);

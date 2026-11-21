@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:11:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/21 03:01:10 by me               ###   ########.fr       */
+/*   Updated: 2026/11/21 03:33:27 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,16 @@ bool	init_sem_tab(sem_t	tab[])
 	return (true);
 }
 
+void	exit_prog(t_render param)
+{
+	close_sem_tab(param.sem_printing, NB_TH);
+	sem_destroy(&param.sem_stop);
+	destroy_graphics(&param.data);
+	if (param.err != ok)
+		manage_error_and_exit(syscall_err, &param.sc, NOT_A_LINE);
+	free_scene(&param.sc);
+}
+
 int	main(int ac, char **av)
 {
 	t_render	param;
@@ -89,14 +99,5 @@ int	main(int ac, char **av)
 	build_frame(&param.data, &param.sc);
 	mlx_loop_hook(param.data.mlx, rendering_loop, &param);
 	mlx_loop(param.data.mlx);
-	if (param.err != ok)
-	{
-		sem_destroy(&param.sem_stop);
-		destroy_graphics(&param.data);
-		manage_error_and_exit(syscall_err, &param.sc, NOT_A_LINE);
-	}
-	sem_destroy(&param.sem_stop);
-	destroy_graphics(&param.data);
-	free_scene(&param.sc);
-	return (0);
+	return (exit_prog(param), 0);
 }

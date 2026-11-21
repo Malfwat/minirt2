@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:19:48 by me                #+#    #+#             */
-/*   Updated: 2026/11/21 02:59:53 by me               ###   ########.fr       */
+/*   Updated: 2026/11/21 03:16:24 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ t_err	render_th(t_render *param)
 	lim = 0;
 	while (++i < NB_TH)
 	{
-		param->th_data[i].id = i;
 		param->th_data[i] = attrib_data(param, i);
+		param->th_data[i].id = i;
 		param->th_data[i].y_start = lim;
 		lim += HEIGHT / NB_TH + (int []){0, 1}[i < HEIGHT % NB_TH];
 		param->th_data[i].y_end = lim;
