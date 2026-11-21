@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/20 01:15:25 by me               ###   ########.fr       */
+/*   Updated: 2026/11/21 02:05:34 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,13 @@ t_vec3			pxl_to_sysvec(double ox, double oy, double posx, double posy);
 
 double			deg_to_rad(double angle);
 
-# define WIDTH 1100
-# define HEIGHT 400
-# define AA 4
+void			destroy_graphics(t_graphics *data);
 
-# ifndef NB_TH
-#  define NB_TH 8
-# endif /*NB_TH*/
+int				keyhook(int keycode, void *param);
+int				stop_loop(void *param);
+
+# define WIDTH 1920
+# define HEIGHT 1080
+# define AA 4
 
 #endif /*RT_GRAPHICS_H*/

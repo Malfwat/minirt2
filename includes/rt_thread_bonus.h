@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 20:05:34 by me                #+#    #+#             */
-/*   Updated: 2026/11/16 21:15:04 by me               ###   ########.fr       */
+/*   Updated: 2026/11/21 01:58:05 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ typedef struct s_thread_data
 {
 	t_graphics	*data;
 	t_scene		*sc;
-	sem_t		*sem;
+	sem_t		*sem_stop;
+	sem_t		*sem_printing;
 	bool		*stop;
 	int			y_start;
 	int			y_end;

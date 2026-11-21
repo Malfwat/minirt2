@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/20 00:32:06 by me               ###   ########.fr        #
+#    Updated: 2026/11/21 01:56:55 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME_BONUS	=	miniRT_bonus
 
 CC		=	cc
 
-CFLAGS	=	-Wall -Wextra -Werror -MMD -MP -g
+CFLAGS	=	-Wall -Wextra -Werror -MMD -MP -g 
 
 MLX		=	lmlx_Linux
 
@@ -24,9 +24,7 @@ HEADER	=	includes minilibx-linux
 
 SRC_DIR	=	srcs/
 
-SRCS	=	main.c
-
-SRCS	+=	string/ft_strcmp.c \
+SRCS	=	string/ft_strcmp.c \
 			string/ft_strlen.c \
 			string/ft_memcpy.c \
 			string/ft_strdup.c \
@@ -58,8 +56,8 @@ SRCS	+=	rendering/put_pxl.c	\
 			rendering/utils.c	\
 			rendering/color.c	\
 			rendering/quad.c	\
-			rendering/anti_aliasing_quad.c	\
-			rendering/quad_diff.c	\
+			rendering/anti_aliasing_quad.c rendering/quad_diff.c \
+			rendering/graphics.c \
 			rendering/system.c
 
 SRCS	+=	error/rt_error.c
@@ -70,9 +68,19 @@ SRCS	+=	light/light.c
 
 SRCS	+=	obj/obj_utils.c obj/sp.c obj/cy.c obj/pl.c
 
-MANDATORY	=	parsing/loop.c parsing/parse_line.c rendering/render.c
 
-BONUS		=	parsing/loop_bonus.c parsing/parse_line_bonus.c rendering/render_bonus.c
+MANDATORY	=	parsing/loop.c			\
+				parsing/parse_line.c	\
+				rendering/render.c		\
+				rendering/rt_mlx_loop.c	\
+				main.c
+
+BONUS		=	parsing/loop_bonus.c		\
+				parsing/parse_line_bonus.c	\
+				rendering/render_bonus.c	\
+				rendering/rt_mlx_loop_bonus.c\
+				rendering/sem_utils_bonus.c\
+				main_bonus.c
 
 BUILD	=	.build/
 
@@ -95,11 +103,11 @@ $(NAME):	$(OBJ) $(addprefix $(BUILD), $(MANDATORY:.c=.o)) | minilibx-linux/libml
 	$(CC) $^ -o $@ -$(MLX) -lXext -lX11 -lm -lz -O3 -L minilibx-linux/ 
 
 $(NAME_BONUS):	$(OBJ) $(addprefix $(BUILD), $(BONUS:.c=.o)) | minilibx-linux/libmlx_Linux.a
-	$(CC) $^ -o $@ -$(MLX) -lXext -lX11 -lm -lz -O3 -pthread -L minilibx-linux/
+	$(CC) $^ -o $@ -$(MLX) -lXext -lX11 -lm -lz -O3 -pthread -L minilibx-linux/ -fsanitize=address
 
 $(BUILD)%.o:	$(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@ $(addprefix -I, $(HEADER)) -D NB_TH=$(NB_PC)
+	$(CC) $(CFLAGS) -c $< -o $@ $(addprefix -I, $(HEADER)) -D NB_TH=$(NB_PC) -fsanitize=address
 
 clean:
 	rm -rf $(BUILD)

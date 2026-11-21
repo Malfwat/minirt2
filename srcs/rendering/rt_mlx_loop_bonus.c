@@ -1,0 +1,63 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rt_mlx_loop_bonus.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/11/21 00:14:30 by me                #+#    #+#             */
+/*   Updated: 2026/11/21 02:14:05 by me               ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "rt_graphics.h"
+#include "rt_graphics_bonus.h"
+#include "mlx.h"
+
+int	keyhook(int keycode, void *param)
+{
+	t_render	*render_param;
+
+	render_param = param;
+	if (keycode == ESC)
+	{
+		stop_and_join_thread(&render_param->sem_stop,
+			&render_param->stop,
+			render_param->tab,
+			NB_TH);
+		mlx_loop_end(render_param->data.mlx);
+	}
+	return (0);
+}
+
+int	rendering_loop(void *data)
+{
+	static bool	stop;
+	static int	loop;
+	t_render	*param;
+
+	param = data;
+	loop++;
+	loop %= 4;
+	if (!loop)
+	{
+		sem_n_wait(&param->sem_printing, NB_TH);
+		mlx_put_image_to_window(param->data.mlx, param->data.win,
+			param->data.image.img, 0, 0);
+		sem_n_post(&param->sem_printing, NB_TH);
+	}
+	if (!stop)
+	{
+		param->err = render_th(param);
+		if (param->err != ok)
+			return (mlx_loop_end(param->data.mlx), 0);
+		stop = true;
+	}
+	return (0);
+}
+
+int	stop_loop(void *param)
+{
+	mlx_loop_end(((t_graphics *)param)->mlx);
+	return (0);
+}

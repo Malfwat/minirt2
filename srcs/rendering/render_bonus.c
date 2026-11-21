@@ -6,13 +6,14 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:19:48 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 19:37:09 by me               ###   ########.fr       */
+/*   Updated: 2026/11/21 02:13:14 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "str.h"
 #include "rt_error.h"
 #include "rt_graphics.h"
+#include "rt_graphics_bonus.h"
 #include "rt_thread_bonus.h"
 
 #include <errno.h>
@@ -27,15 +28,19 @@ void	*thread_rendering(void *tdata)
 	data = tdata;
 	while (data->y_start < data->y_end)
 	{
+		sem_wait(data->sem_printing);
 		render_lines(data->y_start, data->y_start + 1, data->data, data->sc);
 		data->y_start++;
-		sem_wait(data->sem);
+		sem_wait(data->sem_stop);
 		if (*data->stop)
 		{
-			sem_post(data->sem);
+			sem_post(data->sem_printing);
+			sem_post(data->sem_stop);
 			break ;
 		}
-		sem_post(data->sem);
+		sem_post(data->sem_printing);
+		sem_post(data->sem_stop);
+		usleep(10);
 	}
 	return (NULL);
 }
@@ -57,42 +62,40 @@ void	stop_and_join_thread(sem_t *sem, bool *stop, pthread_t tab[], int n)
 	join_thread(tab, n);
 }
 
-t_thread_data	attrib_data(t_graphics *data, t_scene *sc, sem_t *sem, bool *s)
+t_thread_data	attrib_data(t_render *params)
 {
 	t_thread_data	tmp;
 
-	tmp.data = data;
-	tmp.sc = sc;
-	tmp.sem = sem;
-	tmp.stop = s;
+	tmp.data = &params->data;
+	tmp.sc = &params->sc;
+	tmp.sem_stop = &params->sem_stop;
+	tmp.sem_printing = &params->sem_printing;
+	tmp.stop = &params->stop;
 	return (tmp);
 }
 
-t_err	render(t_graphics *data, t_scene *sc)
+t_err	render_th(t_render *param)
 {
-	struct s_multi_threading	th;
-	pthread_t					tab[NB_TH];
-	t_thread_data				th_data[NB_TH];
-	int							i;
+	int				i;
+	int				lim;
+	t_err			err;
 
-	ft_bzero(&th, sizeof(th));
-	if (sem_init(&th.sem, 0, 1))
-		return (syscall_err);
-	build_frame(data, sc);
 	i = -1;
+	lim = 0;
 	while (++i < NB_TH)
 	{
-		th_data[i] = attrib_data(data, sc, &th.sem, &th.stop);
-		th_data[i].y_start = th.lim;
-		th.lim += HEIGHT / NB_TH + (int []){0, 1}[i < HEIGHT % NB_TH];
-		th_data[i].y_end = th.lim;
-		th.err = pthread_create(tab + i, NULL, thread_rendering, th_data + i);
-		if (th.err)
+		param->th_data[i] = attrib_data(param);
+		param->th_data[i].y_start = lim;
+		lim += HEIGHT / NB_TH + (int []){0, 1}[i < HEIGHT % NB_TH];
+		param->th_data[i].y_end = lim;
+		err = pthread_create(param->tab + i, NULL,
+				thread_rendering, param->th_data + i);
+		if (err)
 		{
-			errno = th.err;
-			stop_and_join_thread(&th.sem, &th.stop, tab, i);
-			return (sem_destroy(&th.sem), syscall_err);
+			errno = err;
+			stop_and_join_thread(&param->sem_stop, &param->stop, param->tab, i);
+			return (sem_destroy(&param->sem_stop), syscall_err);
 		}
 	}
-	return (join_thread(tab, NB_TH), sem_destroy(&th.sem), ok);
+	return (ok);
 }

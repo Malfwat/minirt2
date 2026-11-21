@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 19:23:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/18 19:34:16 by me               ###   ########.fr       */
+/*   Updated: 2026/11/21 02:05:24 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,37 +18,7 @@
 
 #include "mlx.h"
 
-#include <stdlib.h>
-
-void	destroy_graphics(t_graphics *data)
-{
-	if (data->image.img)
-		mlx_destroy_image(data->mlx, data->image.img);
-	if (data->win)
-	{
-		mlx_destroy_window(data->mlx, data->win);
-		mlx_destroy_display(data->mlx);
-	}
-	free(data->mlx);
-}
-
-int	keyhook(int keycode, void *param)
-{
-	t_graphics	*data;
-
-	data = param;
-	if (keycode == ESC)
-		mlx_loop_end(data->mlx);
-	return (0);
-}
-
-int	stop_loop(void *param)
-{
-	mlx_loop_end(((t_graphics *)param)->mlx);
-	return (0);
-}
-
-bool	init_graphics(t_graphics *data)
+static bool	init_graphics(t_graphics *data)
 {
 	ft_bzero(data, sizeof(t_graphics));
 	data->mlx = mlx_init();
@@ -74,8 +44,8 @@ int	main(int ac, char **av)
 	t_err		err;
 
 	ft_bzero(&sc, sizeof(t_scene));
-	if (ac != 2 || NB_TH < 0)
-		return (0);
+	if (ac != 2)
+		return (0); // ajouter un usage
 	parse(av[1], &sc);
 	if (!init_graphics(&data))
 		return (free_scene(&sc), destroy_graphics(&data), 1);
