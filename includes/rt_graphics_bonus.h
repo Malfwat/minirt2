@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:21:19 by me                #+#    #+#             */
-/*   Updated: 2026/11/21 17:48:52 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 00:49:38 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,7 @@ void	sem_n_post(sem_t *s, int n);
 void	sem_n_wait(sem_t *s, int n);
 bool	init_sem_tab(sem_t	tab[]);
 void	close_sem_tab(sem_t tab[], int n);
+
+# define PERIOD 200000
 
 #endif /*RT_GRAPHICS_BONUS_H*/

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:14:30 by me                #+#    #+#             */
-/*   Updated: 2026/11/21 17:36:38 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 00:50:27 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	rendering_loop(void *data)
 		param->err = syscall_err;
 		return (mlx_loop_end(param->data.mlx), 0);
 	}
-	if (delayed(now, param->last, 50000)) // needs to be a define
+	if (delayed(now, param->last, PERIOD)) // needs to be a define
 		refresh(param, now);
 	if (!stop)
 	{

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:19:48 by me                #+#    #+#             */
-/*   Updated: 2026/11/21 17:54:35 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 00:48:32 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ void	*thread_rendering(void *tdata)
 	t_thread_data	*data;
 	int				cursor;
 	int				i;
+	bool			break_loop;
 
 	data = tdata;
+	break_loop = false;
 	sem_wait(data->sem_band);
 	cursor = *data->cursor;
 	*data->cursor += HEIGHT / NB_BAND + (int []){0, 1}[*data->it < HEIGHT % NB_BAND];
@@ -45,6 +47,7 @@ void	*thread_rendering(void *tdata)
 			{
 				sem_post(data->sem_printing);
 				sem_post(data->sem_stop);
+				break_loop = true;
 				break ;
 			}
 			sem_post(data->sem_printing);
@@ -52,6 +55,8 @@ void	*thread_rendering(void *tdata)
 			usleep(1);
 			i++;
 		}
+		if (break_loop)
+			break ;
 		sem_wait(data->sem_band);
 		cursor = *data->cursor;
 		*data->cursor += HEIGHT / NB_BAND + (int []){0, 1}[i < HEIGHT % NB_BAND];
