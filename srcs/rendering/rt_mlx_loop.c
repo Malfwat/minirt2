@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:14:30 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 20:17:24 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 20:20:32 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	rendering_loop(void *param)
 		{
 			mlx_put_image_to_window(rt->data.mlx, rt->data.win,
 				rt->data.image.img, 0, 0);
-			if (ret)
+			if (!ret)
 				rt->last = now;
 		}
 		i++;
