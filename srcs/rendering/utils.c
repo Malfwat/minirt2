@@ -6,12 +6,16 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/18 18:27:16 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 19:51:59 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 20:32:47 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
 #include "rt_graphics.h"
+
+#include "mlx.h"
+
+#include <math.h>
+#include <stdlib.h>
 
 double	deg_to_rad(double angle)
 {
@@ -50,4 +54,16 @@ bool	delayed(t_time n, t_time l, long t)
 	delay = n.tv_sec * 1000000 + n.tv_usec;
 	delay = delay - l.tv_sec * 1000000 - l.tv_usec;
 	return (delay > t);
+}
+
+void	destroy_graphics(t_graphics *data)
+{
+	if (data->image.img)
+		mlx_destroy_image(data->mlx, data->image.img);
+	if (data->win)
+	{
+		mlx_destroy_window(data->mlx, data->win);
+		mlx_destroy_display(data->mlx);
+	}
+	free(data->mlx);
 }

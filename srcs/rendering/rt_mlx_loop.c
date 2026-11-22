@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:14:30 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 20:20:32 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 20:27:29 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ static void	initialize_loop(t_rt *rt, int b[])
 	gettimeofday(&rt->last, 0);
 	fill_bases(b);
 	build_frame(&rt->data, &rt->sc);
+}
+
+t_err	render(t_graphics *data, t_scene *sc, int i, int b[])
+{
+	int	y;
+
+	y = ligne(i, b[0], b[1], b[2]);
+	render_lines(y, y + 1, data, sc);
+	return (ok);
 }
 
 int	rendering_loop(void *param)

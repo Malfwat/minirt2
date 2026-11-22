@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 16:49:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 03:45:35 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 20:47:14 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "rt_error.h"
 #include "rt_parsing.h"
 #include "rt_gnl.h"
+#include "rt.h"
 #include "str.h"
 #include "rt_math.h"
 

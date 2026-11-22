@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/18 23:17:07 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 18:18:16 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 20:38:54 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ bool	solve_cy_eq_disk(t_cy_eq *data, t_hit *hit)
 	return (ret2 || ret1);
 }
 
-bool	solve_cy_eq_pipe(t_cy_eq *data, t_hit *hit)
+bool	solve_cy_eq_lat_surface(t_cy_eq *data, t_hit *hit)
 {
 	double	h1;
 	double	h2;
@@ -82,12 +82,12 @@ bool	solve_cy_eq_pipe(t_cy_eq *data, t_hit *hit)
 	h2 = data->m + data->s2 * data->k;
 	if (data->s1 > 1e-4 && fabs(h1) < data->cy->height / 2 && hit->t > data->s1)
 	{
-		update_hit_pipe(data, hit, data->s1);
+		update_hit_lat_surface(data, hit, data->s1);
 		ret = true;
 	}
 	if (data->s2 > 1e-4 && fabs(h2) < data->cy->height / 2 && hit->t > data->s2)
 	{
-		update_hit_pipe(data, hit, data->s2);
+		update_hit_lat_surface(data, hit, data->s2);
 		ret = true;
 	}
 	return (ret);
@@ -108,7 +108,7 @@ bool	cy_hit(t_obj *cy, t_vec3 d, t_vec3 o, t_hit *hit)
 	ret2 = false;
 	ret1 = solve_cy_eq_disk(&data, &tmp);
 	if (quad(data.q, &data.s1, &data.s2))
-		ret2 = solve_cy_eq_pipe(&data, &tmp);
+		ret2 = solve_cy_eq_lat_surface(&data, &tmp);
 	if (!ret1 && !ret2)
 		return (false);
 	*hit = tmp;

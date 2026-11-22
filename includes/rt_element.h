@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 17:43:09 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 17:49:01 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 20:37:44 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ typedef struct s_cy_eq
 	t_vec3	ray_dir;
 }	t_cy_eq;
 
-void		update_hit_pipe(t_cy_eq *data, t_hit *hit, double s);
+void		update_hit_lat_surface(t_cy_eq *data, t_hit *hit, double s);
 
 #endif /*RT_ELEMENT_H*/

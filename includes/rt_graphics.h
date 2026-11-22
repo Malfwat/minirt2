@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 19:53:23 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 20:46:55 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,71 +20,14 @@
 # include "rt_math.h"
 # include "rt_struct.h"
 
-# include <sys/time.h>
-
-typedef struct s_image
-{
-	void	*addr;
-	void	*img;
-
-	int		bpp;
-	int		line_length;
-	int		endian;
-}	t_image;
-
-typedef struct s_axes
-{
-	t_vec3	x;
-	t_vec3	y;
-	t_vec3	z;
-}	t_axes;
-
-typedef struct s_graphics
-{
-	void	*mlx;
-	void	*win;
-	double	ox;
-	double	oy;
-	t_axes	axes;
-	t_image	image;
-}	t_graphics;
-
-typedef struct s_hit_data
-{
-	t_obj	*obj;
-	double	t;
-	t_vec3	p;
-	t_vec3	normal;
-}	t_hit;
-
-typedef struct s_raycast
-{
-	t_vec3	dir;
-	t_vec3	origin;
-	double	lim;
-}	t_cast;
-
-typedef struct s_pxl_color_data
-{
-	double	dif;
-	double	spec;
-
-	t_color	c_dif;
-	t_color	c_spec;
-}	t_pxl_data;
-
-typedef struct s_quadrant
-{
-	t_color	colors[4];
-}	t_quadrant;
-
-typedef struct timeval	t_time;
-
+t_color			anti_aliasing(t_graphics *data, t_scene *sc, double x,
+					double y);
 t_color			quadrant_mean(t_quadrant q);
 t_quadrant		get_quadrant(t_graphics *data, t_scene *sc, double x, double y);
+double			quadrant_diff(t_quadrant q);
+
 t_color_double	add_color_double(t_color_double c, t_color x);
 t_color			cdouble_to_c(t_color_double c, double div);
-double			quadrant_diff(t_quadrant q);
 
 void			put_pxl(int x, int y, t_graphics *data, int color);
 void			render_lines(int y_start, int y_end, t_graphics *data,

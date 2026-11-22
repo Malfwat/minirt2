@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/22 19:43:50 by me               ###   ########.fr        #
+#    Updated: 2026/11/22 20:34:06 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,9 +56,8 @@ SRCS	+=	vector/norme.c vector/operation.c
 SRCS	+=	rendering/put_pxl.c	\
 			rendering/utils.c	\
 			rendering/color.c	\
-			rendering/quad.c	\
-			rendering/anti_aliasing_quad.c rendering/quad_diff.c \
-			rendering/graphics.c \
+			rendering/quadratic.c	\
+			rendering/anti_aliasing.c rendering/quadrant_diff.c \
 			rendering/system.c
 
 SRCS	+=	error/rt_error.c
@@ -72,7 +71,6 @@ SRCS	+=	obj/obj_utils.c obj/sp.c obj/cy.c obj/pl.c
 
 MANDATORY	=	parsing/loop.c			\
 				parsing/parse_line.c	\
-				rendering/render.c		\
 				rendering/rt_mlx_loop.c	\
 				main.c
 

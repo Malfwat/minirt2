@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:03:21 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/22 19:58:09 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 20:44:38 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,9 @@
 # define RT_H
 
 # include "rt_struct.h"
-# include "rt_graphics.h"
-
-void	free_scene(t_scene *sc);
-
 # define USAGE "Error:\n\t./miniRT<_bonus> scene.rt\n"
 
-typedef struct s_rt
-{
-	bool		stop;
-	t_time		last;
-	t_scene		sc;
-	t_graphics	data;
-}	t_rt;
+void	free_scene(t_scene *sc);
+void	manage_error_and_exit(t_err errnum, t_scene *sc, int line);
 
 #endif /* RT_H */

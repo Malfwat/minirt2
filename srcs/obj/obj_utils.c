@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 17:38:20 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 17:48:32 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 20:37:49 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_intersect	get_intersect_f(enum e_obj id)
 	return (NULL);
 }
 
-void	update_hit_pipe(t_cy_eq *data, t_hit *hit, double s)
+void	update_hit_lat_surface(t_cy_eq *data, t_hit *hit, double s)
 {
 	t_vec3	cp;
 
