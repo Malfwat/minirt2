@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/22 21:22:00 by me               ###   ########.fr        #
+#    Updated: 2026/11/22 23:14:35 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,18 +53,16 @@ SRCS	+=	parsing/open_scene.c\
 
 SRCS	+=	vector/norme.c vector/operation.c
 
-SRCS	+=	rendering/put_pxl.c	\
+SRCS	+=	rendering/put_pxl.c	rendering/shading.c\
 			rendering/display_utils.c	\
 			rendering/color_ops.c	\
 			rendering/quadratic.c	\
 			rendering/anti_aliasing.c rendering/quadrant_diff.c \
-			rendering/system.c
+			rendering/system.c rendering/render_utils.c
 
 SRCS	+=	error/rt_error.c
 
 SRCS	+=	gnl/gnl.c gnl/gnl_utils.c
-
-SRCS	+=	light/shading.c
 
 SRCS	+=	obj/obj_utils.c obj/render_sp.c obj/render_cy.c obj/render_pl.c
 
