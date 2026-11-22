@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:21:19 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 01:12:08 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 02:03:24 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ typedef struct s_thread_data
 	bool		*stop;
 	sem_t		*sem_band;
 	int			*cursor;
-	int			y_start;
-	int			y_end;
+	int			index;
 }	t_thread_data;
 
 typedef struct timeval	t_time;

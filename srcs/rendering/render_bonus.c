@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:19:48 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 01:14:00 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 02:04:22 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,38 +22,41 @@
 
 #include <stdio.h>
 
+int	ligne(int cursor)
+{
+	if (cursor < 135)
+		return (8 * cursor);
+	else if (cursor < 270 )
+		return (8 * (cursor - 135) + 4);
+	else if (cursor < 540)
+		return (4 * (cursor - 270) + 2);
+	return (2 * (cursor - 540) + 1);
+}
+
 void	*thread_rendering(void *tdata)
 {
 	t_thread_data	*data;
 	int				cursor;
-	bool			break_loop;
 
 	data = tdata;
-	break_loop = false;
 	sem_wait(data->sem_band);
 	cursor = *data->cursor;
-	while (cursor < NB_BAND && !break_loop)
+	while (cursor < HEIGHT)
 	{
 		*data->cursor += 1;
 		sem_post(data->sem_band);
-		data->y_start = cursor * HEIGHT / NB_BAND;
-		data->y_end = (cursor + 1) * HEIGHT / NB_BAND;
-		while (data->y_start < data->y_end)
+		data->index = ligne(cursor);
+		sem_wait(data->sem_printing);
+		render_lines(data->index, data->index + 1, data->data, data->sc);
+		sem_post(data->sem_printing);
+		sem_wait(data->sem_stop);
+		if (*data->stop)
 		{
-			sem_wait(data->sem_printing);
-			render_lines(data->y_start, data->y_start + 1, data->data, data->sc);
-			sem_post(data->sem_printing);
-			sem_wait(data->sem_stop);
-			if (*data->stop)
-			{
-				sem_post(data->sem_stop);
-				break_loop = true;
-				break ;
-			}
 			sem_post(data->sem_stop);
-			usleep(1);
-			data->y_start++;
+			break ;
 		}
+		sem_post(data->sem_stop);
+		usleep(1);
 		sem_wait(data->sem_band);
 		cursor = *data->cursor;
 	}
