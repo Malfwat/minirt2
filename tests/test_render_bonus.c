@@ -92,6 +92,8 @@ int	main(void)
 	t_scene		sc;
 	t_obj		o;
 	t_err		err;
+	int			b[3];
+	int			i;
 
 	buf = calloc(WIDTH * HEIGHT, 4);
 	check(buf != NULL, "allocation du faux buffer");
@@ -113,13 +115,18 @@ int	main(void)
 	o.color.g = 120;
 	o.color.b = 40;
 	sc.obj_lst = &o;
-	err = render(&g, &sc);
+	fill_bases(b);
+	build_frame(&g, &sc);
+	err = ok;
+	i = -1;
+	while (++i < HEIGHT)
+		err |= render(&g, &sc, i, b);
 	check(err == ok, "render bonus renvoie ok");
-	check(black_pixels(buf, &g) == 0, "les 8 bandes couvrent toute l'image");
+	check(black_pixels(buf, &g) == 0, "les 1080 lignes couvrent toute l'image");
 	check(px(buf, &g, WIDTH / 2, HEIGHT / 2)[2] == 200
 		&& px(buf, &g, WIDTH / 2, HEIGHT / 2)[1] == 120,
 		"couleur de l'objet respectee (ambiance blanche a 1.0)");
-	check(max_row_jump(buf, &g) <= 3, "aucune couture entre les bandes");
+	check(max_row_jump(buf, &g) <= 3, "aucune couture entre deux lignes voisines");
 	free(buf);
 	printf("\n%d cas en echec sur %d\n", g_fail, g_total);
 	return (g_fail != 0);
