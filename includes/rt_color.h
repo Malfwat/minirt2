@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sp.c                                               :+:      :+:    :+:   */
+/*   rt_color.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/11/13 23:12:52 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 20:26:58 by me               ###   ########.fr       */
+/*   Created: 2026/11/22 21:24:53 by me                #+#    #+#             */
+/*   Updated: 2026/11/22 21:29:15 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt_parsing.h"
+#ifndef RT_COLOR_H
+# define RT_COLOR_H
 
-t_getter	*get_sp_getter(void)
+typedef struct s_color
 {
-	static t_getter	tab[6] = {
-		get_vec3,
-		get_diameter,
-		get_color,
-		get_intensity,
-		get_exposant,
-		(void *)0
-	};
+	__UINT8_TYPE__	r;
+	__UINT8_TYPE__	g;
+	__UINT8_TYPE__	b;
+}	t_color;
 
-	return (tab);
-}
-
-t_pass	*get_sp_passer(void)
+typedef struct s_quadrant
 {
-	static t_pass	tab[6] = {
-		pass_component,
-		pass_component,
-		pass_color,
-		pass_component,
-		pass_component,
-		(void *)0
-	};
+	t_color	colors[4];
+}	t_quadrant;
 
-	return (tab);
-}
+typedef struct s_color_double
+{
+	double	r;
+	double	g;
+	double	b;
+}	t_color_double;
+
+#endif /*RT_COLOR_H*/

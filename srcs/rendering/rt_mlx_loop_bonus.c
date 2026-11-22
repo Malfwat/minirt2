@@ -6,12 +6,14 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:14:30 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 19:51:27 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 21:17:47 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt_graphics.h"
+#include "rt_config.h"
+#include "rt_display.h"
 #include "rt_graphics_bonus.h"
+
 #include "mlx.h"
 
 int	keyhook(int keycode, void *param)

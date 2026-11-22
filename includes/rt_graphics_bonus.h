@@ -6,14 +6,14 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:21:19 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 19:53:15 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 21:36:53 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_GRAPHICS_BONUS_H
 # define RT_GRAPHICS_BONUS_H
 
-# include "rt_graphics.h"
+# include "rt_error.h"
 # include "rt_struct.h"
 
 # include <pthread.h>
@@ -53,7 +53,7 @@ typedef struct s_render
 	t_thread_data	th_data[NB_TH];
 }	t_render;
 
-void	stop_and_join_thread(sem_t *sem, bool stop[], pthread_t tab[], int n);
+void	stop_and_join_thread(sem_t tab[], bool stop[], pthread_t ths[], int n);
 
 t_err	render_th(t_render *param);
 void	*thread_rendering(void *tdata);

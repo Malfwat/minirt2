@@ -6,11 +6,13 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:14:30 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 20:27:29 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 21:18:24 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt_graphics.h"
+#include "rt_config.h"
+#include "rt_display.h"
+#include "rt_render.h"
 #include "rt.h"
 #include "mlx.h"
 

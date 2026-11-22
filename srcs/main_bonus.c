@@ -6,21 +6,22 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:11:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 03:46:52 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 21:18:01 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "rt_config.h"
 #include "rt_parsing.h"
 #include "rt_struct.h"
 #include "rt.h"
 #include "str.h"
-#include "rt_graphics.h"
+#include "rt_display.h"
+#include "rt_render.h"
 #include "rt_graphics_bonus.h"
 
 #include "mlx.h"
 
 #include <sys/time.h>
-#include <errno.h>
 
 static bool	init_graphics(t_graphics *data, t_render *param)
 {

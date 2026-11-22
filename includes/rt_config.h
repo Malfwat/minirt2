@@ -1,41 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pl.c                                               :+:      :+:    :+:   */
+/*   rt_config.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/11/13 23:12:52 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 20:31:25 by me               ###   ########.fr       */
+/*   Created: 2026/11/22 20:54:19 by me                #+#    #+#             */
+/*   Updated: 2026/11/22 20:57:06 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt_parsing.h"
+#ifndef RT_CONFIG_H
+# define RT_CONFIG_H
 
-t_getter	*get_pl_getter(void)
-{
-	static t_getter	tab[6] = {
-		get_vec3,
-		get_vec3,
-		get_color,
-		get_intensity,
-		get_exposant,
-		(void *)0
-	};
+# define ESC 65307
+# define W_CROSS 17
+# define WIDTH 1920
+# define HEIGHT 1080
+# define AA 4
+# define PERIOD 200000
 
-	return (tab);
-}
-
-t_pass	*get_pl_passer(void)
-{
-	static t_pass	tab[6] = {
-		pass_component,
-		pass_component,
-		pass_color,
-		pass_component,
-		pass_component,
-		(void *)0
-	};
-
-	return (tab);
-}
+#endif /*RT_CONFIG_H*/

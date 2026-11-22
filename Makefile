@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/22 20:34:06 by me               ###   ########.fr        #
+#    Updated: 2026/11/22 21:22:00 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,9 +41,9 @@ SRCS	+=	parsing/open_scene.c\
 			parsing/double.c	\
 			parsing/cam.c		\
 			parsing/obj.c		\
-			parsing/cy.c		\
-			parsing/pl.c		\
-			parsing/sp.c		\
+			parsing/parse_cy.c	\
+			parsing/parse_pl.c	\
+			parsing/parse_sp.c	\
 			parsing/getter.c	\
 			parsing/getter_utils.c	\
 			parsing/utils.c		\
@@ -66,7 +66,7 @@ SRCS	+=	gnl/gnl.c gnl/gnl_utils.c
 
 SRCS	+=	light/light.c
 
-SRCS	+=	obj/obj_utils.c obj/sp.c obj/cy.c obj/pl.c
+SRCS	+=	obj/obj_utils.c obj/render_sp.c obj/render_cy.c obj/render_pl.c
 
 
 MANDATORY	=	parsing/loop.c			\

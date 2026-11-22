@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cy.c                                               :+:      :+:    :+:   */
+/*   parse_pl.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/13 23:12:52 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 20:20:58 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 21:21:29 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_parsing.h"
 
-t_getter	*get_cy_getter(void)
+t_getter	*get_pl_getter(void)
 {
-	static t_getter	tab[8] = {
+	static t_getter	tab[6] = {
 		get_vec3,
 		get_vec3,
-		get_diameter,
-		get_height,
 		get_color,
 		get_intensity,
 		get_exposant,
@@ -28,11 +26,9 @@ t_getter	*get_cy_getter(void)
 	return (tab);
 }
 
-t_pass	*get_cy_passer(void)
+t_pass	*get_pl_passer(void)
 {
-	static t_pass	tab[8] = {
-		pass_component,
-		pass_component,
+	static t_pass	tab[6] = {
 		pass_component,
 		pass_component,
 		pass_color,

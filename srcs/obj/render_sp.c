@@ -1,31 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pl.c                                               :+:      :+:    :+:   */
+/*   render_sp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/11/18 23:17:07 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 02:15:32 by me               ###   ########.fr       */
+/*   Created: 2026/11/18 22:31:59 by me                #+#    #+#             */
+/*   Updated: 2026/11/22 21:35:49 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_math.h"
 #include "rt_struct.h"
-#include "rt_graphics.h"
 
-#include <math.h>
-
-bool	pl_hit(t_obj *pl, t_vec3 d, t_vec3 o, t_hit *hit)
+t_quad	sp_quad(t_obj *sp, t_vec3 d, t_vec3 o)
 {
-	double	denom;
+	t_quad	q;
+	double	r;
+	t_vec3	oc;
 
-	denom = scal(d, pl->vec);
-	if (fabs(denom) < 1e-4)
+	oc = sub(o, sp->coordinate);
+	q.a = scal(d, d);
+	q.b = 2 * scal(d, oc);
+	r = sp->diameter / 2;
+	q.c = scal(oc, oc) - r * r;
+	return (q);
+}
+
+bool	sp_hit(t_obj *sp, t_vec3 d, t_vec3 o, t_hit *hit)
+{
+	t_quad	q;
+	bool	ret;
+
+	q = sp_quad(sp, d, o);
+	ret = solve_hit(q, &hit->t);
+	if (!ret)
 		return (false);
-	hit->t = -scal(sub(o, pl->coordinate), pl->vec) / denom;
 	hit->p = add(o, mult(d, hit->t));
-	hit->normal = normalize(pl->vec);
-	hit->obj = pl;
+	hit->normal = normalize(sub(hit->p, sp->coordinate));
+	hit->obj = sp;
 	return (true);
 }

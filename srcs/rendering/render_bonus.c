@@ -6,12 +6,12 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:19:48 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 16:43:52 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 21:17:03 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_error.h"
-#include "rt_graphics.h"
+#include "rt_render.h"
 #include "rt_graphics_bonus.h"
 
 #include <errno.h>

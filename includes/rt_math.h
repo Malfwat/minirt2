@@ -6,14 +6,14 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 22:17:34 by me                #+#    #+#             */
-/*   Updated: 2026/11/20 00:25:42 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 21:28:03 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_MATH_H
 # define RT_MATH_H
 
-# include "rt_struct.h"
+# include <stdbool.h>
 
 typedef struct s_quad
 {
@@ -21,6 +21,15 @@ typedef struct s_quad
 	double	b;
 	double	c;
 }	t_quad;
+
+typedef struct s_vec3
+{
+	double	x;
+	double	y;
+	double	z;
+}	t_vec3;
+
+typedef t_vec3			t_coordinate;
 
 t_vec3	add(t_vec3 a, t_vec3 b);
 t_vec3	cross(t_vec3 a, t_vec3 b);

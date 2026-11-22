@@ -6,13 +6,14 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 03:26:37 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 16:40:20 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 21:17:36 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "str.h"
-#include "rt_error.h"
-#include "rt_graphics.h"
+#include "rt_config.h"
+#include "rt_display.h"
+#include "rt_render.h"
 #include "rt_graphics_bonus.h"
 
 #include <semaphore.h>
@@ -28,8 +29,7 @@ void	join_thread(pthread_t tab[], int tab_size)
 		pthread_join(tab[i++], NULL);
 }
 
-void	stop_and_join_thread(sem_t tab[], bool stop[],
-	pthread_t th_tab[], int n)
+void	stop_and_join_thread(sem_t tab[], bool stop[], pthread_t ths[], int n)
 {
 	int	i;
 
@@ -41,7 +41,7 @@ void	stop_and_join_thread(sem_t tab[], bool stop[],
 		sem_post(tab + i);
 		i++;
 	}
-	join_thread(th_tab, n);
+	join_thread(ths, n);
 }
 
 void	compute_line(t_thread_data *data, int cursor)

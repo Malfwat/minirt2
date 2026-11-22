@@ -6,14 +6,13 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 22:21:54 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 03:59:57 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 21:36:38 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "str.h"
-#include "rt_math.h"
+#include "rt_render.h"
 #include "rt_struct.h"
-#include "rt_graphics.h"
 
 int	t_color_to_int(t_color c)
 {

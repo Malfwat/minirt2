@@ -6,12 +6,12 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/20 00:32:20 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 20:31:32 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 21:28:19 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_math.h"
-#include "rt_graphics.h"
+#include "rt_color.h"
 
 static double	quad_max(double a, double b, double c, double d)
 {
