@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:21:19 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 00:49:38 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 01:12:08 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct s_band
 
 typedef struct s_thread_data
 {
-	//int			id;
 	t_graphics	*data;
 	t_scene		*sc;
 	sem_t		*sem_stop;
@@ -44,9 +43,8 @@ typedef struct s_thread_data
 	bool		*stop;
 	sem_t		*sem_band;
 	int			*cursor;
-	int			*it;
 	int			y_start;
-	int			band_height;
+	int			y_end;
 }	t_thread_data;
 
 typedef struct timeval	t_time;
@@ -57,7 +55,6 @@ typedef struct s_render
 	t_err			err;
 	t_scene			sc;
 	t_graphics		data;
-	int				band_it;
 	int				band_cursor;
 	sem_t			sem_cursor;
 	sem_t			sem_stop[NB_TH];
