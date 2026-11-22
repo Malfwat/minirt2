@@ -12,6 +12,9 @@
 
 
 #include "rt_struct.h"
+#include "rt_config.h"
+#include "rt_render.h"
+#include "rt_display.h"
 #include "str.h"
 
 #include <stdio.h>

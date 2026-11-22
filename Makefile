@@ -37,7 +37,7 @@ SRCS	=	string/ft_strcmp.c \
 
 SRCS	+=	parsing/open_scene.c\
 			parsing/parse.c		\
-			parsing/light.c		\
+			parsing/parse_light.c		\
 			parsing/double.c	\
 			parsing/cam.c		\
 			parsing/obj.c		\
@@ -46,16 +46,16 @@ SRCS	+=	parsing/open_scene.c\
 			parsing/parse_sp.c	\
 			parsing/getter.c	\
 			parsing/getter_utils.c	\
-			parsing/utils.c		\
+			parsing/parse_utils.c		\
 			parsing/pass.c		\
 			parsing/vector.c	\
-			parsing/color.c
+			parsing/parse_color.c
 
 SRCS	+=	vector/norme.c vector/operation.c
 
 SRCS	+=	rendering/put_pxl.c	\
-			rendering/utils.c	\
-			rendering/color.c	\
+			rendering/display_utils.c	\
+			rendering/color_ops.c	\
 			rendering/quadratic.c	\
 			rendering/anti_aliasing.c rendering/quadrant_diff.c \
 			rendering/system.c
@@ -64,7 +64,7 @@ SRCS	+=	error/rt_error.c
 
 SRCS	+=	gnl/gnl.c gnl/gnl_utils.c
 
-SRCS	+=	light/light.c
+SRCS	+=	light/shading.c
 
 SRCS	+=	obj/obj_utils.c obj/render_sp.c obj/render_cy.c obj/render_pl.c
 
