@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 19:23:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 03:24:12 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 19:39:28 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static bool	init_graphics(t_graphics *data)
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "MiniRT");
 	if (!data->win)
 		return (false);
-	mlx_key_hook(data->win, keyhook, data);
 	data->image.img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (!data->image.img)
 		return (false);
@@ -39,25 +38,18 @@ static bool	init_graphics(t_graphics *data)
 
 int	main(int ac, char **av)
 {
-	t_graphics	data;
-	t_scene		sc;
-	t_err		err;
+	t_rt	rt;
 
-	ft_bzero(&sc, sizeof(t_scene));
+	ft_bzero(&rt, sizeof(rt));
 	if (ac != 2)
 		return (ft_putstr_fd(USAGE, 2), 1);
-	parse(av[1], &sc);
-	if (!init_graphics(&data))
-		return (free_scene(&sc), destroy_graphics(&data), 1);
-	err = render(&data, &sc);
-	if (err != ok)
-	{
-		destroy_graphics(&data);
-		manage_error_and_exit(err, &sc, NOT_A_LINE);
-	}
-	mlx_put_image_to_window(data.mlx, data.win, data.image.img, 0, 0);
-	mlx_loop(data.mlx);
-	destroy_graphics(&data);
-	free_scene(&sc);
+	parse(av[1], &rt.sc);
+	if (!init_graphics(&rt.data))
+		return (free_scene(&rt.sc), destroy_graphics(&rt.data), 1);
+	mlx_key_hook(rt.data.win, keyhook, &rt);
+	mlx_loop_hook(rt.data.mlx, rendering_loop, &rt);
+	mlx_loop(rt.data.mlx);
+	destroy_graphics(&rt.data);
+	free_scene(&rt.sc);
 	return (0);
 }

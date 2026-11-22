@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 01:13:53 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 19:44:57 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ double			quadrant_diff(t_quadrant q);
 void			put_pxl(int x, int y, t_graphics *data, int color);
 void			render_lines(int y_start, int y_end, t_graphics *data,
 					t_scene *sc);
-t_err			render(t_graphics *data, t_scene *sc);
+t_err			render(t_graphics *data, t_scene *sc, int i, int b[]);
 t_color			get_pxl_color(t_scene *sc, t_graphics *d, double x, double y);
 int				t_color_to_int(t_color c);
 t_color			mult_color_light(t_color a, t_light light, double factor);
@@ -94,6 +94,8 @@ t_color			get_final_color(t_hit hit, t_scene *sc);
 t_color			get_pixel_illumination(t_hit hit, t_light *l, t_scene *sc);
 bool			cast_ray(t_scene *sc, t_cast data, t_hit *ptr);
 bool			quad(t_quad q, double *s1, double *s2);
+
+int				rendering_loop(void *param);
 
 /**
 ** @brief Give a 3D sytem from one t_vec3
@@ -113,6 +115,9 @@ void			destroy_graphics(t_graphics *data);
 
 int				keyhook(int keycode, void *param);
 int				stop_loop(void *param);
+
+int				ligne(int cursor, int b2, int b3, int b4);
+void			fill_bases(int b[]);
 
 # define WIDTH 1920
 # define HEIGHT 1080

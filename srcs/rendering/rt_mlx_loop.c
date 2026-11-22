@@ -6,20 +6,45 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:14:30 by me                #+#    #+#             */
-/*   Updated: 2026/11/21 00:14:59 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 19:44:38 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_graphics.h"
+#include "rt.h"
 #include "mlx.h"
+
+#include <stdbool.h>
 
 int	keyhook(int keycode, void *param)
 {
-	t_graphics	*data;
+	t_rt	*rt;
 
-	data = param;
+	rt = param;
 	if (keycode == ESC)
-		mlx_loop_end(data->mlx);
+		rt->stop = true;
+	return (0);
+}
+
+int	rendering_loop(void *param)
+{
+	static int	i;
+	static int	b[3];
+	t_rt		*rt;
+
+	rt = param;
+	if (rt->stop)
+		return (mlx_loop_end(rt->data.mlx), 0);
+	if (i == 0)
+	{
+		fill_bases(b);
+		build_frame(&rt->data, &rt->sc);
+	}
+	if (i < HEIGHT)
+	{
+		render(&rt->data, &rt->sc, i, b);
+		i++;
+	}
 	return (0);
 }
 

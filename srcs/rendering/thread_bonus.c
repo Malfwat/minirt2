@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 03:26:37 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 03:30:27 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 16:40:20 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,6 @@ void	stop_and_join_thread(sem_t tab[], bool stop[],
 		i++;
 	}
 	join_thread(th_tab, n);
-}
-
-int	ligne(int cursor, int b2, int b3, int b4)
-{
-	if (cursor < b2)
-		return (8 * cursor);
-	else if (cursor < b3)
-		return (8 * (cursor - b2) + 4);
-	else if (cursor < b4)
-		return (4 * (cursor - b3) + 2);
-	return (2 * (cursor - b4) + 1);
 }
 
 void	compute_line(t_thread_data *data, int cursor)

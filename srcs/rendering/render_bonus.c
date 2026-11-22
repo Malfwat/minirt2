@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:19:48 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 03:35:25 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 16:43:52 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,6 @@ static t_thread_data	attrib_data(t_render *params, int i, int b[])
 	tmp.cursor = &params->band_cursor;
 	tmp.sem_band = &params->sem_cursor;
 	return (tmp);
-}
-
-static void	fill_bases(int b[])
-{
-	int	c1;
-	int	c2;
-	int	c3;
-
-	c1 = (HEIGHT + 7) / 8;
-	c2 = (HEIGHT + 3) / 8;
-	c3 = (HEIGHT + 1) / 4;
-	b[0] = c1;
-	b[1] = b[0] + c2;
-	b[2] = b[1] + c3;
 }
 
 t_err	render_th(t_render *param)
