@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 20:47:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 23:08:53 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 23:36:35 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,16 @@ t_color	get_pxl_color(t_scene *sc, t_graphics *d, double x, double y)
 	t_cast	data;
 	t_vec3	vec;
 	t_hit	best;
-	t_hit	hit;
 
-	ft_bzero(&hit, sizeof(hit));
+	ft_bzero(&best, sizeof(best));
 	vec = sysvec_to_real_vec(d->axes, pxl_to_sysvec(d->ox, d->oy, x, y));
 	data.dir = vec;
 	data.lim = INFINITY;
 	data.origin = sc->cam.coordinate;
 	if (!cast_ray(sc, data, &best))
 		return ((t_color){0, 0, 0});
+	if (scal(best.normal, data.dir) > 0)
+		best.normal = mult(best.normal, -1);
 	return (get_final_color(best, sc));
 }
 
