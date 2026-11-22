@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:11:55 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 03:23:38 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 03:46:52 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	exit_prog(t_render *param, void *curs, void *print, void *stop)
 	if (stop)
 		close_sem_tab(stop, NB_TH);
 	destroy_graphics(&param->data);
-	if (param->err != ok || errno)
+	if (param->err != ok)
 		manage_error_and_exit(syscall_err, &param->sc, NOT_A_LINE);
 	free_scene(&param->sc);
 }
