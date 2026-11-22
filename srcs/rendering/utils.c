@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/18 18:27:16 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 19:18:39 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 19:51:59 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,13 @@ void	fill_bases(int b[])
 	b[0] = c1;
 	b[1] = b[0] + c2;
 	b[2] = b[1] + c3;
+}
+
+bool	delayed(t_time n, t_time l, long t)
+{
+	long	delay;
+
+	delay = n.tv_sec * 1000000 + n.tv_usec;
+	delay = delay - l.tv_sec * 1000000 - l.tv_usec;
+	return (delay > t);
 }

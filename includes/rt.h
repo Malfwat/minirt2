@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:03:21 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/22 16:55:57 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 19:58:09 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	free_scene(t_scene *sc);
 typedef struct s_rt
 {
 	bool		stop;
+	t_time		last;
 	t_scene		sc;
 	t_graphics	data;
 }	t_rt;

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:21:19 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 17:05:26 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 19:53:15 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 # include <pthread.h>
 # include <semaphore.h>
-# include <sys/time.h>
 
 # ifndef NB_TH
 #  define NB_TH 8
@@ -38,8 +37,6 @@ typedef struct s_thread_data
 	int			b3;
 	int			b4;
 }	t_thread_data;
-
-typedef struct timeval	t_time;
 
 typedef struct s_render
 {
@@ -64,7 +61,5 @@ void	sem_n_post(sem_t *s, int n);
 void	sem_n_wait(sem_t *s, int n);
 bool	init_sem_tab(sem_t	tab[]);
 void	close_sem_tab(sem_t tab[], int n);
-
-# define PERIOD 200000
 
 #endif /*RT_GRAPHICS_BONUS_H*/

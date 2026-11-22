@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:14:30 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 02:11:04 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 19:51:27 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,6 @@ int	keyhook(int keycode, void *param)
 		mlx_loop_end(render_param->data.mlx);
 	}
 	return (0);
-}
-
-bool	delayed(t_time n, t_time l, long t)
-{
-	long	delay;
-
-	delay = n.tv_sec * 1000000 + n.tv_usec;
-	delay = delay - l.tv_sec * 1000000 - l.tv_usec;
-	return (delay > t);
 }
 
 void	refresh(t_render *param, t_time now)

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 19:44:57 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 19:53:23 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "rt_error.h"
 # include "rt_math.h"
 # include "rt_struct.h"
+
+# include <sys/time.h>
 
 typedef struct s_image
 {
@@ -76,6 +78,8 @@ typedef struct s_quadrant
 	t_color	colors[4];
 }	t_quadrant;
 
+typedef struct timeval	t_time;
+
 t_color			quadrant_mean(t_quadrant q);
 t_quadrant		get_quadrant(t_graphics *data, t_scene *sc, double x, double y);
 t_color_double	add_color_double(t_color_double c, t_color x);
@@ -94,6 +98,7 @@ t_color			get_final_color(t_hit hit, t_scene *sc);
 t_color			get_pixel_illumination(t_hit hit, t_light *l, t_scene *sc);
 bool			cast_ray(t_scene *sc, t_cast data, t_hit *ptr);
 bool			quad(t_quad q, double *s1, double *s2);
+bool			delayed(t_time n, t_time l, long t);
 
 int				rendering_loop(void *param);
 
@@ -122,5 +127,7 @@ void			fill_bases(int b[]);
 # define WIDTH 1920
 # define HEIGHT 1080
 # define AA 4
+
+# define PERIOD 200000
 
 #endif /*RT_GRAPHICS_H*/
