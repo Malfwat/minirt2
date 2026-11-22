@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 19:23:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/21 02:05:24 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 03:24:12 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int ac, char **av)
 
 	ft_bzero(&sc, sizeof(t_scene));
 	if (ac != 2)
-		return (0); // ajouter un usage
+		return (ft_putstr_fd(USAGE, 2), 1);
 	parse(av[1], &sc);
 	if (!init_graphics(&data))
 		return (free_scene(&sc), destroy_graphics(&data), 1);

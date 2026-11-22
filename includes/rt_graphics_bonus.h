@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:21:19 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 03:02:17 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 03:29:43 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	stop_and_join_thread(sem_t *sem, bool stop[], pthread_t tab[], int n);
 
 t_err	render_th(t_render *param);
 int		rendering_loop(void *param);
+void	*thread_rendering(void *tdata);
 void	sem_n_post(sem_t *s, int n);
 void	sem_n_wait(sem_t *s, int n);
 bool	init_sem_tab(sem_t	tab[]);

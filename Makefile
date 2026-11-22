@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/22 01:53:20 by me               ###   ########.fr        #
+#    Updated: 2026/11/22 03:30:04 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS	=	string/ft_strcmp.c \
 			string/ft_memcpy.c \
 			string/ft_strdup.c \
 			string/ft_strchr.c \
+			string/ft_putstr.c \
 			string/ft_bzero.c  \
 			string/ft_atoi.c   \
 			string/ft_atof.c   \
@@ -78,6 +79,7 @@ MANDATORY	=	parsing/loop.c			\
 BONUS		=	parsing/loop_bonus.c		\
 				parsing/parse_line_bonus.c	\
 				rendering/render_bonus.c	\
+				rendering/thread_bonus.c	\
 				rendering/rt_mlx_loop_bonus.c\
 				rendering/sem_utils_bonus.c\
 				main_bonus.c
