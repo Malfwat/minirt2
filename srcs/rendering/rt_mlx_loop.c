@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:14:30 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 20:04:18 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 20:17:24 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	initialize_loop(t_rt *rt, int b[])
 
 int	rendering_loop(void *param)
 {
+	int			ret;
 	static int	i;
 	static int	b[3];
 	t_rt		*rt;
@@ -49,11 +50,13 @@ int	rendering_loop(void *param)
 	if (i < HEIGHT)
 	{
 		render(&rt->data, &rt->sc, i, b);
-		if (!gettimeofday(&now, 0) || delayed(now, rt->last, PERIOD))
+		ret = gettimeofday(&now, 0);
+		if (ret || delayed(now, rt->last, PERIOD))
 		{
 			mlx_put_image_to_window(rt->data.mlx, rt->data.win,
 				rt->data.image.img, 0, 0);
-			rt->last = now;
+			if (ret)
+				rt->last = now;
 		}
 		i++;
 	}
