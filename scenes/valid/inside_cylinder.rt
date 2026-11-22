@@ -1,0 +1,8 @@
+# Camera au centre d'un cylindre ferme : on voit la paroi interne et les deux bouchons.
+A 0.2 255,255,255
+
+C 0,0,0 0,0,1 70
+
+L 20,0,30 0.8 255,255,255
+
+cy 0,0,0 0,0,1 10 20 120,255,120

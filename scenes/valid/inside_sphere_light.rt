@@ -1,0 +1,9 @@
+# Camera et lumiere toutes deux a l'interieur de la sphere.
+# Sans retournement de la normale, la paroi reste eclairee par l'ambiante seule.
+A 0.2 255,255,255
+
+C 0,0,0 0,0,1 70
+
+L 3,0,0 1.0 255,255,255
+
+sp 0,0,0 20 0,180,255

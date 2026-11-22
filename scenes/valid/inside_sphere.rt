@@ -1,0 +1,9 @@
+# Camera au centre d'une sphere : tous les rayons touchent la face interne.
+# Aucune lumiere a l'interieur, donc seule l'ambiante eclaire la paroi.
+A 0.2 255,255,255
+
+C 0,0,0 0,0,1 70
+
+L 30,0,10 1.0 255,255,255
+
+sp 0,0,0 20 255,0,0
