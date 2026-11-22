@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 00:21:19 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 02:03:24 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 02:09:05 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,6 @@
 # ifndef NB_TH
 #  define NB_TH 8
 # endif /*NB_TH*/
-
-# define NB_BAND 48
-
-typedef struct s_band
-{
-	int				y_start;
-	int				y_end;
-
-	struct s_band	*next;
-}	t_band;
 
 typedef struct s_thread_data
 {

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 21:19:48 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 02:04:22 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 02:14:15 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,21 @@
 
 int	ligne(int cursor)
 {
-	if (cursor < 135)
+	if (cursor < HEIGHT / 8)
 		return (8 * cursor);
-	else if (cursor < 270 )
-		return (8 * (cursor - 135) + 4);
-	else if (cursor < 540)
-		return (4 * (cursor - 270) + 2);
-	return (2 * (cursor - 540) + 1);
+	else if (cursor < HEIGHT / 4)
+		return (8 * (cursor - HEIGHT / 8) + 4);
+	else if (cursor < HEIGHT / 2)
+		return (4 * (cursor - HEIGHT / 4) + 2);
+	return (2 * (cursor - HEIGHT / 2) + 1);
+}
+
+void	compute_line(t_thread_data *data, int cursor)
+{
+	data->index = ligne(cursor);
+	sem_wait(data->sem_printing);
+	render_lines(data->index, data->index + 1, data->data, data->sc);
+	sem_post(data->sem_printing);
 }
 
 void	*thread_rendering(void *tdata)
@@ -45,10 +53,7 @@ void	*thread_rendering(void *tdata)
 	{
 		*data->cursor += 1;
 		sem_post(data->sem_band);
-		data->index = ligne(cursor);
-		sem_wait(data->sem_printing);
-		render_lines(data->index, data->index + 1, data->data, data->sc);
-		sem_post(data->sem_printing);
+		compute_line(data, cursor);
 		sem_wait(data->sem_stop);
 		if (*data->stop)
 		{
