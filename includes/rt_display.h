@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 18:35:57 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 21:35:23 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 21:47:17 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@
 # include "rt_struct.h"
 
 /**
- * @brief convert t_color to an integer a/r/g/b 
- * 
- * @param c struct s_color
- * @return ** int 
- */
+** @brief convert t_color to an integer a/r/g/b 
+** 
+** @param[in] c struct s_color
+**/
 int				t_color_to_int(t_color c);
 /**
 ** @brief Write one pixel into the image buffer
@@ -45,9 +44,9 @@ t_err			render(t_graphics *data, t_scene *sc, int i, int b[]);
 /**
  * @brief Return true if the delay between last and now is superior to period
  * 
- * @param n struct timeval now 
- * @param l struct timeval last update
- * @param t period needed before update
+ * @param[in] n struct timeval now 
+ * @param[in] l struct timeval last update
+ * @param[in] t period needed before update
  * @return true 
  * @return false 
  */

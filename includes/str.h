@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 20:27:06 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 03:21:09 by me               ###   ########.fr       */
+/*   Updated: 2026/11/22 21:52:34 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ size_t	ft_strlen(const char *str);
 
 /* ft_strdup.c */
 char	*ft_strdup(const char *str);
-// char	*ft_strdup_range(const char *start, const char *end);
 
 /* ft_memcpy.c */
 void	*ft_memcpy(void *dest, const void *src, size_t n);

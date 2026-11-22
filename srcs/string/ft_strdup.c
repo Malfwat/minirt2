@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admoufle <admoufle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 20:31:00 by me                #+#    #+#             */
-/*   Updated: 2026/10/24 16:07:49 by admoufle         ###   ########.fr       */
+/*   Updated: 2026/11/22 21:52:51 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,3 @@ char	*ft_strdup(const char *str)
 	}
 	return (s);
 }
-
-// char	*ft_strdup_range(const char *start, const char *end)
-// {
-// 	size_t	len;
-// 	char	*ptr;
-
-// 	if (end < start)
-// 		return (NULL);
-// 	len = (size_t)(end - start + 1);
-// 	ptr = malloc(sizeof(char) * (len + 1));
-// 	if (!ptr)
-// 		return (NULL);
-// 	ptr[len--] = 0;
-// 	while (start <= end)
-// 		ptr[len--] = *(end--);
-// 	return (ptr);
-// }
