@@ -97,6 +97,9 @@ minilibx-linux/libmlx_Linux.a:
 
 bonus: $(NAME_BONUS)
 
+test:
+	@bash tests/run_tests.sh
+
 $(NAME):	$(OBJ) $(addprefix $(BUILD), $(MANDATORY:.c=.o)) | minilibx-linux/libmlx_Linux.a
 	$(CC) $^ -o $@ -$(MLX) -lXext -lX11 -lm -lz -O3 -L minilibx-linux/
 
@@ -116,6 +119,6 @@ fclean: clean
 
 re: fclean all 
 
-.PHONY: all re clean fclean bonus
+.PHONY: all re clean fclean bonus test
 
 -include $(DEPS)

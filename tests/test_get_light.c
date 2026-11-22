@@ -13,6 +13,7 @@
 #include "rt_struct.h"
 #include "rt_error.h"
 #include "rt_parsing.h"
+#include "rt_element.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -72,6 +73,7 @@ static int	run_case(t_light_line c, int index)
 	printf("%-3d %-5s \"%-26s\" attendu=(%d, noeuds %d) obtenu=(%d, noeuds %d)\n",
 		index, bad ? "FAIL" : "ok", c.input, (int)c.expected_err,
 		c.expected_nodes, (int)err, nodes);
+	free_light(sc.light_lst);
 	return (bad);
 }
 

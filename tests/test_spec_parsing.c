@@ -34,6 +34,7 @@
 #include "rt_struct.h"
 #include "rt_error.h"
 #include "rt_parsing.h"
+#include "rt_element.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -112,6 +113,8 @@ static int	run_case(t_case c, int index)
 		index, bad ? "FAIL" : "ok", c.input, (int)wanted, (int)err,
 		sc.obj_lst ? sc.obj_lst->intensity : 0.0,
 		sc.obj_lst ? sc.obj_lst->exposant : 0.0);
+	free_obj(sc.obj_lst);
+	free_light(sc.light_lst);
 	return (bad);
 }
 
