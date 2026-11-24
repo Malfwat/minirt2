@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/24 12:15:19 by me               ###   ########.fr       */
+/*   Updated: 2026/11/24 21:01:59 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define PL "pl"
 # define SP "sp"
 # define CY "cy"
+# define CO "co"
 
 # define SPECULAR 2
 # define CHECKER 1
@@ -46,6 +47,7 @@ typedef void	(*t_pass)(char **);
 t_pass				*get_light_passer(void);
 t_pass				*get_amb_passer(void);
 t_pass				*get_cam_passer(void);
+t_pass				*get_co_passer(void);
 t_pass				*get_cy_passer(void);
 t_pass				*get_pl_passer(void);
 t_pass				*get_sp_passer(void);
@@ -62,6 +64,7 @@ t_err				get_intensity(char *str, void *res);
 t_err				get_checker_size(char *str, void *res);
 typedef t_err	(*t_getter)(char *, void *);
 
+t_getter			*get_co_getter(void);
 t_getter			*get_cy_getter(void);
 t_getter			*get_pl_getter(void);
 t_getter			*get_sp_getter(void);
@@ -70,9 +73,11 @@ t_getter			*get_amb_getter(void);
 t_getter			*get_cam_getter(void);
 bool				add_light(t_light **head, t_light data);
 
+t_elem				get_elem(char *line);
 t_err				get_amb(char *str, t_scene *sc);
 t_err				get_cam(char *str, t_scene *sc);
 t_err				get_light(char *str, t_scene *sc);
+t_err				get_co(char *str, t_scene *sc);
 t_err				get_cy(char *str, t_scene *sc);
 t_err				get_pl(char *str, t_scene *sc);
 t_err				get_sp(char *str, t_scene *sc);

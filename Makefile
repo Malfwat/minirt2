@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/24 18:24:19 by me               ###   ########.fr        #
+#    Updated: 2026/11/24 21:06:12 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,8 @@ MANDATORY	=	parsing/loop.c			\
 				main.c
 
 BONUS		=	parsing/loop_bonus.c		\
+				parsing/parse_co_bonus.c	\
+				parsing/obj_bonus.c	\
 				parsing/parse_line_bonus.c	\
 				rendering/checker_bonus.c	\
 				rendering/cy_checker_bonus.c	\

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 16:26:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 02:31:12 by me               ###   ########.fr       */
+/*   Updated: 2026/11/24 20:38:13 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,12 @@
 
 static char	**messages(void)
 {
-	static char	*tab[23] = {
+	static char	*tab[24] = {
 		"Bad color format",
 		"Bad element identifier",
 		"Bad field of view format",
-		"Bad ratio format",
-		"Bad vector format",
-		"Bad file extension",
-		"Color value out of range",
+		"Bad ratio format", "Bad vector format",
+		"Bad file extension", "Color value out of range",
 		"Invalid double value",
 		"Length must be strictly positive",
 		"Bad ambient light configuration",
@@ -42,6 +40,7 @@ static char	**messages(void)
 		"Light declared more than once",
 		"Missing ambient light", "Missing light", "Missing camera",
 		"Null vector", "Invalid double value",
+		"Bad plane configuration",
 	};
 
 	return (tab);

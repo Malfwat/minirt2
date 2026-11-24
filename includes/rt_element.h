@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 17:43:09 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 21:19:11 by me               ###   ########.fr       */
+/*   Updated: 2026/11/24 22:00:59 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_cy_eq
 {
 	double	s1;
 	double	s2;
+	double	a;
 	double	m;
 	double	k;
 	t_quad	q;
@@ -27,6 +28,18 @@ typedef struct s_cy_eq
 	t_vec3	cam_o;
 	t_vec3	ray_dir;
 }	t_cy_eq;
+
+typedef struct s_co_eq
+{
+	double	s1;
+	double	s2;
+	double	m;
+	double	k;
+	t_quad	q;
+	t_obj	*co;
+	t_vec3	cam_o;
+	t_vec3	ray_dir;
+}	t_co_eq;
 
 typedef bool	(*t_intersect)(t_obj *, t_vec3, t_vec3, t_hit *);
 
