@@ -42,7 +42,7 @@ fi
 ALL=$(find srcs -name '*.c' | sort)
 SET_M=$(echo "$ALL" | grep -v '_bonus\.c$' | grep -v 'srcs/main\.c$')
 SET_B=$(echo "$ALL" | grep -v 'srcs/main\.c$' | grep -v 'srcs/main_bonus\.c$' \
-	| grep -vE 'srcs/parsing/loop\.c$|srcs/parsing/parse_line\.c$|srcs/rendering/render\.c$|srcs/rendering/rt_mlx_loop\.c$')
+	| grep -vE 'srcs/parsing/loop\.c$|srcs/parsing/parse_line\.c$|srcs/rendering/render\.c$|srcs/rendering/rt_mlx_loop\.c$|srcs/rendering/get_final_color\.c$')
 
 build_set()
 {
