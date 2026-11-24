@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 17:43:09 by me                #+#    #+#             */
-/*   Updated: 2026/11/24 22:00:59 by me               ###   ########.fr       */
+/*   Updated: 2026/11/24 22:15:11 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ typedef struct s_cy_eq
 {
 	double	s1;
 	double	s2;
-	double	a;
 	double	m;
 	double	k;
 	t_quad	q;
@@ -33,8 +32,10 @@ typedef struct s_co_eq
 {
 	double	s1;
 	double	s2;
+	double	a;
 	double	m;
 	double	k;
+	t_vec3	u;
 	t_quad	q;
 	t_obj	*co;
 	t_vec3	cam_o;
@@ -46,9 +47,10 @@ typedef bool	(*t_intersect)(t_obj *, t_vec3, t_vec3, t_hit *);
 void		free_obj(t_obj *lst);
 void		free_light(t_light *lst);
 
-bool		cy_hit(t_obj *sp, t_vec3 d, t_vec3 o, t_hit *hit);
-bool		pl_hit(t_obj *sp, t_vec3 d, t_vec3 o, t_hit *hit);
+bool		cy_hit(t_obj *cy, t_vec3 d, t_vec3 o, t_hit *hit);
+bool		pl_hit(t_obj *pl, t_vec3 d, t_vec3 o, t_hit *hit);
 bool		sp_hit(t_obj *sp, t_vec3 d, t_vec3 o, t_hit *hit);
+bool		co_hit(t_obj *co, t_vec3 d, t_vec3 o, t_hit *hit);
 
 t_intersect	get_intersect_f(enum e_obj id);
 
