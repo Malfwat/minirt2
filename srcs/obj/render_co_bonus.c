@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/24 20:51:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/24 23:29:49 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 00:02:03 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_quad	co_quad(t_obj *co, t_vec3 d, t_vec3 o, t_co_eq *data)
 	return (q);
 }
 
-bool	check_root(double t, t_co_eq data, t_hit *hit)
+static bool	solve_co_lat(t_co_eq data, t_hit *tmp, double t)
 {
 	double	h;
 
@@ -42,17 +42,23 @@ bool	check_root(double t, t_co_eq data, t_hit *hit)
 	h = data.m + t * data.k;
 	if (h > data.co->height || h < 0)
 		return (false);
-	if (hit->t > t)
-		hit->t = t;
+	if (tmp->t < t)
+		return (false);
+	tmp->t = t;
+	tmp->p = add(data.cam_o, mult(data.ray_dir, tmp->t));
+	tmp->normal = sub(mult(sub(tmp->p, data.co->coordinate),
+				data.a), mult(data.co->vec, h));
+	tmp->normal = normalize(tmp->normal);
+	tmp->obj = data.co;
 	return (true);
 }
 
-static bool	ray_cast_disk(t_co_eq *data, t_hit *hit, t_vec3	disk_o, double denom)
+static bool	ray_cast_disk(t_co_eq *data, t_hit *hit, t_vec3	disk_o, double div)
 {
 	double	tmp;
 	t_vec3	p;
 
-	tmp = -scal(sub(data->cam_o, disk_o), data->co->vec) / denom;
+	tmp = -scal(sub(data->cam_o, disk_o), data->co->vec) / div;
 	if (tmp < 1e-4)
 		return (false);
 	p = add(data->cam_o, mult(data->ray_dir, tmp));
@@ -67,33 +73,23 @@ static bool	ray_cast_disk(t_co_eq *data, t_hit *hit, t_vec3	disk_o, double denom
 	return (true);
 }
 
-
 bool	solve_co_eq_disk(t_co_eq *data, t_hit *hit)
 {
-	bool	ret1;
-	bool	ret2;
-	t_vec3	o1;
-	t_vec3	o2;
+	t_vec3	o;
 	double	denom;
 
-	o1 = add(data->co->coordinate, mult(data->co->vec, data->co->height));
-	o2 = sub(data->co->coordinate, mult(data->co->vec, data->co->height));
+	o = add(data->co->coordinate, mult(data->co->vec, data->co->height));
 	denom = scal(data->ray_dir, data->co->vec);
 	if (fabs(denom) < 1e-4)
 		return (false);
-	ret1 = ray_cast_disk(data, hit, o1, denom);
-	ret2 = ray_cast_disk(data, hit, o2, denom);
-	return (ret2 || ret1);
+	return (ray_cast_disk(data, hit, o, denom));
 }
 
 bool	co_hit(t_obj *co, t_vec3 d, t_vec3 o, t_hit *hit)
 {
 	t_co_eq	data;
 	t_hit	tmp;
-	double	h;
-	bool	ret1;
-	bool	ret2;
-	bool	ret3;
+	bool	ret;
 
 	data.q = co_quad(co, d, o, &data);
 	data.ray_dir = d;
@@ -102,22 +98,15 @@ bool	co_hit(t_obj *co, t_vec3 d, t_vec3 o, t_hit *hit)
 	tmp.t = INFINITY;
 	if (!quad(data.q, &data.s1, &data.s2))
 		return (false);
-	ret1 = false;
-	ret2 = false;
-	ret3 = false;
-	if (check_root(data.s1, data, &tmp))
-		ret1 = true;
-	if (check_root(data.s2, data, &tmp))
-		ret2 = true;
+	ret = false;
+	if (solve_co_lat(data, &tmp, data.s1))
+		ret = true;
+	if (solve_co_lat(data, &tmp, data.s2))
+		ret = true;
 	if (solve_co_eq_disk(&data, &tmp))
-		ret3 = true;
-	if (!ret1 && !ret2 && !ret3)
+		ret = true;
+	if (!ret)
 		return (false);
-	hit->t = tmp.t;
-	hit->obj = co;
-	hit->p = add(o, mult(d, hit->t));
-	h = data.m + data.k * hit->t;
-	hit->normal = sub(mult(sub(hit->p, co->coordinate), data.a), mult(co->vec, h));
-	hit->normal = normalize(hit->normal);
+	*hit = tmp;
 	return (true);
 }

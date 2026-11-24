@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/24 23:18:20 by me               ###   ########.fr        #
+#    Updated: 2026/11/24 23:58:43 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ MANDATORY	=	parsing/loop.c			\
 				parsing/parse_line.c	\
 				rendering/rt_mlx_loop.c	\
 				rendering/get_final_color.c	\
+				obj/intersect.c			\
 				main.c
 
 BONUS		=	parsing/loop_bonus.c		\
@@ -85,6 +86,7 @@ BONUS		=	parsing/loop_bonus.c		\
 				rendering/rt_mlx_loop_bonus.c\
 				rendering/get_final_color_bonus.c	\
 				rendering/sem_utils_bonus.c\
+				obj/intersect_bonus.c	\
 				main_bonus.c
 
 BUILD	=	.build/
