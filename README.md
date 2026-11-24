@@ -16,12 +16,13 @@ colour, a duplicate camera or a missing mandatory element stops the program
 with an explicit error message.
 
 Beyond the mandatory part, the project adds specular highlights (Phong model),
-multiple spot lights of different colours, an adaptive anti-aliasing pass and a
-progressive display: the image is drawn across the whole window from the first
-rendering pass, in an interleaved order, so the scene is recognisable within the
-first second instead of staying black until the end. Rendering happens inside
-the MiniLibX event loop, one line at a time, which keeps the window responsive
-and lets `ESC` interrupt a running render cleanly.
+multiple spot lights of different colours, a checkerboard pattern on planes,
+spheres and cylinders, an adaptive anti-aliasing pass and a progressive display:
+the image is drawn across the whole window from the first rendering pass, in an
+interleaved order, so the scene is recognisable within the first second instead
+of staying black until the end. Rendering happens inside the MiniLibX event
+loop, one line at a time, which keeps the window responsive and lets `ESC`
+interrupt a running render cleanly.
 
 ## Instructions
 
@@ -64,17 +65,34 @@ cy 50,0,20.6 0,0,1 14.2 21.42 10,0,255  cylinder         centre, axis, diameter,
 
 The bonus binary accepts optional values at the end of an `sp`, `pl` or `cy`
 line, **in this order**: the specular intensity (in `[0,1]`), then the specular
-exponent (in `[1,1000]`). A plane accepts one extra value after those two: the
-checkerboard cell size, strictly positive, which turns the plane into a
-checkerboard. Absent, the plane keeps a plain colour.
+exponent (in `[1,1000]`), then the checkerboard cell size, strictly positive.
+Absent, the object keeps a plain colour; present, it becomes a checkerboard.
 
 ```
 sp -3,-0.3,1 2.6 208,56,54 0.85 90        specular only
-pl 0,0,0 0,1,0 255,0,225 0 0 2.5          checkerboard, cells of 2.5, no specular
-pl 0,0,0 0,1,0 255,0,225 0.8 60 2.5       specular and checkerboard
+pl 0,0,0 0,1,0 255,0,225 0 0 2.5          checkerboard, cells of 2.5
+sp 0,0,0 2 255,0,0 0.5 40 0.7            checkerboard with specular
+cy 0,0,0 0,1,0 1.7 4 96,200,162 0.7 45 0.5
 ```
 
-A plane line therefore takes 3, 5 or 6 fields — never 4, never more than 6.
+A plane line therefore takes 3, 5 or 6 fields, a sphere 3, 5 or 6 as well, and a
+cylinder 5, 7 or 8 — never anything in between.
+
+Cells are laid out in surface coordinates, not in world space, so they keep the
+same size all around the object:
+
+- **plane** — two in-plane axes divided by the cell size, squares everywhere;
+- **cylinder** — arc length around the barrel (`angle x radius`) and height
+  along the axis. The number of cells around the circumference is rounded to the
+  nearest **even** integer, so the pattern closes on itself: an odd count would
+  leave two neighbouring columns of the same colour where the surface wraps, and
+  the barrel would show one column twice as wide;
+- **sphere** — longitude and latitude, the classic equirectangular mapping.
+  Cells are square at the equator and narrow towards the poles, where the
+  meridians meet, as on a globe. Longitude is rounded to an even number of
+  columns for the same closing reason;
+- **cylinder caps** — a plain planar checkerboard in the cap plane, so both ends
+  match.
 
 ### Scenes shipped
 
@@ -84,7 +102,10 @@ A plane line therefore takes 3, 5 or 6 fields — never 4, never more than 6.
 | `scenes/valid/inside_sphere.rt` | camera inside a sphere, lit from outside |
 | `scenes/valid/inside_sphere_light.rt` | camera and light both inside a sphere |
 | `scenes/valid/inside_cylinder.rt` | camera inside a closed cylinder |
-| `scenes/bonus/presentation.rt` | specular highlights, three coloured spots, materials |
+| `scenes/bonus/presentation.rt` | everything at once: three coloured spots, hard shadows, specular, checkerboards on the plane, a sphere and the cylinder |
+| `scenes/bonus/checker.rt` | a single checkerboard floor and a sphere, one raking light |
+| `scenes/bonus/checker_multi.rt` | two checkers of different sizes and two coloured spots |
+| `scenes/bonus/multi_spot.rt`, `2spot.rt` | coloured and multi-spot lighting |
 | `scenes/hermes/*.rt` | deliberately broken scenes, one mistake each, used to check the error handling |
 
 ### Tests
