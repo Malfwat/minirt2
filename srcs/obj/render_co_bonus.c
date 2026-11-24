@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/24 20:51:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/24 22:31:21 by me               ###   ########.fr       */
+/*   Updated: 2026/11/24 22:55:10 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,26 @@ t_quad	co_quad(t_obj *co, t_vec3 d, t_vec3 o, t_co_eq *data)
 	return (q);
 }
 
+bool	check_root(double t, t_co_eq data, t_hit *hit)
+{
+	double	h;
+
+	if (t < 1e-4)
+		return (false);
+	h = data.m + t * data.k;
+	if (h > data.co->height || h < 0)
+		return (false);
+	if (hit->t > t)
+		hit->t = t;
+	return (true);
+}
+
 bool	co_hit(t_obj *co, t_vec3 d, t_vec3 o, t_hit *hit)
 {
 	t_co_eq	data;
 	t_hit	tmp;
-	double	h1;
-	double	h2;
-	double	res;
+	bool	ret1;
+	bool	ret2;
 
 	data.q = co_quad(co, d, o, &data);
 	data.ray_dir = d;
@@ -47,16 +60,16 @@ bool	co_hit(t_obj *co, t_vec3 d, t_vec3 o, t_hit *hit)
 	tmp.t = INFINITY;
 	if (!quad(data.q, &data.s1, &data.s2))
 		return (false);
-	h1 = data.m + data.s1 * data.k;
-	h2 = data.m + data.s1 * data.k;
-	res = min(h1, h2);
-	if (res > co->height)
+	ret1 = false;
+	ret2 = false;
+	if (check_root(data.s1, data, &tmp))
+		ret1 = true;
+	if (check_root(data.s2, data, &tmp))
+		ret2 = true;
+	if (!ret1 && !ret2)
 		return (false);
+	hit->t = tmp.t;
 	hit->obj = co;
-	if (h1 == res)
-		hit->t = data.s1;
-	else
-		hit->t = data.s2;
 	hit->p = add(o, mult(d, hit->t));
 	hit->normal = (t_vec3){0, 0, 0};
 	return (true);
