@@ -72,8 +72,12 @@ for test_file in tests/test_*.c; do
 	name=$(basename "$test_file" .c)
 	bin="$TMP/bin/$name"
 	linked=""
+	case "$name" in
+		*_bonus) sets="B" ;;
+		*)       sets="M B" ;;
+	esac
 
-	for set in M B; do
+	for set in $sets; do
 		if $CC $INC $CFLAGS "$test_file" "$TMP"/obj$set/*.o "$TMP/mlx_stub.o" \
 			-o "$bin" -lm -lpthread 2>/dev/null; then
 			linked=$set

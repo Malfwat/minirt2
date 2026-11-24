@@ -62,9 +62,19 @@ pl 0,0,0 0,1,0 255,0,225               plane            point, normal, colour
 cy 50,0,20.6 0,0,1 14.2 21.42 10,0,255  cylinder         centre, axis, diameter, height, colour
 ```
 
-The bonus binary accepts an optional pair of values at the end of a `sp`, `pl`
-or `cy` line: the specular intensity (in `[0,1]`) then the exponent (in
-`[1,1000]`), for example `sp -3,-0.3,1 2.6 208,56,54 0.85 90`.
+The bonus binary accepts optional values at the end of an `sp`, `pl` or `cy`
+line, **in this order**: the specular intensity (in `[0,1]`), then the specular
+exponent (in `[1,1000]`). A plane accepts one extra value after those two: the
+checkerboard cell size, strictly positive, which turns the plane into a
+checkerboard. Absent, the plane keeps a plain colour.
+
+```
+sp -3,-0.3,1 2.6 208,56,54 0.85 90        specular only
+pl 0,0,0 0,1,0 255,0,225 0 0 2.5          checkerboard, cells of 2.5, no specular
+pl 0,0,0 0,1,0 255,0,225 0.8 60 2.5       specular and checkerboard
+```
+
+A plane line therefore takes 3, 5 or 6 fields — never 4, never more than 6.
 
 ### Scenes shipped
 
