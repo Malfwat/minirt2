@@ -105,10 +105,12 @@ static void	test_barrel_axis(t_obj *o)
 	t_color	a;
 	t_color	b;
 	t_color	c;
+	double	s;
 
-	a = at_n(o, 1, 0.185, 0, (t_vec3){1, 0, 0});
-	b = at_n(o, 1, 0.685, 0, (t_vec3){1, 0, 0});
-	c = at_n(o, 1, 1.185, 0, (t_vec3){1, 0, 0});
+	s = o->checker_size;
+	a = at_n(o, 1, 0.37 * s, 0, (t_vec3){1, 0, 0});
+	b = at_n(o, 1, 1.37 * s, 0, (t_vec3){1, 0, 0});
+	c = at_n(o, 1, 2.37 * s, 0, (t_vec3){1, 0, 0});
 	ck("fut : meme point deux fois, meme case", same(a, a));
 	ck("fut : +1 cellule en hauteur change la case", !same(a, b));
 	ck("fut : +2 cellules en hauteur redonne la meme case", same(a, c));
@@ -120,11 +122,13 @@ static void	test_barrel_arc(t_obj *o)
 	t_color	b;
 	t_color	c;
 	double	th;
+	double	h;
 
 	th = o->checker_size / (o->diameter / 2.0);
-	a = at_n(o, 1, 0.185, 0, (t_vec3){1, 0, 0});
-	b = at_n(o, cos(th), 0.185, -sin(th), (t_vec3){cos(th), 0, -sin(th)});
-	c = at_n(o, cos(2 * th), 0.185, -sin(2 * th),
+	h = 0.37 * o->checker_size;
+	a = at_n(o, 1, h, 0, (t_vec3){1, 0, 0});
+	b = at_n(o, cos(th), h, -sin(th), (t_vec3){cos(th), 0, -sin(th)});
+	c = at_n(o, cos(2 * th), h, -sin(2 * th),
 		(t_vec3){cos(2 * th), 0, -sin(2 * th)});
 	ck("fut : +1 cellule en arc change la case", !same(a, b));
 	ck("fut : +2 cellules en arc redonne la meme case", same(a, c));
@@ -137,8 +141,8 @@ static void	test_barrel_seam(void)
 	t_color	b;
 
 	o8 = make_cy(2.0 * M_PI / 8.0, (t_vec3){0, 1, 0});
-	a = at_n(o8, 1, 0.185, 0, (t_vec3){1, 0, 0});
-	b = at_n(o8, -1, 0.185, 0, (t_vec3){-1, 0, 0});
+	a = at_n(o8, 1, 0.37 * o8->checker_size, 0, (t_vec3){1, 0, 0});
+	b = at_n(o8, -1, 0.37 * o8->checker_size, 0, (t_vec3){-1, 0, 0});
 	ck("fut : 8 cellules par tour, le point oppose est dans la meme case",
 		same(a, b));
 	free_obj(o8);
@@ -150,8 +154,8 @@ static void	test_barrel_translation(t_obj *o, t_obj *ot)
 	t_color	b;
 
 	ot->coordinate = (t_coordinate){10, 0, 0};
-	a = at_n(o, 1, 0.185, 0.3, (t_vec3){1, 0, 0});
-	b = at_n(ot, 11, 0.185, 0.3, (t_vec3){1, 0, 0});
+	a = at_n(o, 1, 0.37 * o->checker_size, 0.3, (t_vec3){1, 0, 0});
+	b = at_n(ot, 11, 0.37 * ot->checker_size, 0.3, (t_vec3){1, 0, 0});
 	ck("fut : deplacer le cylindre deplace le motif avec lui", same(a, b));
 }
 
@@ -166,12 +170,14 @@ static void	test_cap(t_obj *o)
 	t_color	c;
 	t_color	d;
 	t_vec3	axis;
+	double	sz;
 
 	axis = (t_vec3){0, 1, 0};
-	a = at_n(o, 0.185, 2, 0.185, axis);
-	b = at_n(o, 0.685, 2, 0.185, axis);
-	c = at_n(o, 0.185, 2, 0.685, axis);
-	d = at_n(o, 0.185, 2.5, 0.185, axis);
+	sz = o->checker_size;
+	a = at_n(o, 0.37 * sz, 2, 0.37 * sz, axis);
+	b = at_n(o, 1.37 * sz, 2, 0.37 * sz, axis);
+	c = at_n(o, 0.37 * sz, 2, 1.37 * sz, axis);
+	d = at_n(o, 0.37 * sz, 2 + sz, 0.37 * sz, axis);
 	ck("bouchon : +1 cellule en x change la case", !same(a, b));
 	ck("bouchon : +1 cellule en z change la case", !same(a, c));
 	ck("bouchon : avancer sur l'axe ne change pas la case", same(a, d));
@@ -260,10 +266,10 @@ int	main(void)
 	t_obj	*ot;
 	t_obj	*pl;
 
-	o = make_cy(0.5, (t_vec3){0, 1, 0});
-	ot = make_cy(0.5, (t_vec3){0, 1, 0});
+	o = make_cy(2.0 * M_PI / 12.0, (t_vec3){0, 1, 0});
+	ot = make_cy(2.0 * M_PI / 12.0, (t_vec3){0, 1, 0});
 	pl = make_pl(0.5);
-	printf("cylindre r=1, axe (0,1,0), cellule 0.5\n\n");
+	printf("cylindre r=1, axe (0,1,0), 12 cellules par tour\n\n");
 	test_barrel_axis(o);
 	test_barrel_arc(o);
 	test_barrel_seam();
