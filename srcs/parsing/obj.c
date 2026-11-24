@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/13 17:58:20 by me                #+#    #+#             */
-/*   Updated: 2026/11/19 20:42:32 by me               ###   ########.fr       */
+/*   Updated: 2026/11/24 12:11:58 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_err	get_pl(char *str, t_scene *sc)
 	p.addr[2] = &o.color;
 	p.addr[3] = &o.intensity;
 	p.addr[4] = &o.exposant;
+	p.addr[5] = &o.checker_size;
 	p.getting_f = get_pl_getter();
 	p.passing_f = get_pl_passer();
 	o.id = plan;

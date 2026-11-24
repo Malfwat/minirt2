@@ -6,13 +6,23 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/13 14:55:21 by me                #+#    #+#             */
-/*   Updated: 2026/11/13 23:36:14 by me               ###   ########.fr       */
+/*   Updated: 2026/11/24 12:14:58 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "str.h"
 #include "rt_struct.h"
 #include "rt_parsing.h"
+
+t_err	get_strict_positive_double(char *str, double *res)
+{
+	null_terminate_component(str);
+	if (!ft_atof(str, 5, res))
+		return (invalid_double_value);
+	if (*res <= 0)
+		return (invalid_length_value);
+	return (ok);
+}
 
 t_elem	get_elem(char *line)
 {

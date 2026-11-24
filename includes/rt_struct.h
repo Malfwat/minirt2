@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 18:53:51 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 21:28:59 by me               ###   ########.fr       */
+/*   Updated: 2026/11/24 12:08:03 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_obj
 	t_vec3			vec;
 	double			diameter;
 	double			height;
+	double			checker_size;
 
 	double			intensity;
 	double			exposant;
@@ -49,7 +50,7 @@ typedef struct s_obj
 	struct s_obj	*next;
 }	t_obj;
 
-# define NB_COMP 7
+# define NB_COMP 8
 
 typedef struct s_light
 {

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/19 20:35:18 by me               ###   ########.fr       */
+/*   Updated: 2026/11/24 12:15:19 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define CY "cy"
 
 # define SPECULAR 2
+# define CHECKER 1
 
 # include "rt_struct.h"
 # include "rt_error.h"
@@ -53,10 +54,12 @@ t_err				get_vec3(char *str, void *vec);
 t_err				get_ratio(char *str, void *ratio);
 t_err				get_color(char *str, void *color);
 t_err				get_fov(char *str, void *fov);
+t_err				get_strict_positive_double(char *str, double *res);
 t_err				get_height(char *str, void *res);
 t_err				get_diameter(char *str, void *res);
 t_err				get_exposant(char *str, void *res);
 t_err				get_intensity(char *str, void *res);
+t_err				get_checker_size(char *str, void *res);
 typedef t_err	(*t_getter)(char *, void *);
 
 t_getter			*get_cy_getter(void);
