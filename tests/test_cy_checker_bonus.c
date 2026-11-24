@@ -226,11 +226,19 @@ static void	test_sphere_azimut(t_obj *o)
 	t_color	b;
 	t_color	c;
 	double	s;
+	double	y;
 
+/*
+** Deux points de depart evites : y = 0 pile et l'azimut 0. Les deux tombent
+** sur une frontiere de cellule, ou le sens de l'arrondi decide du resultat.
+** On part donc decale d'une demi-cellule en longitude et legerement en
+** latitude.
+*/
 	s = o->checker_size;
-	a = at_n(o, 1, 0, 0, (t_vec3){1, 0, 0});
-	b = at_n(o, cos(s), 0, sin(s), (t_vec3){0, 0, 0});
-	c = at_n(o, cos(2 * s), 0, sin(2 * s), (t_vec3){0, 0, 0});
+	y = 0.13;
+	a = at_n(o, cos(0.5 * s), y, sin(0.5 * s), (t_vec3){0, y, 0});
+	b = at_n(o, cos(1.5 * s), y, sin(1.5 * s), (t_vec3){0, y, 0});
+	c = at_n(o, cos(2.5 * s), y, sin(2.5 * s), (t_vec3){0, y, 0});
 	ck("sphere : +1 cellule en longitude change la case", !same(a, b));
 	ck("sphere : +2 cellules en longitude redonne la meme case", same(a, c));
 }
