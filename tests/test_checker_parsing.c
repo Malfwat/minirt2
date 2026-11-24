@@ -1,0 +1,110 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test_checker_parsing.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/11/24 12:20:00 by me                #+#    #+#             */
+/*   Updated: 2026/11/24 12:20:00 by me               ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "rt_struct.h"
+#include "rt_error.h"
+#include "rt_parsing.h"
+#include "rt_element.h"
+
+#include <stdio.h>
+#include <string.h>
+
+t_err	get_pl(char *str, t_scene *sc);
+
+/*
+** Champ optionnel de taille de cellule du damier, sur la ligne pl.
+** Champs seuls, identifiant deja consomme :
+**   "0,0,-10 0,1,0 255,0,225"        pas de damier  -> checker_size = 0
+**   "0,0,-10 0,1,0 255,0,225 2.5"    damier, cellules de 2.5
+** Present, la valeur doit etre STRICTEMENT positive : 0, -1 et les chaines
+** non numeriques sont refusees. Absent, le champ reste a 0.
+** Les autres champs de la ligne restent valides avec le damier present.
+*/
+
+typedef struct s_ck_case
+{
+	const char	*input;
+	t_err		expected_err;
+	double		expected_size;
+	int			expected_nodes;
+}	t_ck_case;
+
+static int	check_node(t_obj *o, t_ck_case c)
+{
+	if (!o || o->id != plan)
+		return (1);
+	if (o->checker_size != c.expected_size)
+		return (1);
+	return (0);
+}
+
+static int	run_case(t_ck_case c, int index)
+{
+	char		buf[160];
+	t_scene		sc;
+	t_err		err;
+	int			nodes;
+	int			bad;
+	t_obj		*o;
+
+	memset(&sc, 0, sizeof(sc));
+	strcpy(buf, c.input);
+	err = get_pl(buf, &sc);
+	nodes = 0;
+	o = sc.obj_lst;
+	while (o)
+	{
+		nodes++;
+		o = o->next;
+	}
+	bad = (err != c.expected_err);
+	if (!bad && err == ok)
+		bad = (nodes != c.expected_nodes) || check_node(sc.obj_lst, c);
+	printf("%-3d %-5s \"%-28s\" attendu=(%d, %.3f, %d) obtenu=(%d, %.3f, %d)\n",
+		index, bad ? "FAIL" : "ok", c.input, (int)c.expected_err,
+		c.expected_size, c.expected_nodes, (int)err,
+		sc.obj_lst ? sc.obj_lst->checker_size : 0.0, nodes);
+	free_obj(sc.obj_lst);
+	return (bad);
+}
+
+int	main(void)
+{
+	static const t_ck_case	cases[] = {
+	{"0,0,-10 0,1,0 255,0,225", ok, 0.0, 1},
+	{"0,0,-10 0,1,0 255,0,225 2.5", ok, 2.5, 1},
+	{"0,0,-10 0,1,0 255,0,225 1", ok, 1.0, 1},
+	{"0,0,-10 0,1,0 255,0,225 0.001", ok, 0.001, 1},
+	{"0,0,-10 0,1,0 255,0,225   2.5", ok, 2.5, 1},
+	{"0,0,-10 0,1,0 255,0,225 2.5\n", ok, 2.5, 1},
+	{"0,0,-10 0,1,0 255,0,225 0", bad_pl_config, 0.0, 0},
+	{"0,0,-10 0,1,0 255,0,225 -1", bad_pl_config, 0.0, 0},
+	{"0,0,-10 0,1,0 255,0,225 -0.5", bad_pl_config, 0.0, 0},
+	{"0,0,-10 0,1,0 255,0,225 abc", bad_pl_config, 0.0, 0},
+	{"0,0,-10 0,1,0 255,0,225 1 2", bad_pl_config, 0.0, 0},
+	{"0,0,-10 0,0,0 255,0,225 2", vector_null, 0.0, 0},
+	{"0,0,-10 0,1,0 300,0,0 2", invalid_color_value, 0.0, 0},
+	{NULL, ok, 0.0, 0}
+	};
+	int						failures;
+	int						i;
+
+	failures = 0;
+	i = 0;
+	while (cases[i].input)
+	{
+		failures += run_case(cases[i], i);
+		i++;
+	}
+	printf("\n%d cas en echec sur %d\n", failures, i);
+	return (failures != 0);
+}
