@@ -79,17 +79,6 @@ static t_obj	*make_pl(double size)
 	return (o);
 }
 
-static t_color	at(t_obj *o, double x, double y, double z)
-{
-	t_hit	hit;
-
-	hit.obj = o;
-	hit.t = 0;
-	hit.p = (t_vec3){x, y, z};
-	hit.normal = (t_vec3){0, 0, 0};
-	return (checker_color(hit, o));
-}
-
 static t_color	at_n(t_obj *o, double x, double y, double z, t_vec3 n)
 {
 	t_hit	hit;
@@ -214,6 +203,57 @@ static void	test_plane_regression(t_obj *pl)
 	ck("plan : +2 cellules redonne la meme case", same(a, c));
 }
 
+/*
+** Fermeture du tour : les colonnes doivent etre egalement reparties sur la
+** circonference. Une colonne coupee, ou deux colonnes voisines de meme
+** couleur au raccord, produisent un ecart deux fois plus large que les
+** autres. C'est ce que ce test mesure, sans avoir besoin de connaitre n.
+*/
+static void	test_barrel_closed(void)
+{
+	t_obj	*o;
+	t_color	prev;
+	t_color	cur;
+	int		idx[4100];
+	int		pos[4100];
+	int		nb;
+	int		i;
+	int		n;
+	int		mini;
+	int		maxi;
+
+	o = make_cy(0.5, (t_vec3){0, 1, 0});
+	n = 3600;
+	nb = 0;
+	prev = at_n(o, 1, 0.185, 0, (t_vec3){1, 0, 0});
+	i = 0;
+	while (++i < n)
+	{
+		cur = at_n(o, cos(2 * M_PI * i / n), 0.185,
+			sin(2 * M_PI * i / n), (t_vec3){1, 0, 0});
+		if (!same(prev, cur))
+			idx[nb++] = i;
+		prev = cur;
+	}
+	i = -1;
+	while (++i < nb - 1)
+		pos[i] = idx[i + 1] - idx[i];
+	pos[nb - 1] = n - idx[nb - 1] + idx[0];
+	mini = pos[0];
+	maxi = pos[0];
+	i = -1;
+	while (++i < nb)
+	{
+		mini = (pos[i] < mini) ? pos[i] : mini;
+		maxi = (pos[i] > maxi) ? pos[i] : maxi;
+	}
+	printf("    (%d colonnes, ecart min %d max %d sur %d points)\n",
+		nb, mini, maxi, n);
+	ck("fut : les colonnes sont egalement reparties sur le tour",
+		nb >= 4 && maxi - mini <= 2);
+	free_obj(o);
+}
+
 int	main(void)
 {
 	t_obj	*o;
@@ -230,6 +270,7 @@ int	main(void)
 	test_barrel_translation(o, ot);
 	test_cap(o);
 	test_dispatch();
+	test_barrel_closed();
 	test_plane_regression(pl);
 	free_obj(o);
 	free_obj(ot);
