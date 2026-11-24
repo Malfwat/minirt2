@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/24 16:27:18 by me                #+#    #+#             */
-/*   Updated: 2026/11/24 16:36:07 by me               ###   ########.fr       */
+/*   Updated: 2026/11/24 16:42:27 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_color	cy_checker(t_hit hit, t_obj *obj)
 	hit_axes = get_system(obj->vec);
 	u = atan2(scal(d, hit_axes.y), scal(d, hit_axes.x)) * obj->diameter / 2;
 	u /= obj->checker_size;
-	v = scal(d, obj->vec);
+	v = scal(d, obj->vec) / obj->checker_size;
 	c = obj->color;
 	if ((int)(floor(u) + floor(v)) % 2 != 0)
 		return ((t_color){c.r * DARKEN, c.g * DARKEN, c.b * DARKEN});
