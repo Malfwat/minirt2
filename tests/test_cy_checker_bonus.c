@@ -66,6 +66,20 @@ static t_obj	*make_cy(double size, t_vec3 axis)
 	return (o);
 }
 
+static t_obj	*make_sp(double size)
+{
+	t_obj	*o;
+
+	o = calloc(1, sizeof(t_obj));
+	o->id = sphere;
+	o->coordinate = (t_coordinate){0, 0, 0};
+	o->vec = (t_vec3){0, 0, 0};
+	o->diameter = 2.0;
+	o->checker_size = size;
+	o->color = (t_color){200, 100, 50};
+	return (o);
+}
+
 static t_obj	*make_pl(double size)
 {
 	t_obj	*o;
@@ -183,17 +197,60 @@ static void	test_cap(t_obj *o)
 	ck("bouchon : avancer sur l'axe ne change pas la case", same(a, d));
 }
 
-static void	test_dispatch(void)
+/*
+** La sphere se parametre par deux angles : une latitude (polaire) et une
+** longitude (azimut). Une cellule vaut checker_size dans les deux sens a
+** l'equateur. L'axe de reference est le vertical du monde : le champ vec
+** d'une sphere est nul et get_system y donnerait du NaN.
+*/
+static void	test_sphere_latitude(t_obj *o)
 {
-	t_obj	*sp;
+	t_color	a;
+	t_color	b;
 	t_color	c;
+	double	s;
+	double	p;
 
-	sp = make_cy(0.5, (t_vec3){0, 1, 0});
-	sp->id = sphere;
-	c = at_n(sp, 1, 0.185, 0, (t_vec3){1, 0, 0});
-	ck("sphere : aucun damier, la couleur brute est rendue",
-		same(c, sp->color));
-	free_obj(sp);
+	s = o->checker_size;
+	p = 0.37 * s;
+	a = at_n(o, sin(p), cos(p), 0, (t_vec3){sin(p), cos(p), 0});
+	b = at_n(o, sin(p + s), cos(p + s), 0, (t_vec3){0, 0, 0});
+	c = at_n(o, sin(p + 2 * s), cos(p + 2 * s), 0, (t_vec3){0, 0, 0});
+	ck("sphere : +1 cellule en latitude change la case", !same(a, b));
+	ck("sphere : +2 cellules en latitude redonne la meme case", same(a, c));
+}
+
+static void	test_sphere_azimut(t_obj *o)
+{
+	t_color	a;
+	t_color	b;
+	t_color	c;
+	double	s;
+
+	s = o->checker_size;
+	a = at_n(o, 1, 0, 0, (t_vec3){1, 0, 0});
+	b = at_n(o, cos(s), 0, sin(s), (t_vec3){0, 0, 0});
+	c = at_n(o, cos(2 * s), 0, sin(2 * s), (t_vec3){0, 0, 0});
+	ck("sphere : +1 cellule en longitude change la case", !same(a, b));
+	ck("sphere : +2 cellules en longitude redonne la meme case", same(a, c));
+}
+
+/*
+** Au pole, acos depasse [-1, 1] des que l'arrondi fait sortir le point de la
+** sphere : sans bornage, la couleur n'est ni l'une ni l'autre des deux
+** couleurs du damier.
+*/
+static void	test_sphere_pole(t_obj *o)
+{
+	t_color	c;
+	t_color	light;
+	t_color	dark;
+
+	c = at_n(o, 0, 1.0000001, 0, (t_vec3){0, 1, 0});
+	light = o->color;
+	dark = (t_color){light.r * DARKEN, light.g * DARKEN, light.b * DARKEN};
+	ck("sphere : un point au-dela du pole rend une couleur du damier",
+		same(c, light) || same(c, dark));
 }
 
 static void	test_plane_regression(t_obj *pl)
@@ -265,22 +322,27 @@ int	main(void)
 	t_obj	*o;
 	t_obj	*ot;
 	t_obj	*pl;
+	t_obj	*sp;
 
 	o = make_cy(2.0 * M_PI / 12.0, (t_vec3){0, 1, 0});
 	ot = make_cy(2.0 * M_PI / 12.0, (t_vec3){0, 1, 0});
 	pl = make_pl(0.5);
+	sp = make_sp(2.0 * M_PI / 12.0);
 	printf("cylindre r=1, axe (0,1,0), 12 cellules par tour\n\n");
 	test_barrel_axis(o);
 	test_barrel_arc(o);
 	test_barrel_seam();
 	test_barrel_translation(o, ot);
 	test_cap(o);
-	test_dispatch();
+	test_sphere_latitude(sp);
+	test_sphere_azimut(sp);
+	test_sphere_pole(sp);
 	test_barrel_closed();
 	test_plane_regression(pl);
 	free_obj(o);
 	free_obj(ot);
 	free_obj(pl);
+	free_obj(sp);
 	printf("\n%d cas en echec\n", g_fail);
 	return (g_fail != 0);
 }
