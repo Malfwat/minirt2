@@ -6,13 +6,14 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/24 20:51:24 by me                #+#    #+#             */
-/*   Updated: 2026/11/24 22:55:10 by me               ###   ########.fr       */
+/*   Updated: 2026/11/24 23:03:47 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_element.h"
 #include "rt_math.h"
 #include "rt_struct.h"
+#include "rt_render.h"
 
 #include <math.h>
 
@@ -50,6 +51,7 @@ bool	co_hit(t_obj *co, t_vec3 d, t_vec3 o, t_hit *hit)
 {
 	t_co_eq	data;
 	t_hit	tmp;
+	double	h;
 	bool	ret1;
 	bool	ret2;
 
@@ -71,6 +73,8 @@ bool	co_hit(t_obj *co, t_vec3 d, t_vec3 o, t_hit *hit)
 	hit->t = tmp.t;
 	hit->obj = co;
 	hit->p = add(o, mult(d, hit->t));
-	hit->normal = (t_vec3){0, 0, 0};
+	h = data.m + data.k * hit->t;
+	hit->normal = sub(mult(sub(hit->p, co->coordinate), data.a), mult(co->vec, h));
+	hit->normal = normalize(hit->normal);
 	return (true);
 }
