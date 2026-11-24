@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/13 23:51:11 by me                #+#    #+#             */
-/*   Updated: 2026/11/24 21:03:08 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 00:14:12 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ t_parse_functions	get_parsefunc(t_elem elem)
 		return (get_sp);
 	if (elem == cylinder)
 		return (get_cy);
+	if (elem == plan)
+		return (get_pl);
 	return (get_co);
 }
 
