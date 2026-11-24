@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/13 17:58:20 by me                #+#    #+#             */
-/*   Updated: 2026/11/24 12:11:58 by me               ###   ########.fr       */
+/*   Updated: 2026/11/24 13:41:22 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ t_err	get_cy(char *str, t_scene *sc)
 	p.addr[4] = &o.color;
 	p.addr[5] = &o.intensity;
 	p.addr[6] = &o.exposant;
+	p.addr[7] = &o.checker_size;
 	p.getting_f = get_cy_getter();
 	p.passing_f = get_cy_passer();
 	o.id = cylinder;
