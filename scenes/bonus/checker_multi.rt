@@ -1,0 +1,13 @@
+# Deux damiers d'echelles differentes, deux lumieres colorees, un speculaire.
+# Le sol a des cellules de 1, le mur du fond de 0.5 : meme formule, deux echelles.
+A 0.1 180,180,200
+
+C 0,1.5,-8 0,-0.08,1 60
+
+L -8,6,-3 0.7 255,235,210
+
+L 8,5,2 0.5 110,150,255
+
+pl 0,-2,0 0,1,0 240,240,240 0 0 1
+pl 0,0,7 0,0,-1 200,200,235 0.7 40 0.5
+sp 0,0,-1 2.6 230,90,60 0.9 120

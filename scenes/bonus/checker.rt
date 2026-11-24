@@ -1,0 +1,10 @@
+# Damier simple : un sol a damier, une sphere posee dessus, une lumiere rasante.
+# Les cellules font 1.5 unite, la lumiere venant de la gauche allonge les ombres.
+A 0.15 255,255,255
+
+C 0,1.2,-8 0,-0.1,1 60
+
+L -6,7,-4 0.7 255,255,255
+
+pl 0,-1.5,0 0,1,0 235,235,235 0 0 1.5
+sp 0,0.2,0 3 200,60,60
