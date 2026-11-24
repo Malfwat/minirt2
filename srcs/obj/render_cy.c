@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/18 23:17:07 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 21:21:08 by me               ###   ########.fr       */
+/*   Updated: 2026/11/24 23:22:43 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_quad	cy_quad(t_obj *cy, t_vec3 d, t_vec3 o, t_cy_eq *data)
 	return (q);
 }
 
-bool	ray_cast_disk(t_cy_eq *data, t_hit *hit, t_vec3	disk_o, double denom)
+static bool	ray_cast_disk(t_cy_eq *data, t_hit *hit, t_vec3	disk_o, double denom)
 {
 	double	tmp;
 	t_vec3	p;

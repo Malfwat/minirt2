@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/24 22:12:10 by me               ###   ########.fr        #
+#    Updated: 2026/11/24 23:18:20 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME_BONUS	=	miniRT_bonus
 
 CC		=	cc
 
-CFLAGS	=	-Wall -Wextra -Werror -MMD -MP  # -g 
+CFLAGS	=	-Wall -Wextra -Werror -MMD -MP  -g 
 
 MLX		=	lmlx_Linux
 
