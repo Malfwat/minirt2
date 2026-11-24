@@ -6,11 +6,12 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 22:21:54 by me                #+#    #+#             */
-/*   Updated: 2026/11/24 13:09:13 by me               ###   ########.fr       */
+/*   Updated: 2026/11/24 13:25:08 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "str.h"
+#include "rt_config.h"
 #include "rt_render.h"
 #include "rt_struct.h"
 
@@ -53,16 +54,16 @@ t_color	checker_color(t_hit hit, t_obj *obj)
 {
 	double	u;
 	double	v;
-	int	ttl;
+	t_color	c;
 	t_axes	hit_axes;
 
 	hit_axes = get_system(hit.normal);
 	u = scal(sub(hit.p, obj->coordinate), hit_axes.x) / obj->checker_size;
 	v = scal(sub(hit.p, obj->coordinate), hit_axes.y) / obj->checker_size;
-	ttl = floor(u) + floor(v);
-	if (ttl % 2 != 0)
-		return ((t_color){0, 0, 0});
-	return (obj->color);
+	c = obj->color;
+	if ((int)(floor(u) + floor(v)) % 2 != 0)
+		return ((t_color){c.r * DARKEN, c.g * DARKEN, c.b * DARKEN});
+	return (c);
 }
 
 t_color	get_final_color(t_hit hit, t_scene *sc)
@@ -72,10 +73,12 @@ t_color	get_final_color(t_hit hit, t_scene *sc)
 	t_color	b;
 	t_obj	local;
 
-	local = *hit.obj;
-	hit.obj = &local;
 	if (hit.obj->checker_size)
+	{
+		local = *hit.obj;
+		hit.obj = &local;
 		hit.obj->color = checker_color(hit, hit.obj);
+	}
 	a = mult_color_light(hit.obj->color, sc->amb, 1);
 	ft_bzero(&b, sizeof(b));
 	l = sc->light_lst;
