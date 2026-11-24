@@ -1,0 +1,33 @@
+# Vitrine 2 : damier vu de haut, objets poses chacun au centre d'une case.
+#
+# Cellule de 1.4 unite, sol d'origine 0,0,0. Les centres de cases sont les
+# multiples impairs de 0.7. Le repere du plan est celui que construit
+# get_system sur la normale (0,1,0) : axes.x = (0,0,1) et axes.y = (1,0,0),
+# donc la parite du damier vaut floor(x / 1.4) + floor(z / 1.4), et la case est
+# sombre quand cette somme est impaire.
+#
+# Cinq spheres sur case SOMBRE : (-2.1,-0.7) (0.7,-0.7) (-0.7,0.7) (2.1,0.7) (-2.1,2.1)
+# Trois cylindres sur case CLAIRE : (-3.5,-0.7) (3.5,0.7) (2.1,2.1)
+#
+# Variations : damier ou couleur unie, speculaire nul, large ou serre, huit
+# teintes pastel.
+A 0.20 235,238,245
+
+C 0,5.5,-8.5 0,-0.47,0.883 56
+
+L -6,7,-5 0.85 255,235,215
+L 7,6,-3 0.60 200,225,255
+L 0,5,4 0.45 255,205,225
+
+pl 0,0,0 0,1,0 132,136,150 0 0 1.4
+pl 0,0,6 0,0,-1 62,66,80
+
+sp -2.1,0.55,-0.7 1.10 246,199,203 0.90 120 0.55
+sp 0.7,0.50,-0.7 1.00 214,200,240 0.35 25
+sp -0.7,0.55,0.7 1.10 197,231,205 0 0 0.50
+sp 2.1,0.50,0.7 1.00 194,220,245 0.90 200
+sp -2.1,0.55,2.1 1.10 246,236,197 0.50 40
+
+cy -3.5,0.95,-0.7 0,1,0 0.60 1.90 244,193,183 0.70 60 0.35
+cy 3.5,0.65,0.7 0,1,0 0.50 1.30 200,224,197 0.40 30
+cy 2.1,1.05,2.1 0,1,0 0.60 2.10 238,222,199 0 0 0.38
