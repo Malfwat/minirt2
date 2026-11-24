@@ -19,6 +19,6 @@
 # define HEIGHT 1080
 # define AA 4
 # define PERIOD 200000
-# define DARKEN 0.4
+# define DARKEN 0.33
 
 #endif /*RT_CONFIG_H*/
