@@ -2,7 +2,7 @@
 # Le sol a des cellules de 1, le mur du fond de 0.5 : meme formule, deux echelles.
 A 0.1 180,180,200
 
-C 0,1.5,-8 0,-0.08,1 60
+C 0,1.5,-18 0,-0.08,1 60
 
 L -8,6,-3 0.7 255,235,210
 

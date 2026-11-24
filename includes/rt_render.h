@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 21:02:08 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 21:36:44 by me               ###   ########.fr       */
+/*   Updated: 2026/11/24 16:36:35 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,5 +173,8 @@ t_color			get_pxl_color(t_scene *sc, t_graphics *d, double x, double y);
 ** @return true when an object is hit before the limit
 */
 bool			cast_ray(t_scene *sc, t_cast data, t_hit *ptr);
+
+t_color			checker_color(t_hit hit, t_obj *obj);
+t_color			get_final_color(t_hit hit, t_scene *sc);
 
 #endif /*RT_RENDER_H*/

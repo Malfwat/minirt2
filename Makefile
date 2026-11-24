@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/22 23:14:35 by me               ###   ########.fr        #
+#    Updated: 2026/11/24 16:35:49 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,13 +70,16 @@ SRCS	+=	obj/obj_utils.c obj/render_sp.c obj/render_cy.c obj/render_pl.c
 MANDATORY	=	parsing/loop.c			\
 				parsing/parse_line.c	\
 				rendering/rt_mlx_loop.c	\
+				rendering/get_final_color.c	\
 				main.c
 
 BONUS		=	parsing/loop_bonus.c		\
 				parsing/parse_line_bonus.c	\
+				rendering/checker_bonus.c	\
 				rendering/render_bonus.c	\
 				rendering/thread_bonus.c	\
 				rendering/rt_mlx_loop_bonus.c\
+				rendering/get_final_color_bonus.c	\
 				rendering/sem_utils_bonus.c\
 				main_bonus.c
 
