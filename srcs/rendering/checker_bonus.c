@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/24 16:27:18 by me                #+#    #+#             */
-/*   Updated: 2026/11/24 17:57:14 by me               ###   ########.fr       */
+/*   Updated: 2026/11/24 18:00:22 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static void	get_uv(t_hit hit, t_obj *obj, double *u, double *v)
 	n = 2 * round(tour / (2 * obj->checker_size));
 	if (n < 2)
 		n = 2;
-	n = round(tour / obj->checker_size);
 	*u = (atan2(scal(d, h_axes.y), scal(d, h_axes.x)) + M_PI) / (2 * M_PI) * n;
 	*v = scal(d, obj->vec) / (tour / n);
 }
