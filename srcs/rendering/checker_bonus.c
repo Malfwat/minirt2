@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/24 16:27:18 by me                #+#    #+#             */
-/*   Updated: 2026/11/24 18:00:22 by me               ###   ########.fr       */
+/*   Updated: 2026/11/24 18:24:59 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,40 +31,30 @@ t_color	pl_checker(t_hit hit, t_obj *obj)
 	return (c);
 }
 
-t_color	disk_checker(t_hit hit, t_obj *obj)
+static void	get_uv_sp(t_hit hit, t_obj *obj, double *u, double *v)
 {
-	return (pl_checker(hit, obj));
-}
-
-static void	get_uv(t_hit hit, t_obj *obj, double *u, double *v)
-{
-	double	tour;
-	t_vec3	d;
-	t_axes	h_axes;
+	double	pol;
+	double	azim;
 	double	n;
+	t_vec3	d;
+	double	tour;
 
-	d = sub(hit.p, obj->coordinate);
-	h_axes = get_system(obj->vec);
 	tour = M_PI * obj->diameter;
+	d = sub(hit.p, obj->coordinate);
 	n = 2 * round(tour / (2 * obj->checker_size));
-	if (n < 2)
-		n = 2;
-	*u = (atan2(scal(d, h_axes.y), scal(d, h_axes.x)) + M_PI) / (2 * M_PI) * n;
-	*v = scal(d, obj->vec) / (tour / n);
+	pol = acos(d.y / (obj->diameter / 2));
+	azim = atan2(d.z, d.x);
+	*u = (azim + M_PI) / (2 * M_PI) * n;
+	*v = pol * (obj->diameter / 2) / (tour / n);
 }
 
-t_color	cy_checker(t_hit hit, t_obj *obj)
+t_color	sp_checker(t_hit hit, t_obj *obj)
 {
+	t_color	c;
 	double	u;
 	double	v;
-	t_color	c;
 
-	if (1 - fabs(scal(hit.normal, obj->vec)) < 1e-2)
-	{
-		hit.normal = obj->vec;
-		return (disk_checker(hit, obj));
-	}
-	get_uv(hit, obj, &u, &v);
+	get_uv_sp(hit, obj, &u, &v);
 	c = obj->color;
 	if ((int)(floor(u) + floor(v)) % 2 != 0)
 		return ((t_color){c.r * DARKEN, c.g * DARKEN, c.b * DARKEN});
@@ -77,5 +67,7 @@ t_color	checker_color(t_hit hit, t_obj *obj)
 		return (pl_checker(hit, obj));
 	else if (obj->id == cylinder)
 		return (cy_checker(hit, obj));
+	else if (obj->id == sphere)
+		return (sp_checker(hit, obj));
 	return (obj->color);
 }
