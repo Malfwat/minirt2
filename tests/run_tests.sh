@@ -73,7 +73,7 @@ for test_file in tests/test_*.c; do
 	bin="$TMP/bin/$name"
 	linked=""
 	case "$name" in
-		*_bonus) sets="B" ;;
+		*_bonus) sets="B M" ;;
 		*)       sets="M B" ;;
 	esac
 
