@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/24 18:20:39 by me                #+#    #+#             */
-/*   Updated: 2026/11/24 18:22:27 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 00:49:01 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,39 @@ t_color	cy_checker(t_hit hit, t_obj *obj)
 		return (disk_checker(hit, obj));
 	}
 	get_uv_cy(hit, obj, &u, &v);
+	c = obj->color;
+	if ((int)(floor(u) + floor(v)) % 2 != 0)
+		return ((t_color){c.r * DARKEN, c.g * DARKEN, c.b * DARKEN});
+	return (c);
+}
+
+static void	get_uv_co(t_hit hit, t_obj *obj, double *u, double *v)
+{
+	double	azim;
+	double	n;
+	t_vec3	d;
+	double	tour;
+
+	tour = M_PI * obj->diameter;
+	d = sub(hit.p, obj->coordinate);
+	n = 2 * round(tour / (2 * obj->checker_size));
+	azim = atan2(d.z, d.x);
+	*u = (azim + M_PI) / (2 * M_PI) * n;
+	*v = get_norme(d) / (tour / n);
+}
+
+t_color	co_checker(t_hit hit, t_obj *obj)
+{
+	double	u;
+	double	v;
+	t_color	c;
+
+	if (1 - fabs(scal(hit.normal, obj->vec)) < 1e-2)
+	{
+		hit.normal = obj->vec;
+		return (disk_checker(hit, obj));
+	}
+	get_uv_co(hit, obj, &u, &v);
 	c = obj->color;
 	if ((int)(floor(u) + floor(v)) % 2 != 0)
 		return ((t_color){c.r * DARKEN, c.g * DARKEN, c.b * DARKEN});

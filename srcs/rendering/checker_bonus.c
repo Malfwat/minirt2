@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/24 16:27:18 by me                #+#    #+#             */
-/*   Updated: 2026/11/24 18:24:59 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 00:35:44 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,7 @@ t_color	checker_color(t_hit hit, t_obj *obj)
 		return (cy_checker(hit, obj));
 	else if (obj->id == sphere)
 		return (sp_checker(hit, obj));
+	else if (obj->id == cone)
+		return (co_checker(hit, obj));
 	return (obj->color);
 }
