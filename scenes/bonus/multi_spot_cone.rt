@@ -1,0 +1,20 @@
+# Trois lumieres ponctuelles, dont deux colorees, pour lire les couleurs sur des
+# surfaces neutres : rouge a gauche, bleue a droite, blanche derriere la camera.
+#
+# Copie de multi_spot.rt : la sphere du milieu laisse la place a un cone de meme
+# emprise au sol (base de rayon 1,7, un peu plus large et plus haute que la sphere), pointe en
+# haut. Les deux
+# spheres de cote restent pour comparer les ombres d'une sphere et d'un cone
+# sous le meme eclairage.
+A 0.08 255,255,255
+
+C 0,0,-15 0,0,1 70
+
+L -10,10,2 0.8 255,0,0
+L 10,10,2 0.8 0,0,255
+L 0,10,-15 0.8 255,0,0
+
+pl 0,-2,0 0,1,0 220,220,220
+co 0,2,4 0,-1,0 3.4 4 255,255,255
+sp -7,0,7 4 220,220,220
+sp 7,0,7 4 220,220,220

@@ -107,6 +107,7 @@ same size all around the object:
 | `scenes/bonus/checker.rt` | a single checkerboard floor and a sphere, one raking light |
 | `scenes/bonus/checker_multi.rt` | two checkers of different sizes and two coloured spots |
 | `scenes/bonus/multi_spot.rt`, `2spot.rt` | coloured and multi-spot lighting |
+| `scenes/bonus/multi_spot_cone.rt` | same lighting, the middle sphere replaced by a cone of the same footprint |
 | `scenes/hermes/*.rt` | deliberately broken scenes, one mistake each, used to check the error handling |
 
 ### Tests
