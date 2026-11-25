@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/25 21:58:44 by me               ###   ########.fr        #
+#    Updated: 2026/11/25 22:38:40 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,9 @@ SRCS	+=	parsing/open_scene.c\
 			parsing/getter_utils.c	\
 			parsing/parse_utils.c		\
 			parsing/pass.c		\
+			parsing/parse_bump.c\
+			parsing/parse_ppm.c	\
+			parsing/ppm_utils.c	\
 			parsing/vector.c	\
 			parsing/parse_color.c
 
@@ -78,9 +81,6 @@ BONUS		=	parsing/loop_bonus.c		\
 				parsing/parse_co_bonus.c	\
 				parsing/obj_bonus.c	\
 				parsing/parse_line_bonus.c	\
-				parsing/parse_bump_bonus.c	\
-				parsing/parse_ppm_bonus.c	\
-				parsing/ppm_utils_bonus.c	\
 				rendering/checker_bonus.c	\
 				rendering/cy_checker_bonus.c	\
 				rendering/render_bonus.c	\
