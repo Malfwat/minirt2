@@ -65,8 +65,10 @@ cy 50,0,20.6 0,0,1 14.2 21.42 10,0,255  cylinder         centre, axis, diameter,
 
 The bonus binary accepts optional values at the end of an `sp`, `pl` or `cy`
 line, **in this order**: the specular intensity (in `[0,1]`), then the specular
-exponent (in `[1,1000]`), then the checkerboard cell size, strictly positive.
-Absent, the object keeps a plain colour; present, it becomes a checkerboard.
+exponent (in `[1,1000]`), then the checkerboard cell size. Below zero the size is
+rejected (`invalid_length_value`); at zero the object keeps a plain colour, which is
+how you write a texture without a checkerboard; above zero the object becomes a
+checkerboard. Absent, the field stays at zero.
 
 ```
 sp -3,-0.3,1 2.6 208,56,54 0.85 90        specular only

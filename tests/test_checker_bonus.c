@@ -31,7 +31,7 @@ t_err	get_pl(char *str, t_scene *sc);
 **
 ** Present, la taille doit etre STRICTEMENT positive. Une chaine non numerique
 ** donne invalid_double_value, une valeur nulle ou negative donne
-** invalid_length_value. Absente, le champ reste a 0.
+** negative : invalid_length_value. Zero : pas de damier. Absente : 0 aussi.
 ** Quatre champs, ou sept, sont refuses.
 */
 
@@ -95,7 +95,7 @@ int	main(void)
 	{"0,0,-10 0,1,0 255,0,225 0 0 2.5", ok, 2.5, 0.0, 1},
 	{"0,0,-10 0,1,0 255,0,225 0 0 0.001", ok, 0.001, 0.0, 1},
 	{"0,0,-10 0,1,0 255,0,225 0 0 2.5\n", ok, 2.5, 0.0, 1},
-	{"0,0,-10 0,1,0 255,0,225 0 0 0", invalid_length_value, 0.0, 0.0, 0},
+	{"0,0,-10 0,1,0 255,0,225 0 0 0", ok, 0.0, 0.0, 1},
 	{"0,0,-10 0,1,0 255,0,225 0 0 -1", invalid_length_value, 0.0, 0.0, 0},
 	{"0,0,-10 0,1,0 255,0,225 0 0 abc", invalid_double_value, 0.0, 0.0, 0},
 	{"0,0,-10 0,1,0 255,0,225 0.8", bad_pl_config, 0.0, 0.0, 0},
