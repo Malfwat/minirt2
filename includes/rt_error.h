@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 16:58:41 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/24 20:31:53 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 17:03:39 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ typedef enum e_err
 	missing_cam = -21,
 	vector_null = -22,
 	invalid_exposant = -23,
-	bad_co_config = -24
+	bad_co_config = -24,
+	bad_ppm_config = -25
 }	t_err;
 
 #endif /* RT_ERROR_H */

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/24 21:01:59 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 18:26:33 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,8 @@ typedef struct s_parser
 }	t_parser;
 
 t_err				get_comp(char *str, t_parser *p);
+
+t_err				load_ppm(char const *filename, t_ppm *texture);
+t_err				get_len(int fd, int *ptr);
 
 #endif /* RT_PARSING_H */

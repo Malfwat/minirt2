@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 18:53:51 by me                #+#    #+#             */
-/*   Updated: 2026/11/24 20:30:42 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 18:29:20 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,21 @@ typedef struct s_axes
 	t_vec3	z;
 }	t_axes;
 
+enum e_ppm
+{
+	p6,
+	p3,
+};
+
+typedef struct s_ppm
+{
+	enum e_ppm	id;
+	int			width;
+	int			height;
+	int			max_value;
+	char		*map;
+}	t_ppm;
+
 typedef struct s_graphics
 {
 	void	*mlx;
@@ -106,6 +121,7 @@ typedef struct s_graphics
 	double	oy;
 	t_axes	axes;
 	t_image	image;
+	t_ppm	*texture;
 }	t_graphics;
 
 typedef struct s_hit_data
