@@ -116,6 +116,7 @@ static void	test_bad(char const *dir)
 	write_file(path, "P3\n1 1\n255\n255 0 0\n", NULL, 0);
 	memset(&t, 0, sizeof(t));
 	ck("P3 (ASCII) : refuse", load_ppm(path, &t) != ok);
+	free(t.map);
 	snprintf(path, sizeof(path), "%s/short.ppm", dir);
 	write_file(path, "P6\n2 2\n255\n", body, 6);
 	memset(&t, 0, sizeof(t));
