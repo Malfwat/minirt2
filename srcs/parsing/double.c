@@ -6,18 +6,13 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 14:13:30 by me                #+#    #+#             */
-/*   Updated: 2026/11/24 12:14:48 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 21:44:51 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_error.h"
 #include "rt_parsing.h"
 #include "str.h"
-
-t_err	get_checker_size(char *str, void *res)
-{
-	return (get_strict_positive_double(str, res));
-}
 
 t_err	get_height(char *str, void *res)
 {
@@ -41,5 +36,15 @@ t_err	get_exposant(char *str, void *res)
 		return (invalid_double_value);
 	if (!(*(double *)res >= 0 && *(double *)res <= 1000))
 		return (invalid_exposant);
+	return (ok);
+}
+
+t_err	get_checker_size(char *str, void *res)
+{
+	null_terminate_component(str);
+	if (!ft_atof(str, 5, res))
+		return (invalid_double_value);
+	if (*(double *)res < 0)
+		return (invalid_length_value);
 	return (ok);
 }

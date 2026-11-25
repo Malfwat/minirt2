@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/13 22:32:39 by me                #+#    #+#             */
-/*   Updated: 2026/11/24 12:13:54 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 21:46:59 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ t_err	get_comp(char *str, t_parser *p)
 		i++;
 	}
 	if (*str || (i != p->required && i != p->required + SPECULAR
-			&& i != p->required + SPECULAR + CHECKER))
+			&& i != p->required + SPECULAR + CHECKER
+			&& i != p->required + SPECULAR + CHECKER + BUMP))
 		return (p->err);
 	return (ok);
 }

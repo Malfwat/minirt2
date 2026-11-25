@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/25 18:24:59 by me                #+#    #+#             */
-/*   Updated: 2026/11/25 20:57:00 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 22:13:46 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_err	pass_comments(int fd, char *ptr)
 			return (syscall_err);
 		bytes_read = read(fd, &c, 1);
 		if (bytes_read < 0)
-		return (syscall_err);
+			return (syscall_err);
 		pass_wspace(fd, ptr);
 	}
 	*ptr = c;

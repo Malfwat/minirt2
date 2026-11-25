@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 18:53:51 by me                #+#    #+#             */
-/*   Updated: 2026/11/25 20:50:41 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 21:56:42 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ enum e_obj
 
 typedef enum e_obj		t_elem;
 
+typedef struct s_ppm
+{
+	int			width;
+	int			height;
+	int			max_value;
+	void		*map;
+}	t_ppm;
+
 typedef struct s_obj
 {
 	enum e_obj		id;
@@ -47,11 +55,11 @@ typedef struct s_obj
 
 	double			intensity;
 	double			exposant;
-
+	t_ppm			texture;
 	struct s_obj	*next;
 }	t_obj;
 
-# define NB_COMP 8
+# define NB_COMP 9
 
 typedef struct s_light
 {
@@ -97,14 +105,6 @@ typedef struct s_axes
 	t_vec3	y;
 	t_vec3	z;
 }	t_axes;
-
-typedef struct s_ppm
-{
-	int			width;
-	int			height;
-	int			max_value;
-	void		*map;
-}	t_ppm;
 
 typedef struct s_graphics
 {

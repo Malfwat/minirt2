@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/25 20:53:05 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 21:54:32 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 # define SPECULAR 2
 # define CHECKER 1
+# define BUMP 1
 
 # include "rt_struct.h"
 # include "rt_error.h"
@@ -39,6 +40,7 @@ bool				is_line_empty(char *str);
 void				null_terminate_component(char *str);
 void				pass_id(char **str_ptr);
 char				*pass_color_value(char *str, int i);
+t_err				load_ppm(char const *filename, t_ppm *texture);
 
 void				pass_color(char **str_ptr);
 void				pass_component(char **str_ptr);
@@ -62,6 +64,7 @@ t_err				get_diameter(char *str, void *res);
 t_err				get_exposant(char *str, void *res);
 t_err				get_intensity(char *str, void *res);
 t_err				get_checker_size(char *str, void *res);
+t_err				get_ppm(char *str, void *res);
 typedef t_err	(*t_getter)(char *, void *);
 
 t_getter			*get_co_getter(void);

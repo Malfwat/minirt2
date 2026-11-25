@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/25 16:56:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/25 21:06:48 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 21:52:43 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,10 @@ t_err	load_ppm(char const *filename, t_ppm *texture)
 		return (close(fd), err);
 	err = get_max_val(fd, &texture->max_value);
 	if (err != ok)
-		return (close(fd), err);
+		return (free(texture->map), close(fd), err);
 	err = get_map(fd, texture);
 	if (err != ok)
-		return (close(fd), err);
+		return (free(texture->map), close(fd), err);
 	close(fd);
 	return (ok);
 }

@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/25 18:27:01 by me               ###   ########.fr        #
+#    Updated: 2026/11/25 21:58:44 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,6 +78,7 @@ BONUS		=	parsing/loop_bonus.c		\
 				parsing/parse_co_bonus.c	\
 				parsing/obj_bonus.c	\
 				parsing/parse_line_bonus.c	\
+				parsing/parse_bump_bonus.c	\
 				parsing/parse_ppm_bonus.c	\
 				parsing/ppm_utils_bonus.c	\
 				rendering/checker_bonus.c	\
