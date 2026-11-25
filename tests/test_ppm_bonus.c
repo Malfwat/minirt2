@@ -64,14 +64,14 @@ static void	write_file(char const *path, const char *head,
 
 static int	pixel(t_ppm *t, int x, int y, int r, int g, int b)
 {
-	int	o;
+	unsigned char	*m;
+	int				o;
 
+	m = (unsigned char *)t->map;
 	o = (y * t->width + x) * 3;
 	if (t->max_value != 255)
 		o = (y * t->width + x) * 6;
-	return ((unsigned char)t->map[o] == r
-		&& (unsigned char)t->map[o + 1] == g
-		&& (unsigned char)t->map[o + 2] == b);
+	return (m[o] == r && m[o + 1] == g && m[o + 2] == b);
 }
 
 static void	test_tiny(char const *dir)
