@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/25 16:56:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/25 21:04:13 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 21:06:48 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ static t_err	get_map(int fd, t_ppm *texture)
 		return (close(fd), syscall_err);
 	bytes_read = read(fd, map, size);
 	if (bytes_read < 0)
-		return (syscall_err);
+		return (free(map), syscall_err);
 	if (bytes_read != size)
-		return (bad_ppm_config);
+		return (free(map), bad_ppm_config);
 	texture->map = map;
 	return (ok);
 }
