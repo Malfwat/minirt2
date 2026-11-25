@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/25 18:24:59 by me                #+#    #+#             */
-/*   Updated: 2026/11/25 20:14:19 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 20:52:50 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_err	pass_comments(int fd, char *ptr)
 	return (ok);
 }
 
-t_err	get_len(int fd, int *ptr, int delta)
+t_err	get_len(int fd, int *ptr)
 {
 	char	buf;
 	int		byte_read;
@@ -87,7 +87,7 @@ t_err	get_len(int fd, int *ptr, int delta)
 	while (byte_read > 0 && !is_wspace(buf))
 	{
 		tmp *= 10;
-		tmp += buf - delta;
+		tmp += buf - '0';
 		byte_read = read(fd, &buf, 1);
 	}
 	if (byte_read < 0)

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/25 16:56:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/25 20:14:41 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 20:52:25 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
-static t_err	get_map_size(int fd, int *x, int *y, int delta)
+static t_err	get_map_size(int fd, int *x, int *y)
 {
 	t_err	err;
 
-	err = get_len(fd, x, delta);
+	err = get_len(fd, x);
 	if (err)
 		return (err);
-	err = get_len(fd, y, delta);
+	err = get_len(fd, y);
 	if (err)
 		return (err);
 	return (ok);
 }
 
-static t_err	get_max_val(int fd, int *max_size, int delta)
+static t_err	get_max_val(int fd, int *max_size)
 {
-	return (get_len(fd, max_size, delta));
+	return (get_len(fd, max_size));
 }
 
 static t_err	get_ppm_id(int fd, t_ppm *texture)
@@ -47,17 +47,12 @@ static t_err	get_ppm_id(int fd, t_ppm *texture)
 		return (syscall_err);
 	if (pass_comments(fd, &c) != ok)
 		return (syscall_err);
-	printf("%c----", c);
 	if (c != 'P')
 		return (bad_ppm_config);
 	bytes_read = read(fd, &c, 1);
 	if (bytes_read < 0)
 		return (syscall_err);
-	if (c == '6')
-		texture->id = p6;
-	else if (c == '3')
-		texture->id = p3;
-	else
+	if (c != '6')
 		return (bad_ppm_config);
 	bytes_read = read(fd, &c, 1);
 	if (bytes_read < 0)
@@ -72,9 +67,7 @@ static t_err	get_map(int fd, t_ppm *texture)
 	int		bytes_read;
 	int		size;
 
-	size = texture->width * texture->height;
-	if (texture->id == p6)
-		size *= 3;
+	size = texture->width * texture->height * 3;
 	texture->map = malloc(sizeof(char) * size);
 	if (!texture->map)
 		return (close(fd), syscall_err);
@@ -98,13 +91,10 @@ t_err	load_ppm(char const *filename, t_ppm *texture)
 	err = get_ppm_id(fd, texture);
 	if (err != ok)
 		return (close(fd), err);
-	delta = 0;
-	if (texture->id == p6)
-		delta = '0';
-	err = get_map_size(fd, &texture->width, &texture->height, delta);
+	err = get_map_size(fd, &texture->width, &texture->height);
 	if (err != ok)
 		return (close(fd), err);
-	err = get_max_val(fd, &texture->max_value, delta);
+	err = get_max_val(fd, &texture->max_value);
 	if (err != ok)
 		return (close(fd), err);
 	err = get_map(fd, texture);

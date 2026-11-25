@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 18:53:51 by me                #+#    #+#             */
-/*   Updated: 2026/11/25 19:08:44 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 20:50:41 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,15 +98,8 @@ typedef struct s_axes
 	t_vec3	z;
 }	t_axes;
 
-enum e_ppm
-{
-	p6,
-	p3,
-};
-
 typedef struct s_ppm
 {
-	enum e_ppm	id;
 	int			width;
 	int			height;
 	int			max_value;
