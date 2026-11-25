@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/25 16:56:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/25 19:08:51 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 19:56:23 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,30 @@ static t_err	get_max_val(int fd, int *max_size, int delta)
 
 static t_err	get_ppm_id(int fd, t_ppm *texture)
 {
-	char	identifier[3];
+	char	c;
 	int		bytes_read;
 
-	bytes_read = read(fd, identifier, 3);
+	bytes_read = read(fd, &c, 1);
 	if (bytes_read < 0)
 		return (syscall_err);
-	if (bytes_read != 3 || !is_wspace(identifier[2]) || identifier[0] != 'P')
+	if (c == '#' && pass_comments(fd, &c) != ok)
+		return (syscall_err);
+	printf("%c----", c);
+	if (c != 'P')
 		return (bad_ppm_config);
-	if (identifier[1] == '6')
+	bytes_read = read(fd, &c, 1);
+	if (bytes_read < 0)
+		return (syscall_err);
+	if (c == '6')
 		texture->id = p6;
-	else if (identifier[1] == '3')
+	else if (c == '3')
 		texture->id = p3;
 	else
+		return (bad_ppm_config);
+	bytes_read = read(fd, &c, 1);
+	if (bytes_read < 0)
+		return (syscall_err);
+	if (!is_wspace(c))
 		return (bad_ppm_config);
 	return (ok);
 }
@@ -63,7 +74,7 @@ static t_err	get_map(int fd, t_ppm *texture)
 
 	size = texture->width * texture->height;
 	if (texture->id == p6)
-		size *= 4;
+		size *= 3;
 	texture->map = malloc(sizeof(char) * size);
 	if (!texture->map)
 		return (close(fd), syscall_err);
