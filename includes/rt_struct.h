@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 18:53:51 by me                #+#    #+#             */
-/*   Updated: 2026/11/25 18:29:20 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 19:08:44 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ typedef struct s_ppm
 	int			width;
 	int			height;
 	int			max_value;
-	char		*map;
+	void		*map;
 }	t_ppm;
 
 typedef struct s_graphics
