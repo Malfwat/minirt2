@@ -68,6 +68,7 @@ build_set "$TMP/objB" "$SET_B" || exit 1
 pass=0
 fail=0
 link_ko=0
+fallback=0
 
 for test_file in tests/test_*.c; do
 	name=$(basename "$test_file" .c)
@@ -77,10 +78,12 @@ for test_file in tests/test_*.c; do
 	esac
 	bin="$TMP/bin/$name"
 	linked=""
+	wanted=""
 	case "$name" in
 		*_bonus) sets="B M" ;;
 		*)       sets="M B" ;;
 	esac
+	wanted=${sets%% *}
 
 	for set in $sets; do
 		if $CC $INC $CFLAGS "$test_file" "$TMP"/obj$set/*.o "$TMP/mlx_stub.o" \
@@ -94,6 +97,10 @@ for test_file in tests/test_*.c; do
 		printf '%-26s LIEN IMPOSSIBLE\n' "$name"
 		link_ko=$((link_ko + 1))
 		continue
+	fi
+	if [ "$linked" != "$wanted" ]; then
+		printf '%-26s ATTENTION  jeu %s impossible a lier, binaire %s utilise\n' "$name" "$wanted" "$linked"
+		fallback=$((fallback + 1))
 	fi
 
 	output=$(timeout 120 "$bin" 2>&1)
@@ -111,7 +118,7 @@ for test_file in tests/test_*.c; do
 done
 
 echo "-------------------------------------------------------"
-echo "tests: $((pass + fail + link_ko))   ok: $pass   echecs: $fail   liens impossibles: $link_ko"
+echo "tests: $((pass + fail + link_ko))   ok: $pass   echecs: $fail   liens impossibles: $link_ko   binaires de secours: $fallback"
 
 if [ "$fail" -ne 0 ] || [ "$link_ko" -ne 0 ]; then
 	exit 1
