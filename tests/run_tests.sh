@@ -14,6 +14,7 @@
 # Compile et lance toute la batterie de tests, sans fenetre et sans serveur X.
 #
 #   ./tests/run_tests.sh              tous les tests
+#   ./tests/run_tests.sh ppm          seulement ceux dont le nom contient ppm
 #   ASAN=1 ./tests/run_tests.sh       avec AddressSanitizer et detecteur de fuites
 #
 # Code de sortie : 0 si tout passe, 1 des qu'un test echoue.
@@ -70,6 +71,10 @@ link_ko=0
 
 for test_file in tests/test_*.c; do
 	name=$(basename "$test_file" .c)
+	case "$name" in
+		*"${1:-}"*) ;;
+		*) continue ;;
+	esac
 	bin="$TMP/bin/$name"
 	linked=""
 	case "$name" in
