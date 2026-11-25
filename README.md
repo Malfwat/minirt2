@@ -102,7 +102,7 @@ same size all around the object:
 | `scenes/valid/inside_sphere.rt` | camera inside a sphere, lit from outside |
 | `scenes/valid/inside_sphere_light.rt` | camera and light both inside a sphere |
 | `scenes/valid/inside_cylinder.rt` | camera inside a closed cylinder |
-| `scenes/bonus/presentation.rt` | everything at once: three coloured spots, hard shadows, specular, checkerboards on the plane, a sphere and the cylinder |
+| `scenes/bonus/presentation.rt` | everything at once: three coloured spots, hard shadows, Phong specular, checkerboards on the plane, a sphere, the cylinder and two cones, one of them tilted |
 | `scenes/bonus/vitrine_damier.rt` | seen from above: five spheres standing on dark cells, three cylinders on light ones, mixed checkerboard and plain materials |
 | `scenes/bonus/checker.rt` | a single checkerboard floor and a sphere, one raking light |
 | `scenes/bonus/checker_multi.rt` | two checkers of different sizes and two coloured spots |
