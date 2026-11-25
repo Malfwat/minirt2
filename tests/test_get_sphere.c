@@ -94,6 +94,7 @@ static int	test_chained_list(void)
 		99, bad ? "FAIL" : "ok");
 	free(a);
 	free(b);
+	free_obj(sc.obj_lst);
 	return (bad);
 }
 

@@ -106,6 +106,7 @@ static int	test_chained_list(void)
 		99, bad ? "FAIL" : "ok");
 	free(a);
 	free(b);
+	free_light(sc.light_lst);
 	return (bad);
 }
 
