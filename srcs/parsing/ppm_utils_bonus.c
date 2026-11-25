@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/25 18:24:59 by me                #+#    #+#             */
-/*   Updated: 2026/11/25 20:52:50 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 20:57:00 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ t_err	get_len(int fd, int *ptr)
 			return (syscall_err);
 		pass_wspace(fd, &buf);
 	}
-	printf("%c----", buf);
 	while (byte_read > 0 && !is_wspace(buf))
 	{
 		tmp *= 10;

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/25 16:56:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/25 20:52:25 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 20:56:39 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static t_err	get_max_val(int fd, int *max_size)
 	return (get_len(fd, max_size));
 }
 
-static t_err	get_ppm_id(int fd, t_ppm *texture)
+static t_err	get_ppm_id(int fd)
 {
 	char	c;
 	int		bytes_read;
@@ -82,13 +82,12 @@ static t_err	get_map(int fd, t_ppm *texture)
 t_err	load_ppm(char const *filename, t_ppm *texture)
 {
 	int		fd;
-	int		delta;
 	t_err	err;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (syscall_err);
-	err = get_ppm_id(fd, texture);
+	err = get_ppm_id(fd);
 	if (err != ok)
 		return (close(fd), err);
 	err = get_map_size(fd, &texture->width, &texture->height);
