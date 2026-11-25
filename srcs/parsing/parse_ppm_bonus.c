@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/25 16:56:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/25 20:58:26 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 21:04:13 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,18 @@ static t_err	get_map(int fd, t_ppm *texture)
 {
 	int		bytes_read;
 	int		size;
+	void	*map;
 
 	size = texture->width * texture->height * 3;
-	texture->map = malloc(sizeof(char) * size);
-	if (!texture->map)
+	map = malloc(sizeof(char) * size);
+	if (!map)
 		return (close(fd), syscall_err);
-	bytes_read = read(fd, texture->map, size);
+	bytes_read = read(fd, map, size);
 	if (bytes_read < 0)
-		return (free(texture->map), syscall_err);
+		return (syscall_err);
 	if (bytes_read != size)
-		return (free(texture->map), bad_ppm_config);
+		return (bad_ppm_config);
+	texture->map = map;
 	return (ok);
 }
 
