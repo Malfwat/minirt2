@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/25 16:56:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/25 19:56:23 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 20:14:41 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static t_err	get_ppm_id(int fd, t_ppm *texture)
 	bytes_read = read(fd, &c, 1);
 	if (bytes_read < 0)
 		return (syscall_err);
-	if (c == '#' && pass_comments(fd, &c) != ok)
+	if (pass_comments(fd, &c) != ok)
 		return (syscall_err);
 	printf("%c----", c);
 	if (c != 'P')

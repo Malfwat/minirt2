@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/25 19:53:55 by me               ###   ########.fr       */
+/*   Updated: 2026/11/25 20:09:10 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ t_err				get_comp(char *str, t_parser *p);
 t_err				load_ppm(char const *filename, t_ppm *texture);
 t_err				get_len(int fd, int *ptr, int delta);
 t_err				pass_comments(int fd, char *ptr);
+t_err				pass_wspace(int fd, char *ptr);
 
 #endif /* RT_PARSING_H */
