@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/24 16:33:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/27 00:17:33 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 00:41:35 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,12 @@ static void	get_uv_sp(t_hit hit, t_obj *obj, double *u, double *v)
 	double	pol;
 	double	azim;
 	t_vec3	d;
-	double	tour;
 
-	tour = M_PI * obj->diameter;
 	d = sub(hit.p, obj->coordinate);
 	pol = acos(d.y / (obj->diameter / 2));
 	azim = atan2(d.z, d.x);
 	*u = (azim + M_PI) / (2 * M_PI);
-	*v = pol * (obj->diameter / 2) / (tour);
+	*v = pol / M_PI;
 }
 
 t_color	texture_color(t_hit hit, t_obj *obj)
@@ -51,7 +49,9 @@ t_color	texture_color(t_hit hit, t_obj *obj)
 		return (obj->color);
 	get_uv_sp(hit, obj, &x, &y);
 	tex = obj->texture;
-	return (ppm_to_tcolor(obj->texture, x * tex->width, y * tex->height));
+	x *= (tex->width - 1);
+	y *= (tex->height - 1);
+	return (ppm_to_tcolor(obj->texture, x, y));
 }
 
 t_color	get_final_color(t_hit hit, t_scene *sc)
