@@ -63,22 +63,33 @@ pl 0,0,0 0,1,0 255,0,225               plane            point, normal, colour
 cy 50,0,20.6 0,0,1 14.2 21.42 10,0,255  cylinder         centre, axis, diameter, height, colour
 ```
 
-The bonus binary accepts optional values at the end of an `sp`, `pl` or `cy`
+The bonus binary accepts optional values at the end of an `sp`, `pl`, `cy` or `co`
 line, **in this order**: the specular intensity (in `[0,1]`), then the specular
-exponent (in `[1,1000]`), then the checkerboard cell size. Below zero the size is
-rejected (`invalid_length_value`); at zero the object keeps a plain colour, which is
-how you write a texture without a checkerboard; above zero the object becomes a
-checkerboard. Absent, the field stays at zero.
+exponent (in `[1,1000]`), then the checkerboard cell size, then the path of a texture.
+Below zero the size is rejected (`invalid_length_value`); at zero the object keeps a
+plain colour, which is how you write a texture without a checkerboard; above zero the
+object becomes a checkerboard. Absent, the field stays at zero.
+
+The texture is a binary PPM (`P6`), 8 bits per channel, and is loaded once per scene
+however many objects reference it: the same path yields the same image in memory.
 
 ```
 sp -3,-0.3,1 2.6 208,56,54 0.85 90        specular only
 pl 0,0,0 0,1,0 255,0,225 0 0 2.5          checkerboard, cells of 2.5
 sp 0,0,0 2 255,0,0 0.5 40 0.7            checkerboard with specular
 cy 0,0,0 0,1,0 1.7 4 96,200,162 0.7 45 0.5
+sp 0,0,0 2 255,255,255 0.6 120 0 assets/textures/earth_atmos_2048.ppm
 ```
 
-A plane line therefore takes 3, 5 or 6 fields, a sphere 3, 5 or 6 as well, and a
-cylinder 5, 7 or 8 — never anything in between.
+A plane line therefore takes 3, 5, 6 or 7 fields, a sphere 3, 5, 6 or 7 as well,
+and a cylinder or a cone 5, 7, 8 or 9 — never anything in between.
+
+**Texture paths are resolved from the current working directory.** Launch the
+binary from the repository root — `./miniRT_bonus scenes/bonus/presentation.rt` —
+or write an absolute path in the scene file. A relative path such as
+`assets/textures/earth_atmos_2048.ppm` will not resolve from `scenes/bonus/`,
+where it would be looked up as `scenes/bonus/assets/textures/...`, and the scene is
+refused with `Bad or missing ppm` on the offending line.
 
 Cells are laid out in surface coordinates, not in world space, so they keep the
 same size all around the object:
