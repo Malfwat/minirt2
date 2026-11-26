@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/13 17:58:20 by me                #+#    #+#             */
-/*   Updated: 2026/11/25 22:17:31 by me               ###   ########.fr       */
+/*   Updated: 2026/11/26 22:01:27 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ t_err	get_sp(char *str, t_scene *sc)
 	p.addr[3] = &o.intensity;
 	p.addr[4] = &o.exposant;
 	p.addr[5] = &o.checker_size;
-	p.addr[6] = &o.texture;
+	sc->tmp = (t_parse_ppm){&o.texture, sc->table};
+	p.addr[6] = &sc->tmp;
 	p.getting_f = get_sp_getter();
 	p.passing_f = get_sp_passer();
 	o.id = sphere;
@@ -56,7 +57,8 @@ t_err	get_pl(char *str, t_scene *sc)
 	p.addr[3] = &o.intensity;
 	p.addr[4] = &o.exposant;
 	p.addr[5] = &o.checker_size;
-	p.addr[6] = &o.texture;
+	sc->tmp = (t_parse_ppm){&o.texture, sc->table};
+	p.addr[6] = &sc->tmp;
 	p.getting_f = get_pl_getter();
 	p.passing_f = get_pl_passer();
 	o.id = plan;
@@ -69,7 +71,7 @@ t_err	get_pl(char *str, t_scene *sc)
 	return (add_obj(sc, o));
 }
 
-static t_parser	attrib_cy_pars(t_obj *o)
+static t_parser	attrib_cy_pars(t_obj *o, t_scene *sc)
 {
 	t_parser	p;
 
@@ -83,7 +85,8 @@ static t_parser	attrib_cy_pars(t_obj *o)
 	p.addr[5] = &o->intensity;
 	p.addr[6] = &o->exposant;
 	p.addr[7] = &o->checker_size;
-	p.addr[8] = &o->texture;
+	sc->tmp = (t_parse_ppm){&o->texture, sc->table};
+	p.addr[8] = &sc->tmp;
 	p.getting_f = get_cy_getter();
 	p.passing_f = get_cy_passer();
 	return (p);
@@ -96,7 +99,7 @@ t_err	get_cy(char *str, t_scene *sc)
 	t_obj		o;
 
 	ft_bzero(&o, sizeof(t_obj));
-	p = attrib_cy_pars(&o);
+	p = attrib_cy_pars(&o, sc);
 	o.id = cylinder;
 	err = get_comp(str, &p);
 	if (err != ok)

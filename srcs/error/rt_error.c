@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 16:26:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/26 21:06:36 by me               ###   ########.fr       */
+/*   Updated: 2026/11/26 21:55:14 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static char	**messages(void)
 		"Camera declared more than once",
 		"Light declared more than once",
 		"Missing ambient light", "Missing light", "Missing camera",
-		"Null vector", "Invalid double value",
-		"Bad plane configuration", "Bad or missing ppm"
+		"Null vector", "Invalid exposant value",
+		"Bad cone configuration", "Bad or missing ppm"
 	};
 
 	return (tab);
