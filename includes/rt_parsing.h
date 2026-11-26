@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/25 21:54:32 by me               ###   ########.fr       */
+/*   Updated: 2026/11/26 20:32:53 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void				null_terminate_component(char *str);
 void				pass_id(char **str_ptr);
 char				*pass_color_value(char *str, int i);
 t_err				load_ppm(char const *filename, t_ppm *texture);
+t_err				add_hash(t_hash *table[], char *str, t_ppm **ptr);
+t_err				load_link_ppm_to_obj(t_ppm **texture_ptr, t_hash *table[], char *pathname);
 
 void				pass_color(char **str_ptr);
 void				pass_component(char **str_ptr);

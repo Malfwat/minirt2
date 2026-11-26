@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/25 22:38:40 by me               ###   ########.fr        #
+#    Updated: 2026/11/26 20:18:56 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,13 +46,15 @@ SRCS	+=	parsing/open_scene.c\
 			parsing/parse_sp.c	\
 			parsing/getter.c	\
 			parsing/getter_utils.c	\
-			parsing/parse_utils.c		\
+			parsing/parse_utils.c	\
 			parsing/pass.c		\
 			parsing/parse_bump.c\
 			parsing/parse_ppm.c	\
 			parsing/ppm_utils.c	\
 			parsing/vector.c	\
 			parsing/parse_color.c
+
+SRCS	+=	hash/hash.c hash/hash_utils.c
 
 SRCS	+=	vector/norme.c vector/operation.c
 

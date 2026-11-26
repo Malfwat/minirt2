@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/24 21:04:06 by me                #+#    #+#             */
-/*   Updated: 2026/11/25 22:17:35 by me               ###   ########.fr       */
+/*   Updated: 2026/11/26 20:29:47 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "rt_parsing.h"
 #include "rt_struct.h"
 
-static t_parser	attrib_co_pars(t_obj *o)
+static t_parser	attrib_co_pars(t_obj *o, t_scene *sc)
 {
 	t_parser	p;
 
@@ -30,7 +30,8 @@ static t_parser	attrib_co_pars(t_obj *o)
 	p.addr[5] = &o->intensity;
 	p.addr[6] = &o->exposant;
 	p.addr[7] = &o->checker_size;
-	p.addr[8] = &o->texture;
+	sc->tmp = (t_parse_ppm){&o->texture, sc->table};
+	p.addr[8] = &sc->tmp;
 	p.getting_f = get_co_getter();
 	p.passing_f = get_co_passer();
 	return (p);
@@ -43,7 +44,7 @@ t_err	get_co(char *str, t_scene *sc)
 	t_obj		o;
 
 	ft_bzero(&o, sizeof(t_obj));
-	p = attrib_co_pars(&o);
+	p = attrib_co_pars(&o, sc->table);
 	o.id = cone;
 	err = get_comp(str, &p);
 	if (err != ok)

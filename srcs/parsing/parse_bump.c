@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/25 21:48:50 by me                #+#    #+#             */
-/*   Updated: 2026/11/25 22:36:23 by me               ###   ########.fr       */
+/*   Updated: 2026/11/26 20:34:04 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,15 @@ void	trim_trailling_wspace(char *str)
 
 t_err	get_ppm(char *str, void *res)
 {
-	t_err	err;
-	t_ppm	texture;
+	t_err		err;
+	t_parse_ppm	*data;
+	t_ppm		*texture;
 
 	trim_trailling_wspace(str);
-	err = load_ppm(str, &texture);
+	data = res;
+	err = load_link_ppm_to_obj(&texture, data->table, str);
 	if (err != ok)
 		return (err);
-	*(t_ppm *)res = texture;
+	*data->tex = texture;
 	return (ok);
 }

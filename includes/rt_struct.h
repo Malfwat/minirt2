@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 18:53:51 by me                #+#    #+#             */
-/*   Updated: 2026/11/25 21:56:42 by me               ###   ########.fr       */
+/*   Updated: 2026/11/26 20:33:10 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_obj
 
 	double			intensity;
 	double			exposant;
-	t_ppm			texture;
+	t_ppm			*texture;
 	struct s_obj	*next;
 }	t_obj;
 
@@ -77,16 +77,36 @@ typedef struct s_camera
 	__UINT8_TYPE__	fov;
 }	t_cam;
 
+# define HASH_BASE 17
+# define FNV_PRIME 16777619
+# define HASH_TABLE_LENGTH 64
+
+typedef struct s_hash
+{
+	char			*pathname;
+	t_ppm			*tex;
+	struct s_hash	*next;
+}	t_hash;
+
+
+typedef struct s_parse_ppm
+{
+	t_ppm	**tex;
+	t_hash	**table;
+}	t_parse_ppm;
+
 typedef struct s_scene
 {
-	bool	camera;
-	bool	l;
-	bool	ambient;
+	bool		camera;
+	bool		l;
+	bool		ambient;
 
-	t_cam	cam;
-	t_light	amb;
-	t_light	*light_lst;
-	t_obj	*obj_lst;
+	t_cam		cam;
+	t_light		amb;
+	t_light		*light_lst;
+	t_obj		*obj_lst;
+	t_hash		*table[HASH_TABLE_LENGTH];
+	t_parse_ppm	tmp;
 }	t_scene;
 
 typedef struct s_image
