@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 18:53:51 by me                #+#    #+#             */
-/*   Updated: 2026/11/26 20:33:10 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 00:17:47 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ typedef enum e_obj		t_elem;
 
 typedef struct s_ppm
 {
-	int			width;
-	int			height;
-	int			max_value;
-	void		*map;
+	int					width;
+	int					height;
+	int					max_value;
+	unsigned char		*map;
 }	t_ppm;
 
 typedef struct s_obj
@@ -87,7 +87,6 @@ typedef struct s_hash
 	t_ppm			*tex;
 	struct s_hash	*next;
 }	t_hash;
-
 
 typedef struct s_parse_ppm
 {

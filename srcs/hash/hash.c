@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/26 20:16:14 by me                #+#    #+#             */
-/*   Updated: 2026/11/26 20:32:38 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 00:18:26 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	free_hash_table(t_hash *table[])
 		free_hash_lst(table[i++]);
 }
 
-t_err	load_link_ppm_to_obj(t_ppm **texture_ptr, t_hash *table[], char *pathname)
+t_err	load_link_ppm_to_obj(t_ppm **texture_ptr,
+	t_hash *table[], char *pathname)
 {
 	t_ppm	*tex;
 	t_err	err;

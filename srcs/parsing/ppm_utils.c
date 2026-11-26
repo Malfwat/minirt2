@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/25 18:24:59 by me                #+#    #+#             */
-/*   Updated: 2026/11/25 22:38:23 by me               ###   ########.fr       */
+/*   Updated: 2026/11/26 23:50:45 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ t_err	get_len(int fd, int *ptr)
 	while (byte_read > 0 && !is_wspace(buf))
 	{
 		tmp *= 10;
+		if (!(buf <= '9' && buf >= '0'))
+			return (bad_ppm_config);
 		tmp += buf - '0';
 		byte_read = read(fd, &buf, 1);
 	}
