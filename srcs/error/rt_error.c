@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/11 16:26:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/26 20:51:02 by me               ###   ########.fr       */
+/*   Updated: 2026/11/26 21:06:36 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 static char	**messages(void)
 {
-	static char	*tab[24] = {
+	static char	*tab[25] = {
 		"Bad color format",
 		"Bad element identifier",
 		"Bad field of view format",
@@ -41,7 +41,7 @@ static char	**messages(void)
 		"Light declared more than once",
 		"Missing ambient light", "Missing light", "Missing camera",
 		"Null vector", "Invalid double value",
-		"Bad plane configuration",
+		"Bad plane configuration", "Bad or missing ppm"
 	};
 
 	return (tab);
@@ -49,7 +49,7 @@ static char	**messages(void)
 
 char	*err_message(t_err errnum)
 {
-	if (errnum >= 0 || errnum < -22)
+	if (errnum >= 0 || errnum < -25)
 		return ("Unknown error");
 	return (messages()[-errnum - 1]);
 }

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/25 16:56:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/25 22:37:52 by me               ###   ########.fr       */
+/*   Updated: 2026/11/26 21:05:38 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h>
+
+#include <errno.h>
 
 static t_err	get_map_size(int fd, int *x, int *y)
 {
@@ -88,7 +90,7 @@ t_err	load_ppm(char const *filename, t_ppm *texture)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (syscall_err);
+		return (bad_ppm_config);
 	err = get_ppm_id(fd);
 	if (err != ok)
 		return (close(fd), err);
