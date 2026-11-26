@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/24 21:04:06 by me                #+#    #+#             */
-/*   Updated: 2026/11/26 20:29:47 by me               ###   ########.fr       */
+/*   Updated: 2026/11/26 20:42:24 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_err	get_co(char *str, t_scene *sc)
 	t_obj		o;
 
 	ft_bzero(&o, sizeof(t_obj));
-	p = attrib_co_pars(&o, sc->table);
+	p = attrib_co_pars(&o, sc);
 	o.id = cone;
 	err = get_comp(str, &p);
 	if (err != ok)
