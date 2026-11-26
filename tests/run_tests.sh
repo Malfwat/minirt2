@@ -16,6 +16,7 @@
 #   ./tests/run_tests.sh              tous les tests
 #   ./tests/run_tests.sh ppm          seulement ceux dont le nom contient ppm
 #   ASAN=1 ./tests/run_tests.sh       avec AddressSanitizer et detecteur de fuites
+#   VALGRIND=1 ./tests/run_tests.sh   sous valgrind (memcheck + fuites definies)
 #
 # Code de sortie : 0 si tout passe, 1 des qu'un test echoue.
 
@@ -103,8 +104,15 @@ for test_file in tests/test_*.c; do
 		fallback=$((fallback + 1))
 	fi
 
-	output=$(timeout 120 "$bin" 2>&1)
-	code=$?
+	if [ "${VALGRIND:-0}" = "1" ]; then
+		output=$(timeout 900 valgrind -q --leak-check=full \
+			--errors-for-leak-kinds=definite,indirect --error-exitcode=99 \
+			"$bin" 2>&1)
+		code=$?
+	else
+		output=$(timeout 120 "$bin" 2>&1)
+		code=$?
+	fi
 	summary=$(echo "$output" | tail -1)
 
 	if [ "$code" -eq 0 ]; then
