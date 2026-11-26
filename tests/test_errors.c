@@ -35,7 +35,7 @@ int	main(void)
 	int	code;
 
 	code = -1;
-	while (code >= -22)
+	while (code >= -25)
 	{
 		check(err_message(code)[0] != 0, "message non vide");
 		check(strcmp(err_message(code), "Unknown error") != 0, "message connu");
@@ -43,12 +43,13 @@ int	main(void)
 	}
 	check(!strcmp(err_message(ok), "Unknown error"), "ok -> Unknown");
 	check(!strcmp(err_message(syscall_err), "Unknown error"), "syscall -> Unknown");
-	check(!strcmp(err_message(-23), "Unknown error"), "-23 -> Unknown");
+	check(!strcmp(err_message(-26), "Unknown error"), "-26 -> Unknown");
 	check(!strcmp(err_message(-999), "Unknown error"), "-999 -> Unknown");
 	check(!strcmp(err_message(bad_color_format), "Bad color format"), "texte -1");
 	check(!strcmp(err_message(ext), "Bad file extension"), "texte -6");
 	check(!strcmp(err_message(missing_cam), "Missing camera"), "texte -21");
 	check(!strcmp(err_message(vector_null), "Null vector"), "texte -22");
+	check(err_message(bad_ppm_config)[0] != 0, "texte -25 non vide");
 	printf("\n%d cas en echec sur %d\n", g_fail, g_total);
 	return (g_fail != 0);
 }
