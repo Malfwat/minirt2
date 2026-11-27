@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 22:21:54 by me                #+#    #+#             */
-/*   Updated: 2026/11/24 16:30:26 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 01:02:22 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@ t_color	mult_color_light(t_color a, t_light light, double factor)
 	c.g = a.g * (light.color.g / 255.0) * light.ratio * factor;
 	c.b = a.b * (light.color.b / 255.0) * light.ratio * factor;
 	return (c);
+}
+
+t_color	mult_color_ratio(t_color a, double ratio)
+{
+	a.r *= ratio;
+	a.g *= ratio;
+	a.b *= ratio;
+	return (a);
 }
 
 t_color	add_color(t_color a, t_color b)

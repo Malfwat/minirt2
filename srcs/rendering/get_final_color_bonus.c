@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/24 16:33:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/27 00:41:35 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 01:19:21 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,40 @@ static void	get_uv_sp(t_hit hit, t_obj *obj, double *u, double *v)
 	*v = pol / M_PI;
 }
 
+t_color	texel_interpolate(t_ppm *tex, double x, double y)
+{
+	double	fx;
+	double	fy;
+	t_color	c;
+	t_color	tmp;
+
+	fx = x - (int)x;
+	fy = y - (int)y;
+	c = ppm_to_tcolor(tex, (int)x, (int)y);
+	c = mult_color_ratio(c, (1 - fx) * (1 - fy));
+	tmp = ppm_to_tcolor(tex, (int)x + 1, (int)y);
+	tmp = mult_color_ratio(tmp, fx * (1 - fy));
+	c = add_color(c, tmp);
+	tmp = ppm_to_tcolor(tex, (int)x, (int)y + 1);
+	tmp = mult_color_ratio(tmp, (1 - fx) * fy);
+	c = add_color(c, tmp);
+	tmp = ppm_to_tcolor(tex, (int)x + 1, (int)y + 1);
+	tmp = mult_color_ratio(tmp, fx * fy);
+	c = add_color(c, tmp);
+	return (c);
+}
+
 t_color	texture_color(t_hit hit, t_obj *obj)
 {
 	double	x;
 	double	y;
-	t_ppm	*tex;
 
 	if (1 - fabs(scal(hit.normal, obj->vec)) < 1e-3)
 		return (obj->color);
 	get_uv_sp(hit, obj, &x, &y);
-	tex = obj->texture;
-	x *= (tex->width - 1);
-	y *= (tex->height - 1);
-	return (ppm_to_tcolor(obj->texture, x, y));
+	x *= (obj->texture->width - 1);
+	y *= (obj->texture->height - 1);
+	return (texel_interpolate(obj->texture, x, y));
 }
 
 t_color	get_final_color(t_hit hit, t_scene *sc)
