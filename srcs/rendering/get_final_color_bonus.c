@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/24 16:33:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/27 03:27:18 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 15:39:24 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,22 @@ t_color	get_final_color(t_hit hit, t_scene *sc)
 	t_color	b;
 	t_obj	local;
 	t_texel	pos;
+	t_vec3	n;
+	t_vec3	t;
+	t_vec3	bvec;
 
 	local = *hit.obj;
 	hit.obj = &local;
 	if (hit.obj->texture)
 		hit.obj->color = texture_color(hit, hit.obj, &pos);
 	if (hit.obj->normals)
+	{
+		n = hit.normal;
+		t = cross(n, (t_vec3){0, 1, 0});
+		bvec = cross(t, n);
 		hit.normal = normalize(texture_vec(hit.obj, &pos));
+		hit.normal = add(add(mult(t, hit.normal.x), mult(bvec, hit.normal.y)), mult(n, hit.normal.z));
+	}
 	if (hit.obj->checker_size)
 		hit.obj->color = checker_color(hit, hit.obj);
 	a = mult_color_light(hit.obj->color, sc->amb, 1);

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/27 01:38:28 by me                #+#    #+#             */
-/*   Updated: 2026/11/27 03:48:15 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 03:51:07 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_color	ppm_to_tcolor(t_ppm *tex, int x, int y)
 static t_color	texel_interpolate_color(t_ppm *tex, double x, double y)
 {
 	t_color_double	c;
-	
+
 	c = texel_interpolate(tex, x, y);
 	return (cdouble_to_c(c, 1));
 }
