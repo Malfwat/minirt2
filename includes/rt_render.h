@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 21:02:08 by me                #+#    #+#             */
-/*   Updated: 2026/11/27 17:25:59 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 18:36:19 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,7 @@ typedef struct s_texel
 {
 	double	x;
 	double	y;
+	t_axes	axes;
 }	t_texel;
 
 t_color_double	ppm_to_tcolor_double(t_ppm *tex, int x, int y);

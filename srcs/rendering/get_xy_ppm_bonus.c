@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/27 17:24:00 by me                #+#    #+#             */
-/*   Updated: 2026/11/27 17:52:03 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 18:39:59 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,16 @@ void	get_xy_sp(t_hit hit, t_obj *obj, t_texel *indexes)
 	azim = atan2(d.z, d.x);
 	indexes->x = (azim + M_PI) / (2 * M_PI);
 	indexes->y = pol / M_PI;
+	indexes->axes = get_system(hit.normal);
 }
 
 void	get_xy_pl(t_hit hit, t_obj *obj, t_texel *indexes)
 {
-	t_axes	hit_axes;
+	//t_axes	hit_axes;
 
-	hit_axes = get_system(hit.normal);
-	indexes->x = scal(sub(hit.p, obj->coordinate), hit_axes.x) / TEXTURE_SIZE;
-	indexes->y = scal(sub(hit.p, obj->coordinate), hit_axes.y) / TEXTURE_SIZE;
+	indexes->axes = get_system(hit.normal);
+	indexes->x = scal(sub(hit.p, obj->coordinate), indexes->axes.x) / TEXTURE_SIZE;
+	indexes->y = scal(sub(hit.p, obj->coordinate), indexes->axes.y) / TEXTURE_SIZE;
 	indexes->x = fabs(indexes->x);
 	indexes->x -= floor(indexes->x);
 	indexes->y = fabs(indexes->y);
