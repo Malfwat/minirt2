@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/24 16:33:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/27 18:41:22 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 18:52:10 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,8 @@ void	texturize(t_hit *hit)
 	if (hit->obj->normals)
 	{
 		n = hit->normal;
-		//if (1 - fabs(scal(n, (t_vec3){0, 1, 0})) < 1e-3)
-		//	t = normalize(cross(n, (t_vec3){0, 0, 1}));
-		//else
-		//	t = normalize(cross(n, (t_vec3){0, 1, 0}));
-		t = normalize(cross(n, pos.axes.y));
-		b = normalize(cross(t, n));
+		t = pos.axes.x;
+		b = mult(pos.axes.y, -1);
 		hit->normal = normalize(texture_vec(hit->obj, &pos));
 		tmp = add(mult(t, hit->normal.x), mult(b, hit->normal.y));
 		hit->normal = add(tmp, mult(n, hit->normal.z));

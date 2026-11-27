@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/27 17:24:00 by me                #+#    #+#             */
-/*   Updated: 2026/11/27 18:39:59 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 18:53:18 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@ void	get_xy_sp(t_hit hit, t_obj *obj, t_texel *indexes)
 	indexes->x = (azim + M_PI) / (2 * M_PI);
 	indexes->y = pol / M_PI;
 	indexes->axes = get_system(hit.normal);
+	indexes->axes.x = mult(indexes->axes.x, -1);
+	indexes->axes.y = mult(indexes->axes.y, -1);
 }
 
-void	get_xy_pl(t_hit hit, t_obj *obj, t_texel *indexes)
+void	get_xy_pl(t_hit hit, t_obj *obj, t_texel *pos)
 {
-	//t_axes	hit_axes;
-
-	indexes->axes = get_system(hit.normal);
-	indexes->x = scal(sub(hit.p, obj->coordinate), indexes->axes.x) / TEXTURE_SIZE;
-	indexes->y = scal(sub(hit.p, obj->coordinate), indexes->axes.y) / TEXTURE_SIZE;
-	indexes->x = fabs(indexes->x);
-	indexes->x -= floor(indexes->x);
-	indexes->y = fabs(indexes->y);
-	indexes->y -= floor(indexes->y);
+	pos->axes = get_system(hit.normal);
+	pos->x = scal(sub(hit.p, obj->coordinate), pos->axes.x) / TEXTURE_SIZE;
+	pos->y = scal(sub(hit.p, obj->coordinate), pos->axes.y) / TEXTURE_SIZE;
+	pos->x = fabs(pos->x);
+	pos->x -= floor(pos->x);
+	pos->y = fabs(pos->y);
+	pos->y -= floor(pos->y);
 }
