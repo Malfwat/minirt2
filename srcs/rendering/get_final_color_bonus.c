@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/24 16:33:47 by me                #+#    #+#             */
-/*   Updated: 2026/11/27 16:44:12 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 17:22:43 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,6 @@ void	texturize(t_hit *hit)
 	if (hit->obj->checker_size)
 		hit->obj->color = checker_color(*hit, hit->obj);
 }
-
-#include <stdio.h>
-#include <stdlib.h>
 
 t_color	get_final_color(t_hit hit, t_scene *sc)
 {

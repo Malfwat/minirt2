@@ -6,12 +6,11 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/27 01:38:28 by me                #+#    #+#             */
-/*   Updated: 2026/11/27 17:05:45 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 17:26:13 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_color.h"
-#include "rt_config.h"
 #include "rt_math.h"
 #include "rt_render.h"
 #include "rt_struct.h"
@@ -46,52 +45,19 @@ static t_color	texel_interpolate_color(t_ppm *tex, double x, double y)
 	return (cdouble_to_c(c, 1));
 }
 
-static void	get_xy_sp(t_hit hit, t_obj *obj, t_texel *indexes)
-{
-	double	pol;
-	double	azim;
-	t_vec3	d;
-
-	d = sub(hit.p, obj->coordinate);
-	pol = acos(d.y / (obj->diameter / 2));
-	azim = atan2(d.z, d.x);
-	indexes->x = (azim + M_PI) / (2 * M_PI);
-	indexes->y = pol / M_PI;
-}
-
-#include <stdio.h>
-
-static void	get_xy_pl(t_hit hit, t_obj *obj, t_texel *indexes)
-{
-	t_axes	hit_axes;
-
-	hit_axes = get_system(hit.normal);
-	indexes->x = scal(sub(hit.p, obj->coordinate), hit_axes.x);
-	indexes->y = scal(sub(hit.p, obj->coordinate), hit_axes.y);
-	printf("%f-%f\t\t\n", indexes->x, indexes->y);
-
-}
-
 t_color	texture_color(t_hit hit, t_obj *obj, t_texel *pos)
 {
 	t_ppm	*tex;
 
-	//if (1 - fabs(scal(hit.normal, obj->vec)) < 1e-3)
-		//return (obj->color);
+	if (1 - fabs(scal(hit.normal, obj->vec)) < 1e-3 && obj->id != plan)
+		return (obj->color);
 	tex = obj->texture;
 	if (obj->id == sphere)
-	{
 		get_xy_sp(hit, obj, pos);
-		pos->x *= (tex->width - 1);
-		pos->y *= (tex->height - 1);
-	}
 	else
-	{
 		get_xy_pl(hit, obj, pos);
-		//pos->x /= (tex->width - 1);
-		//pos->y /= (tex->height - 1);
-	}
-	
+	pos->x *= (tex->width - 1);
+	pos->y *= (tex->height - 1);
 	if (pos->x == tex->width - 1 || pos->y == tex->height - 1)
 		return (ppm_to_tcolor(tex, pos->x, pos->y));
 	return (texel_interpolate_color(tex, pos->x, pos->y));

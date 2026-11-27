@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 21:02:08 by me                #+#    #+#             */
-/*   Updated: 2026/11/27 03:46:54 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 17:25:59 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,5 +197,8 @@ t_color_double	texel_interpolate(t_ppm *tex, double x, double y);
 
 t_color			texture_color(t_hit hit, t_obj *obj, t_texel *pos);
 t_vec3			texture_vec(t_obj *obj, t_texel *pos);
+
+void			get_xy_sp(t_hit hit, t_obj *obj, t_texel *indexes);
+void			get_xy_pl(t_hit hit, t_obj *obj, t_texel *indexes);
 
 #endif /*RT_RENDER_H*/
