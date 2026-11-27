@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 22:21:54 by me                #+#    #+#             */
-/*   Updated: 2026/11/27 01:59:28 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 02:10:19 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,15 @@ t_color	add_color(t_color a, t_color b)
 	t_color	c;
 	int		tmp;
 
-	tmp = a.r + b.r;
+	tmp = (int)a.r + (int)b.r;
 	if (tmp > 255)
 		tmp = 255;
 	c.r = tmp;
-	tmp = a.g + b.g;
+	tmp = (int)a.g + (int)b.g;
 	if (tmp > 255)
 		tmp = 255;
 	c.g = tmp;
-	tmp = a.b + b.b;
+	tmp = (int)a.b + (int)b.b;
 	if (tmp > 255)
 		tmp = 255;
 	c.b = tmp;
