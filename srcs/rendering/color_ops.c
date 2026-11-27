@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 22:21:54 by me                #+#    #+#             */
-/*   Updated: 2026/11/27 01:24:16 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 01:37:29 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,20 @@ t_color	mult_color_light(t_color a, t_light light, double factor)
 	return (c);
 }
 
-//t_color	mult_color_ratio(t_color a, double ratio)
-//{
-//	a.r *= ratio;
-//	a.g *= ratio;
-//	a.b *= ratio;
-//	return (a);
-//}
-
 t_color_double	mult_color_ratio(t_color_double a, double ratio)
 {
 	a.r *= ratio;
 	a.g *= ratio;
 	a.b *= ratio;
 	return (a);
+}
+
+t_color_double	add_color_doubles(t_color_double c, t_color_double x)
+{
+	c.r += (double)x.r;
+	c.g += (double)x.g;
+	c.b += (double)x.b;
+	return (c);
 }
 
 t_color	add_color(t_color a, t_color b)

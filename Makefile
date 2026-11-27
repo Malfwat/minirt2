@@ -6,7 +6,7 @@
 #    By: me <me@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/23 19:49:09 by me                #+#    #+#              #
-#    Updated: 2026/11/26 21:57:22 by me               ###   ########.fr        #
+#    Updated: 2026/11/27 01:40:47 by me               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,6 +86,7 @@ BONUS		=	parsing/loop_bonus.c		\
 				rendering/checker_bonus.c	\
 				rendering/cy_checker_bonus.c	\
 				rendering/render_bonus.c	\
+				rendering/ppm_ops_bonus.c	\
 				obj/render_co_bonus.c	\
 				rendering/thread_bonus.c	\
 				rendering/rt_mlx_loop_bonus.c\
