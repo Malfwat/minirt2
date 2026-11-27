@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/13 23:12:52 by me                #+#    #+#             */
-/*   Updated: 2026/11/26 22:10:29 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 02:44:39 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_getter	*get_cy_getter(void)
 {
-	static t_getter	tab[10] = {
+	static t_getter	tab[11] = {
 		get_vec3,
 		get_vec3,
 		get_diameter,
@@ -24,6 +24,7 @@ t_getter	*get_cy_getter(void)
 		get_exposant,
 		get_checker_size,
 		get_ppm,
+		get_ppm,
 		(void *)0
 	};
 
@@ -32,12 +33,13 @@ t_getter	*get_cy_getter(void)
 
 t_pass	*get_cy_passer(void)
 {
-	static t_pass	tab[10] = {
+	static t_pass	tab[11] = {
 		pass_component,
 		pass_component,
 		pass_component,
 		pass_component,
 		pass_color,
+		pass_component,
 		pass_component,
 		pass_component,
 		pass_component,

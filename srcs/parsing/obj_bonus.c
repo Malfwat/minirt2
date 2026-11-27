@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/24 21:04:06 by me                #+#    #+#             */
-/*   Updated: 2026/11/26 20:42:24 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 02:51:17 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ static t_parser	attrib_co_pars(t_obj *o, t_scene *sc)
 	p.addr[5] = &o->intensity;
 	p.addr[6] = &o->exposant;
 	p.addr[7] = &o->checker_size;
-	sc->tmp = (t_parse_ppm){&o->texture, sc->table};
-	p.addr[8] = &sc->tmp;
+	sc->tex = (t_parse_ppm){&o->texture, sc->table};
+	p.addr[8] = &sc->tex;
+	sc->norm = (t_parse_ppm){&o->normals, sc->table};
+	p.addr[9] = &sc->norm;
 	p.getting_f = get_co_getter();
 	p.passing_f = get_co_passer();
 	return (p);

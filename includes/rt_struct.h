@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 18:53:51 by me                #+#    #+#             */
-/*   Updated: 2026/11/27 00:17:47 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 02:37:56 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,11 @@ typedef struct s_obj
 	double			intensity;
 	double			exposant;
 	t_ppm			*texture;
+	t_ppm			*normals;
 	struct s_obj	*next;
 }	t_obj;
 
-# define NB_COMP 9
+# define NB_COMP 10
 
 typedef struct s_light
 {
@@ -105,7 +106,8 @@ typedef struct s_scene
 	t_light		*light_lst;
 	t_obj		*obj_lst;
 	t_hash		*table[HASH_TABLE_LENGTH];
-	t_parse_ppm	tmp;
+	t_parse_ppm	tex;
+	t_parse_ppm	norm;
 }	t_scene;
 
 typedef struct s_image

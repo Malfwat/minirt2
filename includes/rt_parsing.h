@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 14:57:13 by admoufle          #+#    #+#             */
-/*   Updated: 2026/11/27 00:18:50 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 02:45:18 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define SPECULAR 2
 # define CHECKER 1
 # define BUMP 1
+# define NORM 1
 
 # include "rt_struct.h"
 # include "rt_error.h"

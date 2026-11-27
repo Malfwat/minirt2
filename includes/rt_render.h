@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 21:02:08 by me                #+#    #+#             */
-/*   Updated: 2026/11/27 01:39:26 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 03:26:22 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,16 @@ t_color			pl_checker(t_hit hit, t_obj *obj);
 t_color			sp_checker(t_hit hit, t_obj *obj);
 t_color			disk_checker(t_hit hit, t_obj *obj);
 
-t_color			texture_color(t_hit hit, t_obj *obj);
+typedef struct s_texel
+{
+	double	x;
+	double	y;
+}	t_texel;
+
+t_color			texel_interpolate(t_ppm *tex, double x, double y);
+t_color			ppm_to_tcolor(t_ppm *tex, int x, int y);
+
+t_color			texture_color(t_hit hit, t_obj *obj, t_texel *pos);
+t_vec3			texture_vec(t_obj *obj, t_texel *pos);
 
 #endif /*RT_RENDER_H*/

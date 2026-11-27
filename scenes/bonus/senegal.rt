@@ -20,4 +20,4 @@ C 12.18,3.255,-3.159 -0.9370,-0.2504,0.2427 42
 L 5,9,-13 1.0 255,247,228
 L -9,-3,9 0.32 165,195,255
 
-sp 0,0,0 4 255,255,255 0.25 400 0 assets/textures/earth_atmos_2048.ppm
+sp 0,0,0 4 255,255,255 0.25 400 0 assets/textures/earth_atmos_2048.ppm assets/textures/earth_normal_2048.ppm

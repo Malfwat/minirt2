@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/25 21:48:50 by me                #+#    #+#             */
-/*   Updated: 2026/11/26 20:34:04 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 03:31:59 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_err	get_ppm(char *str, void *res)
 	t_parse_ppm	*data;
 	t_ppm		*texture;
 
+	null_terminate_component(str);
 	trim_trailling_wspace(str);
 	data = res;
 	err = load_link_ppm_to_obj(&texture, data->table, str);
