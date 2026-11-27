@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/20 00:13:19 by me                #+#    #+#             */
-/*   Updated: 2026/11/22 21:16:10 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 01:26:44 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@
 #include "rt_math.h"
 
 t_color_double	add_color_double(t_color_double c, t_color x)
+{
+	c.r += (double)x.r;
+	c.g += (double)x.g;
+	c.b += (double)x.b;
+	return (c);
+}
+
+t_color_double	add_color_doubles(t_color_double c, t_color_double x)
 {
 	c.r += (double)x.r;
 	c.g += (double)x.g;

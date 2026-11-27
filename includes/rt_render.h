@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 21:02:08 by me                #+#    #+#             */
-/*   Updated: 2026/11/27 01:02:45 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 01:26:54 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ t_color			cdouble_to_c(t_color_double c, double div);
 ** @return the new accumulator
 */
 t_color_double	add_color_double(t_color_double c, t_color x);
+t_color_double	add_color_doubles(t_color_double c, t_color_double x);
+
 /**
 ** @brief Multiply a colour by a light colour and an intensity
 **
@@ -173,7 +175,8 @@ t_color			get_pxl_color(t_scene *sc, t_graphics *d, double x, double y);
 ** @return true when an object is hit before the limit
 */
 bool			cast_ray(t_scene *sc, t_cast data, t_hit *ptr);
-t_color			mult_color_ratio(t_color a, double ratio);
+//t_color			mult_color_ratio(t_color a, double ratio);
+t_color_double	mult_color_ratio(t_color_double a, double ratio);
 
 t_color			checker_color(t_hit hit, t_obj *obj);
 t_color			get_final_color(t_hit hit, t_scene *sc);
