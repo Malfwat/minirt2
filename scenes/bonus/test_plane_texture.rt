@@ -1,0 +1,15 @@
+# Cible de test : texture sur un PLAN.
+# Un sol carre vu en perspective, plus une sphere posee dessus pour comparer
+# l'echelle des texels entre le plan et la sphere.
+# A lancer depuis la racine du depot :
+#   ./miniRT_bonus scenes/bonus/test_plane_texture.rt
+A 0.18 170,185,215
+
+C 0,3,-9 0,-0.25,1 55
+
+L 6,9,-4 1.0 255,250,235
+L -8,4,2 0.35 165,195,255
+
+pl 0,-2,0 0,1,0 255,255,255 0.10 30 0 assets/textures/paving_color.ppm assets/textures/paving_normal.ppm
+
+sp 0,-1,0 2 255,255,255 0.30 120 0 assets/textures/paving_color.ppm assets/textures/paving_normal.ppm

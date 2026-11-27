@@ -1,0 +1,15 @@
+# Cible de test : texture sur un CYLINDRE.
+# Une colonne de briques, avec un sol pave pour lire les deux projections dans
+# la meme image.
+# A lancer depuis la racine du depot :
+#   ./miniRT_bonus scenes/bonus/test_cy_texture.rt
+A 0.18 170,185,215
+
+C 0,2,-10 0,0,1 50
+
+L 7,8,-5 1.0 255,250,235
+L -7,3,3 0.35 165,195,255
+
+pl 0,-2,0 0,1,0 255,255,255 0.10 30 0 assets/textures/paving_color.ppm assets/textures/paving_normal.ppm
+
+cy 0,-2,0 0,1,0 2.4 5 255,255,255 0.20 60 0 assets/textures/bricks_color.ppm assets/textures/bricks_normal.ppm

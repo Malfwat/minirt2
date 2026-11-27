@@ -122,6 +122,9 @@ same size all around the object:
 | `scenes/bonus/multi_spot.rt`, `2spot.rt` | coloured and multi-spot lighting |
 | `scenes/bonus/multi_spot_cone.rt` | same lighting, the middle sphere replaced by a cone of the same footprint |
 | `scenes/bonus/senegal.rt` | the textured Earth framed on Senegal, whole sphere in frame, specular glint on the Atlantic |
+| `scenes/bonus/test_plane_texture.rt` | target scene for a textured plane: paved floor and a sphere above it |
+| `scenes/bonus/test_cy_texture.rt` | target scene for a textured cylinder: a brick column on a paved floor |
+| `scenes/bonus/test_co_texture.rt` | target scene for a textured cone: a diamond-plate cone on a paved floor |
 | `scenes/hermes/*.rt` | deliberately broken scenes, one mistake each, used to check the error handling |
 
 ### Tests
