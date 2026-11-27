@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/27 02:53:01 by me                #+#    #+#             */
-/*   Updated: 2026/11/27 03:42:49 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 03:46:43 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 #include <stdio.h>
 
-static t_color_double	texel_interpolate(t_ppm *tex, double x, double y)
+t_color_double	texel_interpolate(t_ppm *tex, double x, double y)
 {
 	double			fx;
 	double			fy;
@@ -67,6 +67,5 @@ t_vec3	texture_vec(t_obj *obj, t_texel *pos)
 	vec.y = (c.g / 255.0) * 2 - 1;
 	vec.z = (c.b / 255.0) * 2 - 1;
 	vec = normalize(vec);
-	printf("%f, %f, %f\n", vec.x, vec.y, vec.z);
 	return (vec);
 }

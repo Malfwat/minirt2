@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/27 01:38:28 by me                #+#    #+#             */
-/*   Updated: 2026/11/27 03:37:59 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 03:48:15 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,11 @@ t_color	ppm_to_tcolor(t_ppm *tex, int x, int y)
 	return (c);
 }
 
-static t_color	texel_interpolate(t_ppm *tex, double x, double y)
+static t_color	texel_interpolate_color(t_ppm *tex, double x, double y)
 {
-	double			fx;
-	double			fy;
 	t_color_double	c;
-	t_color_double	tmp;
-
-	fx = x - (int)x;
-	fy = y - (int)y;
-	c = ppm_to_tcolor_double(tex, (int)x, (int)y);
-	c = mult_color_ratio(c, (1 - fx) * (1 - fy));
-	tmp = ppm_to_tcolor_double(tex, (int)x + 1, (int)y);
-	tmp = mult_color_ratio(tmp, fx * (1 - fy));
-	c = add_color_doubles(c, tmp);
-	tmp = ppm_to_tcolor_double(tex, (int)x, (int)y + 1);
-	tmp = mult_color_ratio(tmp, (1 - fx) * fy);
-	c = add_color_doubles(c, tmp);
-	tmp = ppm_to_tcolor_double(tex, (int)x + 1, (int)y + 1);
-	tmp = mult_color_ratio(tmp, fx * fy);
-	c = add_color_doubles(c, tmp);
+	
+	c = texel_interpolate(tex, x, y);
 	return (cdouble_to_c(c, 1));
 }
 
@@ -85,5 +70,5 @@ t_color	texture_color(t_hit hit, t_obj *obj, t_texel *pos)
 	pos->y *= (tex->height - 1);
 	if (pos->x == tex->width - 1 || pos->y == tex->height - 1)
 		return (ppm_to_tcolor(tex, pos->x, pos->y));
-	return (texel_interpolate(tex, pos->x, pos->y));
+	return (texel_interpolate_color(tex, pos->x, pos->y));
 }
