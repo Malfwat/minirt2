@@ -6,14 +6,13 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/20 00:13:19 by me                #+#    #+#             */
-/*   Updated: 2026/11/27 01:37:22 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 01:59:46 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_config.h"
 #include "rt_render.h"
 #include "str.h"
-#include "rt_math.h"
 
 t_color_double	add_color_double(t_color_double c, t_color x)
 {
@@ -21,11 +20,6 @@ t_color_double	add_color_double(t_color_double c, t_color x)
 	c.g += (double)x.g;
 	c.b += (double)x.b;
 	return (c);
-}
-
-t_color	cdouble_to_c(t_color_double c, double div)
-{
-	return ((t_color){c.r / div, c.g / div, c.b / div});
 }
 
 t_quadrant	get_quadrant(t_graphics *data, t_scene *sc, double x, double y)
