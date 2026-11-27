@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/27 01:38:28 by me                #+#    #+#             */
-/*   Updated: 2026/11/27 03:21:52 by me               ###   ########.fr       */
+/*   Updated: 2026/11/27 03:37:59 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_color	ppm_to_tcolor(t_ppm *tex, int x, int y)
 	return (c);
 }
 
-t_color	texel_interpolate(t_ppm *tex, double x, double y)
+static t_color	texel_interpolate(t_ppm *tex, double x, double y)
 {
 	double			fx;
 	double			fy;
