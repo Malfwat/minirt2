@@ -1,0 +1,33 @@
+# Trois colonnes, pour lire ce que font les calculs d'uv du cylindre.
+#
+# A gauche, diametre 2,6 : les briques sont larges. Une seule copie de la
+# texture fait le tour, donc la largeur des briques vaut la circonference
+# divisee par leur nombre dans l'image.
+#
+# Au centre, diametre 0,9 : meme texture, meme hauteur, mais la circonference
+# est presque trois fois plus petite, donc tout le motif rétrécit. C'est la
+# consequence directe du choix "un tour = une texture", qu'on voit d'un coup
+# d'oeil en comparant les deux colonnes.
+#
+# A droite, inclinee a 45 degres : le relief reste aligne sur les joints, parce
+# que le repere est construit sur l'axe de l'objet et non sur le haut du monde.
+#
+# La lumiere est rase et laterale, sinon les micro-reliefs disparaissent.
+# Le sol pave donne l'echelle.
+#
+# A lancer depuis la racine du depot :
+#   ./miniRT_bonus scenes/bonus/colonnes.rt
+A 0.13 150,170,200
+
+C 0,2.5,-9 0,0,1 54
+
+L -7,1.4,2 1.00 255,232,195
+L 6,5,-3 0.40 165,195,255
+
+pl 0,0,0 0,1,0 255,255,255 0.05 20 0 assets/textures/paving_color.ppm assets/textures/paving_normal.ppm
+
+cy -3.6,2,3 0,1,0 2.6 4 255,255,255 0.25 60 0 assets/textures/bricks_color.ppm assets/textures/bricks_normal.ppm
+
+cy 0,2,3 0,1,0 0.9 4 255,255,255 0.25 60 0 assets/textures/bricks_color.ppm assets/textures/bricks_normal.ppm
+
+cy 3.2,2.2,3 1,1,0 1.7 4 255,255,255 0.25 60 0 assets/textures/bricks_color.ppm assets/textures/bricks_normal.ppm
