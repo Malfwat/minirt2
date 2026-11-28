@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/27 17:24:00 by me                #+#    #+#             */
-/*   Updated: 2026/11/28 04:31:48 by me               ###   ########.fr       */
+/*   Updated: 2026/11/28 04:52:19 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,13 @@ void	get_xy_co(t_hit hit, t_obj *obj, t_texel *pos)
 	tmp = get_system(obj->vec);
 	pos->x = scal(d, tmp.x);
 	pos->y = scal(d, tmp.y);
-	u = (atan2(pos->y, pos->x) + M_PI) / (2 * M_PI);
+	u = (atan2(pos->y, pos->x) + M_PI) / (M_PI * 2);
 	v = get_norme(d) / (M_PI * obj->diameter);
 	v = v - floor(v);
 	pos->x = u;
 	pos->y = v;
-	tmp.x = cross(obj->vec, hit.normal);
-	tmp.y = obj->vec;
+	tmp.x = cross(obj->vec, d);
+	tmp.x = normalize(tmp.x);
+	tmp.y = normalize(d);
 	pos->axes = tmp;
 }
