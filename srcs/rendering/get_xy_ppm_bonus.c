@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/27 17:24:00 by me                #+#    #+#             */
-/*   Updated: 2026/11/28 03:31:38 by me               ###   ########.fr       */
+/*   Updated: 2026/11/28 03:49:31 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ void	get_xy_cy(t_hit hit, t_obj *obj, t_texel *pos)
 	v = v - floor(v);
 	pos->x = u;
 	pos->y = v;
-	pos->axes = get_system(hit.normal);
+	tmp.x = cross(obj->vec, hit.normal);
+	pos->axes = tmp;
 }
