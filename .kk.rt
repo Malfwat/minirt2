@@ -10,12 +10,12 @@
 #
 # A lancer depuis la racine du depot :
 #   ./miniRT_bonus scenes/bonus/test_plane_relief.rt
-A 0.10 150,170,200
+A 0.36 150,170,200
 
-C 0,5,-30 0,0,1 52
+C 0,0,-10 0,0,1 52
 
 #L -4,0.7,3.0 1.0 255,232,195
-L 0,16,-7 0.85 255,255,255
+L 4,16,-7 0.85 255,255,255
 
-pl 0,0,0 0,0,1 255,255,255 0.05 20 0 assets/textures/bricks_color.ppm assets/textures/bricks_normal.ppm
+cy 0,0,0 0,1,0 0.50 1.9 200,224,197 0.40 30 0 assets/textures/bricks_color.ppm assets/textures/bricks_normal.ppm
 

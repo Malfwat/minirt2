@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/27 01:38:28 by me                #+#    #+#             */
-/*   Updated: 2026/11/27 17:26:13 by me               ###   ########.fr       */
+/*   Updated: 2026/11/28 01:20:50 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ t_color	texture_color(t_hit hit, t_obj *obj, t_texel *pos)
 {
 	t_ppm	*tex;
 
-	if (1 - fabs(scal(hit.normal, obj->vec)) < 1e-3 && obj->id != plan)
-		return (obj->color);
 	tex = obj->texture;
 	if (obj->id == sphere)
 		get_xy_sp(hit, obj, pos);
+	else if (obj->id == cylinder)
+		get_xy_cy(hit, obj, pos);
 	else
 		get_xy_pl(hit, obj, pos);
 	pos->x *= (tex->width - 1);

@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/24 18:20:39 by me                #+#    #+#             */
-/*   Updated: 2026/11/25 00:58:13 by me               ###   ########.fr       */
+/*   Updated: 2026/11/28 01:02:19 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ t_color	disk_checker(t_hit hit, t_obj *obj)
 
 static void	get_uv_cy(t_hit hit, t_obj *obj, double *u, double *v)
 {
-	double	tour;
 	t_vec3	d;
 	t_axes	h_axes;
 	double	n;
+	double	tour;
 
 	d = sub(hit.p, obj->coordinate);
 	h_axes = get_system(obj->vec);
