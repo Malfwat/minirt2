@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/27 17:24:00 by me                #+#    #+#             */
-/*   Updated: 2026/11/28 03:55:01 by me               ###   ########.fr       */
+/*   Updated: 2026/11/28 04:24:58 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,29 @@ void	get_xy_cy(t_hit hit, t_obj *obj, t_texel *pos)
 	pos->y = scal(d, tmp.y);
 	u = (atan2(pos->y, pos->x) + M_PI) / (2 * M_PI);
 	v = scal(d, obj->vec) / cir;
+	v = v - floor(v);
+	pos->x = u;
+	pos->y = v;
+	tmp.x = cross(obj->vec, hit.normal);
+	tmp.y = obj->vec;
+	pos->axes = tmp;
+}
+
+void	get_xy_co(t_hit hit, t_obj *obj, t_texel *pos)
+{
+	t_axes	tmp;
+	t_vec3	d;
+	double	u;
+	double	v;
+
+	if (1 - fabs(scal(hit.normal, obj->vec)) < 1e-3)
+		return (get_xy_pl(hit, obj, pos));
+	d = sub(hit.p, obj->coordinate);
+	tmp = get_system(obj->vec);
+	pos->x = scal(d, tmp.x);
+	pos->y = scal(d, tmp.y);
+	u = (atan2(pos->y, pos->x) + M_PI) / (2 * M_PI);
+	v = get_norme(d);
 	v = v - floor(v);
 	pos->x = u;
 	pos->y = v;
