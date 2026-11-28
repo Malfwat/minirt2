@@ -1,0 +1,26 @@
+# Vitrine du cone : un monolithe de roche sur une place pavee, deux colonnes de
+# briques pour l'echelle et la comparaison des materiaux.
+#
+# Le cone est pose pointe en haut : son vecteur pointe vers le bas, donc le
+# sommet est a la coordonnee et la base a coordinate + vec * hauteur.
+# Les trois materiaux viennent d'ambientCG (CC0).
+#
+# Lumiere rase a gauche, pour que les strates de la roche et les joints des
+# briques accrochent. Le ciel du moteur est noir : la scene est nocturne.
+#
+# A lancer depuis la racine du depot :
+#   ./miniRT_bonus scenes/bonus/pointe.rt
+A 0.14 148,168,200
+
+C 0,3.6,-12.5 0,-0.035,1 50
+
+L -9,1.8,2 1.00 255,226,182
+L 7,6,-4 0.35 158,190,255
+
+pl 0,0,0 0,1,0 255,255,255 0.05 20 0 assets/textures/paving_color.ppm assets/textures/paving_normal.ppm
+
+co 0,5.2,3.5 0,-1,0 3.2 5.2 255,255,255 0.22 45 0 assets/textures/rock_color.ppm assets/textures/rock_normal.ppm
+
+cy -4.6,2.2,4.5 0,1,0 1.5 4.4 255,255,255 0.22 45 0 assets/textures/bricks_color.ppm assets/textures/bricks_normal.ppm
+
+cy 4.6,1.6,4.2 0,1,0 1.1 3.2 255,255,255 0.22 45 0 assets/textures/bricks_color.ppm assets/textures/bricks_normal.ppm

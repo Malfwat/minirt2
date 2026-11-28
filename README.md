@@ -126,6 +126,7 @@ same size all around the object:
 | `scenes/bonus/test_plane_relief.rt` | low raking sun on the paved floor, to make the plane's normal map readable |
 | `scenes/bonus/test_cy_texture.rt` | target scene for a textured cylinder: a brick column on a paved floor |
 | `scenes/bonus/colonnes.rt` | three brick columns (thick, thin, tilted) to read the cylinder's uv: brick size follows the circumference, relief follows the axis |
+| `scenes/bonus/pointe.rt` | showcase: a rock monolith cone on a paved plaza, flanked by two brick columns |
 | `scenes/bonus/test_co_texture.rt` | target scene for a textured cone: a diamond-plate cone on a paved floor |
 | `scenes/hermes/*.rt` | deliberately broken scenes, one mistake each, used to check the error handling |
 
