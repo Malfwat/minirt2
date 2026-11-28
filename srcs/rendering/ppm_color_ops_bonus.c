@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/27 01:38:28 by me                #+#    #+#             */
-/*   Updated: 2026/11/28 04:17:10 by me               ###   ########.fr       */
+/*   Updated: 2026/11/28 04:29:05 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_color	texture_color(t_hit hit, t_obj *obj, t_texel *pos)
 	else if (obj->id == plan)
 		get_xy_pl(hit, obj, pos);
 	else
-		get_xy_cy(hit, obj, pos);
+		get_xy_co(hit, obj, pos);
 	pos->x *= (tex->width - 1);
 	pos->y *= (tex->height - 1);
 	if (pos->x == tex->width - 1 || pos->y == tex->height - 1)

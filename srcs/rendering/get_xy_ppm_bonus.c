@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/27 17:24:00 by me                #+#    #+#             */
-/*   Updated: 2026/11/28 04:24:58 by me               ###   ########.fr       */
+/*   Updated: 2026/11/28 04:31:48 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	get_xy_co(t_hit hit, t_obj *obj, t_texel *pos)
 	pos->x = scal(d, tmp.x);
 	pos->y = scal(d, tmp.y);
 	u = (atan2(pos->y, pos->x) + M_PI) / (2 * M_PI);
-	v = get_norme(d);
+	v = get_norme(d) / (M_PI * obj->diameter);
 	v = v - floor(v);
 	pos->x = u;
 	pos->y = v;

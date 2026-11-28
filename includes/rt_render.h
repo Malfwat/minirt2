@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 21:02:08 by me                #+#    #+#             */
-/*   Updated: 2026/11/28 01:02:54 by me               ###   ########.fr       */
+/*   Updated: 2026/11/28 04:29:36 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,5 +202,6 @@ t_vec3			texture_vec(t_obj *obj, t_texel *pos);
 void			get_xy_sp(t_hit hit, t_obj *obj, t_texel *indexes);
 void			get_xy_pl(t_hit hit, t_obj *obj, t_texel *pos);
 void			get_xy_cy(t_hit hit, t_obj *obj, t_texel *pos);
+void			get_xy_co(t_hit hit, t_obj *obj, t_texel *pos);
 
 #endif /*RT_RENDER_H*/
