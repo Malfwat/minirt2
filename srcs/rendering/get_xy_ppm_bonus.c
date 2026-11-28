@@ -6,7 +6,7 @@
 /*   By: me <me@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/27 17:24:00 by me                #+#    #+#             */
-/*   Updated: 2026/11/28 01:42:26 by me               ###   ########.fr       */
+/*   Updated: 2026/11/28 03:31:38 by me               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,24 @@ void	get_xy_pl(t_hit hit, t_obj *obj, t_texel *pos)
 
 void	get_xy_cy(t_hit hit, t_obj *obj, t_texel *pos)
 {
+	t_axes	tmp;
 	t_vec3	d;
-	double	tour;
+	double	cir;
+	double	u;
+	double	v;
 
 	if (1 - fabs(scal(hit.normal, obj->vec)) < 1e-3)
 		return (get_xy_pl(hit, obj, pos));
 	d = sub(hit.p, obj->coordinate);
-	pos->axes = get_system(obj->vec);
-	tour = M_PI * obj->diameter;
-	pos->x = atan2(scal(d, pos->axes.y), scal(d, pos->axes.x)) + M_PI;
-	pos->x /= 2 * M_PI;
-	pos->y = scal(d, obj->vec) / (tour);
-	pos->y = fabs(pos->y);
-	pos->y -= floor(pos->y);
+	d = sub(d, mult(obj->vec, obj->height / 2));
+	tmp = get_system(obj->vec);
+	cir = M_PI * obj->diameter;
+	pos->x = scal(d, tmp.x);
+	pos->y = scal(d, tmp.y);
+	u = (atan2(pos->y, pos->x) + M_PI) / (2 * M_PI);
+	v = scal(d, obj->vec) / cir;
+	v = v - floor(v);
+	pos->x = u;
+	pos->y = v;
+	pos->axes = get_system(hit.normal);
 }
